@@ -1,0 +1,211 @@
+# ==============================================================================
+# Model Configuration
+# ==============================================================================
+
+model:
+
+  # ---------------------------------------------------------------------------
+  # General
+  # ---------------------------------------------------------------------------
+
+  name: "HybridBrainTumorDiagnosis"
+
+  version: "1.0"
+
+  task:
+    - classification
+    - segmentation
+
+  device: "cuda"
+
+  input_channels: 4
+
+  num_classes: 4
+
+  dropout: 0.20
+
+  pretrained: true
+
+  freeze_backbone: false
+
+  # ---------------------------------------------------------------------------
+  # Self-Supervised Learning
+  # ---------------------------------------------------------------------------
+
+  self_supervised:
+
+    enabled: true
+
+    method: "dinov2"
+
+    teacher_momentum: 0.996
+
+    projection_dim: 768
+
+    temperature: 0.04
+
+    epochs: 100
+
+  # ---------------------------------------------------------------------------
+  # Masked Autoencoder
+  # ---------------------------------------------------------------------------
+
+  mae:
+
+    enabled: true
+
+    mask_ratio: 0.75
+
+    decoder_depth: 8
+
+    decoder_heads: 16
+
+    decoder_embed_dim: 512
+
+  # ---------------------------------------------------------------------------
+  # ConvNeXt V2 Backbone
+  # ---------------------------------------------------------------------------
+
+  convnextv2:
+
+    enabled: true
+
+    model_name: "convnextv2_base"
+
+    pretrained: true
+
+    feature_dim: 1024
+
+    drop_path_rate: 0.20
+
+  # ---------------------------------------------------------------------------
+  # Swin Transformer V2
+  # ---------------------------------------------------------------------------
+
+  swinv2:
+
+    enabled: true
+
+    model_name: "swinv2_base_window12"
+
+    pretrained: true
+
+    image_size: 224
+
+    patch_size: 4
+
+    embed_dim: 128
+
+    depths:
+      - 2
+      - 2
+      - 18
+      - 2
+
+    num_heads:
+      - 4
+      - 8
+      - 16
+      - 32
+
+    window_size: 12
+
+    mlp_ratio: 4.0
+
+    drop_rate: 0.10
+
+    attention_drop_rate: 0.10
+
+    drop_path_rate: 0.20
+
+  # ---------------------------------------------------------------------------
+  # Cross Attention Fusion
+  # ---------------------------------------------------------------------------
+
+  fusion:
+
+    enabled: true
+
+    type: "cross_attention"
+
+    embed_dim: 768
+
+    num_heads: 12
+
+    dropout: 0.10
+
+    num_layers: 2
+
+  # ---------------------------------------------------------------------------
+  # Segmentation Head
+  # ---------------------------------------------------------------------------
+
+  segmentation:
+
+    enabled: true
+
+    architecture: "SwinUNETR"
+
+    feature_size: 48
+
+    output_channels: 4
+
+    use_checkpoint: true
+
+  # ---------------------------------------------------------------------------
+  # Classification Head
+  # ---------------------------------------------------------------------------
+
+  classification:
+
+    enabled: true
+
+    hidden_dim: 512
+
+    activation: "gelu"
+
+    dropout: 0.30
+
+  # ---------------------------------------------------------------------------
+  # Explainable AI
+  # ---------------------------------------------------------------------------
+
+  explainability:
+
+    gradcampp: true
+
+    shap: true
+
+  # ---------------------------------------------------------------------------
+  # Mixed Precision
+  # ---------------------------------------------------------------------------
+
+  mixed_precision:
+
+    enabled: true
+
+    dtype: "float16"
+
+  # ---------------------------------------------------------------------------
+  # Checkpoints
+  # ---------------------------------------------------------------------------
+
+  checkpoint:
+
+    save_best_only: true
+
+    monitor: "val_dice"
+
+    mode: "max"
+
+    directory: "outputs/checkpoints"
+
+  # ---------------------------------------------------------------------------
+  # Export
+  # ---------------------------------------------------------------------------
+
+  export:
+
+    onnx: true
+
+    torchscript: true

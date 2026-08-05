@@ -1,0 +1,166 @@
+# ==============================================================================
+# Inference Configuration
+# ==============================================================================
+
+inference:
+
+  # ---------------------------------------------------------------------------
+  # General
+  # ---------------------------------------------------------------------------
+
+  model_name: "HybridBrainTumorDiagnosis"
+
+  device: "cuda"
+
+  gpu_id: 0
+
+  mixed_precision: true
+
+  batch_size: 1
+
+  num_workers: 2
+
+  pin_memory: true
+
+  # ---------------------------------------------------------------------------
+  # Input
+  # ---------------------------------------------------------------------------
+
+  input:
+
+    modalities:
+
+      - t1n
+      - t1c
+      - t2w
+      - t2f
+
+    image_size:
+
+      x: 128
+      y: 128
+      z: 128
+
+    normalization: "zscore"
+
+    orientation: "RAS"
+
+  # ---------------------------------------------------------------------------
+  # Model
+  # ---------------------------------------------------------------------------
+
+  model:
+
+    checkpoint: "outputs/checkpoints/best_model.pth"
+
+    confidence_threshold: 0.50
+
+    segmentation_threshold: 0.50
+
+    use_tta: true
+
+  # ---------------------------------------------------------------------------
+  # Test Time Augmentation
+  # ---------------------------------------------------------------------------
+
+  tta:
+
+    horizontal_flip: true
+
+    vertical_flip: true
+
+    rotation: true
+
+  # ---------------------------------------------------------------------------
+  # Outputs
+  # ---------------------------------------------------------------------------
+
+  outputs:
+
+    save_prediction: true
+
+    save_segmentation_mask: true
+
+    save_probability_map: true
+
+    save_overlay: true
+
+    save_heatmap: true
+
+    output_directory: "outputs/predictions"
+
+  # ---------------------------------------------------------------------------
+  # Explainability
+  # ---------------------------------------------------------------------------
+
+  explainability:
+
+    gradcampp: true
+
+    shap: true
+
+    save_visualization: true
+
+  # ---------------------------------------------------------------------------
+  # Visualization
+  # ---------------------------------------------------------------------------
+
+  visualization:
+
+    overlay_alpha: 0.5
+
+    color_map: "jet"
+
+    save_png: true
+
+    save_nifti: true
+
+  # ---------------------------------------------------------------------------
+  # Metrics
+  # ---------------------------------------------------------------------------
+
+  metrics:
+
+    calculate_dice: true
+
+    calculate_iou: true
+
+    calculate_accuracy: true
+
+    calculate_precision: true
+
+    calculate_recall: true
+
+    calculate_f1: true
+
+    calculate_hausdorff: true
+
+  # ---------------------------------------------------------------------------
+  # Logging
+  # ---------------------------------------------------------------------------
+
+  logging:
+
+    verbose: true
+
+    save_log: true
+
+    log_directory: "outputs/logs"
+
+  # ---------------------------------------------------------------------------
+  # Export
+  # ---------------------------------------------------------------------------
+
+  export:
+
+    save_csv: true
+
+    save_json: true
+
+    save_excel: true
+
+    csv_file: "outputs/metrics/results.csv"
+
+    json_file: "outputs/metrics/results.json"
+
+    excel_file: "outputs/metrics/results.xlsx"
