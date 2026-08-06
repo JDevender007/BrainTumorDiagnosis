@@ -1,30 +1,31 @@
-from pathlib import Path
+import numpy as np
 
-from datasets.brats_dataset import BraTSDataset, DatasetConfig
+from datasets.transforms import TransformFactory
 
-config = DatasetConfig(
-    dataset_root=Path("data/raw/BraTS2024"),
-    use_segmentation=True,
+image = np.random.rand(
+    4,
+    240,
+    240,
+    155,
+).astype(np.float32)
+
+mask = np.random.randint(
+    0,
+    4,
+    (
+        240,
+        240,
+        155,
+    ),
+).astype(np.uint8)
+
+transform = TransformFactory.create(training=True)
+
+sample = transform(
+    image,
+    mask,
 )
 
-dataset = BraTSDataset(config)
+print(sample["image"].shape)
 
-dataset.summary()
-
-print(dataset)
-
-print()
-
-sample = dataset[0]
-
-print("Patient :", sample["patient_id"])
-
-print("Image Shape :", sample["image"].shape)
-
-print("Mask Shape :", sample["mask"].shape)
-
-print()
-
-print("Image Type :", sample["image"].dtype)
-
-print("Mask Type :", sample["mask"].dtype)
+print(sample["mask"].shape)
