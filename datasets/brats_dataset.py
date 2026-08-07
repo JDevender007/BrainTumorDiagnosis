@@ -2,17 +2,20 @@
 ==============================================================================
 BraTS 2024 Dataset Loader
 
-Author: Devender J.
-Project: Brain Tumor Diagnosis using Hybrid Vision Transformer
-==============================================================================
+Author  : Devender J.
+Project : Hybrid Brain Tumor Diagnosis
 
-Supports
---------
-• BraTS 2024
-• Multi-modal MRI
-• .nii
-• .nii.gz
-• PyTorch Dataset
+Loads BraTS 2024 multimodal MRI data.
+
+Modalities:
+    T1 native
+    T1 contrast enhanced
+    T2 weighted
+    T2 FLAIR
+
+Segmentation:
+    BraTS segmentation mask
+==============================================================================
 """
 
 from __future__ import annotations
@@ -20,64 +23,37 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Tuple
 
 import nibabel as nib
 import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-# ==============================================================================
-# Logger
-# ==============================================================================
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s",
-)
-
 LOGGER = logging.getLogger(__name__)
 
-# ==============================================================================
-# BraTS Modalities
-# ==============================================================================
-
-MODALITIES = (
-    "t1n",
-    "t1c",
-    "t2w",
-    "t2f",
-)
-
-SEGMENTATION = "seg"
-
-SUPPORTED_EXTENSIONS = (
-    ".nii",
-    ".nii.gz",
-)
 
 # ==============================================================================
-# Dataset Configuration
+# Configuration
 # ==============================================================================
 
 
 @dataclass(slots=True)
 class DatasetConfig:
-    """
-    Dataset configuration.
-    """
+    dataset_root: str
 
-    dataset_root: Path
+    modalities: Tuple[str, ...] = (
+        "t1n",
+        "t1c",
+        "t2w",
+        "t2f",
+    )
 
-    transform: Optional[Callable] = None
-
-    use_segmentation: bool = True
+    segmentation_suffix: str = "seg"
 
     image_dtype: np.dtype = np.float32
 
     mask_dtype: np.dtype = np.uint8
-
-    verbose: bool = True
 
 
 # ==============================================================================
@@ -87,68 +63,74 @@ class DatasetConfig:
 
 class BraTSDataset(Dataset):
     """
-    BraTS 2024 Dataset Loader.
+    PyTorch Dataset for BraTS 2024.
 
-    Expected Folder Structure
+    Expected directory structure:
 
     data/
         raw/
             BraTS2024/
-                BraTS-GLI-00001-000/
-                    BraTS-GLI-00001-000-t1n.nii
-                    BraTS-GLI-00001-000-t1c.nii
-                    BraTS-GLI-00001-000-t2w.nii
-                    BraTS-GLI-00001-000-t2f.nii
-                    BraTS-GLI-00001-000-seg.nii
+                BraTS-GLI-xxxxx-xxx/
+                    *_t1n.nii
+                    *_t1c.nii
+                    *_t2w.nii
+                    *_t2f.nii
+                    *_seg.nii
     """
 
     def __init__(
         self,
         config: DatasetConfig,
+        transform: Optional[Callable] = None,
     ) -> None:
 
-        super().__init__()
-
         self.config = config
+        self.transform = transform
 
-        self.root = Path(config.dataset_root)
+        self.dataset_root = Path(config.dataset_root)
 
-        if not self.root.exists():
-            raise FileNotFoundError(f"Dataset folder not found:\n{self.root}")
+        if not self.dataset_root.exists():
+            raise FileNotFoundError(
+                f"Dataset directory not found:\n{self.dataset_root}"
+            )
+
+        if not self.dataset_root.is_dir():
+            raise NotADirectoryError(
+                f"Dataset root is not a directory:\n{self.dataset_root}"
+            )
+
+        LOGGER.info("Loading BraTS Dataset...")
 
         self.patient_dirs = self._discover_patients()
 
-        if len(self.patient_dirs) == 0:
-            raise RuntimeError("No patient folders found.")
+        if not self.patient_dirs:
+            raise RuntimeError(f"No patient directories found in:\n{self.dataset_root}")
 
-        if self.config.verbose:
-            LOGGER.info("BraTS Dataset Loaded Successfully")
-            LOGGER.info(
-                "Patients Found : %d",
-                len(self.patient_dirs),
-            )
-
-    # ==========================================================================
-    # Dataset Length
-    # ==========================================================================
-
-    def __len__(self) -> int:
-        return len(self.patient_dirs)
+        LOGGER.info("BraTS Dataset Loaded Successfully")
+        LOGGER.info("Patients Found : %d", len(self.patient_dirs))
 
     # ==========================================================================
     # Discover Patients
     # ==========================================================================
 
-    def _discover_patients(
-        self,
-    ) -> List[Path]:
+    def _discover_patients(self) -> List[Path]:
 
-        patients = sorted([folder for folder in self.root.iterdir() if folder.is_dir()])
+        patients = []
+
+        for path in sorted(self.dataset_root.iterdir()):
+
+            if not path.is_dir():
+                continue
+
+            if path.name.startswith("."):
+                continue
+
+            patients.append(path)
 
         return patients
 
     # ==========================================================================
-    # Locate MRI File
+    # Find File
     # ==========================================================================
 
     @staticmethod
@@ -156,21 +138,27 @@ class BraTSDataset(Dataset):
         patient_dir: Path,
         suffix: str,
     ) -> Path:
-        """
-        Finds either .nii or .nii.gz file.
-        """
 
-        nii_file = list(patient_dir.glob(f"*{suffix}.nii"))
+        patterns = [
+            f"*_{suffix}.nii",
+            f"*_{suffix}.nii.gz",
+            f"*-{suffix}.nii",
+            f"*-{suffix}.nii.gz",
+            f"*{suffix}.nii",
+            f"*{suffix}.nii.gz",
+        ]
 
-        if len(nii_file) == 1:
-            return nii_file[0]
+        matches: List[Path] = []
 
-        nii_gz_file = list(patient_dir.glob(f"*{suffix}.nii.gz"))
+        for pattern in patterns:
+            matches.extend(patient_dir.glob(pattern))
 
-        if len(nii_gz_file) == 1:
-            return nii_gz_file[0]
+        unique_matches = sorted(set(matches))
 
-        raise FileNotFoundError(f"{suffix} not found in\n{patient_dir}")
+        if not unique_matches:
+            raise FileNotFoundError(f"{suffix} not found in\n{patient_dir}")
+
+        return unique_matches[0]
 
     # ==========================================================================
     # Validate Patient
@@ -180,301 +168,132 @@ class BraTSDataset(Dataset):
         self,
         patient_dir: Path,
     ) -> None:
-        """
-        Ensures every MRI modality exists.
-        """
 
-        for modality in MODALITIES:
+        for modality in self.config.modalities:
 
             self._find_file(
                 patient_dir,
                 modality,
             )
 
-        if self.config.use_segmentation:
-
-            self._find_file(
-                patient_dir,
-                SEGMENTATION,
-            )
-
-    # ==========================================================================
-    # Validate Entire Dataset
-    # ==========================================================================
-
-    def validate_dataset(self) -> None:
-        """
-        Validate every patient folder.
-        """
-
-        LOGGER.info("Validating dataset...")
-
-        valid = 0
-
-        for patient in self.patient_dirs:
-
-            try:
-
-                self._validate_patient(patient)
-
-                valid += 1
-
-            except Exception as error:
-
-                LOGGER.warning(
-                    "%s\n%s",
-                    patient.name,
-                    error,
-                )
-
-        LOGGER.info(
-            "Valid Patients : %d / %d",
-            valid,
-            len(self.patient_dirs),
+        self._find_file(
+            patient_dir,
+            self.config.segmentation_suffix,
         )
 
     # ==========================================================================
-    # Load NIfTI File
+    # Load NIfTI
     # ==========================================================================
 
+    @staticmethod
     def _load_nifti(
-        self,
         file_path: Path,
     ) -> np.ndarray:
-        """
-        Load a NIfTI volume.
-        """
 
         image = nib.load(str(file_path))
 
-        volume = image.get_fdata()
+        data = image.get_fdata(dtype=np.float32)
 
-        volume = volume.astype(self.config.image_dtype)
-
-        return volume
-
-    # ==========================================================================
-    # Z-Score Normalization
-    # ==========================================================================
-
-    @staticmethod
-    def _normalize(
-        volume: np.ndarray,
-    ) -> np.ndarray:
-        """
-        Z-score normalization.
-        """
-
-        mask = volume > 0
-
-        if np.sum(mask) == 0:
-            return volume
-
-        mean = volume[mask].mean()
-
-        std = volume[mask].std()
-
-        if std < 1e-8:
-            std = 1.0
-
-        volume[mask] = (volume[mask] - mean) / std
-
-        return volume
-
-    # ==========================================================================
-    # Load Single MRI Modality
-    # ==========================================================================
-
-    def _load_modality(
-        self,
-        patient_dir: Path,
-        modality: str,
-    ) -> np.ndarray:
-
-        file_path = self._find_file(
-            patient_dir,
-            modality,
+        return np.asarray(
+            data,
+            dtype=np.float32,
         )
 
-        volume = self._load_nifti(file_path)
-
-        volume = self._normalize(volume)
-
-        return volume
-
     # ==========================================================================
-    # Load Segmentation Mask
-    # ==========================================================================
-
-    def _load_segmentation(
-        self,
-        patient_dir: Path,
-    ) -> np.ndarray:
-
-        file_path = self._find_file(
-            patient_dir,
-            SEGMENTATION,
-        )
-
-        mask = nib.load(str(file_path)).get_fdata()
-
-        mask = mask.astype(self.config.mask_dtype)
-
-        return mask
-
-    # ==========================================================================
-    # Load All MRI Modalities
-    # ==========================================================================
-
-    def _load_modalities(
-        self,
-        patient_dir: Path,
-    ) -> Dict[str, np.ndarray]:
-
-        images = {}
-
-        for modality in MODALITIES:
-
-            images[modality] = self._load_modality(
-                patient_dir,
-                modality,
-            )
-
-        return images
-
-    # ==========================================================================
-    # Stack MRI Channels
-    # ==========================================================================
-
-    @staticmethod
-    def _stack_modalities(
-        images: Dict[str, np.ndarray],
-    ) -> np.ndarray:
-
-        stacked = np.stack(
-            [
-                images["t1n"],
-                images["t1c"],
-                images["t2w"],
-                images["t2f"],
-            ],
-            axis=0,
-        )
-
-        return stacked
-
-    # ==========================================================================
-    # Validate Shapes
-    # ==========================================================================
-
-    @staticmethod
-    def _validate_shapes(
-        image: np.ndarray,
-        mask: Optional[np.ndarray],
-    ) -> None:
-
-        if image.ndim != 4:
-
-            raise RuntimeError(f"Expected 4D image. Got {image.shape}")
-
-        if mask is not None:
-
-            if image.shape[1:] != mask.shape:
-
-                raise RuntimeError(
-                    "Image and mask shape mismatch.\n"
-                    f"Image : {image.shape}\n"
-                    f"Mask  : {mask.shape}"
-                )
-
-    # ==========================================================================
-    # Patient Information
-    # ==========================================================================
-
-    @staticmethod
-    def _patient_id(
-        patient_dir: Path,
-    ) -> str:
-
-        return patient_dir.name
-
-    # ==========================================================================
-    # Load Complete Patient
+    # Load Patient
     # ==========================================================================
 
     def _load_patient(
         self,
         patient_dir: Path,
-    ) -> Dict:
+    ) -> Tuple[np.ndarray, np.ndarray]:
 
         self._validate_patient(patient_dir)
 
-        images = self._load_modalities(patient_dir)
+        modalities = []
 
-        image = self._stack_modalities(images)
+        for modality in self.config.modalities:
 
-        mask = None
+            file_path = self._find_file(
+                patient_dir,
+                modality,
+            )
 
-        if self.config.use_segmentation:
+            volume = self._load_nifti(file_path)
 
-            mask = self._load_segmentation(patient_dir)
+            modalities.append(volume)
 
-        self._validate_shapes(
-            image,
+        image = np.stack(
+            modalities,
+            axis=0,
+        ).astype(
+            np.float32,
+            copy=False,
+        )
+
+        segmentation_path = self._find_file(
+            patient_dir,
+            self.config.segmentation_suffix,
+        )
+
+        mask = self._load_nifti(segmentation_path)
+
+        mask = np.asarray(
             mask,
+            dtype=np.uint8,
         )
-
-        return {
-            "patient_id": self._patient_id(patient_dir),
-            "image": image,
-            "mask": mask,
-        }
-
-    # ==========================================================================
-    # Apply Transform
-    # ==========================================================================
-
-    def _apply_transform(
-        self,
-        image: np.ndarray,
-        mask: Optional[np.ndarray],
-    ):
-
-        if self.config.transform is None:
-            return image, mask
-
-        transformed = self.config.transform(
-            image=image,
-            mask=mask,
-        )
-
-        image = transformed["image"]
-
-        if mask is not None:
-            mask = transformed["mask"]
 
         return image, mask
 
     # ==========================================================================
-    # Convert to Tensor
+    # Convert To Tensor
     # ==========================================================================
 
     @staticmethod
     def _to_tensor(
-        image: np.ndarray,
-        mask: Optional[np.ndarray],
-    ):
+        image,
+        mask,
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
 
-        image = torch.from_numpy(image).float()
+        if isinstance(image, torch.Tensor):
 
-        if mask is not None:
+            image = image.float()
 
-            mask = torch.from_numpy(mask).long()
+        else:
+
+            image = torch.as_tensor(
+                np.asarray(image),
+                dtype=torch.float32,
+            )
+
+        if isinstance(mask, torch.Tensor):
+
+            mask = mask.long()
+
+        else:
+
+            mask = torch.as_tensor(
+                np.asarray(mask),
+                dtype=torch.long,
+            )
 
         return image, mask
 
     # ==========================================================================
-    # Get Single Sample
+    # Normalize Mask
+    # ==========================================================================
+
+    @staticmethod
+    def _normalize_mask(
+        mask: torch.Tensor,
+    ) -> torch.Tensor:
+
+        mask = mask.long()
+
+        return mask
+
+    # ==========================================================================
+    # Get Item
     # ==========================================================================
 
     def __getitem__(
@@ -486,40 +305,61 @@ class BraTSDataset(Dataset):
 
         try:
 
-            patient = self._load_patient(patient_dir)
+            image, mask = self._load_patient(patient_dir)
 
-            image = patient["image"]
+            if self.transform is not None:
 
-            mask = patient["mask"]
+                sample = self.transform(
+                    image,
+                    mask,
+                )
 
-            image, mask = self._apply_transform(
-                image,
-                mask,
-            )
+                if isinstance(sample, dict):
+
+                    image = sample["image"]
+                    mask = sample["mask"]
+
+                else:
+
+                    raise TypeError(
+                        "Transform must return a dictionary "
+                        "containing 'image' and 'mask'."
+                    )
 
             image, mask = self._to_tensor(
                 image,
                 mask,
             )
 
-            sample = {
-                "patient_id": patient["patient_id"],
+            mask = self._normalize_mask(mask)
+
+            return {
                 "image": image,
                 "mask": mask,
+                "patient_id": patient_dir.name,
             }
 
-            return sample
-
-        except Exception as error:
+        except Exception as exc:
 
             LOGGER.error(
                 "Error loading %s",
                 patient_dir.name,
             )
 
-            LOGGER.exception(error)
+            LOGGER.error(
+                "%s",
+                exc,
+            )
 
             raise
+
+    # ==========================================================================
+    # Length
+    # ==========================================================================
+
+    def __len__(self) -> int:
+
+        return len(self.patient_dirs)
 
     # ==========================================================================
     # Dataset Summary
@@ -527,38 +367,93 @@ class BraTSDataset(Dataset):
 
     def summary(self) -> None:
 
-        LOGGER.info("===================================")
-
-        LOGGER.info("BraTS 2024 Dataset Summary")
-
-        LOGGER.info("===================================")
+        LOGGER.info("=" * 60)
+        LOGGER.info("BraTS Dataset Summary")
+        LOGGER.info("=" * 60)
 
         LOGGER.info(
             "Dataset Root : %s",
-            self.root,
+            self.dataset_root,
         )
 
         LOGGER.info(
             "Patients     : %d",
-            len(self),
+            len(self.patient_dirs),
         )
 
         LOGGER.info(
             "Modalities   : %s",
-            ", ".join(MODALITIES),
+            ", ".join(self.config.modalities),
         )
 
         LOGGER.info(
             "Segmentation : %s",
-            self.config.use_segmentation,
+            self.config.segmentation_suffix,
         )
 
-        LOGGER.info("===================================")
+        LOGGER.info("=" * 60)
 
-    # ==========================================================================
-    # Print Dataset
-    # ==========================================================================
 
-    def __repr__(self):
+# ==============================================================================
+# Factory
+# ==============================================================================
 
-        return f"BraTSDataset(" f"patients={len(self)}, " f"root='{self.root}')"
+
+class BraTSDatasetFactory:
+
+    @staticmethod
+    def create(
+        dataset_root: str,
+        transform: Optional[Callable] = None,
+    ) -> BraTSDataset:
+
+        config = DatasetConfig(dataset_root=dataset_root)
+
+        return BraTSDataset(
+            config=config,
+            transform=transform,
+        )
+
+
+# ==============================================================================
+# Test
+# ==============================================================================
+
+
+if __name__ == "__main__":
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s",
+    )
+
+    dataset_root = Path(__file__).resolve().parents[2] / "data" / "raw" / "BraTS2024"
+
+    dataset = BraTSDatasetFactory.create(dataset_root=str(dataset_root))
+
+    dataset.summary()
+
+    print()
+    print("Dataset length:", len(dataset))
+
+    sample = dataset[0]
+
+    print()
+    print("Patient ID:")
+    print(sample["patient_id"])
+
+    print()
+    print("Image shape:")
+    print(sample["image"].shape)
+
+    print()
+    print("Mask shape:")
+    print(sample["mask"].shape)
+
+    print()
+    print("Image dtype:")
+    print(sample["image"].dtype)
+
+    print()
+    print("Mask dtype:")
+    print(sample["mask"].dtype)

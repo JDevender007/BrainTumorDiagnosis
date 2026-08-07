@@ -2,28 +2,28 @@
 ==============================================================================
 BraTS 2024 DataLoader
 
-Author : Devender J.
+Author  : Devender J.
 Project : Hybrid Brain Tumor Diagnosis
 
-PyTorch DataLoader for BraTS 2024
+Creates training and validation DataLoaders for BraTS 2024.
 ==============================================================================
 """
 
 from __future__ import annotations
 
 import logging
-import random
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
-import numpy as np
 import torch
 from torch.utils.data import DataLoader, random_split
 
-from datasets.brats_dataset import BraTSDataset
+from datasets.brats_dataset import BraTSDataset, DatasetConfig
 from datasets.transforms import TransformFactory
 
 LOGGER = logging.getLogger(__name__)
+
 
 # ==============================================================================
 # Configuration
@@ -32,41 +32,22 @@ LOGGER = logging.getLogger(__name__)
 
 @dataclass(slots=True)
 class DataLoaderConfig:
-    """
-    DataLoader configuration.
-    """
 
     dataset_root: str
 
     batch_size: int = 1
 
-    num_workers: int = 4
+    num_workers: int = 0
 
     validation_split: float = 0.20
 
     shuffle: bool = True
 
-    pin_memory: bool = True
+    pin_memory: bool = False
 
-    persistent_workers: bool = True
-
-    prefetch_factor: int = 2
+    persistent_workers: bool = False
 
     random_seed: int = 42
-
-
-# ==============================================================================
-# Worker Seed
-# ==============================================================================
-
-
-def seed_worker(worker_id: int):
-
-    worker_seed = torch.initial_seed() % 2**32
-
-    np.random.seed(worker_seed)
-
-    random.seed(worker_seed)
 
 
 # ==============================================================================
@@ -79,134 +60,210 @@ class BraTSDataModule:
     def __init__(
         self,
         config: DataLoaderConfig,
-    ):
+    ) -> None:
 
         self.config = config
+
+        self.dataset_root = Path(config.dataset_root)
+
+        self.full_dataset: Optional[BraTSDataset] = None
 
         self.train_dataset = None
 
         self.validation_dataset = None
 
-        self.test_dataset = None
+    # ==========================================================================
+    # Setup
+    # ==========================================================================
 
-        self.generator = torch.Generator().manual_seed(self.config.random_seed)
-
-    # --------------------------------------------------------------------------
-    # Prepare Dataset
-    # --------------------------------------------------------------------------
-
-    def setup(self):
+    def setup(self) -> None:
 
         LOGGER.info("Loading BraTS Dataset...")
 
-        full_dataset = BraTSDataset(
-            dataset_root=Path(self.config.dataset_root),
-            transform=TransformFactory.create(training=True),
+        # ----------------------------------------------------------------------
+        # Training Transform
+        # ----------------------------------------------------------------------
+
+        LOGGER.info("Creating training transform...")
+
+        train_transform = TransformFactory.create(training=True)
+
+        # ----------------------------------------------------------------------
+        # Dataset Configuration
+        # ----------------------------------------------------------------------
+
+        dataset_config = DatasetConfig(dataset_root=str(self.dataset_root))
+
+        # ----------------------------------------------------------------------
+        # Full Dataset
+        # ----------------------------------------------------------------------
+
+        self.full_dataset = BraTSDataset(
+            config=dataset_config,
+            transform=train_transform,
         )
 
-        total_samples = len(full_dataset)
+        total_size = len(self.full_dataset)
 
-        validation_size = int(total_samples * self.config.validation_split)
+        # ----------------------------------------------------------------------
+        # Validation Size
+        # ----------------------------------------------------------------------
 
-        train_size = total_samples - validation_size
+        validation_size = int(total_size * self.config.validation_split)
 
-        self.train_dataset, self.validation_dataset = random_split(
-            full_dataset,
-            [train_size, validation_size],
-            generator=self.generator,
-        )
+        # Ensure validation set exists
+        # when the dataset has enough samples.
+        if total_size > 1:
+
+            validation_size = max(
+                1,
+                validation_size,
+            )
+
+            validation_size = min(
+                validation_size,
+                total_size - 1,
+            )
+
+        else:
+
+            validation_size = 0
+
+        train_size = total_size - validation_size
+
+        # ----------------------------------------------------------------------
+        # Split Dataset
+        # ----------------------------------------------------------------------
+
+        generator = torch.Generator()
+
+        generator.manual_seed(self.config.random_seed)
+
+        if validation_size > 0:
+
+            self.train_dataset, self.validation_dataset = random_split(
+                self.full_dataset,
+                [
+                    train_size,
+                    validation_size,
+                ],
+                generator=generator,
+            )
+
+        else:
+
+            self.train_dataset = self.full_dataset
+
+            self.validation_dataset = None
 
         LOGGER.info("Dataset Loaded Successfully")
 
-        LOGGER.info("Total Samples      : %d", total_samples)
+        LOGGER.info(
+            "Total Samples      : %d",
+            total_size,
+        )
 
-        LOGGER.info("Training Samples  : %d", train_size)
+        LOGGER.info(
+            "Training Samples   : %d",
+            len(self.train_dataset),
+        )
 
-        LOGGER.info("Validation Samples: %d", validation_size)
+        LOGGER.info(
+            "Validation Samples : %d",
+            (
+                len(self.validation_dataset)
+                if self.validation_dataset is not None
+                else 0
+            ),
+        )
 
-    # --------------------------------------------------------------------------
+    # ==========================================================================
     # Training DataLoader
-    # --------------------------------------------------------------------------
+    # ==========================================================================
 
-    def train_dataloader(self):
+    def train_dataloader(self) -> DataLoader:
+
+        if self.train_dataset is None:
+
+            raise RuntimeError("DataModule has not been setup. " "Call setup() first.")
 
         return DataLoader(
-            dataset=self.train_dataset,
+            self.train_dataset,
             batch_size=self.config.batch_size,
             shuffle=self.config.shuffle,
             num_workers=self.config.num_workers,
             pin_memory=self.config.pin_memory,
-            persistent_workers=self.config.persistent_workers,
-            prefetch_factor=self.config.prefetch_factor,
-            worker_init_fn=seed_worker,
-            generator=self.generator,
+            persistent_workers=(
+                self.config.persistent_workers and self.config.num_workers > 0
+            ),
         )
 
-    # --------------------------------------------------------------------------
+    # ==========================================================================
     # Validation DataLoader
-    # --------------------------------------------------------------------------
+    # ==========================================================================
 
-    def validation_dataloader(self):
+    def val_dataloader(self) -> DataLoader:
+
+        if self.validation_dataset is None:
+
+            raise RuntimeError("Validation dataset is not available.")
 
         return DataLoader(
-            dataset=self.validation_dataset,
+            self.validation_dataset,
             batch_size=self.config.batch_size,
             shuffle=False,
             num_workers=self.config.num_workers,
             pin_memory=self.config.pin_memory,
-            persistent_workers=self.config.persistent_workers,
-            prefetch_factor=self.config.prefetch_factor,
-            worker_init_fn=seed_worker,
-            generator=self.generator,
+            persistent_workers=(
+                self.config.persistent_workers and self.config.num_workers > 0
+            ),
         )
 
-    # --------------------------------------------------------------------------
-    # Test DataLoader
-    # --------------------------------------------------------------------------
+    # ==========================================================================
+    # Alias
+    # ==========================================================================
 
-    def test_dataloader(self):
+    def validation_dataloader(self) -> DataLoader:
 
-        if self.test_dataset is None:
+        return self.val_dataloader()
 
-            self.test_dataset = BraTSDataset(
-                dataset_root=Path(self.config.dataset_root),
-                transform=TransformFactory.create(
-                    training=False,
-                ),
-            )
+    # ==========================================================================
+    # Summary
+    # ==========================================================================
 
-        return DataLoader(
-            dataset=self.test_dataset,
-            batch_size=1,
-            shuffle=False,
-            num_workers=self.config.num_workers,
-            pin_memory=self.config.pin_memory,
-            persistent_workers=self.config.persistent_workers,
-            prefetch_factor=self.config.prefetch_factor,
-            worker_init_fn=seed_worker,
-            generator=self.generator,
-        )
+    def summary(self) -> None:
 
-    # --------------------------------------------------------------------------
-    # Dataset Summary
-    # --------------------------------------------------------------------------
+        LOGGER.info("===================================")
 
-    def summary(self):
-
-        LOGGER.info("=" * 60)
         LOGGER.info("BraTS DataLoader Summary")
-        LOGGER.info("=" * 60)
-        LOGGER.info("Dataset Root      : %s", self.config.dataset_root)
-        LOGGER.info("Batch Size        : %d", self.config.batch_size)
-        LOGGER.info("Workers           : %d", self.config.num_workers)
-        LOGGER.info("Validation Split  : %.2f", self.config.validation_split)
-        LOGGER.info("Pin Memory        : %s", self.config.pin_memory)
-        LOGGER.info("Shuffle           : %s", self.config.shuffle)
-        LOGGER.info("=" * 60)
+
+        LOGGER.info("===================================")
+
+        LOGGER.info(
+            "Dataset Root : %s",
+            self.dataset_root,
+        )
+
+        LOGGER.info(
+            "Batch Size   : %d",
+            self.config.batch_size,
+        )
+
+        LOGGER.info(
+            "Workers      : %d",
+            self.config.num_workers,
+        )
+
+        LOGGER.info(
+            "Validation   : %.2f",
+            self.config.validation_split,
+        )
+
+        LOGGER.info("===================================")
 
 
 # ==============================================================================
-# Demo
+# Test
 # ==============================================================================
 
 
@@ -217,21 +274,16 @@ if __name__ == "__main__":
         format="%(levelname)s : %(message)s",
     )
 
-    # --------------------------------------------------------------------------
-    # Update this path to your BraTS 2024 Training Dataset
-    # --------------------------------------------------------------------------
-
-    DATASET_ROOT = r"D:\Datasets\BraTS2024"
+    dataset_root = Path(__file__).resolve().parents[1] / "data" / "raw" / "BraTS2024"
 
     config = DataLoaderConfig(
-        dataset_root=DATASET_ROOT,
+        dataset_root=str(dataset_root),
         batch_size=1,
-        num_workers=4,
+        num_workers=0,
         validation_split=0.20,
         shuffle=True,
         pin_memory=torch.cuda.is_available(),
-        persistent_workers=True,
-        prefetch_factor=2,
+        persistent_workers=False,
     )
 
     datamodule = BraTSDataModule(config)
@@ -242,31 +294,16 @@ if __name__ == "__main__":
 
     train_loader = datamodule.train_dataloader()
 
-    print()
+    LOGGER.info(
+        "Training Batches : %d",
+        len(train_loader),
+    )
 
-    print("=" * 70)
-    print("Testing Training DataLoader")
-    print("=" * 70)
+    if datamodule.validation_dataset is not None:
 
-    batch = next(iter(train_loader))
+        val_loader = datamodule.val_dataloader()
 
-    print("Image Shape :", batch["image"].shape)
-    print("Mask Shape  :", batch["mask"].shape)
-
-    print()
-
-    print("Image Dtype :", batch["image"].dtype)
-    print("Mask Dtype  :", batch["mask"].dtype)
-
-    print()
-
-    print("Image Device :", batch["image"].device)
-    print("Mask Device  :", batch["mask"].device)
-
-    print()
-
-    print("Batch Size :", batch["image"].shape[0])
-
-    print("=" * 70)
-
-    LOGGER.info("DataLoader test completed successfully.")
+        LOGGER.info(
+            "Validation Batches : %d",
+            len(val_loader),
+        )
