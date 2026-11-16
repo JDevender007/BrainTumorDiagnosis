@@ -14,7 +14,7 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
 ---
 
 ## Phase 0 — Recon (STOP after this for confirmation)
-- [ ] Write `AUDIT_REPORT.md`: how each dataset is loaded; how splits are made
+- [ ] Write `docs/AUDIT_REPORT.md`: how each dataset is loaded; how splits are made
       (patient-level?); preprocessing/normalization; where MC dropout sits (T=10);
       how F1 / ECE / MRRS are computed; paper-number → log/JSON mapping.
 - [ ] Flag every unsourced number in the paper (list below) as `TODO-RERUN`.

@@ -168,9 +168,10 @@ report = {
     },
     "overlap_filenames_kaggle_test": sorted(list(overlap_train_ktest | overlap_test_ktest)),
 }
-with open("research_final_validation/leakage_report.json", "w") as f:
+os.makedirs("results", exist_ok=True)
+with open("results/leakage_report_initial.json", "w") as f:
     json.dump(report, f, indent=2)
-print(f"  Saved to research_final_validation/leakage_report.json")
+print(f"  Saved to results/leakage_report_initial.json")
 
 print("\n" + "=" * 70)
 print("LEAKAGE VERDICT")

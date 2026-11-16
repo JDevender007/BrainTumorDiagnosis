@@ -17,7 +17,7 @@ What it does:
   10. Generates evaluation PNGs for new dataset
 
 Usage:
-  python run_everything.py
+  python scripts/run_everything.py
 
 Output:
   outputs/research_experiments/all_outputs/  (42 files)
@@ -32,8 +32,8 @@ import sys
 import time
 from pathlib import Path
 
-# Ensure we're in the project root
-os.chdir(Path(__file__).parent)
+# Ensure we're in the project root (script lives in scripts/)
+os.chdir(Path(__file__).resolve().parent.parent)
 sys.path.insert(0, ".")
 
 

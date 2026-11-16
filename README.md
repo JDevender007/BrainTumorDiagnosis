@@ -258,8 +258,6 @@ Runs segmentation + classification, writes a JSON report and the
 segmentation NIfTI to `outputs/predictions/`. End-to-end pipeline with
 visualizations and reports: `python -m engine.pipeline`.
 
-Streamlit UI: `streamlit run ui/app.py`.
-
 ---
 
 ## Tests
@@ -278,23 +276,30 @@ Grad-CAM, and the SimCLR module.
 ## Project structure
 
 ```
-checkpoints/            trained weights (classification/<backbone>/)
-configs/                per-backbone YAML training configs
-data/                   datasets (classification, segmentation, external)
-engine/                 inference, pipeline, reports, visualization
-evaluation/             evaluator, comprehensive metrics, Grad-CAM, robustness, calibration, uncertainty
-inference/              CLI entry points
-models/                 factory + backbone zoo + TURMA-Net
-outputs/                metrics, predictions, histories, gradcam, training_state.json
-scripts/                training CLI + training manager + experiment scripts
-training/               unified classifier + SimCLR + segmentation + multitask + manager
-tests/                  pytest suite
-ui/                     Streamlit app
-utils/                  device, seeds, metrics, logging
-research_publication_upgrade/  publication audit and upgrade documents
+TAMNet_Paper.docx        current paper draft (single source of truth for the audit)
+docs/                    audit documents: AUDIT_REPORT.md, TODO.md
+paper/                   paper generator, manuscript/, figures/, results/, tables/
+checkpoints/             trained weights (classification/<backbone>/) [gitignored]
+configs/                 per-backbone YAML training configs
+data/                    datasets (classification, segmentation, external) [gitignored]
+datasets/                dataset loaders, preprocessing, patient-level splitting
+engine/                  inference, pipeline, reports, visualization
+evaluation/              evaluator, comprehensive metrics, Grad-CAM, robustness, calibration, uncertainty
+inference/               CLI entry points
+losses/                  classification / segmentation losses
+models/                  factory + backbone zoo + TAMNet (tumor_aware.py) + TURMA-Net
+outputs/                 metrics, predictions, histories, logs, training_state.json [gitignored]
+preprocessing/           volume preprocessing utilities
+results/                 audit results (leakage reports)
+scripts/                 training CLI + experiment scripts + runners (run.bat, run_project.bat, run_everything.py, resume_training.ps1)
+segmentation/            segmentation utilities
+training/                unified classifier + SimCLR + segmentation + multitask + manager
+tests/                   pytest suite
+utils/                   device, seeds, metrics, logging
 ```
 
-## Comprehensive Report
+## Audit report
 
-For detailed metrics, robustness analysis, and full project documentation,
-see `research_publication_upgrade/` directory.
+The audit of `TAMNet_Paper.docx` (every number traced to a script output,
+code-vs-paper consistency, reproducibility plan) is documented in
+`docs/AUDIT_REPORT.md`, with the phased checklist in `docs/TODO.md`.

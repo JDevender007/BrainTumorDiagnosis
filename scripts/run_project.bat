@@ -6,7 +6,7 @@ echo   Tumor-Aware Self-Supervised Multi-Task Architecture
 echo ============================================================
 echo.
 
-cd /d D:\Projects\BrainTumorDiagnosis
+cd /d "%~dp0.."
 
 echo [1/10] Checking environment...
 python -c "import torch, torchvision, numpy, sklearn, matplotlib; print('  All dependencies OK')" || (
@@ -88,6 +88,6 @@ echo   Output folders:
 echo     outputs/research_experiments/all_outputs/  (42 files)
 echo     outputs/kaggle_evaluation/                 (10 files)
 echo.
-echo   Run 'python run_everything.py' for interactive menu.
+echo   Run 'python scripts\run_everything.py' for interactive menu.
 echo.
 pause

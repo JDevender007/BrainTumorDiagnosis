@@ -1,5 +1,5 @@
 # Resume the paused brain tumor training.
-# Run from the project root:  powershell -ExecutionPolicy Bypass -File resume_training.ps1
+# Run from the project root:  powershell -ExecutionPolicy Bypass -File scripts\resume_training.ps1
 
 Add-Type -TypeDefinition @"
 using System;

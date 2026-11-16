@@ -29,11 +29,11 @@
 | Entry points | `python -m scripts.train_classification` (`scripts/train_classification.py:14-17`), `scripts/run_research_experiments.py` (**produced the paper numbers**), `scripts/run_multiseed.py` / `run_multi_seed.py` | |
 | Results (paper source) | `outputs/research_experiments/all_experiment_results.json`, `outputs/research_experiments/multi_seed/statistical_results.json`, `outputs/kaggle_evaluation/results.json`, `outputs/comprehensive_metrics/*`, `outputs/metrics/segmentation_evaluation_test.json` | **gitignored — kept deliberately** |
 | Results (newer, contradicting) | `paper/results/{ablation_all,multi_seed_all,external_validation,all_results}.json` + per-run `.pt` | Sep 4–5 reruns |
-| Leakage evidence | `research_final_validation/leakage_report.json` | Kept (Kaggle 839/1311 proof) |
+| Leakage evidence | `results/leakage_report_initial.json` | Kept (Kaggle 839/1311 proof; was `research_final_validation/leakage_report.json` before the structure tidy) |
 | Logs | `outputs/*.log`, `outputs/**/training_history.json` (31 files) | All gitignored |
 | Notebooks | none | |
 
-**Cleanup performed on branch** (commit `4fd1b1d`, recoverable from baseline `a2666f1`): deleted `research_implementation_audit/`, `research_publication_upgrade/`, `research_verification/`, `ui/`, `.pytest_cache/`, all `__pycache__/`, and the aborted `scripts/evaluation_pipeline.py`. **Kept despite being clutter:** `outputs/` and `research_final_validation/leakage_report.json` because they are the *only* sources for the paper's numbers (audit rule 1) and are gitignored/unrecoverable if deleted.
+**Cleanup performed on branch** (commit `4fd1b1d`, recoverable from baseline `a2666f1`): deleted `research_implementation_audit/`, `research_publication_upgrade/`, `research_verification/`, `ui/`, `.pytest_cache/`, all `__pycache__/`, and the aborted `scripts/evaluation_pipeline.py`. **Kept despite being clutter:** `outputs/` and `research_final_validation/leakage_report.json` (now `results/leakage_report_initial.json`) because they are the *only* sources for the paper's numbers (audit rule 1) and are gitignored/unrecoverable if deleted.
 
 ---
 
@@ -59,7 +59,7 @@
 - `data/external/kaggle_brain_tumor/Testing/` = **1,311** (glioma 300 · meningioma 306 · notumor 405 · pituitary 300) — **matches your FILL exactly** ✔. `Training/` = 3,881 with **no pituitary folder** (1,321/1,339/1,221) — incomplete copy.
 - **⚠ FILL #2:** exact dataset name/link not recorded anywhere in the repo. Layout (Training/Testing, `notumor`) matches the common Kaggle "Brain Tumor MRI Dataset" — **[VERIFY]**, needs your confirmation.
 
-### 2.5 Leakage (from `research_final_validation/leakage_report.json`)
+### 2.5 Leakage (from `results/leakage_report_initial.json`)
 - internal_train 9,286 vs internal_test: **218 filename overlaps** (earlier content check: different images, filename collision)
 - internal_train vs Kaggle test: **839/1,311 overlap → Kaggle set is contaminated, not independent**
 - internal_test vs Kaggle test: 0 · BRISC: no overlap found
