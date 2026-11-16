@@ -1,0 +1,28 @@
+project:
+  root: "."
+
+data:
+  root: "data"
+  raw: "data/raw"
+  processed: "data/processed"
+  splits: "data/splits"
+  cache: "data/cache"
+
+brats:
+  root: "data/raw/BraTS2024"
+  processed: "data/processed/brats"
+  splits: "data/splits/brats"
+
+classification:
+  root: "data/raw/classification"
+  processed: "data/processed/classification"
+  splits: "data/splits/classification"
+
+outputs:
+  root: "outputs"
+  checkpoints: "outputs/checkpoints"
+  logs: "outputs/logs"
+  predictions: "outputs/predictions"
+  metrics: "outputs/metrics"
+  figures: "outputs/figures"
+  reports: "outputs/reports"

@@ -1,0 +1,34 @@
+# BrainTumorDiagnosis
+# ConvNeXt-Tiny baseline (ImageNet transfer).
+
+model:
+  backbone: convnext_tiny
+  num_classes: 4
+  input_channels: 3
+  image_size: [224, 224]
+  pretrained: true
+  label_smoothing: 0.05
+  use_class_weights: true
+  use_augmentation: true
+
+data:
+  data_directory: data/raw/classification
+  validation_split: 0.2
+  validation_seed: 42
+  batch_size: 8
+  num_workers: 0
+
+training:
+  epochs: 30
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  use_amp: true
+  seed: 42
+  patience: 7
+  min_delta: 0.001
+  grad_accumulation_steps: 2
+  grad_clip: 1.0
+
+paths:
+  model_directory: checkpoints/classification/convnext_tiny
+  result_directory: outputs/convnext_tiny_training

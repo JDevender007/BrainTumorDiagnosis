@@ -1,0 +1,6 @@
+{
+    "epoch": 30,
+    "monitor_name": "val_dice_mean",
+    "monitor_value": 0.5242573222884773,
+    "is_best": false
+}

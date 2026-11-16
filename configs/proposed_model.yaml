@@ -1,0 +1,33 @@
+# TumorAwareMultiTaskNet configuration
+model:
+  backbone: "densenet121"
+  pretrained: true
+  num_classes: 4
+  segmentation_classes: 4
+  dropout: 0.3
+  fusion_dim: 256
+  use_attention_fusion: true
+  use_segmentation_head: true
+  use_uncertainty_head: true
+  mc_dropout_passes: 10
+
+training:
+  epochs: 50
+  batch_size: 8
+  image_size: 224
+  lr: 0.0001
+  weight_decay: 0.0001
+  patience: 7
+  label_smoothing: 0.1
+  seg_loss_weight: 0.5
+  cls_loss_weight: 1.0
+  uncertainty_loss_weight: 0.1
+  seed: 42
+  mixed_precision: true
+  gradient_accumulation_steps: 2
+
+data:
+  classification_root: "data/raw/classification"
+  segmentation_root: "data/raw/BraTS2024"
+  external_root: "data/external/brisc2025/brisc2025/classification_task/test"
+  num_workers: 0

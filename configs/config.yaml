@@ -1,0 +1,21 @@
+project:
+  name: "BrainTumorDiagnosis"
+  version: "1.0.0"
+
+task:
+  primary: "brain_tumor_detection_and_classification"
+
+pipeline:
+  stages:
+    - "tumor_localization"
+    - "tumor_classification"
+
+  localization_dataset: "BraTS2024"
+  classification_dataset: "external_labeled_dataset"
+
+files:
+  paths_config: "configs/paths.yaml"
+  dataset_config: "configs/dataset.yaml"
+  segmentation_config: "configs/segmentation.yaml"
+  classification_config: "configs/classification.yaml"
+  training_config: "configs/training.yaml"

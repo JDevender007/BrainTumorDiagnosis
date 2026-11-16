@@ -1,0 +1,42 @@
+# TURMA-Net configuration
+# Tumor-guided Uncertainty-aware Robust Multi-task Network
+model:
+  backbone: "densenet121"
+  pretrained: true
+  num_classes: 4
+  segmentation_classes: 4
+  dropout: 0.3
+  fusion_dim: 256
+  # Novel components
+  use_atgfm: true
+  use_consistency: true
+  use_uncertainty_weights: true
+  use_segmentation_head: true
+  use_uncertainty_head: true
+  mc_dropout_passes: 10
+  consistency_temperature: 2.0
+
+training:
+  epochs: 50
+  batch_size: 8
+  image_size: 224
+  lr: 0.0001
+  weight_decay: 0.0001
+  patience: 7
+  label_smoothing: 0.1
+  focal_gamma: 2.0
+  # Loss weights (used when use_uncertainty_weights=false)
+  cls_loss_weight: 1.0
+  seg_loss_weight: 0.5
+  consistency_loss_weight: 0.1
+  seed: 42
+  mixed_precision: true
+  gradient_accumulation_steps: 2
+
+data:
+  classification_root: "data/raw/classification"
+  segmentation_root: "data/raw/BraTS2024"
+  external_root: "data/external/brisc2025/brisc2025/classification_task/test"
+  validation_split: 0.2
+  validation_seed: 42
+  num_workers: 0

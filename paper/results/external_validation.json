@@ -1,0 +1,236 @@
+{
+  "A_baseline_densenet121_BRISC": {
+    "model": "A_baseline_densenet121",
+    "dataset": "BRISC",
+    "accuracy": 0.89,
+    "macro_f1": 0.890167462363521,
+    "roc_auc": 0.9900409658957124,
+    "per_class_f1": {
+      "glioma": 0.9303278688524591,
+      "meningioma": 0.8336448598130841,
+      "no tumor": 0.8917197452229298,
+      "pituitary": 0.904977375565611
+    },
+    "confusion_matrix": [
+      [
+        227,
+        6,
+        4,
+        17
+      ],
+      [
+        7,
+        223,
+        30,
+        46
+      ],
+      [
+        0,
+        0,
+        140,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        300
+      ]
+    ]
+  },
+  "d_tumor_aware_BRISC": {
+    "model": "d_tumor_aware",
+    "dataset": "BRISC",
+    "accuracy": 0.962,
+    "macro_f1": 0.9604514011229399,
+    "roc_auc": 0.9971201518745938,
+    "per_class_f1": {
+      "glioma": 0.9514563106796117,
+      "meningioma": 0.9539473684210527,
+      "no tumor": 0.9530685920577618,
+      "pituitary": 0.9833333333333333
+    },
+    "confusion_matrix": [
+      [
+        245,
+        8,
+        0,
+        1
+      ],
+      [
+        9,
+        290,
+        4,
+        3
+      ],
+      [
+        6,
+        1,
+        132,
+        1
+      ],
+      [
+        1,
+        3,
+        1,
+        295
+      ]
+    ]
+  },
+  "e_turma_full_BRISC": {
+    "model": "e_turma_full",
+    "dataset": "BRISC",
+    "accuracy": 0.905,
+    "macro_f1": 0.9024746856778503,
+    "roc_auc": 0.9828401502175874,
+    "per_class_f1": {
+      "glioma": 0.9242718446601942,
+      "meningioma": 0.8571428571428571,
+      "no tumor": 0.8778877887788779,
+      "pituitary": 0.950596252129472
+    },
+    "confusion_matrix": [
+      [
+        238,
+        14,
+        1,
+        1
+      ],
+      [
+        17,
+        255,
+        28,
+        6
+      ],
+      [
+        4,
+        2,
+        133,
+        1
+      ],
+      [
+        2,
+        18,
+        1,
+        279
+      ]
+    ]
+  },
+  "A_baseline_densenet121_Kaggle": {
+    "model": "A_baseline_densenet121",
+    "dataset": "Kaggle",
+    "accuracy": 0.9038901601830663,
+    "macro_f1": 0.8982101846243964,
+    "roc_auc": 0.990703047649309,
+    "per_class_f1": {
+      "glioma": 0.9198606271777003,
+      "meningioma": 0.8320895522388059,
+      "no tumor": 0.9453681710213776,
+      "pituitary": 0.8955223880597014
+    },
+    "confusion_matrix": [
+      [
+        264,
+        7,
+        9,
+        20
+      ],
+      [
+        7,
+        223,
+        30,
+        46
+      ],
+      [
+        3,
+        0,
+        398,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        300
+      ]
+    ]
+  },
+  "d_tumor_aware_Kaggle": {
+    "model": "d_tumor_aware",
+    "dataset": "Kaggle",
+    "accuracy": 0.9748283752860412,
+    "macro_f1": 0.9735610598223228,
+    "roc_auc": 0.9983224335566713,
+    "per_class_f1": {
+      "glioma": 0.9651741293532338,
+      "meningioma": 0.9539473684210527,
+      "no tumor": 0.9901477832512314,
+      "pituitary": 0.9849749582637728
+    },
+    "confusion_matrix": [
+      [
+        291,
+        8,
+        0,
+        1
+      ],
+      [
+        9,
+        290,
+        4,
+        3
+      ],
+      [
+        2,
+        1,
+        402,
+        0
+      ],
+      [
+        1,
+        3,
+        1,
+        295
+      ]
+    ]
+  },
+  "e_turma_full_Kaggle": {
+    "model": "e_turma_full",
+    "dataset": "Kaggle",
+    "accuracy": 0.927536231884058,
+    "macro_f1": 0.9247657600991401,
+    "roc_auc": 0.989634277164619,
+    "per_class_f1": {
+      "glioma": 0.9326765188834154,
+      "meningioma": 0.8585858585858586,
+      "no tumor": 0.9555822328931572,
+      "pituitary": 0.9522184300341298
+    },
+    "confusion_matrix": [
+      [
+        284,
+        14,
+        1,
+        1
+      ],
+      [
+        17,
+        255,
+        28,
+        6
+      ],
+      [
+        6,
+        1,
+        398,
+        0
+      ],
+      [
+        2,
+        18,
+        1,
+        279
+      ]
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+seed: 42
+
+device:
+  auto: true
+  preferred: "cuda"
+
+amp:
+  enabled: true
+
+checkpoint:
+  save_best: true
+  save_last: true
+
+logging:
+  level: "INFO"
+
+reproducibility:
+  deterministic: true
+
+dataloader:
+  pin_memory: true
+  persistent_workers: false
+  drop_last: false

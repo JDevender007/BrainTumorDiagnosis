@@ -1,0 +1,38 @@
+brats:
+  modalities:
+    - t1n
+    - t1c
+    - t2w
+    - t2f
+
+  segmentation_label: seg
+
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+
+  random_seed: 42
+
+  patient_level_split: true
+  split_manifest: "data/splits/brats/split_manifest.json"
+
+  batch_size: 1
+  num_workers: 0
+
+  patch_size:
+    - 96
+    - 96
+    - 96
+
+  foreground_sampling: true
+
+classification:
+  image_size:
+    - 224
+    - 224
+
+  batch_size: 16
+  num_workers: 0
+
+  validation_split: 0.2
+  validation_seed: 42

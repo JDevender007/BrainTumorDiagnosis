@@ -1,0 +1,279 @@
+"""
+Multi-task training framework for TumorAwareMultiTaskNet.
+
+Handles:
+- Combined segmentation + classification loss
+- Multi-task gradient balancing
+- Checkpointing
+- Mixed precision training
+- Gradient accumulation
+"""
+
+from __future__ import annotations
+
+import json
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Optional
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import DataLoader
+from torch.amp import autocast, GradScaler
+from tqdm import tqdm
+import numpy as np
+from sklearn.metrics import f1_score, accuracy_score
+
+from models.tumor_aware import TumorAwareMultiTaskNet, TumorAwareConfig
+from losses.segmentation import DiceLoss3D, SegmentationLoss
+
+
+@dataclass
+class MultiTaskTrainingConfig:
+    backbone: str = "densenet121"
+    pretrained: bool = True
+    num_classes: int = 4
+    segmentation_classes: int = 4
+    epochs: int = 50
+    batch_size: int = 8
+    image_size: tuple[int, int] = (224, 224)
+    lr: float = 0.0001
+    weight_decay: float = 0.0001
+    patience: int = 7
+    label_smoothing: float = 0.1
+    seg_loss_weight: float = 0.5
+    cls_loss_weight: float = 1.0
+    uncertainty_loss_weight: float = 0.1
+    dropout: float = 0.3
+    fusion_dim: int = 256
+    use_attention_fusion: bool = True
+    use_segmentation_head: bool = True
+    use_uncertainty_head: bool = True
+    seed: int = 42
+    mixed_precision: bool = True
+    gradient_accumulation_steps: int = 2
+    output_dir: str = "outputs/research_experiments/proposed_model"
+
+
+@dataclass
+class TrainingResult:
+    best_val_f1: float
+    best_epoch: int
+    training_history: list[dict]
+    checkpoint_path: str
+    config: dict
+
+
+class MultiTaskLoss(nn.Module):
+    """Combined loss for multi-task learning."""
+
+    def __init__(
+        self,
+        num_classes: int = 4,
+        cls_weight: float = 1.0,
+        seg_weight: float = 0.5,
+        label_smoothing: float = 0.1,
+    ):
+        super().__init__()
+        self.cls_loss = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
+        self.seg_loss = DiceLoss3D()
+        self.cls_weight = cls_weight
+        self.seg_weight = seg_weight
+
+    def forward(
+        self,
+        outputs: dict,
+        labels: torch.Tensor,
+        seg_targets: Optional[torch.Tensor] = None,
+    ) -> dict[str, torch.Tensor]:
+        cls_loss = self.cls_loss(outputs["logits"], labels)
+
+        total_loss = self.cls_weight * cls_loss
+        seg_loss_val = torch.tensor(0.0, device=labels.device)
+
+        if "seg_logits" in outputs and seg_targets is not None:
+            seg_loss_val = self.seg_loss(outputs["seg_logits"], seg_targets)
+            total_loss = total_loss + self.seg_weight * seg_loss_val
+
+        return {
+            "total_loss": total_loss,
+            "cls_loss": cls_loss,
+            "seg_loss": seg_loss_val,
+        }
+
+
+def train_multitask_model(
+    config: MultiTaskTrainingConfig,
+    train_loader: DataLoader,
+    val_loader: DataLoader,
+    device: torch.device,
+    external_loader: Optional[DataLoader] = None,
+) -> TrainingResult:
+    """Train the multi-task tumor-aware model."""
+    torch.manual_seed(config.seed)
+    np.random.seed(config.seed)
+
+    model_config = TumorAwareConfig(
+        backbone=config.backbone,
+        pretrained=config.pretrained,
+        num_classes=config.num_classes,
+        segmentation_classes=config.segmentation_classes,
+        dropout=config.dropout,
+        fusion_dim=config.fusion_dim,
+        use_attention_fusion=config.use_attention_fusion,
+        use_segmentation_head=config.use_segmentation_head,
+        use_uncertainty_head=config.use_uncertainty_head,
+    )
+    model = TumorAwareMultiTaskNet(model_config).to(device)
+
+    optimizer = torch.optim.AdamW(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=config.epochs)
+    criterion = MultiTaskLoss(
+        num_classes=config.num_classes,
+        cls_weight=config.cls_loss_weight,
+        seg_weight=config.seg_loss_weight,
+        label_smoothing=config.label_smoothing,
+    )
+
+    scaler = GradScaler("cuda", enabled=config.mixed_precision)
+
+    output_dir = Path(config.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    best_val_f1 = 0.0
+    best_epoch = 0
+    patience_counter = 0
+    history = []
+
+    for epoch in range(config.epochs):
+        model.train()
+        epoch_losses = []
+        epoch_cls_losses = []
+        epoch_seg_losses = []
+
+        pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{config.epochs}", leave=False)
+        for batch_idx, (images, labels) in enumerate(pbar):
+            images, labels = images.to(device), labels.to(device)
+
+            optimizer.zero_grad()
+
+            with autocast("cuda", enabled=config.mixed_precision):
+                outputs = model(images, return_seg=True)
+                losses = criterion(outputs, labels)
+                loss = losses["total_loss"] / config.gradient_accumulation_steps
+
+            scaler.scale(loss).backward()
+
+            if (batch_idx + 1) % config.gradient_accumulation_steps == 0:
+                scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                scaler.step(optimizer)
+                scaler.update()
+
+            epoch_losses.append(losses["total_loss"].item())
+            epoch_cls_losses.append(losses["cls_loss"].item())
+            epoch_seg_losses.append(losses["seg_loss"].item())
+
+            pbar.set_postfix({
+                "loss": f"{losses['total_loss'].item():.4f}",
+                "cls": f"{losses['cls_loss'].item():.4f}",
+            })
+
+            if (batch_idx + 1) % 5 == 0:
+                n = len(epoch_losses)
+                print(
+                    f"  [Batch {batch_idx+1}/{len(train_loader)}] "
+                    f"loss={sum(epoch_losses[-5:])/min(5,n):.4f} "
+                    f"cls={sum(epoch_cls_losses[-5:])/min(5,n):.4f} "
+                    f"seg={sum(epoch_seg_losses[-5:])/min(5,n):.4f}",
+                    flush=True,
+                )
+
+        scheduler.step()
+
+        model.eval()
+        val_preds = []
+        val_labels = []
+        with torch.no_grad():
+            for images, labels in val_loader:
+                images = images.to(device)
+                outputs = model(images)
+                preds = outputs["logits"].argmax(dim=1)
+                val_preds.extend(preds.cpu().numpy())
+                val_labels.extend(labels.numpy())
+
+        val_f1 = f1_score(val_labels, val_preds, average="weighted", zero_division=0)
+        val_acc = accuracy_score(val_labels, val_preds)
+
+        epoch_info = {
+            "epoch": epoch + 1,
+            "train_loss": float(np.mean(epoch_losses)),
+            "train_cls_loss": float(np.mean(epoch_cls_losses)),
+            "train_seg_loss": float(np.mean(epoch_seg_losses)),
+            "val_f1": val_f1,
+            "val_accuracy": val_acc,
+            "learning_rate": optimizer.param_groups[0]["lr"],
+        }
+        history.append(epoch_info)
+
+        print(
+            f"  Epoch {epoch+1}/{config.epochs} | "
+            f"train_loss={epoch_info['train_loss']:.4f} "
+            f"cls={epoch_info['train_cls_loss']:.4f} "
+            f"seg={epoch_info['train_seg_loss']:.4f} | "
+            f"val_f1={val_f1:.4f} val_acc={val_acc:.4f} | "
+            f"lr={optimizer.param_groups[0]['lr']:.6f}",
+            flush=True,
+        )
+
+        if val_f1 > best_val_f1:
+            best_val_f1 = val_f1
+            best_epoch = epoch + 1
+            patience_counter = 0
+
+            torch.save({
+                "epoch": epoch + 1,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "val_f1": val_f1,
+                "val_accuracy": val_acc,
+                "config": {
+                    "backbone": config.backbone,
+                    "num_classes": config.num_classes,
+                    "dropout": config.dropout,
+                    "fusion_dim": config.fusion_dim,
+                },
+            }, output_dir / "best.pt")
+        else:
+            patience_counter += 1
+
+        if patience_counter >= config.patience:
+            print(f"  Early stopping at epoch {epoch+1}")
+            break
+
+    torch.save({
+        "epoch": epoch + 1,
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "history": history,
+    }, output_dir / "last.pt")
+
+    with open(output_dir / "training_history.json", "w") as f:
+        json.dump(history, f, indent=2)
+
+    print(f"\nBest val F1: {best_val_f1:.4f} at epoch {best_epoch}")
+
+    return TrainingResult(
+        best_val_f1=best_val_f1,
+        best_epoch=best_epoch,
+        training_history=history,
+        checkpoint_path=str(output_dir / "best.pt"),
+        config={
+            "backbone": config.backbone,
+            "epochs": config.epochs,
+            "lr": config.lr,
+            "batch_size": config.batch_size,
+        },
+    )

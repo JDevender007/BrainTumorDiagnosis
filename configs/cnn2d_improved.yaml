@@ -1,0 +1,36 @@
+# BrainTumorDiagnosis
+# CNN-2D Improved Configuration
+# Residual CNN with increased capacity for >95% accuracy
+
+model:
+  backbone: cnn2d
+  num_classes: 4
+  input_channels: 3
+  image_size: [224, 224]
+  pretrained: false
+  label_smoothing: 0.1
+  use_class_weights: true
+  use_augmentation: true
+  base_channels: 32
+
+data:
+  data_directory: data/raw/classification
+  validation_split: 0.2
+  validation_seed: 42
+  batch_size: 32
+  num_workers: 0
+
+training:
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  use_amp: true
+  seed: 42
+  patience: 10
+  min_delta: 0.001
+  grad_accumulation_steps: 1
+  grad_clip: 1.0
+
+paths:
+  model_directory: checkpoints/classification/cnn2d
+  result_directory: outputs/cnn2d_training

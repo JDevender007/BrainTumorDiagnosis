@@ -1,0 +1,93 @@
+{
+  "project_name": "BrainTumorDiagnosis",
+  "audit_date": "2026-09-04",
+  "project_root": "D:\\BrainTumorDiagnosis",
+  "total_python_files": 88,
+  "total_lines_of_code": 15000,
+  "models": {
+    "classification": [
+      {"name": "CNN-2D", "type": "2D", "params": "21.40M", "status": "trained"},
+      {"name": "DenseNet121", "type": "2D", "params": "6.96M", "status": "trained"},
+      {"name": "ResNet50", "type": "2D", "params": "23.52M", "status": "trained"},
+      {"name": "EfficientNetV2-S", "type": "2D", "params": "20.18M", "status": "trained"},
+      {"name": "ConvNeXt-Tiny", "type": "2D", "params": "27.82M", "status": "trained"},
+      {"name": "Swin-T", "type": "2D", "params": "27.52M", "status": "trained"},
+      {"name": "ViT-B/16", "type": "2D", "params": "85.80M", "status": "trained"},
+      {"name": "BrainTumorClassifier3D", "type": "3D", "params": "~0.5M", "status": "not_trained"}
+    ],
+    "segmentation": [
+      {"name": "UNet3D", "type": "3D", "params": "~2.5M", "status": "partially_trained", "epochs_completed": 30, "epochs_target": 100}
+    ],
+    "proposed": [
+      {"name": "TumorAwareMultiTaskNet", "type": "2D", "params": "9.03M", "status": "trained"}
+    ],
+    "ssl": [
+      {"name": "SimCLR", "type": "2D", "status": "exists"}
+    ]
+  },
+  "datasets": {
+    "internal_classification": {
+      "location": "data/raw/classification/",
+      "train_total": 9291,
+      "test_total": 1857,
+      "grand_total": 11148,
+      "classes": ["Glioma", "Meningioma", "Pituitary", "No Tumor"],
+      "class_distribution": {
+        "train": {"Glioma": 3018, "Meningioma": 2183, "Pituitary": 2145, "No Tumor": 1945},
+        "test": {"Glioma": 603, "Meningioma": 436, "Pituitary": 429, "No Tumor": 389}
+      },
+      "patient_ids_available": false,
+      "patient_level_split": false,
+      "source": "unknown",
+      "license": "unknown"
+    },
+    "brats_2024": {
+      "location": "data/raw/BraTS2024/",
+      "split_ratio": {"train": 0.70, "validation": 0.15, "test": 0.15},
+      "patient_level_split": true,
+      "modalities": ["t1n", "t1c", "t2w", "t2f"],
+      "segmentation_labels": ["background", "NETC", "SNFH", "ET", "RC"]
+    },
+    "brisc_2025": {
+      "location": "data/external/brisc2025/",
+      "count": 1000,
+      "source": "BRISC 2025 challenge"
+    },
+    "kaggle": {
+      "location": "data/external/kaggle_brain_tumor/",
+      "count": 1311,
+      "source": "Zenodo"
+    }
+  },
+  "evaluation_components": {
+    "classification_metrics": ["accuracy", "precision", "recall", "f1", "specificity", "roc_auc", "pr_auc", "mcc", "kappa", "log_loss", "per_class_f1"],
+    "robustness": {"corruption_types": 9, "mrrs": true},
+    "calibration": ["ece", "mce", "brier", "nll", "temperature_scaling", "reliability_diagrams"],
+    "uncertainty": ["mc_dropout", "predictive_variance", "predictive_entropy", "mutual_information"],
+    "explainability": ["grad_cam", "grad_cam_plus_plus"],
+    "segmentation": ["dice", "hausdorff_95"]
+  },
+  "critical_findings": {
+    "high_severity": [
+      "Classification is 2D slice-based, NOT 3D volumetric",
+      "Documentation states 7897 train images but actual count is 9291",
+      "Validation split ratio discrepancy: code=0.2, docs=0.15",
+      "Segmentation metadata shows epoch 30/Dice 0.5243, docs claim 0.5669",
+      "Random seeds inconsistent across documentation",
+      "No patient-level identity checking for classification dataset",
+      "External validation accuracy exceeds internal (suspicious)"
+    ],
+    "medium_severity": [
+      "Proposed model is entirely 2D",
+      "No genuine novelty in combining existing techniques",
+      "All ROC-AUC values are 1.0000 (suspicious)",
+      "Documentation has multiple numerical inconsistencies"
+    ]
+  },
+  "publication_readiness": {
+    "score": 41,
+    "max_score": 100,
+    "classification": "SIGNIFICANT_RESEARCH_GAPS",
+    "status": "NOT_PUBLICATION_READY"
+  }
+}

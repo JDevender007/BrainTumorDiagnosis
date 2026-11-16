@@ -1,0 +1,25 @@
+# BrainTumorDiagnosis
+# Self-supervised SimCLR pretraining on unlabeled MRI slices.
+
+model:
+  backbone: densenet121
+  temperature: 0.07
+  projector_hidden: 512
+  projection_dim: 128
+  image_size: [224, 224]
+
+data:
+  data_directory: data/raw/classification
+  batch_size: 32
+  num_workers: 0
+
+training:
+  epochs: 50
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  use_amp: true
+  seed: 42
+
+paths:
+  model_directory: checkpoints/self_supervised/densenet121
+  result_directory: outputs/densenet121_ssl

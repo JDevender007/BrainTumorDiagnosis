@@ -1,0 +1,137 @@
+[
+  {
+    "name": "TURMA-Net instantiate",
+    "status": "PASS",
+    "detail": "9.49M params"
+  },
+  {
+    "name": "TURMA-Net forward",
+    "status": "PASS",
+    "detail": "logits=torch.Size([2, 4]), seg=torch.Size([2, 4, 224, 224])"
+  },
+  {
+    "name": "TURMA-Net backward",
+    "status": "PASS",
+    "detail": "loss=8.1843"
+  },
+  {
+    "name": "ATGFM",
+    "status": "FAIL",
+    "detail": "AdaptiveTumorGuidedModulation.__init__() got an unexpected keyword argument 'encoder_channels'"
+  },
+  {
+    "name": "TumorAware forward",
+    "status": "PASS",
+    "detail": "9.03M params, logits=torch.Size([2, 4])"
+  },
+  {
+    "name": "TurmaNetLoss",
+    "status": "PASS",
+    "detail": "total=3.1035, components=['total_loss', 'cls_loss', 'seg_loss', 'cons_loss', 'cls_weight', 'seg_weight', 'cons_weight']"
+  },
+  {
+    "name": "TurmaNetLoss backward",
+    "status": "PASS",
+    "detail": ""
+  },
+  {
+    "name": "TurmaNetLoss (no UW)",
+    "status": "PASS",
+    "detail": "total=2.4219"
+  },
+  {
+    "name": "Classifier densenet121",
+    "status": "PASS",
+    "detail": "6.96M, out=torch.Size([2, 4])"
+  },
+  {
+    "name": "Classifier resnet50",
+    "status": "PASS",
+    "detail": "23.52M, out=torch.Size([2, 4])"
+  },
+  {
+    "name": "Classifier efficientnet_v2_s",
+    "status": "PASS",
+    "detail": "20.18M, out=torch.Size([2, 4])"
+  },
+  {
+    "name": "SimCLR",
+    "status": "FAIL",
+    "detail": "SimCLRModel.forward() missing 1 required positional argument: 'view_two'"
+  },
+  {
+    "name": "TURMA checkpoint load",
+    "status": "PASS",
+    "detail": "keys=['epoch', 'model_state_dict', 'val_f1']"
+  },
+  {
+    "name": "TumorAware checkpoint",
+    "status": "PASS",
+    "detail": "keys=['epoch', 'model_state_dict', 'val_f1']"
+  },
+  {
+    "name": "MC Dropout",
+    "status": "FAIL",
+    "detail": "'str' object has no attribute 'shape'"
+  },
+  {
+    "name": "UncertaintyWeightedLoss",
+    "status": "FAIL",
+    "detail": "UncertaintyWeightedMultiTaskLoss.forward() missing 2 required positional arguments: 'seg_loss' and 'consistency_loss'"
+  },
+  {
+    "name": "3D U-Net",
+    "status": "FAIL",
+    "detail": "unsupported operand type(s) for %: 'SegmentationConfig' and 'int'"
+  },
+  {
+    "name": "Statistical validation",
+    "status": "FAIL",
+    "detail": "bootstrap_confidence_interval() missing 1 required positional argument: 'metric_fn'"
+  },
+  {
+    "name": "Classification Train",
+    "status": "PASS",
+    "detail": "data\\raw\\classification\\Train"
+  },
+  {
+    "name": "Classification Test",
+    "status": "PASS",
+    "detail": "data\\raw\\classification\\Test"
+  },
+  {
+    "name": "BRISC external",
+    "status": "PASS",
+    "detail": "data\\external\\brisc2025\\brisc2025\\classification_task\\test"
+  },
+  {
+    "name": "Kaggle external",
+    "status": "PASS",
+    "detail": "data\\external\\kaggle_brain_tumor\\Testing"
+  },
+  {
+    "name": "paper/results/ablation_all.json",
+    "status": "PASS",
+    "detail": "8 entries"
+  },
+  {
+    "name": "paper/results/multi_seed_all.json",
+    "status": "PASS",
+    "detail": "9 entries"
+  },
+  {
+    "name": "paper/results/external_validation.json",
+    "status": "PASS",
+    "detail": "6 entries"
+  },
+  {
+    "name": "Figures exist",
+    "status": "PASS",
+    "detail": "22 files"
+  },
+  {
+    "name": "Tables exist",
+    "status": "PASS",
+    "detail": "3 files"
+  }
+]

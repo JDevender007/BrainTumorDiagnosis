@@ -1,0 +1,37 @@
+# Segmentation pipeline configuration.
+# Keys mirror SegmentationTrainerConfig / SegmentationEvalConfig fields.
+
+model:
+  in_channels: 4
+  out_channels: 5
+  base_channels: 16
+  dropout: 0.1
+
+dataset:
+  patch_size: [96, 96, 96]
+  samples_per_case: 8
+  foreground_ratio: 0.6
+  augment: true
+
+training:
+  batch_size: 4
+  num_workers: 0
+  pin_memory: false
+  epochs: 100
+  learning_rate: 0.0001
+  weight_decay: 0.00001
+  use_amp: true
+  gradient_clip_norm: 1.0
+  dice_weight: 0.5
+  ce_weight: 0.5
+  early_stopping_patience: 15
+  seed: 42
+
+paths:
+  manifest_path: "data/splits/brats/split_manifest.json"
+  checkpoint_dir: "checkpoints/segmentation/unet3d"
+  history_path: "outputs/segmentation_unet3d/training_history.json"
+
+inference:
+  overlap: 0.5
+  output_dir: "outputs/metrics"
