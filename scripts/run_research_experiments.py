@@ -55,13 +55,9 @@ def load_classification_data(
     """Load classification dataset."""
     from datasets.classification import BrainTumorClassificationDataset
     from datasets.classification import discover_classification_samples
-    from torchvision import transforms
+    from datasets.normalization import build_classification_transform
 
-    transform = transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    transform = build_classification_transform(image_size)
 
     samples = discover_classification_samples(root)
     train_samples = [s for s in samples if s.split.lower() == "train"]
@@ -88,14 +84,10 @@ def load_external_data(
 ):
     """Load external BRISC 2025 dataset (flat structure: class folders directly)."""
     from datasets.classification import BrainTumorClassificationDataset, ClassificationSample, CLASS_TO_INDEX
-    from torchvision import transforms
+    from datasets.normalization import build_classification_transform
     from pathlib import Path
 
-    transform = transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    transform = build_classification_transform(image_size)
 
     root = Path(external_root)
     class_to_idx = {name.lower().replace(" ", "_"): idx for name, idx in CLASS_TO_INDEX.items()}

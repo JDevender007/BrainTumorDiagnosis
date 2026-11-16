@@ -1,0 +1,154 @@
+{
+  "generated_at": "2026-11-16T17:15:46+00:00",
+  "script": "scripts/audit_splits.py",
+  "git": {
+    "commit": "8b806e9"
+  },
+  "dataset": {
+    "path": "data\\raw\\classification\\Train",
+    "n_images": 9291,
+    "class_counts": {
+      "Glioma": 3018,
+      "Meningioma": 2183,
+      "Pituitary": 2145,
+      "No Tumor": 1945
+    },
+    "sample_list_order": "class-block ordered (Glioma, Meningioma, Pituitary, No Tumor), files sorted within class \u2014 datasets/classification.py:146-186"
+  },
+  "schemes": {
+    "C_paper_runs": {
+      "location": "scripts/run_research_experiments.py:70-75",
+      "method": "train[:int(0.85*n)] / train[int(0.85*n):] on the class-block-ordered sample list (no shuffle, no stratification)",
+      "n_total": 9291,
+      "n_train": 7897,
+      "n_val": 1394,
+      "train_class_counts": {
+        "Glioma": 3018,
+        "Meningioma": 2183,
+        "Pituitary": 2145,
+        "No Tumor": 551
+      },
+      "val_class_counts": {
+        "No Tumor": 1394
+      },
+      "val_n_classes": 1,
+      "valid": false,
+      "verdict": "INVALID \u2014 validation tail is single-class; model selection (best val F1, early stopping) ran on a degenerate set"
+    },
+    "A_trainer": {
+      "location": "training/classification_trainer.py:353-358",
+      "method": "sklearn train_test_split(test_size=0.2, random_state=42, stratify=labels) \u2014 image-level",
+      "n_total": 9291,
+      "n_train": 7432,
+      "n_val": 1859,
+      "train_class_counts": {
+        "Pituitary": 1716,
+        "Meningioma": 1746,
+        "Glioma": 2414,
+        "No Tumor": 1556
+      },
+      "val_class_counts": {
+        "Glioma": 604,
+        "Meningioma": 437,
+        "No Tumor": 389,
+        "Pituitary": 429
+      },
+      "val_n_classes": 4,
+      "valid": true,
+      "verdict": "OK stratified, but IMAGE-level: no patient IDs exist in this dataset, so subject-level splitting is impossible (see patient_id_availability)"
+    },
+    "B_dataset_helper": {
+      "location": "datasets/classification.py:200-241",
+      "method": "per-class stratified holdout, seed 42, image-level",
+      "note": "not used by the paper runs; same image-level caveat"
+    },
+    "D_all_experiments": {
+      "location": "scripts/run_all_experiments.py:127-138",
+      "method": "np.random.seed + shuffle, unstratified, image-level",
+      "note": "not used by the paper runs"
+    }
+  },
+  "brats": {
+    "location": "data/splits/brats/split_manifest.json",
+    "split_level": "patient",
+    "seed": 42,
+    "ratios": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "statistics": {
+      "total_cases": 200,
+      "total_patients": 39,
+      "cases_per_split": {
+        "train": 129,
+        "validation": 26,
+        "test": 45
+      },
+      "patients_per_split": {
+        "train": 27,
+        "validation": 5,
+        "test": 7
+      }
+    },
+    "splits": {
+      "train": {
+        "n_cases": 129,
+        "n_patients": 27
+      },
+      "validation": {
+        "n_cases": 26,
+        "n_patients": 5
+      },
+      "test": {
+        "n_cases": 45,
+        "n_patients": 7
+      }
+    },
+    "cross_split_patient_overlap": {
+      "test__train": 0,
+      "test__validation": 0,
+      "train__validation": 0
+    },
+    "valid": true,
+    "verdict": "OK \u2014 patient-level, zero cross-split patient overlap"
+  },
+  "patient_id_availability": {
+    "internal_classification": {
+      "patient_ids_in_filenames": false,
+      "examples": [
+        "gg (325).jpg",
+        "1299.jpg",
+        "1 no.jpeg",
+        "1178.jpg"
+      ],
+      "subject_level_split_possible": false,
+      "impact": "the paper's internal train/test split CANNOT be made subject-level without new metadata; must be disclosed as a limitation (Phase 5)"
+    },
+    "kaggle_brain_tumor": {
+      "patient_ids_in_filenames": false,
+      "examples": [
+        "Te-glTr_0000.jpg",
+        "Tr-glTr_0000.jpg"
+      ],
+      "subject_level_split_possible": false
+    },
+    "brisc2025": {
+      "patient_ids_in_filenames": false,
+      "examples": [
+        "brisc2025_test_00001_gl_ax_t1.jpg"
+      ],
+      "note": "index + plane + sequence only, no subject identifier",
+      "subject_level_split_possible": false
+    },
+    "brats2024": {
+      "patient_ids_in_filenames": true,
+      "examples": [
+        "BraTS-GLI-02062-100 ..."
+      ],
+      "subject_level_split_possible": true,
+      "in_use": true
+    }
+  },
+  "headline_finding": "Scheme C (the paper's scheme) yields a validation set of 1394 images that are 100% single-class \u2014 this is the mechanical cause of macro/weighted F1 (0.9847) exceeding accuracy (0.9645) in TAMNet_Paper.docx."
+}

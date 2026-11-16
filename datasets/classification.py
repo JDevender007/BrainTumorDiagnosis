@@ -10,7 +10,8 @@ import random
 import torch
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
-from torchvision import transforms
+
+from datasets.normalization import build_classification_transform
 
 
 LOGGER = logging.getLogger(__name__)
@@ -255,16 +256,7 @@ class BrainTumorClassificationDataset(Dataset):
             raise ValueError("BrainTumorClassificationDataset received no samples.")
 
         if transform is None:
-            transform = transforms.Compose(
-                [
-                    transforms.Resize(image_size),
-                    transforms.ToTensor(),
-                    transforms.Normalize(
-                        mean=(0.485, 0.456, 0.406),
-                        std=(0.229, 0.224, 0.225),
-                    ),
-                ]
-            )
+            transform = build_classification_transform(image_size)
 
         self.transform = transform
 
@@ -313,16 +305,7 @@ def create_classification_dataloaders(
     if not test_samples:
         raise RuntimeError("No test classification images found.")
 
-    transform = transforms.Compose(
-        [
-            transforms.Resize(config.image_size),
-            transforms.ToTensor(),
-            transforms.Normalize(
-                mean=(0.485, 0.456, 0.406),
-                std=(0.229, 0.224, 0.225),
-            ),
-        ]
-    )
+    transform = build_classification_transform(config.image_size)
 
     train_dataset = BrainTumorClassificationDataset(
         train_samples,
@@ -387,16 +370,7 @@ def create_classification_train_val_dataloaders(
         seed=validation_seed,
     )
 
-    transform = transforms.Compose(
-        [
-            transforms.Resize(config.image_size),
-            transforms.ToTensor(),
-            transforms.Normalize(
-                mean=(0.485, 0.456, 0.406),
-                std=(0.229, 0.224, 0.225),
-            ),
-        ]
-    )
+    transform = build_classification_transform(config.image_size)
 
     train_dataset = BrainTumorClassificationDataset(
         train_samples,

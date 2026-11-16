@@ -1,0 +1,3369 @@
+{
+  "generated_at": "2026-11-16T17:21:53+00:00",
+  "script": "scripts/leakage_check.py",
+  "git": {
+    "commit": "8b806e9",
+    "dirty": true
+  },
+  "config": {
+    "phash_hamming_max": 6,
+    "dhash_hamming_max": 4,
+    "exact": "sha256 of raw file bytes",
+    "image_extensions": [
+      ".jpeg",
+      ".jpg",
+      ".png"
+    ],
+    "sources": {
+      "internal_train": "data/raw/classification/Train",
+      "internal_test": "data/raw/classification/Test",
+      "kaggle_training": "data/external/kaggle_brain_tumor/Training",
+      "kaggle_testing": "data/external/kaggle_brain_tumor/Testing",
+      "brisc_train": "data/external/brisc2025/brisc2025/classification_task/train",
+      "brisc_test": "data/external/brisc2025/brisc2025/classification_task/test"
+    }
+  },
+  "runtime_seconds": 67.6,
+  "sources": {
+    "internal_train": {
+      "path": "data/raw/classification/Train",
+      "n_images": 9291,
+      "n_unique_content": 8468,
+      "n_within_source_duplicates": 823,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 3018,
+        "meningioma": 2183,
+        "no tumor": 1945,
+        "pituitary": 2145
+      },
+      "n_te_prefix_files": 839
+    },
+    "internal_test": {
+      "path": "data/raw/classification/Test",
+      "n_images": 1857,
+      "n_unique_content": 1847,
+      "n_within_source_duplicates": 10,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 603,
+        "meningioma": 436,
+        "no tumor": 389,
+        "pituitary": 429
+      },
+      "n_te_prefix_files": 0
+    },
+    "kaggle_training": {
+      "path": "data/external/kaggle_brain_tumor/Training",
+      "n_images": 3881,
+      "n_unique_content": 3702,
+      "n_within_source_duplicates": 179,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 1321,
+        "meningioma": 1339,
+        "notumor": 1221
+      },
+      "n_te_prefix_files": 0
+    },
+    "kaggle_testing": {
+      "path": "data/external/kaggle_brain_tumor/Testing",
+      "n_images": 1311,
+      "n_unique_content": 1284,
+      "n_within_source_duplicates": 27,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 300,
+        "meningioma": 306,
+        "notumor": 405,
+        "pituitary": 300
+      },
+      "n_te_prefix_files": 1311
+    },
+    "brisc_train": {
+      "path": "data/external/brisc2025/brisc2025/classification_task/train",
+      "n_images": 5000,
+      "n_unique_content": 4962,
+      "n_within_source_duplicates": 38,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 1147,
+        "meningioma": 1329,
+        "no_tumor": 1067,
+        "pituitary": 1457
+      },
+      "n_te_prefix_files": 0
+    },
+    "brisc_test": {
+      "path": "data/external/brisc2025/brisc2025/classification_task/test",
+      "n_images": 1000,
+      "n_unique_content": 995,
+      "n_within_source_duplicates": 5,
+      "n_unreadable": 0,
+      "class_counts": {
+        "glioma": 254,
+        "meningioma": 306,
+        "no_tumor": 140,
+        "pituitary": 300
+      },
+      "n_te_prefix_files": 0
+    }
+  },
+  "pairs": {
+    "internal_train__internal_test": {
+      "n_filename_overlap": 218,
+      "filename_examples": [
+        "1178.jpg",
+        "1179.jpg",
+        "1180.jpg",
+        "1181.jpg",
+        "1182.jpg",
+        "1183.jpg",
+        "1184.jpg",
+        "1185.jpg",
+        "1186.jpg",
+        "1187.jpg"
+      ],
+      "n_exact_duplicates": 0,
+      "exact_examples": [],
+      "n_unique_a_exact": 0,
+      "n_unique_b_exact": 0,
+      "n_near_duplicates_phash": 4477,
+      "n_near_duplicates_dhash": 4918,
+      "n_near_duplicates_union": 6311,
+      "near_phash_distance_histogram": {
+        "0": 1686,
+        "2": 802,
+        "4": 793,
+        "6": 1196
+      },
+      "n_unique_a_overlap": 3362,
+      "n_unique_b_overlap": 1379,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/G_675_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_675_DA_.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_675_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_675_SP_.jpg",
+          "phash": 4,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_BR_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_DA_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_SP_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_BR_.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_DA_.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_SP_.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/raw/classification/Test/glioma/1428.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_HF_.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/raw/classification/Test/meningioma/1265.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_BR_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_DA_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/raw/classification/Test/glioma/G_703_SP_.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_HF_.jpg",
+          "b": "data/raw/classification/Test/glioma/1420.jpg",
+          "phash": 0,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_RO_.jpg",
+          "b": "data/raw/classification/Test/glioma/1526.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_706.jpg",
+          "b": "data/raw/classification/Test/glioma/G_694.jpg",
+          "phash": 6
+        }
+      ],
+      "n_overlap_union": 6311,
+      "n_exact_label_agree": 0,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 3.398492
+    },
+    "internal_train__kaggle_training": {
+      "n_filename_overlap": 2664,
+      "filename_examples": [
+        "tr-gl_0028.jpg",
+        "tr-gl_0029.jpg",
+        "tr-gl_0030.jpg",
+        "tr-gl_0031.jpg",
+        "tr-gl_0032.jpg",
+        "tr-gl_0033.jpg",
+        "tr-gl_0034.jpg",
+        "tr-gl_0035.jpg",
+        "tr-gl_0036.jpg",
+        "tr-gl_0037.jpg"
+      ],
+      "n_exact_duplicates": 3706,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0260.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0260.jpg",
+          "sha256": "62f29d07607b6c8221bbf9fd17d5fec83aee75cb78862a81d0f5f2a046900a7d"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0527.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0527.jpg",
+          "sha256": "c8ac1686b30a537ace0dbb3d1e6368ac59733bdb478d2b88731afd3ab208a355"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0897.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0897.jpg",
+          "sha256": "003c315a304e6410f298abbcae5556e62e83f477f4b05e4682b379091ab8226e"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0503.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0503.jpg",
+          "sha256": "61f0c9740571f6a37655f33169abc08951cc2eae20b23731c4aefdd50c1b379d"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0033.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0033.jpg",
+          "sha256": "9c8fb7b3a545503a016816d5c0b97cdbde29a66eeecdfd5903138db72d7eb58f"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_789.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0112.jpg",
+          "sha256": "b86a5a9523695e65acb20db8ffa02aa18853fedd71e104b94f2b5e99600c8c36"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_819.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0116.jpg",
+          "sha256": "bf416c724c2f6de1aef758d25d5b5062490b3c05563de10f3fa268516607f6f4"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0533.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0533.jpg",
+          "sha256": "caea528c54089877b494d19b33bd17f8af44ad0ca64809e63d232d797c06aa95"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/m2 (89).jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0533.jpg",
+          "sha256": "caea528c54089877b494d19b33bd17f8af44ad0ca64809e63d232d797c06aa95"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_1004.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1004.jpg",
+          "sha256": "194bb174be118972591a1431defce2b23a24db8caa0afbd6353e3f5726c2b224"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0941.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0941.jpg",
+          "sha256": "e99b95416e9f1dacf0ca4b30d61c6084e6942b1359bca36a012bdc94bdc20a3b"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0222.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0222.jpg",
+          "sha256": "be25fd4116c4e6799dac2a75d5cb8c57a872fbdc55a03411490d54d0133dcf2b"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0092.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0092.jpg",
+          "sha256": "f18608438118e39d661c5f82242ace781a24cc8c61bf9d44aaf10aff1399df13"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/gg (676).jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0092.jpg",
+          "sha256": "f18608438118e39d661c5f82242ace781a24cc8c61bf9d44aaf10aff1399df13"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0416.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0416.jpg",
+          "sha256": "73a0e5d8b81640305ec22876b3f18a60ff60332fd2d9099c516307a834835ad1"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/m2 (142).jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0416.jpg",
+          "sha256": "73a0e5d8b81640305ec22876b3f18a60ff60332fd2d9099c516307a834835ad1"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0950.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0950.jpg",
+          "sha256": "db743f0002b6b0e17906740df1df1a2e517c71a532ca761d56a3ae93d5df7a57"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Tr-no_0431.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0431.jpg",
+          "sha256": "faa1644d7275469310aceeb80795b5fed741df6b47cd6ab6565298620d6c469c"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/M_859.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0062.jpg",
+          "sha256": "0c3c91fe2c4031765c4362e3e352c52f0c764d9b13c0bfd875178fbe80595d12"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0160.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0160.jpg",
+          "sha256": "b90ecd085a0a477da778131df57531a11063757a33996830c62ddc605a00ec2f"
+        }
+      ],
+      "n_unique_a_exact": 3281,
+      "n_unique_b_exact": 2929,
+      "n_near_duplicates_phash": 9845,
+      "n_near_duplicates_dhash": 11830,
+      "n_near_duplicates_union": 15631,
+      "near_phash_distance_histogram": {
+        "0": 2318,
+        "2": 2115,
+        "4": 2085,
+        "6": 3327
+      },
+      "n_unique_a_overlap": 5542,
+      "n_unique_b_overlap": 3610,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/G_675_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0096.jpg",
+          "phash": 0,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0467.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_1048.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1177.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0601.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0467.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_1048.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_706_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0904.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0397.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0397.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1177.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1178.jpg",
+          "phash": 0,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1179.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0601.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0100.jpg",
+          "phash": 6
+        }
+      ],
+      "n_overlap_union": 19337,
+      "n_exact_label_agree": 3706,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 4.982479
+    },
+    "internal_train__kaggle_testing": {
+      "n_filename_overlap": 839,
+      "filename_examples": [
+        "te-gl_0057.jpg",
+        "te-gl_0058.jpg",
+        "te-gl_0059.jpg",
+        "te-gl_0060.jpg",
+        "te-gl_0061.jpg",
+        "te-gl_0062.jpg",
+        "te-gl_0063.jpg",
+        "te-gl_0064.jpg",
+        "te-gl_0065.jpg",
+        "te-gl_0066.jpg"
+      ],
+      "n_exact_duplicates": 1119,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0146.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0146.jpg",
+          "sha256": "d1fb1c073086644db1a39cb836e46bde04ed6f20af6a5fcfbf25a07a6f2fd280"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0214.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0214.jpg",
+          "sha256": "8994b0482c54212d5842572841ccc8eca6ddd2bb64de846e3b021b73d2ccca93"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0192.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0192.jpg",
+          "sha256": "cfc942a9e7cecfd0ccb926fc372f202497f81d37e0f4479cfa08f5e9f0ceda67"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0264.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0264.jpg",
+          "sha256": "01c89e6c28cd6a10563f2429fb48478638f7bee6b5086905f6b100ae9ff61666"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0173.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0173.jpg",
+          "sha256": "4bcf391b563ecb51e506efbcbf5217028bc7f71eb10e588990bdfd743decb7db"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0290.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0290.jpg",
+          "sha256": "15da8d206da1a200043f206ded27ac7d06184a6844ac57e421e25fc2762666ea"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/M_878.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0083.jpg",
+          "sha256": "8238d1f576cd9a0d6fb599baa2dec1f08b8d9355412d1cf91db367a8729da07f"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0083.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0083.jpg",
+          "sha256": "8238d1f576cd9a0d6fb599baa2dec1f08b8d9355412d1cf91db367a8729da07f"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0078.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0078.jpg",
+          "sha256": "bd0cf563b67031f7b78bbd044e9208e45cc54966b5572964c1273f268f892821"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0244.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0244.jpg",
+          "sha256": "fde0dcb9f7a9aeb206a5f7fc9cadc37231f528162eabd29589c21b348e2315a1"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0258.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0258.jpg",
+          "sha256": "63621dde894b8eb94a3080be8c529ca369269681fe1c857172d3c2fc67f9b5ef"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0100.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0100.jpg",
+          "sha256": "b9771e729515d78dbfde511d4d068099ea2aea31cb405b6ce697515077ba912e"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0213.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0213.jpg",
+          "sha256": "e5f4c2c3b83cf587beb3c4e4860409f08eec49e6e7923946ce47bec36e2f27af"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0119.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0119.jpg",
+          "sha256": "22e804f0d7e5a3fbd2fcb81c3a2b6bacf756284a5c8b75b7da6d13de2c8e3911"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0168.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0168.jpg",
+          "sha256": "46cb5155d1236ea9aa83cc8267a98df7c6e553609ba60c01931712955097cbe2"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0172.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0172.jpg",
+          "sha256": "b9e5ae37f8f50685abd5c024e0b886e043336ebdecf4c10f3d2c6b2a0ada6a82"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0186.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0186.jpg",
+          "sha256": "b03aaffd184bd7dfb3e392e9b3f18f5368462351d7eabd9d8176f7648e1adefc"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0153.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0153.jpg",
+          "sha256": "57eb21ad1952877b74a35f8bf69fc5e007661fd539a18125d0ba9f4b5ae483c3"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0125.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0125.jpg",
+          "sha256": "3973568a319a82e6d56e314bdcfafa77795bd2076aa6cfb2e9e59005e5274dd5"
+        },
+        {
+          "a": "data/raw/classification/Train/no tumor/Te-no_0198.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0198.jpg",
+          "sha256": "ab913d73a29f0bcead33685b0b0aa29a17fdcfc8d1a007e947036dba8b3e5385"
+        }
+      ],
+      "n_unique_a_exact": 1028,
+      "n_unique_b_exact": 960,
+      "n_near_duplicates_phash": 3969,
+      "n_near_duplicates_dhash": 4527,
+      "n_near_duplicates_union": 5600,
+      "near_phash_distance_histogram": {
+        "0": 1361,
+        "2": 888,
+        "4": 719,
+        "6": 1001
+      },
+      "n_unique_a_overlap": 3738,
+      "n_unique_b_overlap": 1242,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0241.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0212.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_RO_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0067.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_706_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0170.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0047.jpg",
+          "phash": 2,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_DA_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0047.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0047.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0047.jpg",
+          "phash": 2,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_709_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0242.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_710_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0242.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_711_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0243.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_713_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0048.jpg",
+          "phash": 2,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_713_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0048.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0032.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0049.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0032.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_BR_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0049.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0116.jpg",
+          "phash": 6,
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_HF_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0117.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_SP_.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0032.jpg",
+          "dhash": 4
+        }
+      ],
+      "n_overlap_union": 6719,
+      "n_exact_label_agree": 1119,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 5.125095
+    },
+    "internal_train__brisc_train": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 3669,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0260.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00155_gl_ax_t1.jpg",
+          "sha256": "62f29d07607b6c8221bbf9fd17d5fec83aee75cb78862a81d0f5f2a046900a7d"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0527.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00292_gl_ax_t1.jpg",
+          "sha256": "c8ac1686b30a537ace0dbb3d1e6368ac59733bdb478d2b88731afd3ab208a355"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0482.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04163_pi_co_t1.jpg",
+          "sha256": "540668fe197377a5f521b503dc71b92ddde622519eac3abbca513500ed70af96"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/p (533).jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04163_pi_co_t1.jpg",
+          "sha256": "540668fe197377a5f521b503dc71b92ddde622519eac3abbca513500ed70af96"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0897.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00866_gl_sa_t1.jpg",
+          "sha256": "003c315a304e6410f298abbcae5556e62e83f477f4b05e4682b379091ab8226e"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_1162.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04340_pi_co_t1.jpg",
+          "sha256": "7f06e7f32adba8ac9a4f325e13ddf88da6accbed368b3787eaba27c8353b48b5"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Tr-gl_0503.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00532_gl_co_t1.jpg",
+          "sha256": "61f0c9740571f6a37655f33169abc08951cc2eae20b23731c4aefdd50c1b379d"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0222.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03569_pi_ax_t1.jpg",
+          "sha256": "ae66ce1452794fc155029d727f963f52420072b22335b5543a28073770c07a57"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/P_717.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03716_pi_ax_t1.jpg",
+          "sha256": "669c9deff6239c893d4aa6b2582029c843509648fd3ab8f1ff81626bb87da901"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0703.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03716_pi_ax_t1.jpg",
+          "sha256": "669c9deff6239c893d4aa6b2582029c843509648fd3ab8f1ff81626bb87da901"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0033.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01177_me_ax_t1.jpg",
+          "sha256": "9c8fb7b3a545503a016816d5c0b97cdbde29a66eeecdfd5903138db72d7eb58f"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_789.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00441_gl_co_t1.jpg",
+          "sha256": "b86a5a9523695e65acb20db8ffa02aa18853fedd71e104b94f2b5e99600c8c36"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/P_791.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04239_pi_co_t1.jpg",
+          "sha256": "f37ee9f2897615a6a32a1547de64a9e5b0a4b385c8d7745156046ee9a009429b"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0759.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04239_pi_co_t1.jpg",
+          "sha256": "f37ee9f2897615a6a32a1547de64a9e5b0a4b385c8d7745156046ee9a009429b"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0404.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04732_pi_sa_t1.jpg",
+          "sha256": "f201e240c765dd650146cb09c8197069a6f7fda60be0f6b9ca1286f15d02eb16"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_1033.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03877_pi_ax_t1.jpg",
+          "sha256": "8a82830496d05db0282e78f624a861c74bd0ed23c4a731b879580a050feec4d7"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_819.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00445_gl_co_t1.jpg",
+          "sha256": "bf416c724c2f6de1aef758d25d5b5062490b3c05563de10f3fa268516607f6f4"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Tr-pi_0128.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04568_pi_sa_t1.jpg",
+          "sha256": "cfabf4b6d86240b5c0d8b41509d63a8757bc3cad234050c0a3d4f103fef3d679"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Tr-me_0533.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01808_me_co_t1.jpg",
+          "sha256": "caea528c54089877b494d19b33bd17f8af44ad0ca64809e63d232d797c06aa95"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/m2 (89).jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01808_me_co_t1.jpg",
+          "sha256": "caea528c54089877b494d19b33bd17f8af44ad0ca64809e63d232d797c06aa95"
+        }
+      ],
+      "n_unique_a_exact": 3581,
+      "n_unique_b_exact": 3083,
+      "n_near_duplicates_phash": 6575,
+      "n_near_duplicates_dhash": 6361,
+      "n_near_duplicates_union": 10943,
+      "near_phash_distance_histogram": {
+        "0": 617,
+        "2": 666,
+        "4": 1644,
+        "6": 3648
+      },
+      "n_unique_a_overlap": 5688,
+      "n_unique_b_overlap": 3687,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/G_675_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00432_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00435_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00496_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02297_me_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_DA_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00435_gl_co_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00798_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02084_me_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/no_tumor/brisc2025_train_02624_no_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00435_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00496_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02297_me_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_706_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00873_gl_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00435_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01702_me_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00435_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01702_me_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00798_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00799_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00800_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_707_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02084_me_sa_t1.jpg",
+          "phash": 6
+        }
+      ],
+      "n_overlap_union": 14612,
+      "n_exact_label_agree": 3669,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 2.9224
+    },
+    "internal_train__brisc_test": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 654,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0214.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00476_me_co_t1.jpg",
+          "sha256": "8994b0482c54212d5842572841ccc8eca6ddd2bb64de846e3b021b73d2ccca93"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0192.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00458_me_co_t1.jpg",
+          "sha256": "cfc942a9e7cecfd0ccb926fc372f202497f81d37e0f4479cfa08f5e9f0ceda67"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0264.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00538_me_sa_t1.jpg",
+          "sha256": "01c89e6c28cd6a10563f2429fb48478638f7bee6b5086905f6b100ae9ff61666"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0290.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00077_gl_ax_t1.jpg",
+          "sha256": "15da8d206da1a200043f206ded27ac7d06184a6844ac57e421e25fc2762666ea"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/M_878.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00493_me_sa_t1.jpg",
+          "sha256": "8238d1f576cd9a0d6fb599baa2dec1f08b8d9355412d1cf91db367a8729da07f"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0083.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00493_me_sa_t1.jpg",
+          "sha256": "8238d1f576cd9a0d6fb599baa2dec1f08b8d9355412d1cf91db367a8729da07f"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0078.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00042_gl_ax_t1.jpg",
+          "sha256": "bd0cf563b67031f7b78bbd044e9208e45cc54966b5572964c1273f268f892821"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0244.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00519_me_sa_t1.jpg",
+          "sha256": "fde0dcb9f7a9aeb206a5f7fc9cadc37231f528162eabd29589c21b348e2315a1"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0258.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00532_me_sa_t1.jpg",
+          "sha256": "63621dde894b8eb94a3080be8c529ca369269681fe1c857172d3c2fc67f9b5ef"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0100.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00056_gl_ax_t1.jpg",
+          "sha256": "b9771e729515d78dbfde511d4d068099ea2aea31cb405b6ce697515077ba912e"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0213.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00213_gl_sa_t1.jpg",
+          "sha256": "e5f4c2c3b83cf587beb3c4e4860409f08eec49e6e7923946ce47bec36e2f27af"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0172.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00441_me_co_t1.jpg",
+          "sha256": "b9e5ae37f8f50685abd5c024e0b886e043336ebdecf4c10f3d2c6b2a0ada6a82"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0186.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00452_me_co_t1.jpg",
+          "sha256": "b03aaffd184bd7dfb3e392e9b3f18f5368462351d7eabd9d8176f7648e1adefc"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0125.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00117_gl_co_t1.jpg",
+          "sha256": "3973568a319a82e6d56e314bdcfafa77795bd2076aa6cfb2e9e59005e5274dd5"
+        },
+        {
+          "a": "data/raw/classification/Train/pituitary/Te-pi_0096.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00927_pi_sa_t1.jpg",
+          "sha256": "de44495987fb8c37599a1b2cbe4a51ccd5af8c95eadd5d35898c0510b483d24f"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0257.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00531_me_sa_t1.jpg",
+          "sha256": "422d7e9b1465e4083db34d1f93d3507ea9ae353a8980503d8aacccd44076cb65"
+        },
+        {
+          "a": "data/raw/classification/Train/meningioma/Te-me_0224.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00502_me_sa_t1.jpg",
+          "sha256": "f612fbb182e66e066f6f221721fe9e5f96a5d3289298b490526d0c453306c586"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0221.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00219_gl_sa_t1.jpg",
+          "sha256": "af4d49e1afe8d1e36b5ed2df9d094b0561eda0bb05e7be525a295ed97b00f5b7"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0113.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00063_gl_ax_t1.jpg",
+          "sha256": "038db1bbb4895f343f748f586df291c6ad85a6e9f33f4823cb179c1f57dd276d"
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/Te-gl_0217.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00217_gl_sa_t1.jpg",
+          "sha256": "15a2975643bc4368f05ce75490989e07fecc8ba842cd00de7602a3cf1140c7da"
+        }
+      ],
+      "n_unique_a_exact": 651,
+      "n_unique_b_exact": 616,
+      "n_near_duplicates_phash": 1456,
+      "n_near_duplicates_dhash": 1424,
+      "n_near_duplicates_union": 2215,
+      "near_phash_distance_histogram": {
+        "0": 361,
+        "2": 156,
+        "4": 280,
+        "6": 659
+      },
+      "n_unique_a_overlap": 2346,
+      "n_unique_b_overlap": 803,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Train/glioma/G_704_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00153_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00212_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_705_RO_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00109_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_706_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00177_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00096_gl_co_t1.jpg",
+          "phash": 2,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_DA_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00096_gl_co_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00096_gl_co_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_708_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00096_gl_co_t1.jpg",
+          "phash": 2,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_709_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00225_gl_sa_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_710_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00225_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_711_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00154_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_713_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00097_gl_co_t1.jpg",
+          "phash": 2,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_713_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00097_gl_co_t1.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00031_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_BR_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00031_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00066_gl_ax_t1.jpg",
+          "phash": 6,
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_HF_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00067_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Train/glioma/G_716_SP_.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 4
+        }
+      ],
+      "n_overlap_union": 2869,
+      "n_exact_label_agree": 654,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 2.869
+    },
+    "internal_test__kaggle_training": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 40,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Test/meningioma/M_811.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0730.jpg",
+          "sha256": "a8a5c8da2047ed2cdd0c97963311752e131124417ab3ae5b2ffe1f00a361febe"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_791.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0713.jpg",
+          "sha256": "66dfc44c76701d065d01a779d054828c77712416e7a386932bdc318b3ac618b7"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_793.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0715.jpg",
+          "sha256": "f05e30abc50d55228aa766573c16d5c185afef67197bec069b6345965a2accf7"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_810.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0729.jpg",
+          "sha256": "0f6dd05728f38f57d71fae48a5e1d1320c76a2ec3c813d75cd39e92c3d334767"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_814.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0732.jpg",
+          "sha256": "f6c0966fcc0e652b009142f1462f65fde9565268a4803ad52ab6b2ecd240fb1e"
+        },
+        {
+          "a": "data/raw/classification/Test/no tumor/46 no.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_1036.jpg",
+          "sha256": "cadc69402b71fdafac567216ada1281c48858cc5bde7b3b941fdf9c6bca09202"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_809.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0059.jpg",
+          "sha256": "ab3ff5117ba55f255f9dac3795e42eafe2c1101d1f142fd8e052bbf3ba85ed0a"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_816.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0734.jpg",
+          "sha256": "f6e7d095f7bab27e10854c4d8d4ed1f1b8a00267e959ded7deb8d89796672ac9"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_784.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0708.jpg",
+          "sha256": "0188e2a9b5e00ec418360252f5f6680497e439c232904950710eacebc6c19a61"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_785.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0057.jpg",
+          "sha256": "e749a299223436b26ca4f15cbbedff3aa9959d678e8f58f57474ef1e5e4569ea"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_819.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0737.jpg",
+          "sha256": "ca7ecd71a27c8809f42bc399852aa7a804752e04916036264ac15622ac23ed44"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_792.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0714.jpg",
+          "sha256": "1d28a01cd96ef9af7075a1e6fe17f84cd3bd5bb549500a77c9dfb2a2f222e432"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_787.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0710.jpg",
+          "sha256": "a275f5f3088a7f7021db108bb59404593f36e42cfd2687fbb4a6a219057879dd"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_807.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0727.jpg",
+          "sha256": "a044bab6766b669fbd72fd2c502f793882f9cdd3d210b3891878737bb95e29a0"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_799.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0720.jpg",
+          "sha256": "3cc9e95ff309e1864d8ae698afff2c81a539022fedcd272dc0b46e98e1c368fc"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_777.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0703.jpg",
+          "sha256": "17803c66d07a3487624a820bcc31c25b006940a29edb423aa271fcdce5fa395c"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_788.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0711.jpg",
+          "sha256": "ba6065cf9eb3a1f1e5b2d8fe2cebb440e0ea99d027ed9ce0de0eb1483ab8a6b1"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_782.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0706.jpg",
+          "sha256": "5c706a6c586ce154bdc6fd3007107005b74469496982f7be068c71c6021cf08b"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_789.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0712.jpg",
+          "sha256": "80d28f9fd81d1c23ac4b8383998f3cc4b9df3e75185933555dafbd2f96e48d94"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_803.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0723.jpg",
+          "sha256": "24246ccaeba07f6239922a81833d6483128eb053b05e812b36534361bda8219e"
+        }
+      ],
+      "n_unique_a_exact": 40,
+      "n_unique_b_exact": 40,
+      "n_near_duplicates_phash": 2731,
+      "n_near_duplicates_dhash": 3261,
+      "n_near_duplicates_union": 3945,
+      "near_phash_distance_histogram": {
+        "0": 1102,
+        "2": 532,
+        "4": 488,
+        "6": 609
+      },
+      "n_unique_a_overlap": 1033,
+      "n_unique_b_overlap": 1688,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0821.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0822.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0823.jpg",
+          "phash": 4,
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0824.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1050.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0471.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1050.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0472.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0028.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0603.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0604.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0612.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0076.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0316.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0317.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1053.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1112.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1053.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1113.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1055.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0363.jpg",
+          "phash": 6,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1055.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0364.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1089.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0628.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0949.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0950.jpg",
+          "phash": 6
+        }
+      ],
+      "n_overlap_union": 3985,
+      "n_exact_label_agree": 40,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 2.145934
+    },
+    "internal_test__kaggle_testing": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 5,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/G_702.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0046.jpg",
+          "sha256": "e442eac193385a3830ab001b6fd63f7ee6437e179d7936b2747441b91e64f940"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_681.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0042.jpg",
+          "sha256": "c1371cb4c85214082d5b9220b1538b3e7eff0051e085cb325ab4c05149517d36"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_686.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0043.jpg",
+          "sha256": "0de951286256834bd2ddc4e26fe9795265fc200a9f7c85af3fc707eb0bfc8803"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_697.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0045.jpg",
+          "sha256": "7a25c9ff1ef14561ea1cd8c1cc7597ae2d9210b42f2fe1ac5a289e236f3bfcd1"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/image(51).jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0061.jpg",
+          "sha256": "bd86e9a929172ffcf244db8b2839d51746f0ca95fdd81c79916babd1d154a2db"
+        }
+      ],
+      "n_unique_a_exact": 5,
+      "n_unique_b_exact": 5,
+      "n_near_duplicates_phash": 1206,
+      "n_near_duplicates_dhash": 1334,
+      "n_near_duplicates_union": 1561,
+      "near_phash_distance_histogram": {
+        "0": 599,
+        "2": 238,
+        "4": 169,
+        "6": 200
+      },
+      "n_unique_a_overlap": 912,
+      "n_unique_b_overlap": 788,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0143.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0144.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0174.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1097.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0072.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1097.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0108.jpg",
+          "phash": 4,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1101.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0055.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1101.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0021.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1101.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0072.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1101.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0096.jpg",
+          "phash": 6,
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1105.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0082.jpg",
+          "phash": 4,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0100.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0288.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0296.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1112.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0146.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1117.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0102.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1120.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0116.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1123.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0055.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1126.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0155.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1128.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0265.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1143.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0254.jpg",
+          "phash": 2
+        }
+      ],
+      "n_overlap_union": 1566,
+      "n_exact_label_agree": 5,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.194508
+    },
+    "internal_test__brisc_train": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 36,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Test/meningioma/M_811.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02212_me_sa_t1.jpg",
+          "sha256": "a8a5c8da2047ed2cdd0c97963311752e131124417ab3ae5b2ffe1f00a361febe"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_791.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02195_me_sa_t1.jpg",
+          "sha256": "66dfc44c76701d065d01a779d054828c77712416e7a386932bdc318b3ac618b7"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_793.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02197_me_sa_t1.jpg",
+          "sha256": "f05e30abc50d55228aa766573c16d5c185afef67197bec069b6345965a2accf7"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_810.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02211_me_sa_t1.jpg",
+          "sha256": "0f6dd05728f38f57d71fae48a5e1d1320c76a2ec3c813d75cd39e92c3d334767"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_814.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02214_me_sa_t1.jpg",
+          "sha256": "f6c0966fcc0e652b009142f1462f65fde9565268a4803ad52ab6b2ecd240fb1e"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_809.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01200_me_ax_t1.jpg",
+          "sha256": "ab3ff5117ba55f255f9dac3795e42eafe2c1101d1f142fd8e052bbf3ba85ed0a"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_816.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02216_me_sa_t1.jpg",
+          "sha256": "f6e7d095f7bab27e10854c4d8d4ed1f1b8a00267e959ded7deb8d89796672ac9"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_784.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02190_me_sa_t1.jpg",
+          "sha256": "0188e2a9b5e00ec418360252f5f6680497e439c232904950710eacebc6c19a61"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_785.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01198_me_ax_t1.jpg",
+          "sha256": "e749a299223436b26ca4f15cbbedff3aa9959d678e8f58f57474ef1e5e4569ea"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_819.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02219_me_sa_t1.jpg",
+          "sha256": "ca7ecd71a27c8809f42bc399852aa7a804752e04916036264ac15622ac23ed44"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_792.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02196_me_sa_t1.jpg",
+          "sha256": "1d28a01cd96ef9af7075a1e6fe17f84cd3bd5bb549500a77c9dfb2a2f222e432"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_787.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02192_me_sa_t1.jpg",
+          "sha256": "a275f5f3088a7f7021db108bb59404593f36e42cfd2687fbb4a6a219057879dd"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_807.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02209_me_sa_t1.jpg",
+          "sha256": "a044bab6766b669fbd72fd2c502f793882f9cdd3d210b3891878737bb95e29a0"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_799.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02202_me_sa_t1.jpg",
+          "sha256": "3cc9e95ff309e1864d8ae698afff2c81a539022fedcd272dc0b46e98e1c368fc"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_777.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02185_me_sa_t1.jpg",
+          "sha256": "17803c66d07a3487624a820bcc31c25b006940a29edb423aa271fcdce5fa395c"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_788.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02193_me_sa_t1.jpg",
+          "sha256": "ba6065cf9eb3a1f1e5b2d8fe2cebb440e0ea99d027ed9ce0de0eb1483ab8a6b1"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_782.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02188_me_sa_t1.jpg",
+          "sha256": "5c706a6c586ce154bdc6fd3007107005b74469496982f7be068c71c6021cf08b"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_789.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02194_me_sa_t1.jpg",
+          "sha256": "80d28f9fd81d1c23ac4b8383998f3cc4b9df3e75185933555dafbd2f96e48d94"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_803.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02205_me_sa_t1.jpg",
+          "sha256": "24246ccaeba07f6239922a81833d6483128eb053b05e812b36534361bda8219e"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/M_781.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02187_me_sa_t1.jpg",
+          "sha256": "96ce5b2756df90d30963a0b3fe491274d477be2307253a4ac8c9cffb5f95c2f7"
+        }
+      ],
+      "n_unique_a_exact": 36,
+      "n_unique_b_exact": 36,
+      "n_near_duplicates_phash": 1759,
+      "n_near_duplicates_dhash": 1586,
+      "n_near_duplicates_union": 2450,
+      "near_phash_distance_histogram": {
+        "0": 577,
+        "2": 168,
+        "4": 324,
+        "6": 690
+      },
+      "n_unique_a_overlap": 1070,
+      "n_unique_b_overlap": 1633,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00745_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00746_gl_co_t1.jpg",
+          "phash": 4,
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1049.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00747_gl_co_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1050.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00500_gl_co_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1050.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00501_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00417_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00574_gl_co_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00575_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00025_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00187_gl_ax_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1052.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00188_gl_ax_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1053.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_01063_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1053.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_01064_gl_sa_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1055.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00222_gl_ax_t1.jpg",
+          "phash": 6,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1055.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00223_gl_ax_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00915_gl_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00916_gl_sa_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00917_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 1
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1091.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00508_gl_co_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1092.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00924_gl_sa_t1.jpg",
+          "phash": 0,
+          "dhash": 0
+        }
+      ],
+      "n_overlap_union": 2486,
+      "n_exact_label_agree": 36,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.338718
+    },
+    "internal_test__brisc_test": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 6,
+      "exact_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/G_702.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00095_gl_co_t1.jpg",
+          "sha256": "e442eac193385a3830ab001b6fd63f7ee6437e179d7936b2747441b91e64f940"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_681.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00091_gl_co_t1.jpg",
+          "sha256": "c1371cb4c85214082d5b9220b1538b3e7eff0051e085cb325ab4c05149517d36"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_686.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00030_gl_ax_t1.jpg",
+          "sha256": "0de951286256834bd2ddc4e26fe9795265fc200a9f7c85af3fc707eb0bfc8803"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_686.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00092_gl_co_t1.jpg",
+          "sha256": "0de951286256834bd2ddc4e26fe9795265fc200a9f7c85af3fc707eb0bfc8803"
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/G_697.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00094_gl_co_t1.jpg",
+          "sha256": "7a25c9ff1ef14561ea1cd8c1cc7597ae2d9210b42f2fe1ac5a289e236f3bfcd1"
+        },
+        {
+          "a": "data/raw/classification/Test/meningioma/image(51).jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00409_me_co_t1.jpg",
+          "sha256": "bd86e9a929172ffcf244db8b2839d51746f0ca95fdd81c79916babd1d154a2db"
+        }
+      ],
+      "n_unique_a_exact": 5,
+      "n_unique_b_exact": 6,
+      "n_near_duplicates_phash": 637,
+      "n_near_duplicates_dhash": 600,
+      "n_near_duplicates_union": 752,
+      "near_phash_distance_histogram": {
+        "0": 402,
+        "2": 71,
+        "4": 41,
+        "6": 123
+      },
+      "n_unique_a_overlap": 621,
+      "n_unique_b_overlap": 524,
+      "near_examples": [
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00130_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00131_gl_co_t1.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1090.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00181_gl_sa_t1.jpg",
+          "phash": 6,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1097.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00037_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1097.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00059_gl_ax_t1.jpg",
+          "phash": 4,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1101.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00036_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1105.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00044_gl_ax_t1.jpg",
+          "phash": 4,
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00056_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00076_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1108.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00083_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1112.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00133_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1120.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00066_gl_ax_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1123.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00036_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1126.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00139_gl_co_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1128.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00235_gl_sa_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1143.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00165_gl_co_t1.jpg",
+          "phash": 2
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1147.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00068_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1148.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00135_gl_co_t1.jpg",
+          "phash": 4,
+          "dhash": 3
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1159.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00042_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/raw/classification/Test/glioma/1160.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00253_gl_sa_t1.jpg",
+          "phash": 6
+        }
+      ],
+      "n_overlap_union": 758,
+      "n_exact_label_agree": 6,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 0.758
+    },
+    "kaggle_training__kaggle_testing": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 208,
+      "exact_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0302.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0056.jpg",
+          "sha256": "c4c847d6e586faffcadf669ff0a9a608542741edc3a387040c059df1bb7052bb"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0351.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0028.jpg",
+          "sha256": "f3bbcbc551b2533f763091b8d11957d40118b57fe937c3b940f3f8b26098030f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0384.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0032.jpg",
+          "sha256": "4f2893125ab87fc6fcd6cd5388db893efeb9a1a30e59f942e7743144766c78f6"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0989.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0032.jpg",
+          "sha256": "4f2893125ab87fc6fcd6cd5388db893efeb9a1a30e59f942e7743144766c78f6"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0113.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0037.jpg",
+          "sha256": "220816d55783431f776d10ccd11ebda7aa823602de035f0f07d0d7cd780cfa0f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_1093.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0037.jpg",
+          "sha256": "220816d55783431f776d10ccd11ebda7aa823602de035f0f07d0d7cd780cfa0f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_1147.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0016.jpg",
+          "sha256": "9cb0bd6ba354991ae933b55af58ca040f3b8db01add876aba09159d7badd3599"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0070.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0033.jpg",
+          "sha256": "06e6f334b7e990bd685265cea5af2b11410235f4a3baad476c964249310330f3"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_1159.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0017.jpg",
+          "sha256": "39c0884fa9dfa4bf3e2464f41480e240ad7db4eded8a5b1ced54c772956746e1"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0356.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0092.jpg",
+          "sha256": "f0f59157eff868aa8dc74d5a6b5d384421c8587b5f15d90ca8414f4650276436"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0251.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0102.jpg",
+          "sha256": "c515996f4519dbd88019480d9e6442c71bc2513a7e2cb35a776b56af27b1021a"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0080.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0034.jpg",
+          "sha256": "08c04f3659f54e170fe84f98a8ed10a235809251d6ba7c5372f08c90421ce51e"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0179.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0023.jpg",
+          "sha256": "c6b37dbcc8c59a18f68c4ecde7f081eb0caa8cae6edb6d438e11170f0736bf01"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_1141.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0023.jpg",
+          "sha256": "c6b37dbcc8c59a18f68c4ecde7f081eb0caa8cae6edb6d438e11170f0736bf01"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0339.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0076.jpg",
+          "sha256": "c6d35e130bc719af5e19824979ce640e835635fc495a7383435df8b9aa16b023"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0981.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0076.jpg",
+          "sha256": "c6d35e130bc719af5e19824979ce640e835635fc495a7383435df8b9aa16b023"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0354.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0090.jpg",
+          "sha256": "2c0036409ce103a8668735db595e18d01fbd821ca66e8ef43c77d6a4add544de"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0290.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0024.jpg",
+          "sha256": "1fe1db4adc37442001e9e054e3a990efa31b7db7cdb0a3d2711afbf346f9094b"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0328.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0030.jpg",
+          "sha256": "76a70a3f68103e335f080a323d763fbda5febc37e4714c2f9b54499795f13fa3"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/notumor/Tr-no_0328.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0065.jpg",
+          "sha256": "76a70a3f68103e335f080a323d763fbda5febc37e4714c2f9b54499795f13fa3"
+        }
+      ],
+      "n_unique_a_exact": 127,
+      "n_unique_b_exact": 98,
+      "n_near_duplicates_phash": 1963,
+      "n_near_duplicates_dhash": 2447,
+      "n_near_duplicates_union": 3010,
+      "near_phash_distance_histogram": {
+        "0": 529,
+        "2": 475,
+        "4": 428,
+        "6": 531
+      },
+      "n_unique_a_overlap": 1559,
+      "n_unique_b_overlap": 824,
+      "near_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0001.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0153.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0079.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0051.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0051.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0287.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0052.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0055.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0061.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0052.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0062.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0127.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0062.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0091.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0066.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0069.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0149.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0070.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0071.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0229.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0072.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0009.jpg",
+          "phash": 2,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0072.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/notumor/Te-no_0297.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0078.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0003.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0082.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0022.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0084.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0025.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0084.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0120.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0086.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0028.jpg",
+          "phash": 6,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0089.jpg",
+          "b": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0031.jpg",
+          "dhash": 4
+        }
+      ],
+      "n_overlap_union": 3218,
+      "n_exact_label_agree": 208,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 2.454615
+    },
+    "kaggle_training__brisc_train": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 2566,
+      "exact_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0260.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00155_gl_ax_t1.jpg",
+          "sha256": "62f29d07607b6c8221bbf9fd17d5fec83aee75cb78862a81d0f5f2a046900a7d"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0527.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00292_gl_ax_t1.jpg",
+          "sha256": "c8ac1686b30a537ace0dbb3d1e6368ac59733bdb478d2b88731afd3ab208a355"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0897.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00866_gl_sa_t1.jpg",
+          "sha256": "003c315a304e6410f298abbcae5556e62e83f477f4b05e4682b379091ab8226e"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0503.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00532_gl_co_t1.jpg",
+          "sha256": "61f0c9740571f6a37655f33169abc08951cc2eae20b23731c4aefdd50c1b379d"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0033.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01177_me_ax_t1.jpg",
+          "sha256": "9c8fb7b3a545503a016816d5c0b97cdbde29a66eeecdfd5903138db72d7eb58f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0112.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00441_gl_co_t1.jpg",
+          "sha256": "b86a5a9523695e65acb20db8ffa02aa18853fedd71e104b94f2b5e99600c8c36"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0116.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00445_gl_co_t1.jpg",
+          "sha256": "bf416c724c2f6de1aef758d25d5b5062490b3c05563de10f3fa268516607f6f4"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_1092.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_02337_me_sa_t1.jpg",
+          "sha256": "47659f0b7a3739148ba3a036ec2204283a0a233876b0a0458bf251bfae9c2da8"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0030.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01174_me_ax_t1.jpg",
+          "sha256": "5776354c82f75ed25b033499e4eced0b77beca5ac9f775eb27a86440a03dc050"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0533.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01808_me_co_t1.jpg",
+          "sha256": "caea528c54089877b494d19b33bd17f8af44ad0ca64809e63d232d797c06aa95"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_1004.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00965_gl_sa_t1.jpg",
+          "sha256": "194bb174be118972591a1431defce2b23a24db8caa0afbd6353e3f5726c2b224"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0941.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00908_gl_sa_t1.jpg",
+          "sha256": "e99b95416e9f1dacf0ca4b30d61c6084e6942b1359bca36a012bdc94bdc20a3b"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0222.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00125_gl_ax_t1.jpg",
+          "sha256": "be25fd4116c4e6799dac2a75d5cb8c57a872fbdc55a03411490d54d0133dcf2b"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0092.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00428_gl_co_t1.jpg",
+          "sha256": "f18608438118e39d661c5f82242ace781a24cc8c61bf9d44aaf10aff1399df13"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0731.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00673_gl_co_t1.jpg",
+          "sha256": "f7023a245bf0285e63f5f89fb56c8167d105ee5a3b3f38d56d475955d4e2b323"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0416.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01721_me_co_t1.jpg",
+          "sha256": "73a0e5d8b81640305ec22876b3f18a60ff60332fd2d9099c516307a834835ad1"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0950.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01934_me_co_t1.jpg",
+          "sha256": "db743f0002b6b0e17906740df1df1a2e517c71a532ca761d56a3ae93d5df7a57"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0062.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01202_me_ax_t1.jpg",
+          "sha256": "0c3c91fe2c4031765c4362e3e352c52f0c764d9b13c0bfd875178fbe80595d12"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_1318.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01551_me_ax_t1.jpg",
+          "sha256": "b9862b25aab2d2f9adcddca6cc4115f87a8824f9b551b7d7b6b02cc5d197c857"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0160.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00076_gl_ax_t1.jpg",
+          "sha256": "b90ecd085a0a477da778131df57531a11063757a33996830c62ddc605a00ec2f"
+        }
+      ],
+      "n_unique_a_exact": 2527,
+      "n_unique_b_exact": 2538,
+      "n_near_duplicates_phash": 2457,
+      "n_near_duplicates_dhash": 2698,
+      "n_near_duplicates_union": 4637,
+      "near_phash_distance_histogram": {
+        "0": 35,
+        "2": 222,
+        "4": 616,
+        "6": 1584
+      },
+      "n_unique_a_overlap": 2732,
+      "n_unique_b_overlap": 2641,
+      "near_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00561_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00648_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0004.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00603_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00683_gl_co_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00684_gl_co_t1.jpg",
+          "dhash": 0
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00685_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04167_pi_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04169_pi_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04271_pi_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0010.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00706_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0010.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00721_gl_co_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0010.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00722_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0010.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04168_pi_co_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0010.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04272_pi_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0013.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00738_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0013.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00739_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0014.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00747_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0014.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01837_me_co_t1.jpg",
+          "phash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0023.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00425_gl_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0028.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00575_gl_co_t1.jpg",
+          "dhash": 4
+        }
+      ],
+      "n_overlap_union": 7203,
+      "n_exact_label_agree": 2566,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.855965
+    },
+    "kaggle_training__brisc_test": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 2,
+      "exact_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0283.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00352_me_ax_t1.jpg",
+          "sha256": "f3d00bbb942117c2fb62466414d3c466ca283b678200fe87424e4128b80b2dba"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/meningioma/Tr-me_0071.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00344_me_ax_t1.jpg",
+          "sha256": "960155b05ea8f0ddcbcd3a5e29905c2a4b55832f03e5b7d6491c73955960d278"
+        }
+      ],
+      "n_unique_a_exact": 2,
+      "n_unique_b_exact": 2,
+      "n_near_duplicates_phash": 583,
+      "n_near_duplicates_dhash": 557,
+      "n_near_duplicates_union": 919,
+      "near_phash_distance_histogram": {
+        "0": 128,
+        "2": 49,
+        "4": 106,
+        "6": 300
+      },
+      "n_unique_a_overlap": 725,
+      "n_unique_b_overlap": 417,
+      "near_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00138_gl_co_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-glTr_0005.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00846_pi_co_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00032_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0051.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00075_gl_ax_t1.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0052.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00036_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0061.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00033_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0062.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00336_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0066.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00003_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0069.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00358_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0070.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00002_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0071.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00071_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0072.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00009_gl_ax_t1.jpg",
+          "phash": 2,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0078.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00004_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0082.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00019_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0084.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00021_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0084.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00329_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0086.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00024_gl_ax_t1.jpg",
+          "phash": 6,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0089.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00025_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0089.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Training/glioma/Tr-gl_0090.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00027_gl_ax_t1.jpg",
+          "phash": 2,
+          "dhash": 4
+        }
+      ],
+      "n_overlap_union": 921,
+      "n_exact_label_agree": 2,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 0.921
+    },
+    "kaggle_testing__brisc_train": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 9,
+      "exact_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-piTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04176_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-piTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04177_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-piTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04178_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0055.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04218_pi_co_t1.jpg",
+          "sha256": "b5e17076d1427e41a618f92bc72100c1be4df26608223512aac51c911ac1eb88"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0066.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03749_pi_ax_t1.jpg",
+          "sha256": "08690b76457b2b44d58682cece62ec951ef6d30d935ce07df852e97d44434680"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0044.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03705_pi_ax_t1.jpg",
+          "sha256": "39f4f7b252d7809d8d3d2e4521607de2195bf0f66c0592587b1cebd632aac640"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0045.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04194_pi_co_t1.jpg",
+          "sha256": "02799f7863d49de182357e72179f3cc4e65e70099355f2d5aa2e39d356e492d9"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0135.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01210_me_ax_t1.jpg",
+          "sha256": "960155b05ea8f0ddcbcd3a5e29905c2a4b55832f03e5b7d6491c73955960d278"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0143.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01304_me_ax_t1.jpg",
+          "sha256": "f3d00bbb942117c2fb62466414d3c466ca283b678200fe87424e4128b80b2dba"
+        }
+      ],
+      "n_unique_a_exact": 7,
+      "n_unique_b_exact": 9,
+      "n_near_duplicates_phash": 993,
+      "n_near_duplicates_dhash": 895,
+      "n_near_duplicates_union": 1573,
+      "near_phash_distance_histogram": {
+        "0": 121,
+        "2": 86,
+        "4": 229,
+        "6": 557
+      },
+      "n_unique_a_overlap": 701,
+      "n_unique_b_overlap": 1222,
+      "near_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0000.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00194_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0000.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00200_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0000.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00360_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0000.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01445_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00020_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00044_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00200_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00360_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01445_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00017_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00102_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00202_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00271_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00281_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00282_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0003.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00026_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0008.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00368_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0008.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00369_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0009.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00022_gl_ax_t1.jpg",
+          "phash": 2,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0012.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01328_me_ax_t1.jpg",
+          "dhash": 3
+        }
+      ],
+      "n_overlap_union": 1582,
+      "n_exact_label_agree": 9,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.206712
+    },
+    "kaggle_testing__brisc_test": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 864,
+      "exact_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0214.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00476_me_co_t1.jpg",
+          "sha256": "8994b0482c54212d5842572841ccc8eca6ddd2bb64de846e3b021b73d2ccca93"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0192.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00458_me_co_t1.jpg",
+          "sha256": "cfc942a9e7cecfd0ccb926fc372f202497f81d37e0f4479cfa08f5e9f0ceda67"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0264.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00538_me_sa_t1.jpg",
+          "sha256": "01c89e6c28cd6a10563f2429fb48478638f7bee6b5086905f6b100ae9ff61666"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0290.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00077_gl_ax_t1.jpg",
+          "sha256": "15da8d206da1a200043f206ded27ac7d06184a6844ac57e421e25fc2762666ea"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0083.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00493_me_sa_t1.jpg",
+          "sha256": "8238d1f576cd9a0d6fb599baa2dec1f08b8d9355412d1cf91db367a8729da07f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0078.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00042_gl_ax_t1.jpg",
+          "sha256": "bd0cf563b67031f7b78bbd044e9208e45cc54966b5572964c1273f268f892821"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0244.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00519_me_sa_t1.jpg",
+          "sha256": "fde0dcb9f7a9aeb206a5f7fc9cadc37231f528162eabd29589c21b348e2315a1"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0258.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00532_me_sa_t1.jpg",
+          "sha256": "63621dde894b8eb94a3080be8c529ca369269681fe1c857172d3c2fc67f9b5ef"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0100.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00056_gl_ax_t1.jpg",
+          "sha256": "b9771e729515d78dbfde511d4d068099ea2aea31cb405b6ce697515077ba912e"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0213.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00213_gl_sa_t1.jpg",
+          "sha256": "e5f4c2c3b83cf587beb3c4e4860409f08eec49e6e7923946ce47bec36e2f27af"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0225.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00891_pi_co_t1.jpg",
+          "sha256": "182b056953f82ded79ac2d9bf8f447bb2e44fcf23b62c5658ebe6466a608e633"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0172.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00441_me_co_t1.jpg",
+          "sha256": "b9e5ae37f8f50685abd5c024e0b886e043336ebdecf4c10f3d2c6b2a0ada6a82"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0186.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00452_me_co_t1.jpg",
+          "sha256": "b03aaffd184bd7dfb3e392e9b3f18f5368462351d7eabd9d8176f7648e1adefc"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0125.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00117_gl_co_t1.jpg",
+          "sha256": "3973568a319a82e6d56e314bdcfafa77795bd2076aa6cfb2e9e59005e5274dd5"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0096.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00927_pi_sa_t1.jpg",
+          "sha256": "de44495987fb8c37599a1b2cbe4a51ccd5af8c95eadd5d35898c0510b483d24f"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0257.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00531_me_sa_t1.jpg",
+          "sha256": "422d7e9b1465e4083db34d1f93d3507ea9ae353a8980503d8aacccd44076cb65"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0280.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00984_pi_sa_t1.jpg",
+          "sha256": "09960ed6694d446e580565c1ee1d7f109f2e7299a0d27ac82fb2a7fb91c65844"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/meningioma/Te-me_0224.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00502_me_sa_t1.jpg",
+          "sha256": "f612fbb182e66e066f6f221721fe9e5f96a5d3289298b490526d0c453306c586"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0260.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00966_pi_sa_t1.jpg",
+          "sha256": "1c2f032ead29235dca0bbfb1c7f507f3fa39b22601c8223d7d146214ce979c64"
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/pituitary/Te-pi_0226.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00892_pi_co_t1.jpg",
+          "sha256": "ef1e04eca95911a4295f74d356fd684aefb9f4f584a053248afae4871e6229f2"
+        }
+      ],
+      "n_unique_a_exact": 858,
+      "n_unique_b_exact": 860,
+      "n_near_duplicates_phash": 120,
+      "n_near_duplicates_dhash": 138,
+      "n_near_duplicates_union": 219,
+      "near_phash_distance_histogram": {
+        "0": 18,
+        "2": 18,
+        "4": 25,
+        "6": 59
+      },
+      "n_unique_a_overlap": 880,
+      "n_unique_b_overlap": 862,
+      "near_examples": [
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00039_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0002.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/no_tumor/brisc2025_test_00604_no_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-glTr_0008.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00036_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0012.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00067_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0013.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00053_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0015.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00776_pi_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0016.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00380_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0016.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00776_pi_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0017.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00376_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0018.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00359_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0019.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00359_me_ax_t1.jpg",
+          "phash": 4,
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0025.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00023_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0027.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00021_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0032.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00031_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0033.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00028_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0034.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00027_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0049.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0050.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00065_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0054.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00333_me_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/kaggle_brain_tumor/Testing/glioma/Te-gl_0063.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00124_gl_co_t1.jpg",
+          "dhash": 3
+        }
+      ],
+      "n_overlap_union": 1083,
+      "n_exact_label_agree": 864,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.083
+    },
+    "brisc_train__brisc_test": {
+      "n_filename_overlap": 0,
+      "filename_examples": [],
+      "n_exact_duplicates": 9,
+      "exact_examples": [
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04176_pi_co_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00825_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04177_pi_co_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00825_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04178_pi_co_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00825_pi_co_t1.jpg",
+          "sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03749_pi_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00751_pi_ax_t1.jpg",
+          "sha256": "08690b76457b2b44d58682cece62ec951ef6d30d935ce07df852e97d44434680"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04218_pi_co_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00834_pi_co_t1.jpg",
+          "sha256": "b5e17076d1427e41a618f92bc72100c1be4df26608223512aac51c911ac1eb88"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_03705_pi_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00737_pi_ax_t1.jpg",
+          "sha256": "39f4f7b252d7809d8d3d2e4521607de2195bf0f66c0592587b1cebd632aac640"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/pituitary/brisc2025_train_04194_pi_co_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00827_pi_co_t1.jpg",
+          "sha256": "02799f7863d49de182357e72179f3cc4e65e70099355f2d5aa2e39d356e492d9"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01210_me_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00344_me_ax_t1.jpg",
+          "sha256": "960155b05ea8f0ddcbcd3a5e29905c2a4b55832f03e5b7d6491c73955960d278"
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/meningioma/brisc2025_train_01304_me_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00352_me_ax_t1.jpg",
+          "sha256": "f3d00bbb942117c2fb62466414d3c466ca283b678200fe87424e4128b80b2dba"
+        }
+      ],
+      "n_unique_a_exact": 9,
+      "n_unique_b_exact": 7,
+      "n_near_duplicates_phash": 966,
+      "n_near_duplicates_dhash": 917,
+      "n_near_duplicates_union": 1573,
+      "near_phash_distance_histogram": {
+        "0": 119,
+        "2": 84,
+        "4": 223,
+        "6": 540
+      },
+      "n_unique_a_overlap": 1257,
+      "n_unique_b_overlap": 691,
+      "near_examples": [
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00003_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00032_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00003_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00075_gl_ax_t1.jpg",
+          "dhash": 1
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00004_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00036_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00013_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00033_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00014_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00336_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00017_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00003_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00019_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00358_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00020_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00002_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00021_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00071_gl_ax_t1.jpg",
+          "dhash": 3
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00022_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00009_gl_ax_t1.jpg",
+          "phash": 2,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00026_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00004_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00029_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00019_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00031_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00021_gl_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00031_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00329_me_ax_t1.jpg",
+          "phash": 6
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00033_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00024_gl_ax_t1.jpg",
+          "phash": 6,
+          "dhash": 3
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00035_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00027_gl_ax_t1.jpg",
+          "phash": 2,
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00035_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00032_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00035_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00039_gl_ax_t1.jpg",
+          "dhash": 4
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00038_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00026_gl_ax_t1.jpg",
+          "dhash": 2
+        },
+        {
+          "a": "data/external/brisc2025/brisc2025/classification_task/train/glioma/brisc2025_train_00038_gl_ax_t1.jpg",
+          "b": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00031_gl_ax_t1.jpg",
+          "dhash": 2
+        }
+      ],
+      "n_overlap_union": 1582,
+      "n_exact_label_agree": 9,
+      "n_exact_label_disagree": 0,
+      "n_exact_label_unknown": 0,
+      "label_disagreement_examples": [],
+      "overlap_rate_vs_smaller_source": 1.582
+    }
+  },
+  "unreadable_images": [],
+  "n_unreadable_images": 0,
+  "brisc_manifest_sha256_check": {
+    "manifest": "data/external/brisc2025/brisc2025/manifest.csv",
+    "matched": 6000,
+    "mismatched": 0,
+    "not_in_manifest": 0
+  },
+  "verdicts": {
+    "kaggle_testing_independence": {
+      "statement": "Kaggle Testing is NOT an independent external set: 1242 of 1311 Kaggle Testing images (94.7%) also occur in internal_train (byte-identical: 960, perceptual near-duplicate only: 282).",
+      "contaminated_unique_images": 1242,
+      "byte_identical_unique_images": 960,
+      "total": 1311,
+      "contamination_rate": 0.947368
+    },
+    "all_pairs": [
+      {
+        "pair": "brisc_train__brisc_test",
+        "exact_pairs": 9,
+        "near_pairs": 1573,
+        "unique_brisc_train": 1257,
+        "unique_brisc_test": 691,
+        "rate_brisc_train": 0.2514,
+        "rate_brisc_test": 0.691
+      },
+      {
+        "pair": "internal_test__brisc_test",
+        "exact_pairs": 6,
+        "near_pairs": 752,
+        "unique_internal_test": 621,
+        "unique_brisc_test": 524,
+        "rate_internal_test": 0.3344,
+        "rate_brisc_test": 0.524
+      },
+      {
+        "pair": "internal_test__brisc_train",
+        "exact_pairs": 36,
+        "near_pairs": 2450,
+        "unique_internal_test": 1070,
+        "unique_brisc_train": 1633,
+        "rate_internal_test": 0.5762,
+        "rate_brisc_train": 0.3266
+      },
+      {
+        "pair": "internal_test__kaggle_testing",
+        "exact_pairs": 5,
+        "near_pairs": 1561,
+        "unique_internal_test": 912,
+        "unique_kaggle_testing": 788,
+        "rate_internal_test": 0.4911,
+        "rate_kaggle_testing": 0.6011
+      },
+      {
+        "pair": "internal_test__kaggle_training",
+        "exact_pairs": 40,
+        "near_pairs": 3945,
+        "unique_internal_test": 1033,
+        "unique_kaggle_training": 1688,
+        "rate_internal_test": 0.5563,
+        "rate_kaggle_training": 0.4349
+      },
+      {
+        "pair": "internal_train__brisc_test",
+        "exact_pairs": 654,
+        "near_pairs": 2215,
+        "unique_internal_train": 2346,
+        "unique_brisc_test": 803,
+        "rate_internal_train": 0.2525,
+        "rate_brisc_test": 0.803
+      },
+      {
+        "pair": "internal_train__brisc_train",
+        "exact_pairs": 3669,
+        "near_pairs": 10943,
+        "unique_internal_train": 5688,
+        "unique_brisc_train": 3687,
+        "rate_internal_train": 0.6122,
+        "rate_brisc_train": 0.7374
+      },
+      {
+        "pair": "internal_train__internal_test",
+        "exact_pairs": 0,
+        "near_pairs": 6311,
+        "unique_internal_train": 3362,
+        "unique_internal_test": 1379,
+        "rate_internal_train": 0.3619,
+        "rate_internal_test": 0.7426
+      },
+      {
+        "pair": "internal_train__kaggle_testing",
+        "exact_pairs": 1119,
+        "near_pairs": 5600,
+        "unique_internal_train": 3738,
+        "unique_kaggle_testing": 1242,
+        "rate_internal_train": 0.4023,
+        "rate_kaggle_testing": 0.9474
+      },
+      {
+        "pair": "internal_train__kaggle_training",
+        "exact_pairs": 3706,
+        "near_pairs": 15631,
+        "unique_internal_train": 5542,
+        "unique_kaggle_training": 3610,
+        "rate_internal_train": 0.5965,
+        "rate_kaggle_training": 0.9302
+      },
+      {
+        "pair": "kaggle_testing__brisc_test",
+        "exact_pairs": 864,
+        "near_pairs": 219,
+        "unique_kaggle_testing": 880,
+        "unique_brisc_test": 862,
+        "rate_kaggle_testing": 0.6712,
+        "rate_brisc_test": 0.862
+      },
+      {
+        "pair": "kaggle_testing__brisc_train",
+        "exact_pairs": 9,
+        "near_pairs": 1573,
+        "unique_kaggle_testing": 701,
+        "unique_brisc_train": 1222,
+        "rate_kaggle_testing": 0.5347,
+        "rate_brisc_train": 0.2444
+      },
+      {
+        "pair": "kaggle_training__brisc_test",
+        "exact_pairs": 2,
+        "near_pairs": 919,
+        "unique_kaggle_training": 725,
+        "unique_brisc_test": 417,
+        "rate_kaggle_training": 0.1868,
+        "rate_brisc_test": 0.417
+      },
+      {
+        "pair": "kaggle_training__brisc_train",
+        "exact_pairs": 2566,
+        "near_pairs": 4637,
+        "unique_kaggle_training": 2732,
+        "unique_brisc_train": 2641,
+        "rate_kaggle_training": 0.7039,
+        "rate_brisc_train": 0.5282
+      },
+      {
+        "pair": "kaggle_training__kaggle_testing",
+        "exact_pairs": 208,
+        "near_pairs": 3010,
+        "unique_kaggle_training": 1559,
+        "unique_kaggle_testing": 824,
+        "rate_kaggle_training": 0.4017,
+        "rate_kaggle_testing": 0.6285
+      }
+    ]
+  },
+  "thumbnails": [
+    "results/leakage_thumbs/01__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/02__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/03__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/04__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/05__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/06__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/07__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/08__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/09__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/10__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/11__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/12__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/13__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/14__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/15__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/16__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/17__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/18__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/19__internal_train__kaggle_testing__ph0.jpg",
+    "results/leakage_thumbs/20__internal_train__kaggle_testing__ph0.jpg"
+  ],
+  "metrics_before_after_deduplication": "TODO-RERUN (Phase 3): requires model re-evaluation on de-duplicated test sets; not computed by this script."
+}

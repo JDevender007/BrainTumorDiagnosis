@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-11-16T16:54:56+00:00",
+  "script": "scripts/build_dataset_table.py",
+  "git": {
+    "commit": "8b806e9"
+  },
+  "brats_manifest": {
+    "split_level": "patient",
+    "seed": 42,
+    "ratios": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "splits": {},
+    "n_case_dirs": 200,
+    "n_patients": 39
+  },
+  "open_fills": [
+    "FILL #1: internal dataset provenance / label origin",
+    "FILL #2: exact Kaggle dataset name/link",
+    "FILL #3: 3D->2D conversion and whether BraTS was used for classification"
+  ]
+}

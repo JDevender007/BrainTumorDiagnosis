@@ -14,23 +14,27 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
 ---
 
 ## Phase 0 — Recon (STOP after this for confirmation)
-- [ ] Write `docs/AUDIT_REPORT.md`: how each dataset is loaded; how splits are made
+- [x] Write `docs/AUDIT_REPORT.md`: how each dataset is loaded; how splits are made
       (patient-level?); preprocessing/normalization; where MC dropout sits (T=10);
       how F1 / ECE / MRRS are computed; paper-number → log/JSON mapping.
-- [ ] Flag every unsourced number in the paper (list below) as `TODO-RERUN`.
+- [x] Flag every unsourced number in the paper (list below) as `TODO-RERUN`.
 
-## Phase 1 — Data integrity
-- [ ] Label provenance: how each of the 4 classes (glioma, meningioma, pituitary,
-      no_tumor) was produced and from which source; stop if any class has no training samples.
-- [ ] Verify splits are by subject ID, not slice (fix with GroupShuffleSplit/GroupKFold;
-      flag all prior results invalid if not).
-- [ ] `scripts/leakage_check.py` — exact-hash + pHash/dHash across internal-train/test,
-      internal↔BRISC, internal↔Kaggle, BRISC↔Kaggle → `results/leakage_report.json`
-      (counts, example pairs, top-20 thumbnails); metrics before/after de-duplication.
-- [ ] `results/dataset_table.csv` (dataset, version, source/citation, modality, plane,
-      #images, per-class counts, role, mask availability).
-- [ ] One shared per-image intensity normalization (1–99 percentile clip + z-score)
-      applied identically to all datasets; document it.
+## Phase 1 — Data integrity (DONE 2026-11-16 → `docs/PHASE1_REPORT.md`)
+- [x] Label provenance: class counts verified for all 4 classes in every source
+      (none empty); label **origin** still open → FILL #1 (blocks Phase 5 wording only).
+- [x] Verify splits are by subject ID, not slice → **classification splits are
+      image-level and cannot be subject-level** (no patient IDs in filenames;
+      BraTS manifest is the only patient-level split, 0 overlap). GroupShuffleSplit
+      fix + invalidating prior results → Phase 3.
+- [x] `scripts/leakage_check.py` → `results/leakage_report.json` + 20 thumbnails
+      + label-agreement check (12,893/12,893 agree). Headline: Kaggle Testing
+      94.7 % inside internal train; internal test 74.3 % near-dup of train;
+      metrics before/after de-duplication = `TODO-RERUN` (Phase 3).
+- [x] `results/dataset_table.csv` (7 rows, `[VERIFY]`/`[CITATION NEEDED]` marked).
+- [-] Shared per-image normalization: **partially** — `datasets/normalization.py`
+      now single-sources the (identical-everywhere) ImageNet stats + provides
+      1–99 percentile z-score; switching training to it invalidates all numbers,
+      so it is wired in only with the Phase 3 re-run.
 
 ## Phase 2 — Code vs. paper consistency
 - [ ] Expose/document M_s and M_c (kernels, pooling, MLP ratio, sigmoid); note
@@ -153,9 +157,9 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
 
 | # | Claim in TAMNet_Paper.docx | Paper value | Status |
 |---|---------------------------|-------------|--------|
-| 1 | Internal test accuracy / macro-F1 | 96.45% / 0.9847 | TODO-RERUN (F1 > acc is implausible) |
-| 2 | External BRISC accuracy | 97.70% | TODO-RERUN (independence unproven) |
-| 3 | External Kaggle accuracy (+F1/MCC/κ) | 99.16% / 0.9916 / 0.9888 / 0.9887 | TODO-RERUN (839/1311 filename overlap w/ internal train) |
+| 1 | Internal test accuracy / macro-F1 | 96.45% / 0.9847 | TODO-RERUN (val tail = 1,394 × 100% No Tumor → F1 artifact; 74.3% of test near-dup of train — `split_audit.json`, `leakage_report.json`) |
+| 2 | External BRISC accuracy | 97.70% | TODO-RERUN (80.3% of BRISC test overlaps internal train, 616 byte-identical — `leakage_report.json`) |
+| 3 | External Kaggle accuracy (+F1/MCC/κ) | 99.16% / 0.9916 / 0.9888 / 0.9887 | TODO-RERUN (94.7% of Kaggle Testing inside internal train, 960 byte-identical — `leakage_report.json`) |
 | 4 | Kaggle confusion matrix | 300/304/296/400 correct | TODO-RERUN |
 | 5 | Segmentation Dice WT / TC / ET | 0.9005 / 0.5803 / 0.6010 | TODO-RERUN (7×7-map decoder, no baseline) |
 | 6 | Confidence: mean / correct / incorrect | 0.8821 / 0.8843 / 0.8232 | TODO-RERUN |
