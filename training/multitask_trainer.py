@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import time
+import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -27,7 +28,7 @@ import numpy as np
 from sklearn.metrics import f1_score, accuracy_score
 
 from models.tumor_aware import TumorAwareMultiTaskNet, TumorAwareConfig
-from losses.segmentation import DiceLoss3D, SegmentationLoss
+from losses.segmentation import DiceLoss2D, DiceLoss3D, SegmentationLoss
 
 
 @dataclass
@@ -79,6 +80,9 @@ class MultiTaskLoss(nn.Module):
         super().__init__()
         self.cls_loss = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
         self.seg_loss = DiceLoss3D()
+        # 2D variant for TAMNet's (B, C, H, W) aux-branch logits (Phase 2):
+        # DiceLoss3D would reject them with a shape error.
+        self.seg_loss_2d = DiceLoss2D()
         self.cls_weight = cls_weight
         self.seg_weight = seg_weight
 
@@ -93,8 +97,32 @@ class MultiTaskLoss(nn.Module):
         total_loss = self.cls_weight * cls_loss
         seg_loss_val = torch.tensor(0.0, device=labels.device)
 
+        if "seg_logits" in outputs and seg_targets is None and not getattr(self, "_seg_skipped", False):
+            # Phase 2 audit: every training path in this repo calls
+            # criterion(outputs, labels) — or passes seg_targets=None
+            # explicitly — so L_seg was 0 in ALL historical runs and the
+            # auxiliary segmentation branch received no gradient.
+            # Warn once instead of failing silently (loss value unchanged,
+            # so historical behaviour is preserved). See docs/ARCHITECTURE.md.
+            warnings.warn(
+                "MultiTaskLoss: model returned 'seg_logits' but no "
+                "seg_targets were provided — segmentation loss is 0 for "
+                "this step and the auxiliary branch receives no gradient. "
+                "Supply seg_targets (masks) to activate L_seg, or disable "
+                "return_seg. See docs/ARCHITECTURE.md finding D2.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+            self._seg_skipped = True
+
         if "seg_logits" in outputs and seg_targets is not None:
-            seg_loss_val = self.seg_loss(outputs["seg_logits"], seg_targets)
+            seg_pred = outputs["seg_logits"]
+            # dispatch: 2D aux-branch logits -> DiceLoss2D, 5D volumes -> DiceLoss3D
+            seg_loss_val = (
+                self.seg_loss_2d(seg_pred, seg_targets)
+                if seg_pred.ndim == 4
+                else self.seg_loss(seg_pred, seg_targets)
+            )
             total_loss = total_loss + self.seg_weight * seg_loss_val
 
         return {

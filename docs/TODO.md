@@ -36,19 +36,38 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
       1–99 percentile z-score; switching training to it invalidates all numbers,
       so it is wired in only with the Phase 3 re-run.
 
-## Phase 2 — Code vs. paper consistency
-- [ ] Expose/document M_s and M_c (kernels, pooling, MLP ratio, sigmoid); note
-      CBAM-style spatial-then-channel order.
-- [ ] Identify exact fusion op; document; rename function (e.g. `fuse`) so it does not
-      clash with feature map F (paper currently uses Φ and "g⊥t" concatenation).
-- [ ] Segmentation branch: document decoder input (paper says `s = S(F)` on F),
+## Phase 2 — Code vs. paper consistency (DONE 2026-11-16 → `docs/ARCHITECTURE.md`)
+- [x] Expose/document M_s and M_c (kernels, pooling, MLP ratio, sigmoid); note
+      CBAM-style spatial-then-channel order → documented in `docs/ARCHITECTURE.md` §1;
+      **D1: M_c was never instantiated** → `use_channel_attention` flag (default False =
+      historical), Phase 3 "+spatial+channel" ablation; claim change → Phase 5.
+- [x] Identify exact fusion op; document; rename function (e.g. `fuse`) so it does not
+      clash with feature map F → `fuse()` (`models/tumor_aware.py:488`); **D4: Φ = 2-way
+      softmax convex combination + LayerNorm, NOT the paper's `g⊥t` concatenation**
+      (`[060]` must be rewritten, Phase 5); concat ablation = `use_attention_fusion=False`.
+- [x] Segmentation branch: document decoder input (paper says `s = S(F)` on F),
       resolution, skips; make code and paper agree; add lightweight multi-scale decoder
-      variant if it decodes a 7×7 map with no skips and report both.
-- [ ] Document L_cls (CE? label smoothing? class weights?) and L_seg (Dice+BCE?);
-      check if label smoothing explains underconfidence (conf 0.8821 < acc 0.9645).
-- [ ] MC dropout: record locations + rate; ensure `model.eval()` keeps BatchNorm in eval
-      while only Dropout layers are in train mode.
-- [ ] State input channels C in code and paper (paper leaves C undefined).
+      variant if it decodes a 7×7 map with no skips and report both → documented (7×7-map,
+      no skips, ×4/×2 → 56 → interpolate 224); `seg_decoder="multiscale"` U-Net variant
+      added (default-off, densenet121-only); **D3: paper's Dice 0.9005/0.5803/0.6010 come
+      from standalone UNet3D, not this branch** → claim change Phase 5, re-run Phase 3E.
+- [x] Document L_cls (CE? label smoothing? class weights?) and L_seg (Dice+BCE?);
+      check if label smoothing explains underconfidence → L_cls = CE(label_smoothing=0.1),
+      **no class weights** in multitask path (weights exist only in standalone
+      classification trainer); **D2: L_seg ≡ 0 in every historical run** (no runner passes
+      seg_targets; `DiceLoss3D` is 5D-only) → warn-once + `DiceLoss2D` dispatch added;
+      label smoothing as underconfidence contributor → to be tested Phase 3F.
+- [x] MC dropout: record locations + rate; ensure `model.eval()` keeps BatchNorm in eval
+      while only Dropout layers are in train mode → **D5 bug fixed**: eval + Dropout-only
+      re-activation + mode restore; sites: classifier 0.3/0.15, tumor-pool 0.2,
+      uncertainty head 0.3; all prior uncertainty numbers → `TODO-RERUN` (Phase 3F).
+- [x] State input channels C in code and paper (paper leaves C undefined) → C=3 documented
+      (`docs/ARCHITECTURE.md` §1); paper wording → Phase 5.
+- [x] New Phase 2 tests: `tests/test_tumor_aware_phase2.py` (18 tests) — M_c flag,
+      decoder variants, `fuse()` math, MC BN-eval contract, loss contract (D2).
+- [-] "Make code and paper agree" — **code side done** (documented truth + default-off
+      flags preserve history); **paper side blocked on Phase 5** (claims D1/D3/D4/D9 change
+      there, never the numbers).
 
 ## Phase 3 — Experiments (5 seeds; TEST mean±std; headline = mean, never best seed)
 - [ ] A. Ablation (7 configs): DenseNet121 cls-only; +spatial; +spatial+channel;
@@ -161,10 +180,10 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
 | 2 | External BRISC accuracy | 97.70% | TODO-RERUN (80.3% of BRISC test overlaps internal train, 616 byte-identical — `leakage_report.json`) |
 | 3 | External Kaggle accuracy (+F1/MCC/κ) | 99.16% / 0.9916 / 0.9888 / 0.9887 | TODO-RERUN (94.7% of Kaggle Testing inside internal train, 960 byte-identical — `leakage_report.json`) |
 | 4 | Kaggle confusion matrix | 300/304/296/400 correct | TODO-RERUN |
-| 5 | Segmentation Dice WT / TC / ET | 0.9005 / 0.5803 / 0.6010 | TODO-RERUN (7×7-map decoder, no baseline) |
-| 6 | Confidence: mean / correct / incorrect | 0.8821 / 0.8843 / 0.8232 | TODO-RERUN |
-| 7 | Entropy / mutual information | 0.4778 / 0.0415 | TODO-RERUN |
-| 8 | ECE / Brier / NLL | 0.0855 / 0.0736 / 0.2172 | TODO-RERUN |
+| 5 | Segmentation Dice WT / TC / ET | 0.9005 / 0.5803 / 0.6010 | TODO-RERUN (**D3: provenance = standalone UNet3D** `checkpoints/segmentation/unet3d`, not TAMNet's aux branch; TAMNet aux branch had `L_seg≡0` — D2) |
+| 6 | Confidence: mean / correct / incorrect | 0.8821 / 0.8843 / 0.8232 | TODO-RERUN (D5: pre-Phase-2 MC path had BN-in-train bug) |
+| 7 | Entropy / mutual information | 0.4778 / 0.0415 | TODO-RERUN (D5: MC path bug fixed Phase 2) |
+| 8 | ECE / Brier / NLL | 0.0855 / 0.0736 / 0.2172 | TODO-RERUN (D5: MC path bug fixed Phase 2; two non-interchangeable ECE impls — AUDIT §7) |
 | 9 | Robustness: clean, MRRS, rot 5°, contrast 0.5, brightness, noise | 96.45%, 0.7512, 95.96%, 22.40%, 54.17%, 56.81% | TODO-RERUN (MRRS undefined, 27 corruptions unlisted) |
 | 10 | Multi-seed (3): val F1, val acc, ECE, MRRS, latency | 0.9751±0.0035, 0.9530±0.0057, 0.0838±0.0056, 0.7088±0.0309, 46.27±2.48 ms | TODO-RERUN (val F1 > val acc; best-seed headline 0.7512 vs mean 0.7088) |
 | 11 | Backbone table internal accuracy | CNN-2D 95.26, DN121 97.95, R50 97.04, ENv2 98.06, ConvNeXt 97.42, Swin-T 97.09, ViT 97.52, TAMNet 96.45 (%) | TODO-RERUN (no ablation, identical protocol unproven) |

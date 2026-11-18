@@ -34,6 +34,16 @@ class TumorAwareConfig:
     dropout: float = 0.3
     fusion_dim: int = 256
     use_attention_fusion: bool = True
+    # M_c (paper §III.C): SE-style channel attention inside TumorRegionPool,
+    # applied AFTER M_s (CBAM spatial-then-channel order).  Default False =
+    # the historically executed model (M_c was never wired in — Phase 0 audit
+    # finding #4); Phase 3 ablation "+spatial+channel" sets it to True.
+    use_channel_attention: bool = False
+    # Segmentation decoder variant: "lightweight" = the historical 7x7-map
+    # decoder with no skips (SegmentationHead); "multiscale" = U-Net-style
+    # decoder over tapped DenseNet121 scales (MultiScaleSegmentationHead,
+    # densenet121 only) — Phase 3 decoder ablation.
+    seg_decoder: str = "lightweight"
     use_segmentation_head: bool = True
     use_uncertainty_head: bool = True
     mc_dropout_passes: int = 10
@@ -79,11 +89,38 @@ class ChannelAttention(nn.Module):
 
 
 class TumorRegionPool(nn.Module):
-    """Extract tumor-region features using attention-weighted pooling."""
+    """Tumor-region feature extraction: M_s -> (optional M_c) -> GAP -> MLP.
 
-    def __init__(self, in_channels: int, out_channels: int):
+    Exact operation (paper §III.C mapped to code, Phase 2 documentation):
+
+        x_masked = x * mask                      # mask interpolated to x's size
+        x_s      = M_s(x_masked)                 # SpatialAttention: 7x7 conv over
+                                                 # [channel-avg, channel-max] concat
+                                                 # -> sigmoid -> elementwise multiply
+        x_sc     = M_c(x_s)                      # ChannelAttention (SE-style,
+                                                 # reduction=16, shared MLP on avg+max
+                                                 # pool -> sigmoid) — only when
+                                                 # use_channel_attention=True;
+                                                 # CBAM order: spatial THEN channel
+        pooled   = GAP(x_sc)                     # AdaptiveAvgPool2d(1)
+        t        = MLP(pooled)                   # Linear(in->fusion_dim) -> BatchNorm1d
+                                                 # -> ReLU -> Dropout(0.2)
+
+    Note the code applies GAP **after** attention and then an MLP; the paper's
+    bare ``t = GAP(F_t)`` under-specifies the MLP — Phase 5 must state it.
+    """
+
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        use_channel_attention: bool = False,
+    ):
         super().__init__()
         self.attention = SpatialAttention(kernel_size=7)
+        self.channel_attention = (
+            ChannelAttention(in_channels) if use_channel_attention else None
+        )
         self.pool = nn.AdaptiveAvgPool2d(1)
         self.fc = nn.Sequential(
             nn.Linear(in_channels, out_channels),
@@ -99,6 +136,8 @@ class TumorRegionPool(nn.Module):
                 mask_expanded = F.interpolate(mask_expanded, size=x.shape[2:], mode='bilinear', align_corners=False)
             x = x * mask_expanded
         attended = self.attention(x)
+        if self.channel_attention is not None:
+            attended = self.channel_attention(attended)
         pooled = self.pool(attended).flatten(1)
         return self.fc(pooled)
 
@@ -133,7 +172,23 @@ class AttentionFusion(nn.Module):
 
 
 class SegmentationHead(nn.Module):
-    """Lightweight 2D segmentation head for tumor mask prediction."""
+    """Lightweight 2D segmentation head for tumor mask prediction.
+
+    Exact behaviour (Phase 2 documentation, paper §III.D):
+
+        input  F: encoder feature map, for DenseNet121 + 224x224 input this is
+               1024ch @ **7x7** (forward-hook output of ``encoder.features``)
+        conv3x3 1024->128 (pad 1) -> BN -> ReLU
+        bilinear x4                      -> 128ch @ 28x28
+        conv3x3 128->64  (pad 1) -> BN -> ReLU
+        bilinear x2                      ->  64ch @ 56x56
+        conv1x1  64->num_classes         -> num_classes @ 56x56
+        (TumorAwareMultiTaskNet.forward then interpolates to input size)
+
+    **No skip connections and no multi-scale taps** — it decodes the 7x7 map
+    alone.  The multi-scale alternative is :class:`MultiScaleSegmentationHead`
+    (config ``seg_decoder="multiscale"``) used by the Phase 3 ablation.
+    """
 
     def __init__(self, in_channels: int, num_classes: int):
         super().__init__()
@@ -151,6 +206,74 @@ class SegmentationHead(nn.Module):
 
     def forward(self, features: torch.Tensor) -> torch.Tensor:
         return self.decoder(features)
+
+
+class MultiScaleSegmentationHead(nn.Module):
+    """U-Net-style decoder over tapped DenseNet121 encoder scales.
+
+    Phase 3 decoder ablation variant (config ``seg_decoder="multiscale"``).
+    Only supported with ``backbone="densenet121"``; taps are registered on
+    ``encoder.transition{1,2,3}`` by ``TumorAwareMultiTaskNet``.
+
+    For a 224x224 input the taps are::
+
+        transition1 -> 128ch @ 28x28
+        transition2 -> 256ch @ 14x14
+        transition3 -> 512ch @  7x 7
+        deepest (encoder.features output) -> 1024ch @ 7x7
+
+    Stages (each conv is 3x3, pad 1, no bias, + BN + ReLU):
+
+        cat(deepest, transition3)  -> 256ch @  7x7
+        up x2 + cat(transition2)   -> 128ch @ 14x14
+        up x2 + cat(transition1)   ->  64ch @ 28x28
+        up x2                      ->  64ch @ 56x56
+        conv1x1 -> num_classes     -> num_classes @ 56x56
+
+    As with the lightweight head, ``TumorAwareMultiTaskNet.forward``
+    interpolates the result to the input resolution.
+    """
+
+    def __init__(self, num_classes: int, deepest_channels: int = 1024):
+        super().__init__()
+        # (deepest1024 + transition3 512) @7x7
+        self.stage0 = self._conv_block(deepest_channels + 512, 256)
+        # up-sampled 256 + transition2 256 @14x14
+        self.stage1 = self._conv_block(256 + 256, 128)
+        # up-sampled 128 + transition1 128 @28x28
+        self.stage2 = self._conv_block(128 + 128, 64)
+        # up-sampled 64, no skip @56x56
+        self.stage3 = self._conv_block(64, 64)
+        self.head = nn.Conv2d(64, num_classes, 1)
+        self.upsample = nn.Upsample(
+            scale_factor=2, mode="bilinear", align_corners=False
+        )
+
+    @staticmethod
+    def _conv_block(in_channels: int, out_channels: int) -> nn.Sequential:
+        return nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, 3, padding=1, bias=False),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+        )
+
+    def forward(
+        self, deepest: torch.Tensor, skips: list[torch.Tensor]
+    ) -> torch.Tensor:
+        """``skips`` = encoder taps in forward order [t1, t2, t3]."""
+        if len(skips) != 3:
+            raise RuntimeError(
+                "MultiScaleSegmentationHead expects 3 encoder taps "
+                f"(transition1/2/3), got {len(skips)}. Taps are registered "
+                "only for backbone='densenet121'."
+            )
+        # taps arrive in forward (execution) order: transition1, 2, 3
+        transition1, transition2, transition3 = skips
+        x = self.stage0(torch.cat([deepest, transition3], dim=1))
+        x = self.stage1(torch.cat([self.upsample(x), transition2], dim=1))
+        x = self.stage2(torch.cat([self.upsample(x), transition1], dim=1))
+        x = self.stage3(self.upsample(x))
+        return self.head(x)
 
 
 class UncertaintyHead(nn.Module):
@@ -187,6 +310,9 @@ class TumorAwareMultiTaskNet(nn.Module):
         self.config = config
         self.backbone_name = config.backbone
         self._feature_map = None
+        # intermediate encoder taps for seg_decoder="multiscale"
+        # (filled by forward hooks on encoder.transition{1,2,3})
+        self._scale_taps: list[torch.Tensor] = []
 
         self._build_encoder(config)
         self._register_feature_hook()
@@ -195,7 +321,11 @@ class TumorAwareMultiTaskNet(nn.Module):
         self.global_pool = nn.AdaptiveAvgPool2d(1)
         self.global_bn = nn.BatchNorm1d(encoder_out)
 
-        self.tumor_pool = TumorRegionPool(encoder_out, config.fusion_dim)
+        self.tumor_pool = TumorRegionPool(
+            encoder_out,
+            config.fusion_dim,
+            use_channel_attention=config.use_channel_attention,
+        )
 
         if config.use_attention_fusion:
             self.fusion = AttentionFusion(encoder_out, config.fusion_dim, config.fusion_dim)
@@ -215,7 +345,26 @@ class TumorAwareMultiTaskNet(nn.Module):
         )
 
         if config.use_segmentation_head:
-            self.seg_head = SegmentationHead(encoder_out, config.segmentation_classes)
+            if config.seg_decoder not in ("lightweight", "multiscale"):
+                raise ValueError(
+                    f"seg_decoder must be 'lightweight' or 'multiscale', "
+                    f"got {config.seg_decoder!r}"
+                )
+            if config.seg_decoder == "multiscale":
+                if config.backbone != "densenet121":
+                    raise ValueError(
+                        "seg_decoder='multiscale' supports only "
+                        "backbone='densenet121' (encoder taps are "
+                        "backbone-specific)"
+                    )
+                self.seg_head: nn.Module | None = MultiScaleSegmentationHead(
+                    config.segmentation_classes
+                )
+                self._register_multiscale_taps()
+            else:
+                self.seg_head = SegmentationHead(
+                    encoder_out, config.segmentation_classes
+                )
         else:
             self.seg_head = None
 
@@ -284,6 +433,17 @@ class TumorAwareMultiTaskNet(nn.Module):
         if target is not None:
             target.register_forward_hook(hook_fn)
 
+    def _register_multiscale_taps(self) -> None:
+        """Capture transition1/2/3 outputs for the multi-scale seg decoder."""
+
+        def tap_hook(module, input, output):
+            if isinstance(output, torch.Tensor):
+                self._scale_taps.append(output)
+
+        features = self.encoder.features
+        for name in ("transition1", "transition2", "transition3"):
+            getattr(features, name).register_forward_hook(tap_hook)
+
     def _get_encoder_out_channels(self) -> int:
         dummy = torch.zeros(1, 3, 224, 224)
         with torch.no_grad():
@@ -308,6 +468,7 @@ class TumorAwareMultiTaskNet(nn.Module):
 
     def encode(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         self._feature_map = None
+        self._scale_taps = []
         features = self.encoder(x)
         feature_map = self._feature_map
 
@@ -324,6 +485,28 @@ class TumorAwareMultiTaskNet(nn.Module):
 
         return global_feat, feature_map
 
+    def fuse(self, global_feat: torch.Tensor, tumor_feat: torch.Tensor) -> torch.Tensor:
+        """z = Φ(g, t) — the exact fusion op (named to avoid the paper's
+        feature-map symbol F; Phase 2 code↔paper sync).
+
+        ``use_attention_fusion=True`` (default — the executed model)::
+
+            g' = W_g g,  t' = W_t t                 # Linear -> fusion_dim (256)
+            w  = softmax(MLP([g'; t']))             # Linear(512->256) -> ReLU ->
+                                                    # Linear(256->2) -> Softmax(2)
+            z  = LayerNorm(w0*g' + w1*t')           # 2-way softmax-weighted
+                                                    # convex combination + LayerNorm
+
+        This is **not** the plain concatenation ``g ⊥ t`` the paper's §III.E
+        notation implies — Phase 5 must rewrite the paper (or the ablation
+        ``use_attention_fusion=False`` must be reported).
+
+        ``use_attention_fusion=False`` (ablation only): ``z = concat(g, t)``.
+        """
+        if self.config.use_attention_fusion:
+            return self.fusion(global_feat, tumor_feat)
+        return torch.cat([global_feat, tumor_feat], dim=1)
+
     def forward(
         self,
         x: torch.Tensor,
@@ -335,10 +518,7 @@ class TumorAwareMultiTaskNet(nn.Module):
 
         tumor_feat = self.tumor_pool(feature_map, seg_mask)
 
-        if self.config.use_attention_fusion:
-            fused = self.fusion(global_feat, tumor_feat)
-        else:
-            fused = torch.cat([global_feat, tumor_feat], dim=1)
+        fused = self.fuse(global_feat, tumor_feat)
 
         logits = self.classifier(fused)
 
@@ -351,7 +531,10 @@ class TumorAwareMultiTaskNet(nn.Module):
         }
 
         if return_seg and self.seg_head is not None and feature_map is not None:
-            seg_out = self.seg_head(feature_map)
+            if isinstance(self.seg_head, MultiScaleSegmentationHead):
+                seg_out = self.seg_head(feature_map, self._scale_taps)
+            else:
+                seg_out = self.seg_head(feature_map)
             if seg_out.shape[2:] != x.shape[2:]:
                 seg_out = F.interpolate(seg_out, size=x.shape[2:], mode='bilinear', align_corners=False)
             result["seg_logits"] = seg_out
@@ -366,22 +549,44 @@ class TumorAwareMultiTaskNet(nn.Module):
         x: torch.Tensor,
         num_passes: int = 10,
     ) -> dict[str, torch.Tensor]:
-        """MC Dropout uncertainty estimation."""
-        self.train()
-        all_logits = []
+        """MC Dropout uncertainty estimation (T = ``num_passes``, default 10).
 
-        for _ in range(num_passes):
-            with torch.no_grad():
-                out = self.forward(x)
-                all_logits.append(out["probabilities"])
+        Phase 2 bug fix: the previous implementation called ``self.train()``,
+        which also put **BatchNorm in train mode** — the 10 passes then mixed
+        batch-statistics noise into every uncertainty number (and mutated the
+        running stats).  Now the model is set to ``eval()`` first and ONLY the
+        Dropout layers are re-activated, matching the known-good path in
+        ``evaluation/uncertainty.py``.  The model's previous train/eval mode
+        is restored before returning.
 
-        stacked = torch.stack(all_logits)
-        mean_probs = stacked.mean(dim=0)
-        predictive_variance = stacked.var(dim=0)
-        predictive_entropy = -torch.sum(mean_probs * torch.log(mean_probs + 1e-10), dim=1)
-        mutual_info = predictive_entropy - torch.mean(
-            -torch.sum(stacked * torch.log(stacked + 1e-10), dim=2), dim=0
-        )
+        Dropout sites sampled (config.dropout = 0.3): classifier 0.3 / 0.15,
+        tumor-pool MLP 0.2, uncertainty head 0.3.
+
+        NOTE: all pre-Phase-2 uncertainty numbers (ECE, entropy, MI, T=10
+        curves) were produced by the buggy path -> ``TODO-RERUN`` (Phase 3F).
+        """
+        was_training = self.training
+        self.eval()
+        for module in self.modules():
+            if isinstance(module, (nn.Dropout, nn.Dropout1d, nn.Dropout2d, nn.Dropout3d)):
+                module.train()
+        try:
+            all_logits = []
+
+            for _ in range(num_passes):
+                with torch.no_grad():
+                    out = self.forward(x)
+                    all_logits.append(out["probabilities"])
+
+            stacked = torch.stack(all_logits)
+            mean_probs = stacked.mean(dim=0)
+            predictive_variance = stacked.var(dim=0)
+            predictive_entropy = -torch.sum(mean_probs * torch.log(mean_probs + 1e-10), dim=1)
+            mutual_info = predictive_entropy - torch.mean(
+                -torch.sum(stacked * torch.log(stacked + 1e-10), dim=2), dim=0
+            )
+        finally:
+            self.train(was_training)
 
         return {
             "mean_probabilities": mean_probs,

@@ -3,6 +3,7 @@ BrainTumorDiagnosis Losses Package
 """
 
 from .segmentation import (
+    DiceLoss2D,
     DiceLoss3D,
     SegmentationLoss,
     segmentation_loss,
@@ -15,6 +16,7 @@ from .classification import (
 
 
 __all__ = [
+    "DiceLoss2D",
     "DiceLoss3D",
     "SegmentationLoss",
     "segmentation_loss",

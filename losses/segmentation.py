@@ -127,6 +127,75 @@ class DiceLoss3D(nn.Module):
         return (1.0 - dice_score).mean()
 
 
+class DiceLoss2D(nn.Module):
+    """Multi-class soft Dice loss for **2D** predictions (Phase 2 addition).
+
+    TAMNet's auxiliary segmentation head emits ``(B, C, H, W)`` logits, which
+    :class:`DiceLoss3D` rejects (it requires 5D).  This class mirrors the 3D
+    math for the 2D contract so ``MultiTaskLoss`` can actually supervise the
+    paper's auxiliary branch when masks are supplied:
+
+        Prediction: [B, C, H, W]  (logits)
+        Target:     [B, H, W]     (integer labels)
+    """
+
+    def __init__(
+        self,
+        smooth: float = 1e-5,
+        include_background: bool = True,
+        softmax: bool = True,
+    ) -> None:
+        super().__init__()
+        self.smooth = smooth
+        self.include_background = include_background
+        self.softmax = softmax
+
+    def forward(self, prediction: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
+        if prediction.ndim != 4:
+            raise ValueError(
+                "Prediction must have shape (B, C, H, W). "
+                f"Received {tuple(prediction.shape)}"
+            )
+        if target.ndim != 3:
+            raise ValueError(
+                "Target must have shape (B, H, W). "
+                f"Received {tuple(target.shape)}"
+            )
+        if prediction.shape[0] != target.shape[0]:
+            raise ValueError(
+                "Batch dimensions do not match. "
+                f"Prediction={prediction.shape[0]} Target={target.shape[0]}"
+            )
+        if prediction.shape[2:] != target.shape[1:]:
+            raise ValueError(
+                "Spatial dimensions do not match. "
+                f"Prediction={tuple(prediction.shape)} Target={tuple(target.shape)}"
+            )
+
+        prediction = prediction.float()
+        target = target.long()
+        num_classes = prediction.shape[1]
+
+        target = F.one_hot(target, num_classes=num_classes).permute(0, 3, 1, 2).float()
+
+        if self.softmax:
+            prediction = torch.softmax(prediction, dim=1)
+
+        dims = (2, 3)
+        intersection = torch.sum(prediction * target, dim=dims)
+        prediction_sum = torch.sum(prediction, dim=dims)
+        target_sum = torch.sum(target, dim=dims)
+
+        dice_score = (2.0 * intersection + self.smooth) / (
+            prediction_sum + target_sum + self.smooth
+        )
+
+        if not self.include_background and num_classes > 1:
+            dice_score = dice_score[:, 1:]
+
+        return (1.0 - dice_score).mean()
+
+
 class SegmentationLoss(nn.Module):
     """
     Weighted combination of soft Dice loss and cross-entropy.
