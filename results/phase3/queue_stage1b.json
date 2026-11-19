@@ -1,0 +1,10 @@
+[
+  {
+    "name": "tamnet_clean_s45",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s45"]
+  },
+  {
+    "name": "tamnet_clean_s46",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "46", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s46"]
+  }
+]

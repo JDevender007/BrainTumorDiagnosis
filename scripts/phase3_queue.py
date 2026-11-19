@@ -31,23 +31,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RUNS_DIR = ROOT / "results" / "phase3" / "runs"
 LOGS_DIR = ROOT / "results" / "phase3" / "logs"
-STATUS_PATH = ROOT / "results" / "phase3" / "queue_status.json"
+DEFAULT_STATUS_PATH = ROOT / "results" / "phase3" / "queue_status.json"
 
 
 def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def write_status(payload: dict) -> None:
+def write_status(status_path: Path, payload: dict) -> None:
     payload["updated_at"] = now()
-    tmp = STATUS_PATH.with_suffix(".json.tmp")
+    tmp = status_path.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    tmp.replace(STATUS_PATH)
+    tmp.replace(status_path)
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description="Phase 3 sequential queue runner")
     p.add_argument("--queue", required=True, help="queue JSON path")
+    p.add_argument(
+        "--status-file",
+        default=None,
+        help="status JSON path (default results/phase3/queue_status.json); "
+        "set per queue when running multiple queues in parallel",
+    )
     p.add_argument("--dry-run", action="store_true")
     p.add_argument(
         "--max-hours",
@@ -56,6 +62,12 @@ def main() -> int:
         help="optional wall-clock stop guard for this driver session",
     )
     args = p.parse_args()
+
+    status_path = DEFAULT_STATUS_PATH
+    if args.status_file:
+        status_path = Path(args.status_file)
+        if not status_path.is_absolute():
+            status_path = ROOT / status_path
 
     queue_path = Path(args.queue)
     if not queue_path.is_absolute():
@@ -86,7 +98,7 @@ def main() -> int:
             print(f"  [{state:7s}] {entry['name']}: {' '.join(entry['args'])}")
         return 0
 
-    write_status(status)
+    write_status(status_path, status)
     t0 = time.time()
     for entry in queue:
         name = entry["name"]
@@ -99,7 +111,7 @@ def main() -> int:
 
         status["current"] = name
         status["current_started_at"] = now()
-        write_status(status)
+        write_status(status_path, status)
         print(f"START {name} @ {status['current_started_at']}", flush=True)
 
         log_path = LOGS_DIR / f"{name}.log"
@@ -116,18 +128,18 @@ def main() -> int:
         if rc != 0:
             status["failed"] = {"name": name, "exit_code": rc, "log": str(log_path.relative_to(ROOT))}
             status["current"] = None
-            write_status(status)
+            write_status(status_path, status)
             print(f"FAIL {name} (exit {rc}) - see {log_path}", flush=True)
             return rc
 
         status["completed"].append(name)
         status["current"] = None
-        write_status(status)
+        write_status(status_path, status)
         print(f"DONE {name} ({len(status['completed'])}/{status['total_entries']})", flush=True)
 
     status["current"] = None
     status["finished_at"] = now()
-    write_status(status)
+    write_status(status_path, status)
     print(f"QUEUE COMPLETE: {len(status['completed'])}/{status['total_entries']} runs", flush=True)
     return 0
 
