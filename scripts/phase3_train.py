@@ -98,7 +98,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Phase 3 single-run trainer")
     p.add_argument("--model", required=True, help="tamnet | " + " | ".join(BACKBONES))
     p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--epochs", type=int, default=None, help="default: tamnet 50, backbones 30")
+    p.add_argument("--epochs", type=int, default=None, help="default: 30 for all models (user directive 2026-11-19)")
     p.add_argument("--batch-size", type=int, default=8)
     p.add_argument("--lr", type=float, default=1e-4)
     p.add_argument("--weight-decay", type=float, default=1e-4)
@@ -179,7 +179,7 @@ def main() -> int:
         raise SystemExit(f"--model must be tamnet or one of {BACKBONES}")
 
     if args.epochs is None:
-        args.epochs = 1 if args.smoke else (50 if args.model == "tamnet" else 30)
+        args.epochs = 1 if args.smoke else 30
 
     # ---- reproducibility ------------------------------------------------
     random.seed(args.seed)
