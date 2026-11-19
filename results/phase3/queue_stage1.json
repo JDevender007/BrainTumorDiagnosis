@@ -1,0 +1,22 @@
+[
+  {
+    "name": "tamnet_clean_s42",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "42", "--epochs", "50", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s42"]
+  },
+  {
+    "name": "tamnet_clean_s43",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "43", "--epochs", "50", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s43"]
+  },
+  {
+    "name": "tamnet_clean_s44",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "50", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s44"]
+  },
+  {
+    "name": "tamnet_clean_s45",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "50", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s45"]
+  },
+  {
+    "name": "tamnet_clean_s46",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "46", "--epochs", "50", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_clean_s46"]
+  }
+]
