@@ -103,7 +103,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--lr", type=float, default=1e-4)
     p.add_argument("--weight-decay", type=float, default=1e-4)
     p.add_argument("--patience", type=int, default=7)
-    p.add_argument("--num-workers", type=int, default=4)
+    p.add_argument("--num-workers", type=int, default=8)
     p.add_argument("--protocol", choices=("clean", "leaky"), default="clean")
     p.add_argument("--split", type=str, default=str(DEFAULT_SPLIT))
     p.add_argument("--out", type=str, default=None, help="run directory")
@@ -189,6 +189,13 @@ def main() -> int:
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # Speed: fixed 224x224 input -> autotune conv algorithms once; TF32 for
+    # any fp32 matmuls (AMP already runs most ops in fp16). Does not change
+    # the declared protocol (same batch/lr/epochs/seed/split).
+    torch.backends.cudnn.benchmark = True
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
+
     # ---- run naming / output dir ---------------------------------------
     suffix = ""
     if args.model == "tamnet":
@@ -227,13 +234,14 @@ def main() -> int:
         shuffle=True,
         num_workers=args.num_workers,
         seed=args.seed,
-        persistent_workers=not args.smoke,
+        persistent_workers=(args.num_workers > 0 and not args.smoke),
     )
     val_loader = make_dataloader(
         val_ds,
         batch_size=args.batch_size,
         shuffle=False,
         num_workers=args.num_workers,
+        persistent_workers=(args.num_workers > 0 and not args.smoke),
     )
 
     class_counts = {

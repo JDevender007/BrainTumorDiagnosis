@@ -53,6 +53,9 @@ class MultiTaskTrainingConfig:
     use_attention_fusion: bool = True
     use_segmentation_head: bool = True
     use_uncertainty_head: bool = True
+    # Phase 2/3 ablation flags (defaults = historically executed model)
+    use_channel_attention: bool = False
+    seg_decoder: str = "lightweight"
     seed: int = 42
     mixed_precision: bool = True
     gradient_accumulation_steps: int = 2
@@ -139,23 +142,34 @@ def train_multitask_model(
     val_loader: DataLoader,
     device: torch.device,
     external_loader: Optional[DataLoader] = None,
+    model: Optional[nn.Module] = None,
 ) -> TrainingResult:
-    """Train the multi-task tumor-aware model."""
+    """Train the multi-task tumor-aware model.
+
+    ``model``: optional pre-built network (Phase 3) for fair baselines under
+    the *identical* protocol (same optimizer/schedule/loss/early-stopping).
+    It must accept ``forward(x, return_seg=...)`` and return a dict with
+    ``"logits"``. When None (default) TAMNet is built from ``config``.
+    """
     torch.manual_seed(config.seed)
     np.random.seed(config.seed)
 
-    model_config = TumorAwareConfig(
-        backbone=config.backbone,
-        pretrained=config.pretrained,
-        num_classes=config.num_classes,
-        segmentation_classes=config.segmentation_classes,
-        dropout=config.dropout,
-        fusion_dim=config.fusion_dim,
-        use_attention_fusion=config.use_attention_fusion,
-        use_segmentation_head=config.use_segmentation_head,
-        use_uncertainty_head=config.use_uncertainty_head,
-    )
-    model = TumorAwareMultiTaskNet(model_config).to(device)
+    if model is None:
+        model_config = TumorAwareConfig(
+            backbone=config.backbone,
+            pretrained=config.pretrained,
+            num_classes=config.num_classes,
+            segmentation_classes=config.segmentation_classes,
+            dropout=config.dropout,
+            fusion_dim=config.fusion_dim,
+            use_attention_fusion=config.use_attention_fusion,
+            use_segmentation_head=config.use_segmentation_head,
+            use_uncertainty_head=config.use_uncertainty_head,
+            use_channel_attention=config.use_channel_attention,
+            seg_decoder=config.seg_decoder,
+        )
+        model = TumorAwareMultiTaskNet(model_config)
+    model = model.to(device)
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=config.epochs)
@@ -215,7 +229,8 @@ def train_multitask_model(
 
         pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{config.epochs}", leave=False)
         for batch_idx, (images, labels) in enumerate(pbar):
-            images, labels = images.to(device), labels.to(device)
+            images = images.to(device, non_blocking=True)
+            labels = labels.to(device, non_blocking=True)
 
             optimizer.zero_grad()
 
@@ -258,7 +273,7 @@ def train_multitask_model(
         val_labels = []
         with torch.no_grad():
             for images, labels in val_loader:
-                images = images.to(device)
+                images = images.to(device, non_blocking=True)
                 outputs = model(images)
                 preds = outputs["logits"].argmax(dim=1)
                 val_preds.extend(preds.cpu().numpy())
