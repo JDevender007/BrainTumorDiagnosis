@@ -70,6 +70,16 @@ per final config; ask before >2 GPU-hours or new downloads; mark unverifiable re
       there, never the numbers).
 
 ## Phase 3 — Experiments (5 seeds; TEST mean±std; headline = mean, never best seed)
+
+**Progress-reporting protocol (user requirement 2026-11-19):** every training run must
+report **(a) at each epoch completion** and **(b) at least every 5 minutes** what is
+currently running. Enabled by: per-epoch `training_history.json` flush +
+`progress.json` (`status/epoch/epochs_total/epoch_time_s/elapsed_s/eta_s/val_f1/
+best_val_f1/updated_at`) in `training/multitask_trainer.py`; `classification_trainer.py`
+already writes `training_history.json` + `progress_file` per epoch. Watcher loop =
+sleep-5-min → read `progress.json` → user-facing update (epoch just finished, current
+activity, ETA).
+
 - [ ] A. Ablation (7 configs): DenseNet121 cls-only; +spatial; +spatial+channel;
       +aux seg only; full TAMNet; λ_seg ∈ {0, 0.1, 0.25, 0.5, 1.0}; t-only vs g+t fusion.
 - [ ] B. Fair baselines, identical protocol: DenseNet121, ResNet50, EfficientNetV2-S,

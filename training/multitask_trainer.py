@@ -15,6 +15,7 @@ import json
 import time
 import warnings
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -174,8 +175,39 @@ def train_multitask_model(
     best_epoch = 0
     patience_counter = 0
     history = []
+    run_start = time.time()
+    progress_path = output_dir / "progress.json"
+
+    def _write_progress(status: str, epoch_time_s: float) -> None:
+        """Write machine-readable per-epoch status (Phase 3 progress protocol).
+
+        An external watcher polls ``progress.json`` every few minutes and can
+        report each epoch completion without waiting for the run to finish.
+        """
+        elapsed = time.time() - run_start
+        epochs_done = len(history)
+        last = history[-1] if history else {}
+        eta = (elapsed / max(epochs_done, 1)) * (config.epochs - epochs_done)
+        payload = {
+            "status": status,
+            "epoch": epochs_done,
+            "epochs_total": config.epochs,
+            "epoch_time_s": round(epoch_time_s, 1),
+            "elapsed_s": round(elapsed, 1),
+            "eta_s": round(eta, 1),
+            "train_loss": last.get("train_loss"),
+            "val_f1": last.get("val_f1"),
+            "val_accuracy": last.get("val_accuracy"),
+            "best_val_f1": best_val_f1,
+            "best_epoch": best_epoch,
+            "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        }
+        tmp = progress_path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        tmp.replace(progress_path)
 
     for epoch in range(config.epochs):
+        epoch_start = time.time()
         model.train()
         epoch_losses = []
         epoch_cls_losses = []
@@ -237,6 +269,7 @@ def train_multitask_model(
 
         epoch_info = {
             "epoch": epoch + 1,
+            "epoch_time_s": round(time.time() - epoch_start, 1),
             "train_loss": float(np.mean(epoch_losses)),
             "train_cls_loss": float(np.mean(epoch_cls_losses)),
             "train_seg_loss": float(np.mean(epoch_seg_losses)),
@@ -255,6 +288,12 @@ def train_multitask_model(
             f"lr={optimizer.param_groups[0]['lr']:.6f}",
             flush=True,
         )
+
+        # Phase 3 progress protocol: persist after EVERY epoch so watchers
+        # (and crash recovery) see per-epoch state, not just the final file.
+        with open(output_dir / "training_history.json", "w") as f:
+            json.dump(history, f, indent=2)
+        _write_progress("running", time.time() - epoch_start)
 
         if val_f1 > best_val_f1:
             best_val_f1 = val_f1
@@ -279,6 +318,7 @@ def train_multitask_model(
 
         if patience_counter >= config.patience:
             print(f"  Early stopping at epoch {epoch+1}")
+            _write_progress("early_stopped", time.time() - epoch_start)
             break
 
     torch.save({
@@ -290,6 +330,7 @@ def train_multitask_model(
 
     with open(output_dir / "training_history.json", "w") as f:
         json.dump(history, f, indent=2)
+    _write_progress("completed", history[-1].get("epoch_time_s", 0.0) if history else 0.0)
 
     print(f"\nBest val F1: {best_val_f1:.4f} at epoch {best_epoch}")
 
