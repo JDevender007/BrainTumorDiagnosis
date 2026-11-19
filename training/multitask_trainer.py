@@ -304,11 +304,13 @@ def train_multitask_model(
             flush=True,
         )
 
-        # Phase 3 progress protocol: persist after EVERY epoch so watchers
-        # (and crash recovery) see per-epoch state, not just the final file.
+        # Phase 3 progress protocol: persist training_history after EVERY
+        # epoch so watchers (and crash recovery) see per-epoch state.
+        # NOTE: progress.json itself is written AFTER the best/patience block
+        # below so it never reports a best_val_f1 that lags one epoch behind
+        # the checkpoint on disk (best.pt).
         with open(output_dir / "training_history.json", "w") as f:
             json.dump(history, f, indent=2)
-        _write_progress("running", time.time() - epoch_start)
 
         if val_f1 > best_val_f1:
             best_val_f1 = val_f1
@@ -330,6 +332,10 @@ def train_multitask_model(
             }, output_dir / "best.pt")
         else:
             patience_counter += 1
+
+        # Write progress AFTER best/patience are updated so the watcher's
+        # best_val_f1/best_epoch always match best.pt on disk.
+        _write_progress("running", time.time() - epoch_start)
 
         if patience_counter >= config.patience:
             print(f"  Early stopping at epoch {epoch+1}")
