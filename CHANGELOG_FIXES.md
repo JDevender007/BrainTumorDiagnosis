@@ -58,7 +58,22 @@ param/shape accounting). New tests: `tests/test_tumor_aware_phase2.py` (18).
 | C=3 + implementation details | DOCUMENTED (D8) | C=3, global BN, t-MLP (BN+ReLU+Dropout 0.2), classifier 0.3/0.15, CBAM order, T=10, mask path dead (D6), `uncertainty_logits` unused (D7) → `docs/ARCHITECTURE.md` §1; paper wording → Phase 5 |
 | Parameter claim | **VERIFIED** | probe: **9,034,416 total** = paper's 9.03M exactly (seg_head 1,254,212; tumor_pool 263,010; fusion 460,546; classifier 99,716; uncertainty_head 1,028; encoder+global_bn 6,955,904); multiscale decoder variant = 12,094,576 |
 | Historical numbers | UNTOUCHED | all new flags default-off → executed model byte-identical by construction; no metric/checkpoint/`results/` artifact altered; original files preserved |
-## Phase 3 — Experiments, 5 seeds _(pending; needs GPU-budget approval)_
+## Phase 3 — Experiments, 5 seeds (in progress)
+
+Split/harness: `scripts/phase3_split.py` → `results/phase3/split_manifest_clean.json`
+(de-dup grouped 70/15/15 = 7,804/1,672/1,672, 0 clusters cross-split), harness
+`phase3_{train,evaluate,queue}.py` + `phase3_status.ps1`.
+
+| Item | Status | Notes |
+|---|---|---|
+| 30-epoch cap, all training | DONE (`681f52a`) | user directive 2026-11-19; prior 50-epoch work kept as `*_ep50budget*` dirs |
+| GPU speed-ups (protocol-neutral) | DONE (`63b027b`) | cudnn.benchmark + TF32 + persistent workers + non_blocking H2D; single run was 68 % util / data-starved |
+| Parallel queues (2 trainings at once) | DONE (`c60e1da`) | `--status-file` per queue; GPU → **99–100 % util**, ~5.5 min/epoch per run vs 7.45 sequential |
+| `progress.json` best-lag fix | DONE (`9d43d0f`) | write progress AFTER best/patience update (reporting-only) |
+| **Per-epoch checkpoint + auto-resume** | DONE (this commit) | `checkpoint_last.pt` after every epoch (atomic tmp→replace): model/optimizer/scheduler/scaler/best/patience/history/elapsed + all RNG (torch/cuda/numpy/python) + shuffle-generator state; `phase3_train.py` auto-resumes when the file exists and `training_result.json` doesn't (original `run_config.json` never overwritten); `--no-resume` to opt out. New tests `tests/test_multitask_resume.py` (4, incl. crash→resume ≡ uninterrupted). Suite **104/104** |
+| Seed s42 (30-ep protocol) | DONE | best val F1(w) **0.9463 @ ep17**, 24/30 epochs (early stop), 2.98 h, `results/phase3/runs/tamnet_clean_s42/` |
+| Seeds s43+s45 (parallel) | **CRASHED (OOM)** @ ep17/30 | 2026-11-19 22:26 IST: Windows error **1455 (paging file too small)** killed both trainers — `PBZ.exe` game + 2 trainings × 5 procs exhausted RAM. Preserved `*_ep17_oom_partial`: s43 best **0.9402 @ ep15**, s45 best **0.9457 @ ep15** (full history + best.pt). Old code had **no per-epoch checkpoint** → cannot resume mid-run; must restart from epoch 1 with new code. Lesson applied: resume feature ships in this commit |
+| Seeds s44, s46 | PENDING | queue A/B fail-stopped with their sibling; relaunch after RAM freed (close game first) |
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_
 ## Phase 6 — Reproducibility & QA _(pending)_

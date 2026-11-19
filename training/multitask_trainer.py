@@ -12,6 +12,7 @@ Handles:
 from __future__ import annotations
 
 import json
+import random
 import time
 import warnings
 from dataclasses import dataclass, field
@@ -143,6 +144,7 @@ def train_multitask_model(
     device: torch.device,
     external_loader: Optional[DataLoader] = None,
     model: Optional[nn.Module] = None,
+    resume: bool = False,
 ) -> TrainingResult:
     """Train the multi-task tumor-aware model.
 
@@ -150,6 +152,11 @@ def train_multitask_model(
     the *identical* protocol (same optimizer/schedule/loss/early-stopping).
     It must accept ``forward(x, return_seg=...)`` and return a dict with
     ``"logits"``. When None (default) TAMNet is built from ``config``.
+
+    ``resume``: when True and ``<output_dir>/checkpoint_last.pt`` exists,
+    training continues from the last COMPLETED epoch (model/optimizer/
+    scheduler/scaler/best-state/history/RNG/shuffle order all restored) —
+    a shutdown mid-run loses at most the in-flight epoch, never the run.
     """
     torch.manual_seed(config.seed)
     np.random.seed(config.seed)
@@ -191,6 +198,44 @@ def train_multitask_model(
     history = []
     run_start = time.time()
     progress_path = output_dir / "progress.json"
+    last_ckpt_path = output_dir / "checkpoint_last.pt"
+    start_epoch = 0
+
+    if resume and last_ckpt_path.exists():
+        # weights_only=False: the checkpoint carries numpy/python RNG state
+        # tuples (trusted, written by this trainer).
+        ckpt = torch.load(last_ckpt_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        scheduler.load_state_dict(ckpt["scheduler_state_dict"])
+        if ckpt.get("scaler_state_dict"):
+            scaler.load_state_dict(ckpt["scaler_state_dict"])
+        best_val_f1 = float(ckpt["best_val_f1"])
+        best_epoch = int(ckpt["best_epoch"])
+        patience_counter = int(ckpt["patience_counter"])
+        history = list(ckpt["history"])
+        start_epoch = int(ckpt["epoch"])  # completed epochs -> next epoch index
+        run_start = time.time() - float(ckpt.get("elapsed_s", 0.0))
+        rng = ckpt.get("rng_state") or {}
+        if rng.get("torch") is not None:
+            torch.set_rng_state(rng["torch"].cpu())
+        if rng.get("cuda") is not None and torch.cuda.is_available():
+            torch.cuda.set_rng_state_all([s.cpu() for s in rng["cuda"]])
+        if rng.get("numpy") is not None:
+            np.random.set_state(rng["numpy"])
+        if rng.get("python") is not None:
+            random.setstate(rng["python"])
+        gen = getattr(train_loader, "generator", None)
+        if gen is not None and ckpt.get("train_generator_state") is not None:
+            gen.set_state(ckpt["train_generator_state"].cpu())
+        print(
+            f"RESUME: checkpoint_last.pt found -> continuing from epoch "
+            f"{start_epoch + 1}/{config.epochs} (best val F1 {best_val_f1:.4f} "
+            f"@ epoch {best_epoch}, {len(history)} epochs in history)",
+            flush=True,
+        )
+    elif resume:
+        print("RESUME: no checkpoint_last.pt yet - starting from epoch 1", flush=True)
 
     def _write_progress(status: str, epoch_time_s: float) -> None:
         """Write machine-readable per-epoch status (Phase 3 progress protocol).
@@ -220,7 +265,47 @@ def train_multitask_model(
         tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         tmp.replace(progress_path)
 
-    for epoch in range(config.epochs):
+    def _save_last_checkpoint(epoch: int) -> None:
+        """Atomically persist full resumable state after every epoch.
+
+        Written BEFORE progress.json so the watcher never claims an epoch
+        that is not checkpointed. A shutdown mid-run therefore loses at most
+        the current (unfinished) epoch; restarting phase3_train auto-resumes
+        from ``epoch + 1`` with model/optimizer/scheduler/scaler, best-state,
+        patience, history, wall-clock and ALL RNG + shuffle-generator state.
+        """
+        gen = getattr(train_loader, "generator", None)
+        payload = {
+            "epoch": epoch + 1,  # completed epochs; resume starts at this index
+            "model_state_dict": model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+            "scheduler_state_dict": scheduler.state_dict(),
+            "scaler_state_dict": scaler.state_dict(),
+            "best_val_f1": best_val_f1,
+            "best_epoch": best_epoch,
+            "patience_counter": patience_counter,
+            "history": history,
+            "elapsed_s": time.time() - run_start,
+            "rng_state": {
+                "torch": torch.get_rng_state(),
+                "cuda": (
+                    torch.cuda.get_rng_state_all()
+                    if device.type == "cuda"
+                    else None
+                ),
+                "numpy": np.random.get_state(),
+                "python": random.getstate(),
+            },
+            "train_generator_state": gen.get_state() if gen is not None else None,
+        }
+        tmp = last_ckpt_path.parent / (last_ckpt_path.name + ".tmp")
+        torch.save(payload, tmp)
+        tmp.replace(last_ckpt_path)
+
+    # ``epoch`` pre-set so a resume at start_epoch == config.epochs (crash
+    # after the final epoch, before training_result.json) still completes.
+    epoch = start_epoch - 1
+    for epoch in range(start_epoch, config.epochs):
         epoch_start = time.time()
         model.train()
         epoch_losses = []
@@ -333,6 +418,11 @@ def train_multitask_model(
         else:
             patience_counter += 1
 
+        # Checkpoint FIRST (contains the just-updated best/patience), then
+        # progress.json - so both disk states always agree, even if the
+        # system shuts down between the two writes.
+        _save_last_checkpoint(epoch)
+
         # Write progress AFTER best/patience are updated so the watcher's
         # best_val_f1/best_epoch always match best.pt on disk.
         _write_progress("running", time.time() - epoch_start)
@@ -343,7 +433,7 @@ def train_multitask_model(
             break
 
     torch.save({
-        "epoch": epoch + 1,
+        "epoch": history[-1]["epoch"] if history else start_epoch,
         "model_state_dict": model.state_dict(),
         "optimizer_state_dict": optimizer.state_dict(),
         "history": history,

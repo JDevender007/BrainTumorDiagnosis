@@ -109,6 +109,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--out", type=str, default=None, help="run directory")
     p.add_argument("--no-pretrained", action="store_true")
     p.add_argument("--smoke", action="store_true", help="1 epoch, tiny subsets (pipeline test)")
+    p.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="ignore an existing checkpoint_last.pt and start from epoch 1",
+    )
     # TAMNet ablation flags (defaults = historically executed model)
     p.add_argument("--channel-attention", action="store_true", help="enable M_c (D1 ablation)")
     p.add_argument("--no-attention-fusion", action="store_true", help="concat fusion (D4 ablation)")
@@ -211,7 +216,17 @@ def main() -> int:
             suffix += "+msdec"
     run_name = f"{args.model}_{args.protocol}_s{args.seed}{suffix}"
     out_dir = Path(args.out) if args.out else RUNS_DIR / run_name
-    if out_dir.exists() and (out_dir / "run_config.json").exists():
+    # Auto-resume (Phase 3 shutdown safety): a previous attempt left a
+    # per-epoch checkpoint but never wrote training_result.json -> continue
+    # from the last completed epoch instead of refusing to run. A finished
+    # run (training_result.json present) still refuses / is skipped by the
+    # queue, so the test-once-per-config and no-overwrite rules hold.
+    resuming = (
+        not args.no_resume
+        and (out_dir / "checkpoint_last.pt").exists()
+        and not (out_dir / "training_result.json").exists()
+    )
+    if out_dir.exists() and (out_dir / "run_config.json").exists() and not resuming:
         raise SystemExit(f"run config already exists (refusing to overwrite): {out_dir}")
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -317,9 +332,16 @@ def main() -> int:
         "device": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
         "command": " ".join(sys.argv),
     }
-    (out_dir / "run_config.json").write_text(
-        json.dumps(run_config, indent=2), encoding="utf-8"
-    )
+    if resuming and (out_dir / "run_config.json").exists():
+        # Resume: keep the ORIGINAL provenance (created_at/git/command) from
+        # the first attempt - run_config.json is never overwritten.
+        run_config = json.loads(
+            (out_dir / "run_config.json").read_text(encoding="utf-8")
+        )
+    else:
+        (out_dir / "run_config.json").write_text(
+            json.dumps(run_config, indent=2), encoding="utf-8"
+        )
 
     print(f"RUN {run_name}", flush=True)
     print(f"  out      : {out_dir}", flush=True)
@@ -329,8 +351,15 @@ def main() -> int:
     print(f"  device   : {run_config['device']}", flush=True)
 
     # ---- train ----------------------------------------------------------
+    if resuming:
+        print(
+            "  resume  : checkpoint_last.pt found - continuing from last completed epoch",
+            flush=True,
+        )
     started = time.time()
-    result = train_multitask_model(config, train_loader, val_loader, device, model=model)
+    result = train_multitask_model(
+        config, train_loader, val_loader, device, model=model, resume=resuming
+    )
     duration = time.time() - started
 
     ckpt = Path(result.checkpoint_path)
