@@ -370,12 +370,18 @@ def main() -> int:
         seed=args.seed,
         persistent_workers=(args.num_workers > 0 and not args.smoke),
     )
+    # Val runs IN-PROCESS: one pass per epoch doesn't need worker processes,
+    # and on Windows every DataLoader worker commits ~2 GB (torch import
+    # footprint) — with 2 parallel runs, 4 train + 4 val workers per run was
+    # pushing total commit to the paging-file cliff (Win32 1455 incidents
+    # 2026-11-19 and 2026-11-21). Train keeps the full worker pool so the
+    # GPU stays fed.
     val_loader = make_dataloader(
         val_ds,
         batch_size=args.batch_size,
         shuffle=False,
-        num_workers=args.num_workers,
-        persistent_workers=(args.num_workers > 0 and not args.smoke),
+        num_workers=0,
+        persistent_workers=False,
     )
 
     class_counts = {
