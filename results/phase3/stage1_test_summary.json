@@ -1,0 +1,99 @@
+{
+  "kind": "phase3_multiseed_test_summary",
+  "created_at": "2026-11-21T08:38:52+00:00",
+  "git": {
+    "commit": "6f800d8",
+    "dirty": true
+  },
+  "command": "scripts\\phase3_aggregate.py --runs results/phase3/runs/tamnet_clean_s42 results/phase3/runs/tamnet_clean_s43 results/phase3/runs/tamnet_clean_s44 results/phase3/runs/tamnet_clean_s45 results/phase3/runs/tamnet_clean_s46 --eval-dir eval_internal_test --out results/phase3/stage1_test_summary.json",
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 5,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1",
+  "per_seed": [
+    {
+      "run": "tamnet_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 17,
+      "checkpoint_val_f1": 0.94628373342398,
+      "n": 1672,
+      "accuracy": 0.9270334928229665,
+      "macro_f1": 0.9258364651546032,
+      "weighted_f1": 0.9272195175422621,
+      "source": "results/phase3/runs/tamnet_clean_s42/eval_internal_test/metrics.json",
+      "evaluated_at": "2026-11-21T08:11:04+00:00",
+      "checkpoint_sha256": "5166153f7d5b4e33327ea6d5fc93e70c96d80cb1a68a377529309576dd9de392"
+    },
+    {
+      "run": "tamnet_clean_s43",
+      "seed": 43,
+      "checkpoint_best_epoch": 19,
+      "checkpoint_val_f1": 0.9473551289040323,
+      "n": 1672,
+      "accuracy": 0.9300239234449761,
+      "macro_f1": 0.929984726925051,
+      "weighted_f1": 0.9302713191301963,
+      "source": "results/phase3/runs/tamnet_clean_s43/eval_internal_test/metrics.json",
+      "evaluated_at": "2026-11-21T08:11:34+00:00",
+      "checkpoint_sha256": "e4e6668361f45b3fef96b51c7232ff0eb0c3720380cfbffc119f49d756ffddf6"
+    },
+    {
+      "run": "tamnet_clean_s44",
+      "seed": 44,
+      "checkpoint_best_epoch": 26,
+      "checkpoint_val_f1": 0.9521659508465057,
+      "n": 1672,
+      "accuracy": 0.9485645933014354,
+      "macro_f1": 0.9478100226794308,
+      "weighted_f1": 0.948797836899161,
+      "source": "results/phase3/runs/tamnet_clean_s44/eval_internal_test/metrics.json",
+      "evaluated_at": "2026-11-21T08:12:03+00:00",
+      "checkpoint_sha256": "52438cc5ca88194175c367b7b0a606f5faa8c4af16959ebfce9e529d547d6501"
+    },
+    {
+      "run": "tamnet_clean_s45",
+      "seed": 45,
+      "checkpoint_best_epoch": 24,
+      "checkpoint_val_f1": 0.9460778143677371,
+      "n": 1672,
+      "accuracy": 0.9473684210526315,
+      "macro_f1": 0.9467903359425549,
+      "weighted_f1": 0.9472394459165149,
+      "source": "results/phase3/runs/tamnet_clean_s45/eval_internal_test/metrics.json",
+      "evaluated_at": "2026-11-21T08:12:32+00:00",
+      "checkpoint_sha256": "4ccf586cfb06efae451aac466ff78fca6e84455ab2d748f08b69a6108a01838f"
+    },
+    {
+      "run": "tamnet_clean_s46",
+      "seed": 46,
+      "checkpoint_best_epoch": 11,
+      "checkpoint_val_f1": 0.9443892312976612,
+      "n": 1672,
+      "accuracy": 0.9270334928229665,
+      "macro_f1": 0.9268841412790718,
+      "weighted_f1": 0.9269848472300023,
+      "source": "results/phase3/runs/tamnet_clean_s46/eval_internal_test/metrics.json",
+      "evaluated_at": "2026-11-21T08:13:00+00:00",
+      "checkpoint_sha256": "9e239932620461c1ccf2a4eb76096c3d6dfa457d7e62e0766797cd8812222edc"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9360047846889952,
+      "std_sample_ddof1": 0.010995679611752499,
+      "min": 0.9270334928229665,
+      "max": 0.9485645933014354
+    },
+    "macro_f1": {
+      "mean": 0.9354611383961423,
+      "std_sample_ddof1": 0.010920576418406531,
+      "min": 0.9258364651546032,
+      "max": 0.9478100226794308
+    },
+    "weighted_f1": {
+      "mean": 0.9361025933436273,
+      "std_sample_ddof1": 0.010968646030870234,
+      "min": 0.9269848472300023,
+      "max": 0.948797836899161
+    }
+  }
+}
