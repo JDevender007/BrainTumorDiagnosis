@@ -99,6 +99,8 @@ def build_model(run_config: dict) -> torch.nn.Module:
             use_attention_fusion=flags.get("use_attention_fusion", True),
             use_segmentation_head=flags.get("use_segmentation_head", True),
             use_uncertainty_head=flags.get("use_uncertainty_head", True),
+            fusion_mode=flags.get("fusion_mode", "g+t"),
+            segmentation_classes=run_config.get("segmentation_classes", 4),
         )
         return TumorAwareMultiTaskNet(cfg)
     return DictWrapper(
@@ -203,7 +205,9 @@ def main() -> int:
     probs: list[np.ndarray] = []
     paths: list[str] = []
     with torch.no_grad():
-        for images, labels in loader:
+        for batch in loader:
+            # index access: mask-carrying batches are 3-tuples (Phase 3)
+            images, labels = batch[0], batch[1]
             logits = model(images.to(device))
             if isinstance(logits, dict):
                 logits = logits["logits"]

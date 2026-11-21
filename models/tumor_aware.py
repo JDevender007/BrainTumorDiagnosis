@@ -34,6 +34,11 @@ class TumorAwareConfig:
     dropout: float = 0.3
     fusion_dim: int = 256
     use_attention_fusion: bool = True
+    # Phase 3A "t-only vs g+t" ablation (docs/TODO.md item A):
+    #   "g+t" (default) = z = Phi(g, t)   — the executed model
+    #   "t"             = z = t           — classifier sees only the
+    #     tumor-region feature (global branch contributes nothing)
+    fusion_mode: str = "g+t"
     # M_c (paper §III.C): SE-style channel attention inside TumorRegionPool,
     # applied AFTER M_s (CBAM spatial-then-channel order).  Default False =
     # the historically executed model (M_c was never wired in — Phase 0 audit
@@ -327,10 +332,21 @@ class TumorAwareMultiTaskNet(nn.Module):
             use_channel_attention=config.use_channel_attention,
         )
 
-        if config.use_attention_fusion:
+        if config.fusion_mode not in ("g+t", "t"):
+            raise ValueError(
+                f"fusion_mode must be 'g+t' or 't', got {config.fusion_mode!r}"
+            )
+
+        if config.fusion_mode == "t":
+            # t-only ablation: z = t (fusion_dim); no fusion module is built
+            # so its parameters never exist in this variant's state dict.
+            self.fusion = None
+            classifier_in = config.fusion_dim
+        elif config.use_attention_fusion:
             self.fusion = AttentionFusion(encoder_out, config.fusion_dim, config.fusion_dim)
             classifier_in = config.fusion_dim
         else:
+            self.fusion = None
             classifier_in = encoder_out + config.fusion_dim
 
         self.classifier = nn.Sequential(
@@ -502,7 +518,12 @@ class TumorAwareMultiTaskNet(nn.Module):
         ``use_attention_fusion=False`` must be reported).
 
         ``use_attention_fusion=False`` (ablation only): ``z = concat(g, t)``.
+
+        ``fusion_mode="t"`` (Phase 3A t-only ablation): ``z = t`` — only the
+        tumor-region feature reaches the classifier.
         """
+        if getattr(self.config, "fusion_mode", "g+t") == "t":
+            return tumor_feat
         if self.config.use_attention_fusion:
             return self.fusion(global_feat, tumor_feat)
         return torch.cat([global_feat, tumor_feat], dim=1)

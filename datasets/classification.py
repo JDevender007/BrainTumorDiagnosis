@@ -7,6 +7,7 @@ from typing import Sequence
 import logging
 import random
 
+import numpy as np
 import torch
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
@@ -41,6 +42,10 @@ class ClassificationSample:
     class_name: str
     class_index: int
     split: str
+    # Phase 3 (λ_seg sweep, docs/TODO.md A): optional aligned binary mask.
+    # When set, the dataset yields (image, label, mask) triples and the
+    # trainer feeds seg_targets to MultiTaskLoss (activates L_seg, D2).
+    mask_path: Path | None = None
 
 
 @dataclass(frozen=True)
@@ -259,6 +264,7 @@ class BrainTumorClassificationDataset(Dataset):
             transform = build_classification_transform(image_size)
 
         self.transform = transform
+        self.image_size = tuple(image_size)
 
     def __len__(self) -> int:
         return len(self.samples)
@@ -266,7 +272,7 @@ class BrainTumorClassificationDataset(Dataset):
     def __getitem__(
         self,
         index: int,
-    ) -> tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor] | tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
 
         sample = self.samples[index]
 
@@ -279,7 +285,24 @@ class BrainTumorClassificationDataset(Dataset):
             dtype=torch.long,
         )
 
-        return image, label
+        if sample.mask_path is None:
+            return image, label
+
+        # Phase 3 λ_seg sweep: aligned binary mask -> (B=) (H, W) long map.
+        # Deterministic NEAREST resize mirrors the image transform's Resize
+        # (no random augmentation in the canonical pipeline) so image/mask
+        # stay pixel-aligned. BRISC PNG masks are anti-aliased (0..255 edge
+        # values), so anything >=127 counts as tumor; already-binary masks
+        # (max <= 1) pass through unchanged.
+        mask_img = Image.open(sample.mask_path)
+        if mask_img.mode != "L":
+            mask_img = mask_img.convert("L")
+        nearest = getattr(Image, "Resampling", Image).NEAREST
+        mask_img = mask_img.resize(self.image_size, nearest)
+        mask_arr = np.array(mask_img, dtype=np.int64)
+        if mask_arr.max() > 1:
+            mask_arr = (mask_arr >= 127).astype(np.int64)
+        return image, label, torch.from_numpy(mask_arr)
 
 
 ClassificationDataset = BrainTumorClassificationDataset

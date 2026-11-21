@@ -104,7 +104,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--weight-decay", type=float, default=1e-4)
     p.add_argument("--patience", type=int, default=7)
     p.add_argument("--num-workers", type=int, default=8)
-    p.add_argument("--protocol", choices=("clean", "leaky"), default="clean")
+    p.add_argument("--protocol", choices=("clean", "leaky", "brisc"), default="clean")
     p.add_argument("--split", type=str, default=str(DEFAULT_SPLIT))
     p.add_argument("--out", type=str, default=None, help="run directory")
     p.add_argument("--no-pretrained", action="store_true")
@@ -120,6 +120,28 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--no-seg-head", action="store_true")
     p.add_argument("--no-uncertainty-head", action="store_true")
     p.add_argument("--seg-decoder", choices=("lightweight", "multiscale"), default="lightweight")
+    # Phase 3A λ_seg sweep + t-only ablation (docs/TODO.md item A)
+    p.add_argument(
+        "--seg-weight",
+        type=float,
+        default=0.5,
+        help="lambda_seg (weight of the Dice aux-segmentation loss); the "
+        "sweep uses {0, 0.1, 0.25, 0.5, 1.0} and requires --protocol brisc "
+        "(aligned masks)",
+    )
+    p.add_argument(
+        "--seg-classes",
+        type=int,
+        default=4,
+        help="channels of the aux seg head (4 = BraTS-style WT/TC/ET+bg, "
+        "2 = binary BRISC masks)",
+    )
+    p.add_argument(
+        "--fusion-mode",
+        choices=("g+t", "t"),
+        default="g+t",
+        help="'g+t' = z=Phi(g,t) executed model; 't' = t-only ablation",
+    )
     return p.parse_args()
 
 
@@ -148,7 +170,98 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+BRISC_ROOT = ROOT / "data" / "external" / "brisc2025" / "brisc2025"
+BRISC_LABELS = {
+    "glioma": "Glioma",
+    "meningioma": "Meningioma",
+    "pituitary": "Pituitary",
+    "no_tumor": "No Tumor",
+}
+# BRISC ships segmentation masks ONLY for tumor slices (3,933/5,000 train,
+# 860/1,000 test); no_tumor images have no mask file. A no-tumor slice has
+# an empty tumor mask *by the definition of its label*, so those samples
+# point at this generated all-zero mask (224x224, written to results/ —
+# the original dataset files are never touched). That keeps the full
+# 4-class protocol identical to the headline runs.
+BRISC_EMPTY_MASK = ROOT / "results" / "phase3" / "brisc_empty_mask.png"
+
+
+def _ensure_empty_mask() -> Path:
+    if not BRISC_EMPTY_MASK.exists():
+        BRISC_EMPTY_MASK.parent.mkdir(parents=True, exist_ok=True)
+        from PIL import Image
+
+        Image.new("L", (224, 224), 0).save(BRISC_EMPTY_MASK)
+    return BRISC_EMPTY_MASK
+
+
+def load_brisc_split() -> dict[str, list[ClassificationSample]]:
+    """BRISC 2025 paired split for the λ_seg sweep (docs/TODO.md Phase 3A).
+
+    Classification labels come from ``classification_task/<split>/<class>/``
+    and aligned binary masks from ``segmentation_task/<split>/masks/`` (same
+    basename, ``.png``). Tumor slices use their real radiologist mask;
+    no_tumor slices use the generated all-zero mask (see
+    ``BRISC_EMPTY_MASK``). Every image of the official splits participates,
+    so the class set stays {Glioma, Meningioma, Pituitary, No Tumor} —
+    identical to the headline protocol.
+
+    The official BRISC test split stays untouched (evaluated once, later,
+    via ``phase3_evaluate.py --dataset brisc_test``); the train pool gets
+    the same seeded stratified 80/20 train/val split as the other protocols.
+    """
+
+    def collect(split: str) -> list[ClassificationSample]:
+        cls_dir = BRISC_ROOT / "classification_task" / split
+        mask_dir = BRISC_ROOT / "segmentation_task" / split / "masks"
+        if not cls_dir.is_dir() or not mask_dir.is_dir():
+            raise SystemExit(f"BRISC directories missing: {cls_dir} / {mask_dir}")
+        empty_mask: Path | None = None
+        samples: list[ClassificationSample] = []
+        for folder in sorted(cls_dir.iterdir()):
+            if not folder.is_dir():
+                continue
+            cls = BRISC_LABELS.get(folder.name.lower())
+            if cls is None:
+                raise SystemExit(f"unknown BRISC class folder: {folder.name}")
+            for img in sorted(folder.iterdir()):
+                if img.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
+                    continue
+                mask = mask_dir / f"{img.stem}.png"
+                if mask.exists():
+                    mask_path = mask
+                elif cls == "No Tumor":
+                    # empty tumor mask = the label itself (BRISC only
+                    # annotates tumor slices)
+                    if empty_mask is None:
+                        empty_mask = _ensure_empty_mask()
+                    mask_path = empty_mask
+                else:
+                    continue  # tumor slice without a mask -> no supervision
+                samples.append(
+                    ClassificationSample(
+                        image_path=img,
+                        class_name=cls,
+                        class_index=CLASS_NAMES.index(cls),
+                        split=split,
+                        mask_path=mask_path,
+                    )
+                )
+        return samples
+
+    train_pool = collect("train")
+    test = collect("test")
+    if not train_pool or not test:
+        raise SystemExit("BRISC paired data missing - check data/external/brisc2025")
+    train, val = split_classification_samples(
+        train_pool, validation_split=0.2, seed=42
+    )
+    return {"train": train, "val": val, "test": test}
+
+
 def load_split(protocol: str, manifest_path: Path) -> dict[str, list[ClassificationSample]]:
+    if protocol == "brisc":
+        return load_brisc_split()
     if protocol == "clean":
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         buckets: dict[str, list[ClassificationSample]] = {
@@ -214,6 +327,12 @@ def main() -> int:
             suffix += "-unc"
         if args.seg_decoder == "multiscale":
             suffix += "+msdec"
+        if args.fusion_mode == "t":
+            suffix += "-tonly"
+        if args.seg_weight != 0.5:
+            suffix += f"+ls{args.seg_weight:g}"
+        if args.seg_classes != 4:
+            suffix += f"+sc{args.seg_classes}"
     run_name = f"{args.model}_{args.protocol}_s{args.seed}{suffix}"
     out_dir = Path(args.out) if args.out else RUNS_DIR / run_name
     # Auto-resume (Phase 3 shutdown safety): a previous attempt left a
@@ -272,6 +391,7 @@ def main() -> int:
         "use_attention_fusion": not args.no_attention_fusion,
         "use_segmentation_head": not args.no_seg_head,
         "use_uncertainty_head": not args.no_uncertainty_head,
+        "fusion_mode": args.fusion_mode,
     }
     model: nn.Module | None = None
     if args.model != "tamnet":
@@ -295,6 +415,8 @@ def main() -> int:
         patience=args.patience,
         seed=args.seed,
         output_dir=str(out_dir),
+        seg_loss_weight=args.seg_weight,
+        segmentation_classes=args.seg_classes,
         **flags,
     )
 
@@ -313,6 +435,8 @@ def main() -> int:
         "weight_decay": args.weight_decay,
         "patience": args.patience,
         "label_smoothing": config.label_smoothing,
+        "seg_weight": args.seg_weight,
+        "segmentation_classes": args.seg_classes,
         "optimizer": "AdamW+CosineAnnealingLR",
         "selection_metric": "val_f1_weighted",
         "image_size": [224, 224],
@@ -320,13 +444,27 @@ def main() -> int:
         "num_workers": args.num_workers,
         "pretrained": not args.no_pretrained,
         "smoke": args.smoke,
-        "split": {
-            "protocol": args.protocol,
-            "manifest": str(split_path.relative_to(ROOT))
-            if split_path.is_relative_to(ROOT)
-            else str(split_path),
-            "sha256": sha256_file(split_path) if split_path.exists() else None,
-        },
+        "split": (
+            {
+                "protocol": "brisc",
+                "manifest": None,
+                "sha256": None,
+                "note": (
+                    "BRISC 2025 paired split built at runtime "
+                    "(load_brisc_split): labels from classification_task/, "
+                    "aligned masks from segmentation_task/; official test "
+                    "held out untouched"
+                ),
+            }
+            if args.protocol == "brisc"
+            else {
+                "protocol": args.protocol,
+                "manifest": str(split_path.relative_to(ROOT))
+                if split_path.is_relative_to(ROOT)
+                else str(split_path),
+                "sha256": sha256_file(split_path) if split_path.exists() else None,
+            }
+        ),
         "dataset": {"n_total": {k: len(v) for k, v in splits.items()}, "classes": class_counts},
         "torch": torch.__version__,
         "device": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",

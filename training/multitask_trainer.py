@@ -57,6 +57,8 @@ class MultiTaskTrainingConfig:
     # Phase 2/3 ablation flags (defaults = historically executed model)
     use_channel_attention: bool = False
     seg_decoder: str = "lightweight"
+    # Phase 3A t-only ablation: "g+t" (default) | "t"
+    fusion_mode: str = "g+t"
     seed: int = 42
     mixed_precision: bool = True
     gradient_accumulation_steps: int = 2
@@ -174,6 +176,7 @@ def train_multitask_model(
             use_uncertainty_head=config.use_uncertainty_head,
             use_channel_attention=config.use_channel_attention,
             seg_decoder=config.seg_decoder,
+            fusion_mode=config.fusion_mode,
         )
         model = TumorAwareMultiTaskNet(model_config)
     model = model.to(device)
@@ -313,7 +316,16 @@ def train_multitask_model(
         epoch_seg_losses = []
 
         pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{config.epochs}", leave=False)
-        for batch_idx, (images, labels) in enumerate(pbar):
+        for batch_idx, batch in enumerate(pbar):
+            # Phase 3 (D2/λ_seg): datasets that carry masks yield
+            # (image, label, mask); everything else stays (image, label)
+            # so historical behaviour is bit-identical.
+            if len(batch) == 3:
+                images, labels, seg_targets = batch
+                seg_targets = seg_targets.to(device, non_blocking=True)
+            else:
+                images, labels = batch
+                seg_targets = None
             images = images.to(device, non_blocking=True)
             labels = labels.to(device, non_blocking=True)
 
@@ -321,7 +333,7 @@ def train_multitask_model(
 
             with autocast("cuda", enabled=config.mixed_precision):
                 outputs = model(images, return_seg=True)
-                losses = criterion(outputs, labels)
+                losses = criterion(outputs, labels, seg_targets=seg_targets)
                 loss = losses["total_loss"] / config.gradient_accumulation_steps
 
             scaler.scale(loss).backward()
@@ -357,7 +369,9 @@ def train_multitask_model(
         val_preds = []
         val_labels = []
         with torch.no_grad():
-            for images, labels in val_loader:
+            for batch in val_loader:
+                # index access: mask-carrying batches are 3-tuples (Phase 3)
+                images, labels = batch[0], batch[1]
                 images = images.to(device, non_blocking=True)
                 outputs = model(images)
                 preds = outputs["logits"].argmax(dim=1)
