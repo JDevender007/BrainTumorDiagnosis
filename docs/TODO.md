@@ -82,9 +82,18 @@ activity, ETA).
 
 - [ ] A. Ablation (7 configs): DenseNet121 cls-only; +spatial; +spatial+channel;
       +aux seg only; full TAMNet; λ_seg ∈ {0, 0.1, 0.25, 0.5, 1.0}; t-only vs g+t fusion.
+      **Progress 2026-11-21**: harness flags shipped (`--channel-attention`,
+      `--no-attention-fusion`, `--fusion-mode t`, `--seg-weight`, `--seg-classes`,
+      `--protocol brisc`) — commit `f741c9c`. Runs: +mc & +concat queued
+      (queue_stage2a), t-only queued (queue_stage2b), λ_seg sweep = 5 BRISC runs
+      queued (only local data with aligned masks; no_tumor gets all-zero mask).
+      "+aux seg only" is covered by the λ_seg sweep (λ=0 vs λ>0 isolates the
+      aux-seg contribution) — full-TAMNet and +spatial rows = the 5-seed headline.
 - [ ] B. Fair baselines, identical protocol: DenseNet121, ResNet50, EfficientNetV2-S,
       ConvNeXt-T, Swin-T, ViT-B/16, shared-encoder + U-Net-style multi-task baseline.
       (Paper Table I claims TAMNet 96.45% < all of them — must be reproduced honestly.)
+      **Progress**: 6 torchvision backbones queued (queue_stage2a/b, seed 42, 30 ep);
+      shared-encoder U-Net multi-task baseline = TODO (needs design).
 - [ ] C. Metrics audit from saved predictions with scikit-learn; resolve
       **macro-F1 0.9847 > accuracy 96.45%** and **val F1 0.9751 > val acc 0.9530**;
       state averaging used.
