@@ -1,0 +1,14 @@
+[
+  {
+    "name": "tamnet_brisc_s42+ls0+sc2",
+    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0+sc2"]
+  },
+  {
+    "name": "tamnet_brisc_s42+ls0.1+sc2",
+    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0.1", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0.1+sc2"]
+  },
+  {
+    "name": "tamnet_brisc_s42+ls0.25+sc2",
+    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0.25", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0.25+sc2"]
+  }
+]

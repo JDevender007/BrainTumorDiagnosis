@@ -1,42 +1,10 @@
 [
   {
-    "name": "tamnet_clean_s42-tonly",
-    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--fusion-mode", "t", "--out", "results/phase3/runs/tamnet_clean_s42-tonly"]
-  },
-  {
-    "name": "tamnet_leaky_s42",
-    "args": ["--model", "tamnet", "--protocol", "leaky", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/tamnet_leaky_s42"]
-  },
-  {
-    "name": "convnext_tiny_clean_s42",
-    "args": ["--model", "convnext_tiny", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/convnext_tiny_clean_s42"]
-  },
-  {
     "name": "swin_t_clean_s42",
     "args": ["--model", "swin_t", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/swin_t_clean_s42"]
   },
   {
     "name": "vit_b_16_clean_s42",
     "args": ["--model", "vit_b_16", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/vit_b_16_clean_s42"]
-  },
-  {
-    "name": "tamnet_brisc_s42+ls0+sc2",
-    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0+sc2"]
-  },
-  {
-    "name": "tamnet_brisc_s42+ls0.1+sc2",
-    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0.1", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0.1+sc2"]
-  },
-  {
-    "name": "tamnet_brisc_s42+ls0.25+sc2",
-    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0.25", "--out", "results/phase3/runs/tamnet_brisc_s42+ls0.25+sc2"]
-  },
-  {
-    "name": "tamnet_brisc_s42+sc2",
-    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "0.5", "--out", "results/phase3/runs/tamnet_brisc_s42+sc2"]
-  },
-  {
-    "name": "tamnet_brisc_s42+ls1+sc2",
-    "args": ["--model", "tamnet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--seg-classes", "2", "--seg-weight", "1.0", "--out", "results/phase3/runs/tamnet_brisc_s42+ls1+sc2"]
   }
 ]
