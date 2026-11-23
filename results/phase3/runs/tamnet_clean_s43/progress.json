@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "epoch": 26,
+  "epochs_total": 30,
+  "epoch_time_s": 325.1,
+  "elapsed_s": 8561.0,
+  "eta_s": 1317.1,
+  "train_loss": 0.4068116511172447,
+  "val_f1": 0.9359522569720352,
+  "val_accuracy": 0.9360047846889952,
+  "best_val_f1": 0.9473551289040323,
+  "best_epoch": 19,
+  "updated_at": "2026-11-20T12:26:44+00:00"
+}

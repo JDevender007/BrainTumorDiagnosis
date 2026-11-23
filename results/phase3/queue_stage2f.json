@@ -1,0 +1,6 @@
+[
+  {
+    "name": "shared_unet_brisc_s42+ls0.25+sc2",
+    "args": ["--model", "shared_unet", "--protocol", "brisc", "--seed", "42", "--epochs", "30", "--num-workers", "2", "--seg-classes", "2", "--seg-weight", "0.25", "--out", "results/phase3/runs/shared_unet_brisc_s42+ls0.25+sc2"]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "queue": "results\\phase3\\queue_stage1a.json",
+  "started_at": "2026-11-20T10:03:16+00:00",
+  "current": null,
+  "completed": [
+    "tamnet_clean_s43",
+    "tamnet_clean_s44"
+  ],
+  "failed": null,
+  "total_entries": 2,
+  "updated_at": "2026-11-20T14:25:39+00:00",
+  "current_started_at": "2026-11-20T12:26:54+00:00",
+  "finished_at": "2026-11-20T14:25:39+00:00"
+}

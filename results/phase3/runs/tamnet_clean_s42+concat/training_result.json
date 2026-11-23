@@ -1,0 +1,14 @@
+{
+  "run_name": "tamnet_clean_s42+concat",
+  "finished_at": "2026-11-21T12:35:55+00:00",
+  "duration_s": 8825.7,
+  "best_val_f1_weighted": 0.9524677057329288,
+  "best_epoch": 23,
+  "epochs_run": 30,
+  "checkpoint": "results/phase3/runs/tamnet_clean_s42+concat/best.pt",
+  "git": {
+    "commit": "b39f814",
+    "dirty": true
+  },
+  "seed": 42
+}

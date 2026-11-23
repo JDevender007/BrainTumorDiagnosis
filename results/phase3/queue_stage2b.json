@@ -1,10 +1,10 @@
 [
   {
     "name": "swin_t_clean_s42",
-    "args": ["--model", "swin_t", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/swin_t_clean_s42"]
+    "args": ["--model", "swin_t", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "2", "--out", "results/phase3/runs/swin_t_clean_s42"]
   },
   {
     "name": "vit_b_16_clean_s42",
-    "args": ["--model", "vit_b_16", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "4", "--out", "results/phase3/runs/vit_b_16_clean_s42"]
+    "args": ["--model", "vit_b_16", "--protocol", "clean", "--seed", "42", "--epochs", "30", "--num-workers", "2", "--out", "results/phase3/runs/vit_b_16_clean_s42"]
   }
 ]

@@ -1,0 +1,72 @@
+{
+  "run_name": "tamnet_leaky_s42",
+  "created_at": "2026-11-21T11:02:57+00:00",
+  "git": {
+    "commit": "b39f814",
+    "dirty": true
+  },
+  "model": "tamnet",
+  "protocol": "leaky",
+  "flags": {
+    "use_channel_attention": false,
+    "seg_decoder": "lightweight",
+    "use_attention_fusion": true,
+    "use_segmentation_head": true,
+    "use_uncertainty_head": true,
+    "fusion_mode": "g+t"
+  },
+  "seed": 42,
+  "epochs": 30,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "patience": 7,
+  "label_smoothing": 0.1,
+  "seg_weight": 0.5,
+  "segmentation_classes": 4,
+  "optimizer": "AdamW+CosineAnnealingLR",
+  "selection_metric": "val_f1_weighted",
+  "image_size": [
+    224,
+    224
+  ],
+  "transform": "Resize->ToTensor->Normalize(ImageNet)",
+  "num_workers": 4,
+  "pretrained": true,
+  "smoke": false,
+  "split": {
+    "protocol": "leaky",
+    "manifest": "results\\phase3\\split_manifest_clean.json",
+    "sha256": "205c8e6f851070e56be42caad05c1613371a69c3f6b19f19e802ff643e939af6"
+  },
+  "dataset": {
+    "n_total": {
+      "train": 7434,
+      "val": 1857,
+      "test": 1857
+    },
+    "classes": {
+      "train": {
+        "Glioma": 2415,
+        "Meningioma": 1747,
+        "No Tumor": 1556,
+        "Pituitary": 1716
+      },
+      "val": {
+        "Glioma": 603,
+        "Meningioma": 436,
+        "No Tumor": 389,
+        "Pituitary": 429
+      },
+      "test": {
+        "Glioma": 603,
+        "Meningioma": 436,
+        "No Tumor": 389,
+        "Pituitary": 429
+      }
+    }
+  },
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "command": "D:\\BrainTumorDiagnosis\\scripts\\phase3_train.py --model tamnet --protocol leaky --seed 42 --epochs 30 --num-workers 4 --out results/phase3/runs/tamnet_leaky_s42"
+}

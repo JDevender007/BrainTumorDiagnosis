@@ -1,0 +1,72 @@
+{
+  "run_name": "tamnet_clean_s42+concat",
+  "created_at": "2026-11-21T10:08:46+00:00",
+  "git": {
+    "commit": "b39f814",
+    "dirty": true
+  },
+  "model": "tamnet",
+  "protocol": "clean",
+  "flags": {
+    "use_channel_attention": false,
+    "seg_decoder": "lightweight",
+    "use_attention_fusion": false,
+    "use_segmentation_head": true,
+    "use_uncertainty_head": true,
+    "fusion_mode": "g+t"
+  },
+  "seed": 42,
+  "epochs": 30,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "patience": 7,
+  "label_smoothing": 0.1,
+  "seg_weight": 0.5,
+  "segmentation_classes": 4,
+  "optimizer": "AdamW+CosineAnnealingLR",
+  "selection_metric": "val_f1_weighted",
+  "image_size": [
+    224,
+    224
+  ],
+  "transform": "Resize->ToTensor->Normalize(ImageNet)",
+  "num_workers": 4,
+  "pretrained": true,
+  "smoke": false,
+  "split": {
+    "protocol": "clean",
+    "manifest": "results\\phase3\\split_manifest_clean.json",
+    "sha256": "205c8e6f851070e56be42caad05c1613371a69c3f6b19f19e802ff643e939af6"
+  },
+  "dataset": {
+    "n_total": {
+      "train": 7804,
+      "val": 1672,
+      "test": 1672
+    },
+    "classes": {
+      "train": {
+        "Glioma": 2535,
+        "Meningioma": 1833,
+        "No Tumor": 1634,
+        "Pituitary": 1802
+      },
+      "val": {
+        "Glioma": 543,
+        "Meningioma": 393,
+        "No Tumor": 350,
+        "Pituitary": 386
+      },
+      "test": {
+        "Glioma": 543,
+        "Meningioma": 393,
+        "No Tumor": 350,
+        "Pituitary": 386
+      }
+    }
+  },
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "command": "D:\\BrainTumorDiagnosis\\scripts\\phase3_train.py --model tamnet --protocol clean --seed 42 --epochs 30 --num-workers 4 --no-attention-fusion --out results/phase3/runs/tamnet_clean_s42+concat"
+}

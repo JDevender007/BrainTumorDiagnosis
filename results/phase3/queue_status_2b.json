@@ -1,0 +1,14 @@
+{
+  "queue": "results\\phase3\\queue_stage2b.json",
+  "started_at": "2026-11-23T05:47:59+00:00",
+  "current": null,
+  "completed": [
+    "swin_t_clean_s42",
+    "vit_b_16_clean_s42"
+  ],
+  "failed": null,
+  "total_entries": 2,
+  "updated_at": "2026-11-23T09:10:43+00:00",
+  "current_started_at": "2026-11-23T05:47:59+00:00",
+  "finished_at": "2026-11-23T09:10:43+00:00"
+}

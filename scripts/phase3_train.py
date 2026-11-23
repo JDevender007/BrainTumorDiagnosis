@@ -55,6 +55,7 @@ from datasets.classification import (  # noqa: E402
 from datasets.dataloaders import make_dataloader  # noqa: E402
 from datasets.normalization import build_classification_transform  # noqa: E402
 from models.factory import create_backbone_classifier  # noqa: E402
+from models.shared_unet import SharedUNetMultiTask  # noqa: E402
 from training.multitask_trainer import (  # noqa: E402
     MultiTaskTrainingConfig,
     train_multitask_model,
@@ -96,7 +97,7 @@ class DictWrapper(nn.Module):
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Phase 3 single-run trainer")
-    p.add_argument("--model", required=True, help="tamnet | " + " | ".join(BACKBONES))
+    p.add_argument("--model", required=True, help="tamnet | shared_unet | " + " | ".join(BACKBONES))
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--epochs", type=int, default=None, help="default: 30 for all models (user directive 2026-11-19)")
     p.add_argument("--batch-size", type=int, default=8)
@@ -293,8 +294,8 @@ def load_split(protocol: str, manifest_path: Path) -> dict[str, list[Classificat
 
 def main() -> int:
     args = parse_args()
-    if args.model != "tamnet" and args.model not in BACKBONES:
-        raise SystemExit(f"--model must be tamnet or one of {BACKBONES}")
+    if args.model not in ("tamnet", "shared_unet") and args.model not in BACKBONES:
+        raise SystemExit(f"--model must be tamnet, shared_unet, or one of {BACKBONES}")
 
     if args.epochs is None:
         args.epochs = 1 if args.smoke else 30
@@ -316,7 +317,7 @@ def main() -> int:
 
     # ---- run naming / output dir ---------------------------------------
     suffix = ""
-    if args.model == "tamnet":
+    if args.model in ("tamnet", "shared_unet"):
         if args.channel_attention:
             suffix += "+mc"
         if args.no_attention_fusion:
@@ -400,7 +401,14 @@ def main() -> int:
         "fusion_mode": args.fusion_mode,
     }
     model: nn.Module | None = None
-    if args.model != "tamnet":
+    if args.model == "shared_unet":
+        # Phase 3B shared-encoder + U-Net multi-task baseline
+        model = SharedUNetMultiTask(
+            num_classes=len(CLASS_NAMES),
+            num_seg_classes=args.seg_classes,
+            pretrained=not args.no_pretrained,
+        )
+    elif args.model != "tamnet":
         model = DictWrapper(
             create_backbone_classifier(
                 args.model,
@@ -411,7 +419,9 @@ def main() -> int:
         )
 
     config = MultiTaskTrainingConfig(
-        backbone="densenet121" if args.model == "tamnet" else args.model,
+        backbone=(
+            "densenet121" if args.model in ("tamnet", "shared_unet") else args.model
+        ),
         pretrained=not args.no_pretrained,
         num_classes=len(CLASS_NAMES),
         epochs=args.epochs,

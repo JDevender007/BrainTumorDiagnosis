@@ -1,0 +1,15 @@
+{
+  "queue": "results\\phase3\\queue_stage2c.json",
+  "started_at": "2026-11-23T06:16:34+00:00",
+  "current": null,
+  "completed": [
+    "tamnet_brisc_s42+ls0+sc2",
+    "tamnet_brisc_s42+ls0.1+sc2",
+    "tamnet_brisc_s42+ls0.25+sc2"
+  ],
+  "failed": null,
+  "total_entries": 3,
+  "updated_at": "2026-11-23T10:02:34+00:00",
+  "current_started_at": "2026-11-23T08:24:17+00:00",
+  "finished_at": "2026-11-23T10:02:34+00:00"
+}

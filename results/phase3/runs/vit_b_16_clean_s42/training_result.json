@@ -1,0 +1,14 @@
+{
+  "run_name": "vit_b_16_clean_s42",
+  "finished_at": "2026-11-23T09:10:33+00:00",
+  "duration_s": 12139.9,
+  "best_val_f1_weighted": 0.9391587829751971,
+  "best_epoch": 26,
+  "epochs_run": 30,
+  "checkpoint": "results/phase3/runs/vit_b_16_clean_s42/best.pt",
+  "git": {
+    "commit": "15f9768",
+    "dirty": true
+  },
+  "seed": 42
+}

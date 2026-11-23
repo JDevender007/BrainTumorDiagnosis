@@ -1,0 +1,14 @@
+{
+  "run_name": "densenet121_clean_s42",
+  "finished_at": "2026-11-21T13:51:03+00:00",
+  "duration_s": 4475.3,
+  "best_val_f1_weighted": 0.9513828102480156,
+  "best_epoch": 7,
+  "epochs_run": 14,
+  "checkpoint": "results/phase3/runs/densenet121_clean_s42/best.pt",
+  "git": {
+    "commit": "b39f814",
+    "dirty": true
+  },
+  "seed": 42
+}
