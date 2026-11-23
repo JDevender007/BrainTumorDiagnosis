@@ -1,14 +1,14 @@
 {
-  "status": "running",
-  "epoch": 23,
+  "status": "completed",
+  "epoch": 30,
   "epochs_total": 30,
-  "epoch_time_s": 176.0,
-  "elapsed_s": 5387.2,
-  "eta_s": 1639.6,
-  "train_loss": 0.6266385047378654,
-  "val_f1": 0.9748468184610961,
-  "val_accuracy": 0.9749498997995992,
-  "best_val_f1": 0.9809128699063264,
-  "best_epoch": 22,
-  "updated_at": "2026-11-23T10:51:55+00:00"
+  "epoch_time_s": 232.8,
+  "elapsed_s": 6796.8,
+  "eta_s": 0.0,
+  "train_loss": 0.5901349346318883,
+  "val_f1": 0.9798892178414073,
+  "val_accuracy": 0.9799599198396793,
+  "best_val_f1": 0.9829454874002204,
+  "best_epoch": 24,
+  "updated_at": "2026-11-23T11:15:25+00:00"
 }

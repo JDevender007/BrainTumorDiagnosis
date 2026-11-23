@@ -1,0 +1,10 @@
+{
+  "queue": "results\\phase3\\queue_stage2g.json",
+  "started_at": "2026-11-23T11:03:59+00:00",
+  "current": "tamnet_clean_s43-tonly",
+  "completed": [],
+  "failed": null,
+  "total_entries": 5,
+  "updated_at": "2026-11-23T11:03:59+00:00",
+  "current_started_at": "2026-11-23T11:03:59+00:00"
+}

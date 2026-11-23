@@ -1,0 +1,14 @@
+{
+  "run_name": "tamnet_brisc_s42+sc2",
+  "finished_at": "2026-11-23T11:15:25+00:00",
+  "duration_s": 6798.2,
+  "best_val_f1_weighted": 0.9829454874002204,
+  "best_epoch": 24,
+  "epochs_run": 30,
+  "checkpoint": "results/phase3/runs/tamnet_brisc_s42+sc2/best.pt",
+  "git": {
+    "commit": "15f9768",
+    "dirty": true
+  },
+  "seed": 42
+}
