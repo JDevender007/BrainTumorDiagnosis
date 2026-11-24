@@ -161,6 +161,39 @@ Fix FPS to 21.7 (or drop) and external accuracy to 97.30 % (or re-measure).
 
 ---
 
+## 7b. External validation is not independent (new, blocking)
+
+`results/phase3/external_dedup_manifest.json` (built with the same phash≤6 / dhash≤4 union rule as
+Phase 1) near-duplicate-matches every external image against the **clean train** split:
+
+| External source | images | near-duplicates of clean train | kept | % dropped |
+|---|---|---|---|---|
+| Kaggle training | 3881 | 2599 | 1282 | **66.97 %** |
+| Kaggle testing (the 1311 used for 99.16 %) | 1311 | 889 | 422 | **67.81 %** |
+| BRISC train | 5000 | 2676 | 2324 | **53.52 %** |
+| BRISC test (the 1000 used for 97.70 %) | 1000 | 569 | 431 | **56.90 %** |
+
+Two thirds of the "external" Kaggle test images are near-duplicates of images the model trained on.
+So 99.16 % (Kaggle) and 97.70 % (BRISC) are **not** external-validation results in any meaningful
+sense — they are mostly in-distribution.
+
+**Consequence for the paper.** Either
+(a) re-evaluate on the de-duplicated keep-lists (`keep_paths` in the manifest: 422 Kaggle test,
+431 BRISC test) and report those numbers with the drop counts stated, or
+(b) drop the "two independent external datasets" claim entirely.
+
+Option (a) is the defensible one and needs only inference, no retraining. It changes the expected
+accuracy substantially downward and must be run before the paper can state any external number.
+
+Also note the dataset sizes do not line up with the canonical Kaggle release:
+- internal pool (`data/raw/classification`): Train 9291 + Test 1857 = **11148**
+- external Kaggle (`data/external/kaggle_brain_tumor`): Training 3881 + Testing 1311 = **5192**
+- the widely cited Kaggle "Brain Tumor MRI Dataset" is 5712 + 1311 = 7023
+
+So the internal set is not that release either. Exact dataset URLs are still required (FILL #2).
+
+---
+
 ## 8. Open items blocking the rewrite
 
 | # | Item | Blocks |
