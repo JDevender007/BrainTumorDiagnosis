@@ -1,0 +1,143 @@
+{
+  "kind": "phase4_figures",
+  "created_at": "2026-11-24T14:33:50+00:00",
+  "n_runs": 25,
+  "n_runs_with_test_eval": 5,
+  "input_files_sha256_16": {
+    "results\\phase3\\runs\\tamnet_clean_s42\\eval_internal_test\\metrics.json": "00894eaae97074fd",
+    "results\\phase3\\runs\\tamnet_clean_s43\\eval_internal_test\\metrics.json": "df4af1edfd58e616",
+    "results\\phase3\\runs\\tamnet_clean_s44\\eval_internal_test\\metrics.json": "351025bd86282823",
+    "results\\phase3\\runs\\tamnet_clean_s45\\eval_internal_test\\metrics.json": "f2c3d65c9d7d88c8",
+    "results\\phase3\\runs\\tamnet_clean_s46\\eval_internal_test\\metrics.json": "f615b7e0e7598caf"
+  },
+  "figures": {
+    "fig4_ablation_val.png": {
+      "metric": "best_val_f1_weighted from training_result.json",
+      "configs": [
+        {
+          "label": "ConvNeXt-T",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.962257816632406,
+          "std": 0.0
+        },
+        {
+          "label": "DenseNet-121",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9513828102480156,
+          "std": 0.0
+        },
+        {
+          "label": "EfficientNetV2-S",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9688473397144529,
+          "std": 0.0
+        },
+        {
+          "label": "ResNet-50",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9635600405008458,
+          "std": 0.0
+        },
+        {
+          "label": "shared U-Net",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9909837214580753,
+          "std": 0.0
+        },
+        {
+          "label": "Swin-T",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9640575411926694,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet \u03bb=0",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9829253601710265,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet \u03bb=0.1",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9829149859369607,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet \u03bb=0.25",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9839389494898184,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet \u03bb=1",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9779446162075306,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet \u03bb=0.5",
+          "protocol": "brisc",
+          "n": 1,
+          "mean": 0.9829454874002204,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet full",
+          "protocol": "clean",
+          "n": 5,
+          "mean": 0.9472543717679833,
+          "std": 0.00294402857792876
+        },
+        {
+          "label": "TAMNet +concat",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9524677057329288,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet +MC",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9564078084593163,
+          "std": 0.0
+        },
+        {
+          "label": "TAMNet t-only",
+          "protocol": "clean",
+          "n": 4,
+          "mean": 0.9429860754962138,
+          "std": 0.0058767303138040515
+        },
+        {
+          "label": "ViT-B/16",
+          "protocol": "clean",
+          "n": 1,
+          "mean": 0.9391587829751971,
+          "std": 0.0
+        }
+      ],
+      "excluded_runs": [
+        {
+          "run": "tamnet_clean_s42_ep50budget",
+          "reason": "variant=ep50"
+        },
+        {
+          "run": "tamnet_leaky_s42",
+          "reason": "leaky split (leaks train->test)"
+        }
+      ],
+      "note": "TEST-set version pending; only configs with eval_internal_test are eligible"
+    }
+  }
+}
