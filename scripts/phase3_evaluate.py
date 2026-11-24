@@ -253,7 +253,9 @@ def main() -> int:
     }
 
     # ---- save -----------------------------------------------------------
-    out_dir = run_dir / f"eval_{data_prov['dataset']}_{data_prov['split']}"
+    # dedup and full-external evaluations must not overwrite each other
+    dedup_suffix = "_dedup" if data_prov.get("dedup_applied") else ""
+    out_dir = run_dir / f"eval_{data_prov['dataset']}_{data_prov['split']}{dedup_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
     with (out_dir / "predictions.csv").open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
