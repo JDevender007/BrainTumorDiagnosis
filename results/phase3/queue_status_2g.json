@@ -1,12 +1,13 @@
 {
   "queue": "results\\phase3\\queue_stage2g.json",
-  "started_at": "2026-11-24T11:49:03+00:00",
-  "current": "tamnet_clean_s43+mc",
+  "started_at": "2026-11-24T12:56:30+00:00",
+  "current": "tamnet_clean_s43+concat",
   "completed": [
-    "tamnet_clean_s43-tonly"
+    "tamnet_clean_s43-tonly",
+    "tamnet_clean_s43+mc"
   ],
   "failed": null,
   "total_entries": 5,
-  "updated_at": "2026-11-24T12:02:57+00:00",
-  "current_started_at": "2026-11-24T12:02:57+00:00"
+  "updated_at": "2026-11-24T15:56:29+00:00",
+  "current_started_at": "2026-11-24T15:56:29+00:00"
 }
