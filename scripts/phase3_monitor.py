@@ -99,6 +99,30 @@ def short_label(name: str) -> str:
     return n
 
 
+def load_queues() -> list[tuple[str, list[str]]]:
+    """[(queue file, [run names in order])] for every queue that still has work."""
+    out = []
+    for q in sorted(PHASE3.glob("queue_stage*.json")):
+        data = read_json(q)
+        if not isinstance(data, list):
+            continue
+        names = [e.get("name") for e in data if e.get("name")]
+        if names:
+            out.append((q.name, names))
+    return out
+
+
+def next_entry(name: str, queues: list[tuple[str, list[str]]]) -> str | None:
+    """The entry that will start after ``name`` in its own queue."""
+    for _, names in queues:
+        if name not in names:
+            continue
+        for cand in names[names.index(name) + 1:]:
+            if not (RUNS_DIR / cand / "training_result.json").is_file():
+                return cand
+    return None
+
+
 def read_json(path: Path) -> dict | None:
     try:
         return json.loads(path.read_text(encoding="utf-8-sig"))
@@ -207,22 +231,41 @@ def main() -> int:
                     log_event(f"DONE {d.name}: best {res.get('best_val_f1_weighted')} "
                               f"@ ep{res.get('best_epoch')}")
 
-            lines = [f"updated {ts}  (every {args.interval:.0f}s)", ""]
+            queues = load_queues()
+            lines = []
+            soonest = None            # (eta_min, name, prog)
             for name, prog in rows:
-                eta = prog.get("eta_s") or 0
-                h, m = int(eta // 3600), int((eta % 3600) // 60)
-                ep_s = prog.get("epoch_time_s") or 0
-                mark = " (new best)" if prog.get("best_epoch") == prog.get("epoch") else ""
-                lines.append(
-                    f"- {short_label(name)}: ep{prog.get('epoch')}/{prog.get('epochs_total')} — "
-                    f"best {prog.get('best_val_f1'):.4f}@{prog.get('best_epoch')}{mark} · "
-                    f"ETA {h}h {m:02d}m · {ep_s / 60:.1f} min/ep"
-                )
-            lines += [
-                "",
-                f"commit {c_used}/{c_limit} ✓ · GPU {g_util}% / {g_mem} MiB · "
-                f"{len(runs)} trainers · {len(finished)} completed runs on disk",
-            ]
+                epoch = prog.get("epoch") or 0
+                total = prog.get("epochs_total") or 30
+                if prog.get("best_epoch") == epoch:
+                    best_txt = f"{prog.get('best_val_f1'):.4f}"
+                else:
+                    best_txt = f"best {prog.get('best_val_f1'):.4f}@{prog.get('best_epoch')}"
+                try:
+                    age = time.time() - (RUNS_DIR / name / "progress.json").stat().st_mtime
+                except OSError:
+                    age = 0
+                if age > 150 and epoch < total:
+                    lines.append(f"- {short_label(name)}: ep{epoch + 1} in progress — {best_txt}")
+                else:
+                    eta_min = int(round((prog.get("eta_s") or 0) / 60))
+                    lines.append(f"- {short_label(name)}: ep{epoch}/{total} — "
+                                 f"{best_txt} · ETA {eta_min} min")
+                    if soonest is None or eta_min < soonest[0]:
+                        soonest = (eta_min, name, prog)
+
+            lines.append(f"- commit {c_used}/{c_limit} ✓")
+
+            note = ""
+            if soonest:
+                eta_min, sname, sprog = soonest
+                nxt = next_entry(sname, queues)
+                tail = (f"→ {short_label(nxt)} starts" if nxt else "→ queue finished")
+                note = (f"Next: {short_label(sname)} finishes ep{sprog.get('epochs_total')} "
+                        f"in ~{eta_min} min {tail}.")
+            lines += ["", note, "",
+                      f"GPU {g_util}% / {g_mem} MiB · {len(runs)} trainers · "
+                      f"{len(finished)} completed runs on disk · {ts}"]
             LATEST.write_text("\n".join(lines) + "\n", encoding="utf-8")
             time.sleep(args.interval)
     except KeyboardInterrupt:
