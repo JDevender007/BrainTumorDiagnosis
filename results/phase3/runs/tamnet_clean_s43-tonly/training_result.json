@@ -1,0 +1,14 @@
+{
+  "run_name": "tamnet_clean_s43-tonly",
+  "finished_at": "2026-11-24T12:02:53+00:00",
+  "duration_s": 802.2,
+  "best_val_f1_weighted": 0.9401361547442951,
+  "best_epoch": 23,
+  "epochs_run": 30,
+  "checkpoint": "results/phase3/runs/tamnet_clean_s43-tonly/best.pt",
+  "git": {
+    "commit": "8fa9f80",
+    "dirty": true
+  },
+  "seed": 43
+}

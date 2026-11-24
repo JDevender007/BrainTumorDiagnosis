@@ -1,0 +1,7 @@
+[
+  {"name": "tamnet_clean_s45-tonly", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "1", "--fusion-mode", "t", "--out", "results/phase3/runs/tamnet_clean_s45-tonly"]},
+  {"name": "tamnet_clean_s45+mc", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "1", "--channel-attention", "--out", "results/phase3/runs/tamnet_clean_s45+mc"]},
+  {"name": "tamnet_clean_s45+concat", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "1", "--no-attention-fusion", "--out", "results/phase3/runs/tamnet_clean_s45+concat"]},
+  {"name": "densenet121_clean_s45", "args": ["--model", "densenet121", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "1", "--out", "results/phase3/runs/densenet121_clean_s45"]},
+  {"name": "shared_unet_brisc_s45+ls0.25+sc2", "args": ["--model", "shared_unet", "--protocol", "brisc", "--seed", "45", "--epochs", "30", "--num-workers", "1", "--seg-classes", "2", "--seg-weight", "0.25", "--out", "results/phase3/runs/shared_unet_brisc_s45+ls0.25+sc2"]}
+]

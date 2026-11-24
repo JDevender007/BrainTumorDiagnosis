@@ -1,6 +1,6 @@
 [
-  {"name": "tamnet_clean_s44-tonly", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "2", "--fusion-mode", "t", "--out", "results/phase3/runs/tamnet_clean_s44-tonly"]},
-  {"name": "tamnet_clean_s44+mc", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "2", "--channel-attention", "--out", "results/phase3/runs/tamnet_clean_s44+mc"]},
-  {"name": "tamnet_clean_s44+concat", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "2", "--no-attention-fusion", "--out", "results/phase3/runs/tamnet_clean_s44+concat"]},
-  {"name": "densenet121_clean_s44", "args": ["--model", "densenet121", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "2", "--out", "results/phase3/runs/densenet121_clean_s44"]}
+  {"name": "tamnet_clean_s44-tonly", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "1", "--fusion-mode", "t", "--out", "results/phase3/runs/tamnet_clean_s44-tonly"]},
+  {"name": "tamnet_clean_s44+mc", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "1", "--channel-attention", "--out", "results/phase3/runs/tamnet_clean_s44+mc"]},
+  {"name": "tamnet_clean_s44+concat", "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "1", "--no-attention-fusion", "--out", "results/phase3/runs/tamnet_clean_s44+concat"]},
+  {"name": "densenet121_clean_s44", "args": ["--model", "densenet121", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "1", "--out", "results/phase3/runs/densenet121_clean_s44"]}
 ]
