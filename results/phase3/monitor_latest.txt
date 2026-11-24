@@ -1,0 +1,8 @@
+updated 2026-11-24T14:01:11+00:00  (interval 30s)
+
+Run	Epoch	Best (epoch)	min/ep	Remaining
+tamnet_clean_s43+mc	13/30	0.9325 @ 13 (new best)	7.0	2h 15m
+tamnet_clean_s44+mc	19/30	0.9414 @ 14	7.0	1h 30m
+tamnet_clean_s45+mc	8/30	0.9094 @ 8 (new best)	6.6	2h 38m
+
+GPU 100% / 2566 MiB | commit 35.7/38.0 GB | 3 trainers | 25 finished this session
