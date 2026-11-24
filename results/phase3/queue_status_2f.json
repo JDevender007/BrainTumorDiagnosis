@@ -1,10 +1,13 @@
 {
   "queue": "results\\phase3\\queue_stage2f.json",
   "started_at": "2026-11-23T10:28:09+00:00",
-  "current": "shared_unet_brisc_s42+ls0.25+sc2",
-  "completed": [],
+  "current": null,
+  "completed": [
+    "shared_unet_brisc_s42+ls0.25+sc2"
+  ],
   "failed": null,
   "total_entries": 1,
-  "updated_at": "2026-11-23T10:28:09+00:00",
-  "current_started_at": "2026-11-23T10:28:09+00:00"
+  "updated_at": "2026-11-23T11:34:30+00:00",
+  "current_started_at": "2026-11-23T10:28:09+00:00",
+  "finished_at": "2026-11-23T11:34:30+00:00"
 }
