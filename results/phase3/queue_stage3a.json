@@ -1,0 +1,57 @@
+[
+  {
+    "name": "efficientnet_v2_s_clean_s43",
+    "args": [
+      "--model",
+      "efficientnet_v2_s",
+      "--protocol",
+      "clean",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--out",
+      "results/phase3/runs/efficientnet_v2_s_clean_s43"
+    ]
+  },
+  {
+    "name": "efficientnet_v2_s_clean_s44",
+    "args": [
+      "--model",
+      "efficientnet_v2_s",
+      "--protocol",
+      "clean",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--out",
+      "results/phase3/runs/efficientnet_v2_s_clean_s44"
+    ]
+  },
+  {
+    "name": "shared_unet_brisc_s44+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "44",
+      "--seg-classes",
+      "2",
+      "--seg-weight",
+      "0.25",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--out",
+      "results/phase3/runs/shared_unet_brisc_s44+ls0.25+sc2"
+    ]
+  }
+]
