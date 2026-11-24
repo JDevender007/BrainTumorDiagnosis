@@ -1,0 +1,58 @@
+{
+  "kind": "phase3_params",
+  "created_at": "2026-11-24T15:06:50+00:00",
+  "method": "instantiate with pretrained=False, sum numel() over requires_grad",
+  "note": "TAMNet variants differ in fusion/attention flags only; the shared backbone is densenet121 as in the paper",
+  "params": {
+    "densenet121": {
+      "kind": "backbone",
+      "total": 6957956,
+      "trainable": 6957956
+    },
+    "resnet50": {
+      "kind": "backbone",
+      "total": 23516228,
+      "trainable": 23516228
+    },
+    "efficientnet_v2_s": {
+      "kind": "backbone",
+      "total": 20182612,
+      "trainable": 20182612
+    },
+    "convnext_tiny": {
+      "kind": "backbone",
+      "total": 27823204,
+      "trainable": 27823204
+    },
+    "swin_t": {
+      "kind": "backbone",
+      "total": 27522430,
+      "trainable": 27522430
+    },
+    "vit_b_16": {
+      "kind": "backbone",
+      "total": 85801732,
+      "trainable": 85801732
+    },
+    "tamnet_full": {
+      "kind": "tamnet",
+      "total": 9034416,
+      "trainable": 9034416
+    },
+    "tamnet_tonly": {
+      "kind": "tamnet",
+      "total": 8573870,
+      "trainable": 8573870
+    },
+    "tamnet_concat": {
+      "kind": "tamnet",
+      "total": 8840110,
+      "trainable": 8840110
+    },
+    "tamnet_mc": {
+      "kind": "tamnet",
+      "total": 9165488,
+      "trainable": 9165488
+    }
+  }
+}

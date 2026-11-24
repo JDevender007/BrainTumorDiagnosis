@@ -1,0 +1,196 @@
+[
+  {
+    "name": "densenet121_clean_s45",
+    "args": [
+      "--model",
+      "densenet121",
+      "--protocol",
+      "clean",
+      "--seed",
+      "45",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "densenet121_clean_s43",
+    "args": [
+      "--model",
+      "densenet121",
+      "--protocol",
+      "clean",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "densenet121_clean_s44",
+    "args": [
+      "--model",
+      "densenet121",
+      "--protocol",
+      "clean",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "shared_unet_brisc_s43+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4",
+      "--seg-weight",
+      "0.25",
+      "--seg-classes",
+      "2"
+    ]
+  },
+  {
+    "name": "shared_unet_brisc_s45+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "45",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4",
+      "--seg-weight",
+      "0.25",
+      "--seg-classes",
+      "2"
+    ]
+  },
+  {
+    "name": "shared_unet_brisc_s44+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4",
+      "--seg-weight",
+      "0.25",
+      "--seg-classes",
+      "2"
+    ]
+  },
+  {
+    "name": "efficientnet_v2_s_clean_s43",
+    "args": [
+      "--model",
+      "efficientnet_v2_s",
+      "--protocol",
+      "clean",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "efficientnet_v2_s_clean_s44",
+    "args": [
+      "--model",
+      "efficientnet_v2_s",
+      "--protocol",
+      "clean",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "swin_t_clean_s43",
+    "args": [
+      "--model",
+      "swin_t",
+      "--protocol",
+      "clean",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "swin_t_clean_s44",
+    "args": [
+      "--model",
+      "swin_t",
+      "--protocol",
+      "clean",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  },
+  {
+    "name": "tamnet_clean_s43+concat",
+    "args": [
+      "--model",
+      "tamnet",
+      "--protocol",
+      "clean",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--no-attention-fusion"
+    ]
+  },
+  {
+    "name": "tamnet_clean_s44+concat",
+    "args": [
+      "--model",
+      "tamnet",
+      "--protocol",
+      "clean",
+      "--seed",
+      "44",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--no-attention-fusion"
+    ]
+  }
+]
