@@ -79,6 +79,26 @@ def gpu() -> tuple[int, int]:
         return (-1, -1)
 
 
+def short_label(name: str) -> str:
+    """tamnet_clean_s43+mc -> 's43 +mc'; densenet121_clean_s43 -> 'densenet121 s43'."""
+    n = name
+    if n.startswith("tamnet_clean_s"):
+        rest = n[len("tamnet_clean_"):]          # s43+mc
+        seed, _, suffix = rest.partition("+")
+        return f"{seed} +{suffix}" if suffix else seed
+    if n.startswith("shared_unet_brisc_s"):
+        seed = n.split("_s", 1)[1].split("+")[0]
+        return f"shared_unet s{seed}"
+    if n.startswith("efficientnet_v2_s_clean_s"):
+        return f"effnet s{n.rsplit('_s', 1)[1]}"
+    if n.startswith("swin_t_clean_s"):
+        return f"swin s{n.rsplit('_s', 1)[1]}"
+    if "_clean_s" in n:
+        model, seed = n.split("_clean_s", 1)
+        return f"{model} s{seed}"
+    return n
+
+
 def read_json(path: Path) -> dict | None:
     try:
         return json.loads(path.read_text(encoding="utf-8-sig"))
@@ -187,25 +207,21 @@ def main() -> int:
                     log_event(f"DONE {d.name}: best {res.get('best_val_f1_weighted')} "
                               f"@ ep{res.get('best_epoch')}")
 
-            lines = [
-                f"updated {ts}  (interval {args.interval:.0f}s)",
-                "",
-                "Run\tEpoch\tBest (epoch)\tmin/ep\tRemaining",
-            ]
+            lines = [f"updated {ts}  (every {args.interval:.0f}s)", ""]
             for name, prog in rows:
                 eta = prog.get("eta_s") or 0
                 h, m = int(eta // 3600), int((eta % 3600) // 60)
                 ep_s = prog.get("epoch_time_s") or 0
                 mark = " (new best)" if prog.get("best_epoch") == prog.get("epoch") else ""
                 lines.append(
-                    f"{name}\t{prog.get('epoch')}/{prog.get('epochs_total')}\t"
-                    f"{prog.get('best_val_f1'):.4f} @ {prog.get('best_epoch')}{mark}\t"
-                    f"{ep_s / 60:.1f}\t{h}h {m:02d}m"
+                    f"- {short_label(name)}: ep{prog.get('epoch')}/{prog.get('epochs_total')} — "
+                    f"best {prog.get('best_val_f1'):.4f}@{prog.get('best_epoch')}{mark} · "
+                    f"ETA {h}h {m:02d}m · {ep_s / 60:.1f} min/ep"
                 )
             lines += [
                 "",
-                f"GPU {g_util}% / {g_mem} MiB | commit {c_used}/{c_limit} GB | "
-                f"{len(runs)} trainers | {len(finished)} completed runs on disk",
+                f"commit {c_used}/{c_limit} ✓ · GPU {g_util}% / {g_mem} MiB · "
+                f"{len(runs)} trainers · {len(finished)} completed runs on disk",
             ]
             LATEST.write_text("\n".join(lines) + "\n", encoding="utf-8")
             time.sleep(args.interval)
