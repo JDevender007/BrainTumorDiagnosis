@@ -33,6 +33,19 @@ RUNS_DIR = ROOT / "results" / "phase3" / "runs"
 LOGS_DIR = ROOT / "results" / "phase3" / "logs"
 DEFAULT_STATUS_PATH = ROOT / "results" / "phase3" / "queue_status.json"
 
+# Windows only: spawn every trainer with NO console of its own. The
+# 2026-11-25 logon task killed all 3 trainers ~60 s after start with
+# "forrtl: error (200): program aborting due to window-CLOSE event" -
+# the Task Scheduler console was closed while the trainers were still
+# attached to it. stdout/stderr are redirected to the run log anyway,
+# so a console is never needed (and DETACHED_PROCESS also shields the
+# trainers from Ctrl+C meant for the driver).
+NO_CONSOLE = (
+    subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP
+    if sys.platform == "win32"
+    else 0
+)
+
 
 def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -123,6 +136,7 @@ def main() -> int:
                 cwd=ROOT,
                 stdout=log,
                 stderr=subprocess.STDOUT,
+                creationflags=NO_CONSOLE,
             ).returncode
 
         if rc != 0:

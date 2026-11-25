@@ -130,6 +130,61 @@ def read_json(path: Path) -> dict | None:
         return None
 
 
+def _run_name_from_cmd(cmd: list[str]) -> str | None:
+    """Derive the run name exactly as phase3_train.py does when --out is absent.
+
+    The queue never passes --out, so name detection must replicate the
+    trainer's model/protocol/seed + suffix rules, otherwise the monitor
+    reports "0 trainers" while training is live.
+    """
+    opts: dict[str, str] = {}
+    flags: set[str] = set()
+    i = 0
+    while i < len(cmd):
+        tok = cmd[i]
+        if tok.startswith("--") and i + 1 < len(cmd) and not cmd[i + 1].startswith("--"):
+            opts[tok[2:]] = cmd[i + 1]
+            i += 2
+        elif tok.startswith("--"):
+            flags.add(tok[2:])
+            i += 1
+        else:
+            i += 1
+
+    if "out" in opts:
+        return Path(opts["out"].replace("\\", "/")).name
+    if "model" not in opts:
+        return None
+    model = opts["model"]
+    protocol = opts.get("protocol", "clean")
+    seed = opts.get("seed", "42")
+    suffix = ""
+    if model in ("tamnet", "shared_unet"):
+        if "channel-attention" in flags:
+            suffix += "+mc"
+        if "no-attention-fusion" in flags:
+            suffix += "+concat"
+        if "no-seg-head" in flags:
+            suffix += "-seg"
+        if "no-uncertainty-head" in flags:
+            suffix += "-unc"
+        if opts.get("seg-decoder") == "multiscale":
+            suffix += "+msdec"
+        if opts.get("fusion-mode") == "t":
+            suffix += "-tonly"
+        try:
+            if float(opts.get("seg-weight", "0.5")) != 0.5:
+                suffix += f"+ls{float(opts['seg-weight']):g}"
+        except ValueError:
+            pass
+        try:
+            if int(opts.get("seg-classes", "4")) != 4:
+                suffix += f"+sc{int(opts['seg-classes'])}"
+        except ValueError:
+            pass
+    return f"{model}_{protocol}_s{seed}{suffix}"
+
+
 def live_runs() -> dict[str, str]:
     """run name -> log path, for trainers that are actually alive."""
     out: dict[str, str] = {}
@@ -140,12 +195,7 @@ def live_runs() -> dict[str, str]:
             cmd = p.info["cmdline"] or []
             if not any("phase3_train" in t for t in cmd):
                 continue
-            name = None
-            for i, tok in enumerate(cmd):
-                if tok == "--out" and i + 1 < len(cmd):
-                    name = Path(cmd[i + 1].replace("\\", "/")).name
-                elif tok.startswith("--out="):
-                    name = Path(tok.split("=", 1)[1].replace("\\", "/")).name
+            name = _run_name_from_cmd([str(t) for t in cmd])
             if name:
                 out[name] = str(p.info["pid"])
         except (psutil.NoSuchProcess, psutil.AccessDenied):
