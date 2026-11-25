@@ -154,8 +154,9 @@ python -X utf8 scripts/phase3_queue.py --queue results/phase3/queue_stage4_fast.
 | Concurrency policy (empirical) | 2 normal / 3 max | pre-reboot: 3 stacks peaked 37.2/39.0 ✓; 2 stacks saturate GPU (99 %); 3rd slot only with ≥14 GB commit headroom, else `--num-workers 0` |
 | **`densenet121_clean_s45` DONE** | **DONE 14:32** | best val F1(w) **0.9452 @ ep3**, early stop at 10/30 epochs, 52.6 min, provenance `training_result.json` (git `32181bc`) |
 | **`densenet121_clean_s44` DONE** | **DONE 15:12** | best val F1(w) **0.9471 @ ep6**, early stop at 13/30 epochs, 42 min, resumed from ep7 after the 1455 kill |
-| `densenet121_clean_s43` | RUNNING | fresh start after bad-allocation (no checkpoint existed), `queue_status_next3_b.json` |
-| 3rd slot | RUNNING | `queue_stage4_d.json` = `shared_unet_brisc_s45+ls0.25+sc2` → `tamnet_clean_s45+concat` (fills the `+concat` n=4 gap); `queue_stage4_c3.json` = `shared_unet_brisc_s43+ls0.25+sc2` (`--num-workers 0`, launched when only 6 GB was free) |
+| **`densenet121_clean_s43`** | RUNNING | relaunched 15:25 after the 15:21 worker death → **auto-resumed from checkpoint ep8** (best 0.9488 @ ep8), `queue_status_next3_b.json` |
+| 15:21 **DataLoader worker deaths** killed 2 runs | **FIXED** | 3 stacks at **43.75/44.26 (0.51 GB free)** → workers exited unexpectedly (`RuntimeError: DataLoader worker ... exited unexpectedly`) in `densenet121_clean_s43` (checkpoint saved @ ep8 → resumed, zero epoch loss) and `shared_unet_brisc_s45` (only a `run_config.json` → moved aside as `.workerdied1521`, fresh start). Measured per-stack commit: **nw4 ≈ 12.4 GB, nw0 ≈ 10 GB** → policy: **3rd concurrent slot always `--num-workers 0`**; steady state after fix **36.6/44.3 with 3 alive** (7.7 GB free) |
+| 3rd slot (revised) | RUNNING | `queue_stage4_d.json`: s45 shared_unet relaunched at **nw0** → `tamnet_clean_s45+concat` next (fills the `+concat` n=4 gap); `queue_stage4_c3.json` = s43 shared_unet (nw0) |
 
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_
