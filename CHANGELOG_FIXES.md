@@ -157,6 +157,10 @@ python -X utf8 scripts/phase3_queue.py --queue results/phase3/queue_stage4_fast.
 | **`densenet121_clean_s43`** | RUNNING | relaunched 15:25 after the 15:21 worker death → **auto-resumed from checkpoint ep8** (best 0.9488 @ ep8), `queue_status_next3_b.json` |
 | 15:21 **DataLoader worker deaths** killed 2 runs | **FIXED** | 3 stacks at **43.75/44.26 (0.51 GB free)** → workers exited unexpectedly (`RuntimeError: DataLoader worker ... exited unexpectedly`) in `densenet121_clean_s43` (checkpoint saved @ ep8 → resumed, zero epoch loss) and `shared_unet_brisc_s45` (only a `run_config.json` → moved aside as `.workerdied1521`, fresh start). Measured per-stack commit: **nw4 ≈ 12.4 GB, nw0 ≈ 10 GB** → policy: **3rd concurrent slot always `--num-workers 0`**; steady state after fix **36.6/44.3 with 3 alive** (7.7 GB free) |
 | 3rd slot (revised) | RUNNING | `queue_stage4_d.json`: s45 shared_unet relaunched at **nw0** → `tamnet_clean_s45+concat` next (fills the `+concat` n=4 gap); `queue_stage4_c3.json` = s43 shared_unet (nw0) |
+| Worker death #3 (`tamnet_clean_s45+concat`, **nw1**) | FIXED 16:56 | its single worker died mid-ep1 (no checkpoint yet) → `run_config.json` moved aside as `.workerdied1654`, queue entry switched to **nw0**, relaunched. Score: **3/3 runs-with-workers died today, 0/3 nw0 runs died** → all slots nw0 |
+| **`shared_unet_brisc_s43+ls0.25+sc2` DONE 17:21** | **DONE** | best val F1(w) **0.9950 @ ep17**, 24/30 epochs (early stop), 137.6 min, nw0 start to finish |
+| **`densenet121_clean_s43` DONE 19:14** | **DONE** | best val F1(w) **0.9653 @ ep28**, full 30 epochs, 195.8 min — **densenet121 clean = 4 seeds** (s42 0.9514, s43 0.9653, s44 0.9471, s45 0.9452) |
+| Remaining stage 4 (7 runs) | RUNNING | `queue_stage4_e.json`: shared_unet_brisc_s44 → efficientnet_v2_s_s43 → tamnet_clean_s43+concat (resumes ep5); `queue_stage4_f.json`: efficientnet_v2_s_s44 → swin_t_s43 → swin_t_s44 → tamnet_clean_s44+concat (resumes ep8). All **nw0** |
 
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_

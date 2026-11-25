@@ -30,7 +30,7 @@
       "--epochs",
       "30",
       "--num-workers",
-      "1",
+      "0",
       "--no-attention-fusion"
     ]
   }
