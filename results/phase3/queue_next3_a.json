@@ -1,0 +1,17 @@
+[
+  {
+    "name": "densenet121_clean_s45",
+    "args": [
+      "--model",
+      "densenet121",
+      "--protocol",
+      "clean",
+      "--seed",
+      "45",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4"
+    ]
+  }
+]

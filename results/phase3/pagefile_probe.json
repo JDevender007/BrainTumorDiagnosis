@@ -1,0 +1,33 @@
+{
+  "ntdll_export_count": 2522,
+  "pagefile_exports": [
+    "LdrOpenImageFileOptionsKey",
+    "LdrQueryImageFileExecutionOptions",
+    "LdrQueryImageFileExecutionOptionsEx",
+    "LdrQueryImageFileKeyOption",
+    "RtlGetImageFileMachines"
+  ],
+  "has_NtCreatePagefile": false,
+  "sanity_NtAllocateVirtualMemory": true,
+  "systeminfo_exports": [
+    "NtSetSystemInformation"
+  ],
+  "ctypes_lookup": {
+    "NtCreatePagefile": "absent",
+    "NtAllocateVirtualAddress": "absent",
+    "NtAllocateVirtualMemory": "present",
+    "NtSetSystemInformation": "present"
+  },
+  "registry_open_rights": {
+    "QUERY": "OK",
+    "SET": "FAIL 5 [WinError 5] Access is denied",
+    "READ": "OK",
+    "WRITE": "FAIL 5 [WinError 5] Access is denied",
+    "ALL": "FAIL 5 [WinError 5] Access is denied"
+  },
+  "registry_read_with_QUERY_SET": {
+    "ok": false,
+    "error": "[WinError 5] Access is denied"
+  },
+  "is_admin": false
+}

@@ -1,0 +1,10 @@
+{
+  "queue": "results\\phase3\\queue_next3_1.json",
+  "started_at": "2026-11-25T05:22:15+00:00",
+  "current": "densenet121_clean_s45",
+  "completed": [],
+  "failed": null,
+  "total_entries": 1,
+  "updated_at": "2026-11-25T05:22:15+00:00",
+  "current_started_at": "2026-11-25T05:22:15+00:00"
+}

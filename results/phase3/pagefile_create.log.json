@@ -1,0 +1,39 @@
+{
+  "ts": "2026-11-25T12:36:57+0530",
+  "actions": [
+    {
+      "registry": "PagingFiles set",
+      "old_value": [],
+      "verify": [
+        "D:\\pagefile.sys 29696 32768"
+      ]
+    },
+    {
+      "nt_create_pagefile": [
+        {
+          "error": "NtCreatePagefile unavailable: function 'NtCreatePagefile' not found",
+          "note": "expected on this build - reboot path is used"
+        }
+      ]
+    }
+  ],
+  "elevated": true,
+  "before": {
+    "ceiling_gb": 15.26,
+    "avail_gb": 2.71,
+    "ram_total_gb": 15.26
+  },
+  "after": {
+    "ceiling_gb": 15.26,
+    "avail_gb": 2.71,
+    "ram_total_gb": 15.26
+  },
+  "pagefile_file": {
+    "exists": false,
+    "size_gb": 0
+  },
+  "success": false,
+  "action_required": "reboot",
+  "note": "PagingFiles written; pagefile is created by the session manager at boot -> reboot to reach ~44 GB commit",
+  "reboot_required": true
+}

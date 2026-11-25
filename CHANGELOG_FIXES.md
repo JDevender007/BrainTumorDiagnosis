@@ -93,6 +93,54 @@ Split/harness: `scripts/phase3_split.py` → `results/phase3/split_manifest_clea
 | User-requested reboot 2026-11-24 | DONE | machine restarted after s45 t-only completed (no run could finish within 10 min); fresh pagefile raises the commit ceiling. **Resume after boot:** relaunch the 3 queues — `python -X utf8 scripts\phase3_queue.py --queue results\phase3\queue_stage2g.json --status-file results\phase3\queue_status_2g.json` (same for `2h`, `2i`); each skips completed runs and auto-resumes in-flight ones from `checkpoint_last.pt` |
 | **Phase 3B: shared-encoder U-Net baseline** | LAUNCHED 2026-11-23 | `models/shared_unet.py` — same pretrained DenseNet-121 encoder as the cls-only row + U-Net decoder with 5 skips (11.94M params) + GAP/FC head; dict contract identical to TAMNet → same `MultiTaskLoss` (CE + λ·(Dice2D+BCE)); `phase3_train.py --model shared_unet` wiring; queue 2f (brisc, λ=0.25, seed 42, 30 ep, num-workers 2). Smoke-verified: logits (B,4), seg_logits (B,2,224,224) |
 | AMD Radeon iGPU training | DECLINED (2026-11-23) | laptop iGPU (~512 MB, DirectML-only) can't run under installed CUDA torch 2.11 without downgrading the shared env; ~5-10× slower than RTX 3050 and adds RAM/commit pressure → 1455 risk. User advised to skip |
+## Phase 3 — Shutdown checkpoint (2026-11-25 05:03 IST)
+
+**Cause.** Server restart at 2026-11-24T17:07Z killed every phase3 process (queue driver + trainers). The scheduled midnight stop, `scripts/phase3_stop_after_epoch.py --timeout-min 20`, was therefore run with nothing live and exited `STOP: no active runs (nothing marked 'running' without a result)`. **No `results/phase3/shutdown_*.json` exists** — none was written, and none was fabricated.
+
+**Verification (2026-11-25 10:33 IST).**
+- phase3 python processes remaining: **0**
+- 28 runs complete on disk (`training_result.json` present); none zero-byte.
+- 3 runs were in flight; all have intact, non-zero checkpoints:
+
+| run | epoch | best val F1 | `checkpoint_last.pt` | `best.pt` |
+|---|---|---|---|---|
+| `densenet121_clean_s45` | 1/30 | 0.934774 @ ep1 | 84.5 MB | 84.3 MB |
+| `tamnet_clean_s43+concat` | 4/30 | 0.853742 @ ep4 | 97.0 MB | 96.9 MB |
+| `tamnet_clean_s44+concat` | 7/30 | 0.914534 @ ep6 | 97.0 MB | 96.9 MB |
+
+- Historical `*_partial*` dirs (`s43_ep17_oom_partial`, `s43_ep50budget_partial`, `s43_parallel_setup_partial`, `s43_workers4_partial`, `s45_ep17_oom_partial`) have **no `checkpoint_last.pt`** — expected: they predate the per-epoch checkpoint feature or were killed before it. Kept as-is, not deleted. `tamnet_clean_s45+mc_stale_20261124T1248` also has no checkpoints (stale dir, in no queue).
+
+**Pending queue** — `results/phase3/queue_stage4_fast.json`, 12 entries, `--num-workers 4`:
+
+- resumable (3): `densenet121_clean_s45` (ep1), `tamnet_clean_s43+concat` (ep4), `tamnet_clean_s44+concat` (ep7)
+- not started (9): `densenet121_clean_s43`, `densenet121_clean_s44`, `shared_unet_brisc_s43+ls0.25+sc2`, `shared_unet_brisc_s45+ls0.25+sc2`, `shared_unet_brisc_s44+ls0.25+sc2`, `efficientnet_v2_s_clean_s43`, `efficientnet_v2_s_clean_s44`, `swin_t_clean_s43`, `swin_t_clean_s44`
+
+**Gap.** `tamnet_clean_s45+concat` is pending in `queue_stage2i.json` but **absent from `queue_stage4_fast.json`** — it must be added when the fast queue is rebuilt, or the `+concat` ablation stays at n=3 instead of n=4.
+
+**Resume commands** (verbatim from `queue_stage4_fast.json` args; `phase3_train.py` auto-resumes the 3 in-flight runs from `checkpoint_last.pt`, and `phase3_queue.py` skips the 28 completed runs):
+
+```text
+python -X utf8 scripts/phase3_train.py --model densenet121 --protocol clean --seed 45 --epochs 30 --num-workers 4 --out results/phase3/runs/densenet121_clean_s45
+python -X utf8 scripts/phase3_train.py --model densenet121 --protocol clean --seed 43 --epochs 30 --num-workers 4 --out results/phase3/runs/densenet121_clean_s43
+python -X utf8 scripts/phase3_train.py --model densenet121 --protocol clean --seed 44 --epochs 30 --num-workers 4 --out results/phase3/runs/densenet121_clean_s44
+python -X utf8 scripts/phase3_train.py --model shared_unet --protocol brisc --seed 43 --epochs 30 --num-workers 4 --seg-weight 0.25 --seg-classes 2 --out results/phase3/runs/shared_unet_brisc_s43+ls0.25+sc2
+python -X utf8 scripts/phase3_train.py --model shared_unet --protocol brisc --seed 45 --epochs 30 --num-workers 4 --seg-weight 0.25 --seg-classes 2 --out results/phase3/runs/shared_unet_brisc_s45+ls0.25+sc2
+python -X utf8 scripts/phase3_train.py --model shared_unet --protocol brisc --seed 44 --epochs 30 --num-workers 4 --seg-weight 0.25 --seg-classes 2 --out results/phase3/runs/shared_unet_brisc_s44+ls0.25+sc2
+python -X utf8 scripts/phase3_train.py --model efficientnet_v2_s --protocol clean --seed 43 --epochs 30 --num-workers 4 --out results/phase3/runs/efficientnet_v2_s_clean_s43
+python -X utf8 scripts/phase3_train.py --model efficientnet_v2_s --protocol clean --seed 44 --epochs 30 --num-workers 4 --out results/phase3/runs/efficientnet_v2_s_clean_s44
+python -X utf8 scripts/phase3_train.py --model swin_t --protocol clean --seed 43 --epochs 30 --num-workers 4 --out results/phase3/runs/swin_t_clean_s43
+python -X utf8 scripts/phase3_train.py --model swin_t --protocol clean --seed 44 --epochs 30 --num-workers 4 --out results/phase3/runs/swin_t_clean_s44
+python -X utf8 scripts/phase3_train.py --model tamnet --protocol clean --seed 43 --epochs 30 --num-workers 1 --no-attention-fusion --out results/phase3/runs/tamnet_clean_s43+concat
+python -X utf8 scripts/phase3_train.py --model tamnet --protocol clean --seed 44 --epochs 30 --num-workers 1 --no-attention-fusion --out results/phase3/runs/tamnet_clean_s44+concat
+python -X utf8 scripts/phase3_train.py --model tamnet --protocol clean --seed 45 --epochs 30 --num-workers 1 --no-attention-fusion --out results/phase3/runs/tamnet_clean_s45+concat
+```
+
+Queue form (preferred — one command, skips completed, auto-resumes in-flight):
+
+```text
+python -X utf8 scripts/phase3_queue.py --queue results/phase3/queue_stage4_fast.json --status-file results/phase3/queue_status_4.json
+```
+
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_
 ## Phase 6 — Reproducibility & QA _(pending)_
