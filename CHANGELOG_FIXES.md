@@ -141,6 +141,22 @@ Queue form (preferred — one command, skips completed, auto-resumes in-flight):
 python -X utf8 scripts/phase3_queue.py --queue results/phase3/queue_stage4_fast.json --status-file results/phase3/queue_status_4.json
 ```
 
+## Phase 3 — Reboot + relaunch day (2026-11-25)
+
+| Item | Status | Notes |
+|---|---|---|
+| Pagefile restored | DONE (`758cd6d`) | 29 GB fixed pagefile on D: (`PagingFiles = D:\pagefile.sys 29696 32768`, registry-persisted) → commit ceiling 44.26 GB (was 39 GB); runtime attach impossible (`NtCreatePagefile` not exported) |
+| Auto-start after reboot | DONE | scheduled task `TAMNet_ResumeNext3` (AtLogOn, non-elevated) → `scripts/resume_next3_after_reboot.py` with fail-safes (ceiling < 40 GB → start nothing; phase3 already running → no duplicates) |
+| 12:51 task-launch crash (3 trainers) | **FIXED** (`32181bc`) | `forrtl: error (200)` window-CLOSE = Task Scheduler console teardown, **not memory**; evidence kept as `results/phase3/logs/*.bootfail1252`; checkpoints verified intact, nothing re-run. Fix: `phase3_queue.py` spawns trainers with `DETACHED_PROCESS \| CREATE_NEW_PROCESS_GROUP` (no console to close) |
+| Triple simultaneous cold-start | **FIXED** (`32181bc`) | s43 died `RuntimeError: bad allocation` (stale `run_config.json` moved aside as `.badalloc1329`, never deleted); fix: resume script staggers queue launches 120 s + waits for ≥16 GB commit headroom (`HEADROOM_TIMEOUT_S=900`) |
+| Win32 **1455** killed s44 @ ep7 (14:11) | ROOT-CAUSED | **Sekiro was running** (~9.75 GB commit + ~2.4 GB VRAM of the 4 GB): commit peaked **46.6/47.0** (pagefile auto-grew to its 32 GB max), torch shared-memory mapping failed. s44 checkpoint saved at ep6 → resumed ep7, **zero epoch loss**. Games-closed rule reaffirmed |
+| Monitor saw "0 trainers" | **FIXED** (`32181bc`) | `phase3_monitor.py` now derives run name from `--model/--protocol/--seed` + suffix rules (queue never passes `--out`) |
+| Concurrency policy (empirical) | 2 normal / 3 max | pre-reboot: 3 stacks peaked 37.2/39.0 ✓; 2 stacks saturate GPU (99 %); 3rd slot only with ≥14 GB commit headroom, else `--num-workers 0` |
+| **`densenet121_clean_s45` DONE** | **DONE 14:32** | best val F1(w) **0.9452 @ ep3**, early stop at 10/30 epochs, 52.6 min, provenance `training_result.json` (git `32181bc`) |
+| **`densenet121_clean_s44` DONE** | **DONE 15:12** | best val F1(w) **0.9471 @ ep6**, early stop at 13/30 epochs, 42 min, resumed from ep7 after the 1455 kill |
+| `densenet121_clean_s43` | RUNNING | fresh start after bad-allocation (no checkpoint existed), `queue_status_next3_b.json` |
+| 3rd slot | RUNNING | `queue_stage4_d.json` = `shared_unet_brisc_s45+ls0.25+sc2` → `tamnet_clean_s45+concat` (fills the `+concat` n=4 gap); `queue_stage4_c3.json` = `shared_unet_brisc_s43+ls0.25+sc2` (`--num-workers 0`, launched when only 6 GB was free) |
+
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_
 ## Phase 6 — Reproducibility & QA _(pending)_

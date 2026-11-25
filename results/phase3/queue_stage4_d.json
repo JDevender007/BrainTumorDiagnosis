@@ -1,0 +1,37 @@
+[
+  {
+    "name": "shared_unet_brisc_s45+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "45",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "4",
+      "--seg-weight",
+      "0.25",
+      "--seg-classes",
+      "2"
+    ]
+  },
+  {
+    "name": "tamnet_clean_s45+concat",
+    "args": [
+      "--model",
+      "tamnet",
+      "--protocol",
+      "clean",
+      "--seed",
+      "45",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "1",
+      "--no-attention-fusion"
+    ]
+  }
+]

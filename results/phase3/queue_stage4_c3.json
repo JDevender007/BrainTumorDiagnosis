@@ -1,0 +1,21 @@
+[
+  {
+    "name": "shared_unet_brisc_s43+ls0.25+sc2",
+    "args": [
+      "--model",
+      "shared_unet",
+      "--protocol",
+      "brisc",
+      "--seed",
+      "43",
+      "--epochs",
+      "30",
+      "--num-workers",
+      "0",
+      "--seg-weight",
+      "0.25",
+      "--seg-classes",
+      "2"
+    ]
+  }
+]
