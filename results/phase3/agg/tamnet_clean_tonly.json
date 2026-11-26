@@ -1,0 +1,75 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "tamnet_clean_tonly",
+  "description": "TAMNet t-only fusion",
+  "created_at": "2026-11-26T13:10:12+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 4,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "tamnet_clean_s42-tonly",
+      "seed": 42,
+      "checkpoint_best_epoch": 25,
+      "n": 1672,
+      "accuracy": 0.9383971291866029,
+      "macro_f1": 0.9381684204162444,
+      "weighted_f1": 0.9383435497110245,
+      "source": "results/phase3/runs/tamnet_clean_s42-tonly/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s43-tonly",
+      "seed": 43,
+      "checkpoint_best_epoch": 23,
+      "n": 1672,
+      "accuracy": 0.9336124401913876,
+      "macro_f1": 0.9336668644346899,
+      "weighted_f1": 0.9337227856265005,
+      "source": "results/phase3/runs/tamnet_clean_s43-tonly/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s44-tonly",
+      "seed": 44,
+      "checkpoint_best_epoch": 15,
+      "n": 1672,
+      "accuracy": 0.9192583732057417,
+      "macro_f1": 0.9192865149381303,
+      "weighted_f1": 0.9193436971755505,
+      "source": "results/phase3/runs/tamnet_clean_s44-tonly/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s45-tonly",
+      "seed": 45,
+      "checkpoint_best_epoch": 23,
+      "n": 1672,
+      "accuracy": 0.9401913875598086,
+      "macro_f1": 0.9392695751425796,
+      "weighted_f1": 0.9401602053014397,
+      "source": "results/phase3/runs/tamnet_clean_s45-tonly/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9328648325358851,
+      "std_sample_ddof1": 0.009486470496792347,
+      "min": 0.9192583732057417,
+      "max": 0.9401913875598086
+    },
+    "macro_f1": {
+      "mean": 0.932597843732911,
+      "std_sample_ddof1": 0.009199231926837617,
+      "min": 0.9192865149381303,
+      "max": 0.9392695751425796
+    },
+    "weighted_f1": {
+      "mean": 0.9328925594536288,
+      "std_sample_ddof1": 0.009430321936602162,
+      "min": 0.9193436971755505,
+      "max": 0.9401602053014397
+    }
+  }
+}

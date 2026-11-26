@@ -1,0 +1,75 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "densenet121_clean",
+  "description": "DenseNet-121 classification-only baseline",
+  "created_at": "2026-11-26T13:10:13+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 4,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "densenet121_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 7,
+      "n": 1672,
+      "accuracy": 0.9252392344497608,
+      "macro_f1": 0.9273068335329084,
+      "weighted_f1": 0.9262742870264429,
+      "source": "results/phase3/runs/densenet121_clean_s42/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "densenet121_clean_s43",
+      "seed": 43,
+      "checkpoint_best_epoch": 28,
+      "n": 1672,
+      "accuracy": 0.9521531100478469,
+      "macro_f1": 0.9513850671268976,
+      "weighted_f1": 0.9522715725027355,
+      "source": "results/phase3/runs/densenet121_clean_s43/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "densenet121_clean_s44",
+      "seed": 44,
+      "checkpoint_best_epoch": 6,
+      "n": 1672,
+      "accuracy": 0.9270334928229665,
+      "macro_f1": 0.9286568668581426,
+      "weighted_f1": 0.927528156580323,
+      "source": "results/phase3/runs/densenet121_clean_s44/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "densenet121_clean_s45",
+      "seed": 45,
+      "checkpoint_best_epoch": 3,
+      "n": 1672,
+      "accuracy": 0.9395933014354066,
+      "macro_f1": 0.9400861481139569,
+      "weighted_f1": 0.9397676494346681,
+      "source": "results/phase3/runs/densenet121_clean_s45/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9360047846889952,
+      "std_sample_ddof1": 0.012517015273000188,
+      "min": 0.9252392344497608,
+      "max": 0.9521531100478469
+    },
+    "macro_f1": {
+      "mean": 0.9368587289079764,
+      "std_sample_ddof1": 0.011253739869074209,
+      "min": 0.9273068335329084,
+      "max": 0.9513850671268976
+    },
+    "weighted_f1": {
+      "mean": 0.9364604163860424,
+      "std_sample_ddof1": 0.012172002639277443,
+      "min": 0.9262742870264429,
+      "max": 0.9522715725027355
+    }
+  }
+}

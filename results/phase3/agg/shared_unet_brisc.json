@@ -1,0 +1,75 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "shared_unet_brisc",
+  "description": "Shared-encoder U-Net multi-task baseline (BRISC trained)",
+  "created_at": "2026-11-26T13:10:14+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 4,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "shared_unet_brisc_s42+ls0.25+sc2",
+      "seed": 42,
+      "checkpoint_best_epoch": 6,
+      "n": 1672,
+      "accuracy": 0.8923444976076556,
+      "macro_f1": 0.8920279750202177,
+      "weighted_f1": 0.8928540627457344,
+      "source": "results/phase3/runs/shared_unet_brisc_s42+ls0.25+sc2/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "shared_unet_brisc_s43+ls0.25+sc2",
+      "seed": 43,
+      "checkpoint_best_epoch": 17,
+      "n": 1672,
+      "accuracy": 0.9150717703349283,
+      "macro_f1": 0.9156766781629431,
+      "weighted_f1": 0.9159321580353559,
+      "source": "results/phase3/runs/shared_unet_brisc_s43+ls0.25+sc2/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "shared_unet_brisc_s44+ls0.25+sc2",
+      "seed": 44,
+      "checkpoint_best_epoch": 16,
+      "n": 1672,
+      "accuracy": 0.9090909090909091,
+      "macro_f1": 0.908521201635274,
+      "weighted_f1": 0.9099667638979655,
+      "source": "results/phase3/runs/shared_unet_brisc_s44+ls0.25+sc2/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "shared_unet_brisc_s45+ls0.25+sc2",
+      "seed": 45,
+      "checkpoint_best_epoch": 5,
+      "n": 1672,
+      "accuracy": 0.8863636363636364,
+      "macro_f1": 0.8855203542293271,
+      "weighted_f1": 0.8870143531891871,
+      "source": "results/phase3/runs/shared_unet_brisc_s45+ls0.25+sc2/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9007177033492824,
+      "std_sample_ddof1": 0.013568340930760408,
+      "min": 0.8863636363636364,
+      "max": 0.9150717703349283
+    },
+    "macro_f1": {
+      "mean": 0.9004365522619404,
+      "std_sample_ddof1": 0.014033532792877564,
+      "min": 0.8855203542293271,
+      "max": 0.9156766781629431
+    },
+    "weighted_f1": {
+      "mean": 0.9014418344670607,
+      "std_sample_ddof1": 0.01371794370009347,
+      "min": 0.8870143531891871,
+      "max": 0.9159321580353559
+    }
+  }
+}

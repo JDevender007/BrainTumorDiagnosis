@@ -1,0 +1,512 @@
+{
+  "kind": "phase3_test_summary_all",
+  "created_at": "2026-11-26T13:10:20+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1",
+  "groups": [
+    {
+      "slug": "tamnet_clean",
+      "description": "TAMNet baseline (g+t fusion), clean protocol",
+      "n_seeds": 5,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9360047846889952,
+          "std_sample_ddof1": 0.010995679611752499,
+          "min": 0.9270334928229665,
+          "max": 0.9485645933014354
+        },
+        "macro_f1": {
+          "mean": 0.9354611383961423,
+          "std_sample_ddof1": 0.010920576418406531,
+          "min": 0.9258364651546032,
+          "max": 0.9478100226794308
+        },
+        "weighted_f1": {
+          "mean": 0.9361025933436273,
+          "std_sample_ddof1": 0.010968646030870234,
+          "min": 0.9269848472300023,
+          "max": 0.948797836899161
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_clean_s42": 0.9270334928229665,
+        "tamnet_clean_s43": 0.9300239234449761,
+        "tamnet_clean_s44": 0.9485645933014354,
+        "tamnet_clean_s45": 0.9473684210526315,
+        "tamnet_clean_s46": 0.9270334928229665
+      }
+    },
+    {
+      "slug": "tamnet_clean_mc",
+      "description": "TAMNet + channel attention (MC)",
+      "n_seeds": 4,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9419856459330144,
+          "std_sample_ddof1": 0.005940855034191137,
+          "min": 0.937200956937799,
+          "max": 0.9503588516746412
+        },
+        "macro_f1": {
+          "mean": 0.9415983067571245,
+          "std_sample_ddof1": 0.005933472259388265,
+          "min": 0.9362867287879559,
+          "max": 0.9498089766142115
+        },
+        "weighted_f1": {
+          "mean": 0.9422871189537136,
+          "std_sample_ddof1": 0.005957229314409323,
+          "min": 0.9373483764347185,
+          "max": 0.9506995234129875
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_clean_s42+mc": 0.9419856459330144,
+        "tamnet_clean_s43+mc": 0.937200956937799,
+        "tamnet_clean_s44+mc": 0.9503588516746412,
+        "tamnet_clean_s45+mc": 0.9383971291866029
+      }
+    },
+    {
+      "slug": "tamnet_clean_concat",
+      "description": "TAMNet with concat fusion (no attention fusion)",
+      "n_seeds": 4,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9401913875598087,
+          "std_sample_ddof1": 0.008500400959062118,
+          "min": 0.9276315789473685,
+          "max": 0.9461722488038278
+        },
+        "macro_f1": {
+          "mean": 0.9397812374581485,
+          "std_sample_ddof1": 0.007962811595205585,
+          "min": 0.9279458544415302,
+          "max": 0.9452403935248254
+        },
+        "weighted_f1": {
+          "mean": 0.9404316214918744,
+          "std_sample_ddof1": 0.008351516034547703,
+          "min": 0.9280559019504571,
+          "max": 0.9462032577162438
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_clean_s42+concat": 0.9425837320574163,
+        "tamnet_clean_s43+concat": 0.9276315789473685,
+        "tamnet_clean_s44+concat": 0.9461722488038278,
+        "tamnet_clean_s45+concat": 0.944377990430622
+      }
+    },
+    {
+      "slug": "tamnet_clean_tonly",
+      "description": "TAMNet t-only fusion",
+      "n_seeds": 4,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9328648325358851,
+          "std_sample_ddof1": 0.009486470496792347,
+          "min": 0.9192583732057417,
+          "max": 0.9401913875598086
+        },
+        "macro_f1": {
+          "mean": 0.932597843732911,
+          "std_sample_ddof1": 0.009199231926837617,
+          "min": 0.9192865149381303,
+          "max": 0.9392695751425796
+        },
+        "weighted_f1": {
+          "mean": 0.9328925594536288,
+          "std_sample_ddof1": 0.009430321936602162,
+          "min": 0.9193436971755505,
+          "max": 0.9401602053014397
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_clean_s42-tonly": 0.9383971291866029,
+        "tamnet_clean_s43-tonly": 0.9336124401913876,
+        "tamnet_clean_s44-tonly": 0.9192583732057417,
+        "tamnet_clean_s45-tonly": 0.9401913875598086
+      }
+    },
+    {
+      "slug": "densenet121_clean",
+      "description": "DenseNet-121 classification-only baseline",
+      "n_seeds": 4,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9360047846889952,
+          "std_sample_ddof1": 0.012517015273000188,
+          "min": 0.9252392344497608,
+          "max": 0.9521531100478469
+        },
+        "macro_f1": {
+          "mean": 0.9368587289079764,
+          "std_sample_ddof1": 0.011253739869074209,
+          "min": 0.9273068335329084,
+          "max": 0.9513850671268976
+        },
+        "weighted_f1": {
+          "mean": 0.9364604163860424,
+          "std_sample_ddof1": 0.012172002639277443,
+          "min": 0.9262742870264429,
+          "max": 0.9522715725027355
+        }
+      },
+      "per_seed_acc": {
+        "densenet121_clean_s42": 0.9252392344497608,
+        "densenet121_clean_s43": 0.9521531100478469,
+        "densenet121_clean_s44": 0.9270334928229665,
+        "densenet121_clean_s45": 0.9395933014354066
+      }
+    },
+    {
+      "slug": "efficientnet_v2_s_clean",
+      "description": "EfficientNetV2-S baseline",
+      "n_seeds": 3,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9477671451355661,
+          "std_sample_ddof1": 0.002264317522248914,
+          "min": 0.9461722488038278,
+          "max": 0.9503588516746412
+        },
+        "macro_f1": {
+          "mean": 0.9475086583367599,
+          "std_sample_ddof1": 0.002120685386643132,
+          "min": 0.9460330026763051,
+          "max": 0.9499388622445621
+        },
+        "weighted_f1": {
+          "mean": 0.947742466998707,
+          "std_sample_ddof1": 0.0022556578685696987,
+          "min": 0.9459596473768599,
+          "max": 0.9502783092548858
+        }
+      },
+      "per_seed_acc": {
+        "efficientnet_v2_s_clean_s42": 0.9503588516746412,
+        "efficientnet_v2_s_clean_s43": 0.9461722488038278,
+        "efficientnet_v2_s_clean_s44": 0.9467703349282297
+      }
+    },
+    {
+      "slug": "swin_t_clean",
+      "description": "Swin-T baseline",
+      "n_seeds": 3,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9449760765550238,
+          "std_sample_ddof1": 0.011765738979010771,
+          "min": 0.9324162679425837,
+          "max": 0.9557416267942583
+        },
+        "macro_f1": {
+          "mean": 0.9442085409471961,
+          "std_sample_ddof1": 0.011619491604777004,
+          "min": 0.931932250019751,
+          "max": 0.9550351932043477
+        },
+        "weighted_f1": {
+          "mean": 0.9448756064844698,
+          "std_sample_ddof1": 0.011840246214650338,
+          "min": 0.932220015873017,
+          "max": 0.9556831841654932
+        }
+      },
+      "per_seed_acc": {
+        "swin_t_clean_s42": 0.9467703349282297,
+        "swin_t_clean_s43": 0.9557416267942583,
+        "swin_t_clean_s44": 0.9324162679425837
+      }
+    },
+    {
+      "slug": "shared_unet_brisc",
+      "description": "Shared-encoder U-Net multi-task baseline (BRISC trained)",
+      "n_seeds": 4,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9007177033492824,
+          "std_sample_ddof1": 0.013568340930760408,
+          "min": 0.8863636363636364,
+          "max": 0.9150717703349283
+        },
+        "macro_f1": {
+          "mean": 0.9004365522619404,
+          "std_sample_ddof1": 0.014033532792877564,
+          "min": 0.8855203542293271,
+          "max": 0.9156766781629431
+        },
+        "weighted_f1": {
+          "mean": 0.9014418344670607,
+          "std_sample_ddof1": 0.01371794370009347,
+          "min": 0.8870143531891871,
+          "max": 0.9159321580353559
+        }
+      },
+      "per_seed_acc": {
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.8923444976076556,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.9150717703349283,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.9090909090909091,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.8863636363636364
+      }
+    },
+    {
+      "slug": "resnet50_clean",
+      "description": "ResNet-50 baseline (single seed)",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.94377990430622,
+          "std_sample_ddof1": null,
+          "min": 0.94377990430622,
+          "max": 0.94377990430622
+        },
+        "macro_f1": {
+          "mean": 0.943281903315129,
+          "std_sample_ddof1": null,
+          "min": 0.943281903315129,
+          "max": 0.943281903315129
+        },
+        "weighted_f1": {
+          "mean": 0.9441486921201807,
+          "std_sample_ddof1": null,
+          "min": 0.9441486921201807,
+          "max": 0.9441486921201807
+        }
+      },
+      "per_seed_acc": {
+        "resnet50_clean_s42": 0.94377990430622
+      }
+    },
+    {
+      "slug": "convnext_tiny_clean",
+      "description": "ConvNeXt-Tiny baseline (single seed)",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9497607655502392,
+          "std_sample_ddof1": null,
+          "min": 0.9497607655502392,
+          "max": 0.9497607655502392
+        },
+        "macro_f1": {
+          "mean": 0.9493051972314646,
+          "std_sample_ddof1": null,
+          "min": 0.9493051972314646,
+          "max": 0.9493051972314646
+        },
+        "weighted_f1": {
+          "mean": 0.9500771627290269,
+          "std_sample_ddof1": null,
+          "min": 0.9500771627290269,
+          "max": 0.9500771627290269
+        }
+      },
+      "per_seed_acc": {
+        "convnext_tiny_clean_s42": 0.9497607655502392
+      }
+    },
+    {
+      "slug": "vit_b_16_clean",
+      "description": "ViT-B/16 baseline (single seed)",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9282296650717703,
+          "std_sample_ddof1": null,
+          "min": 0.9282296650717703,
+          "max": 0.9282296650717703
+        },
+        "macro_f1": {
+          "mean": 0.9277432557683651,
+          "std_sample_ddof1": null,
+          "min": 0.9277432557683651,
+          "max": 0.9277432557683651
+        },
+        "weighted_f1": {
+          "mean": 0.9283191958414813,
+          "std_sample_ddof1": null,
+          "min": 0.9283191958414813,
+          "max": 0.9283191958414813
+        }
+      },
+      "per_seed_acc": {
+        "vit_b_16_clean_s42": 0.9282296650717703
+      }
+    },
+    {
+      "slug": "tamnet_leaky_control",
+      "description": "Leaky-split control (reproduces the historical split)",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9814593301435407,
+          "std_sample_ddof1": null,
+          "min": 0.9814593301435407,
+          "max": 0.9814593301435407
+        },
+        "macro_f1": {
+          "mean": 0.9826279637298547,
+          "std_sample_ddof1": null,
+          "min": 0.9826279637298547,
+          "max": 0.9826279637298547
+        },
+        "weighted_f1": {
+          "mean": 0.9814630650682064,
+          "std_sample_ddof1": null,
+          "min": 0.9814630650682064,
+          "max": 0.9814630650682064
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_leaky_s42": 0.9814593301435407
+      }
+    },
+    {
+      "slug": "tamnet_clean_ep50",
+      "description": "TAMNet 50-epoch budget control",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9389952153110048,
+          "std_sample_ddof1": null,
+          "min": 0.9389952153110048,
+          "max": 0.9389952153110048
+        },
+        "macro_f1": {
+          "mean": 0.9396809516142541,
+          "std_sample_ddof1": null,
+          "min": 0.9396809516142541,
+          "max": 0.9396809516142541
+        },
+        "weighted_f1": {
+          "mean": 0.9393743753293827,
+          "std_sample_ddof1": null,
+          "min": 0.9393743753293827,
+          "max": 0.9393743753293827
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_clean_s42_ep50budget": 0.9389952153110048
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda0",
+      "description": "BRISC \u03bb_seg = 0 (no segmentation loss)",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9043062200956937,
+          "std_sample_ddof1": null,
+          "min": 0.9043062200956937,
+          "max": 0.9043062200956937
+        },
+        "macro_f1": {
+          "mean": 0.9026773110936664,
+          "std_sample_ddof1": null,
+          "min": 0.9026773110936664,
+          "max": 0.9026773110936664
+        },
+        "weighted_f1": {
+          "mean": 0.9043227944837895,
+          "std_sample_ddof1": null,
+          "min": 0.9043227944837895,
+          "max": 0.9043227944837895
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_brisc_s42+sc2": 0.9043062200956937
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda0.1",
+      "description": "BRISC \u03bb_seg = 0.1",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.8893540669856459,
+          "std_sample_ddof1": null,
+          "min": 0.8893540669856459,
+          "max": 0.8893540669856459
+        },
+        "macro_f1": {
+          "mean": 0.8881838056620361,
+          "std_sample_ddof1": null,
+          "min": 0.8881838056620361,
+          "max": 0.8881838056620361
+        },
+        "weighted_f1": {
+          "mean": 0.8902577728174451,
+          "std_sample_ddof1": null,
+          "min": 0.8902577728174451,
+          "max": 0.8902577728174451
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_brisc_s42+ls0.1+sc2": 0.8893540669856459
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda0.25",
+      "description": "BRISC \u03bb_seg = 0.25",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.9001196172248804,
+          "std_sample_ddof1": null,
+          "min": 0.9001196172248804,
+          "max": 0.9001196172248804
+        },
+        "macro_f1": {
+          "mean": 0.899845918769816,
+          "std_sample_ddof1": null,
+          "min": 0.899845918769816,
+          "max": 0.899845918769816
+        },
+        "weighted_f1": {
+          "mean": 0.9005113054176233,
+          "std_sample_ddof1": null,
+          "min": 0.9005113054176233,
+          "max": 0.9005113054176233
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_brisc_s42+ls0.25+sc2": 0.9001196172248804
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda1",
+      "description": "BRISC \u03bb_seg = 1.0",
+      "n_seeds": 1,
+      "summary": {
+        "accuracy": {
+          "mean": 0.8779904306220095,
+          "std_sample_ddof1": null,
+          "min": 0.8779904306220095,
+          "max": 0.8779904306220095
+        },
+        "macro_f1": {
+          "mean": 0.8783190532746117,
+          "std_sample_ddof1": null,
+          "min": 0.8783190532746117,
+          "max": 0.8783190532746117
+        },
+        "weighted_f1": {
+          "mean": 0.8791355078647273,
+          "std_sample_ddof1": null,
+          "min": 0.8791355078647273,
+          "max": 0.8791355078647273
+        }
+      },
+      "per_seed_acc": {
+        "tamnet_brisc_s42+ls1+sc2": 0.8779904306220095
+      }
+    }
+  ],
+  "runs_missing_eval": []
+}

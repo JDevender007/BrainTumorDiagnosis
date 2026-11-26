@@ -1,0 +1,45 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "tamnet_leaky_control",
+  "description": "Leaky-split control (reproduces the historical split)",
+  "created_at": "2026-11-26T13:10:17+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 1,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "tamnet_leaky_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 29,
+      "n": 1672,
+      "accuracy": 0.9814593301435407,
+      "macro_f1": 0.9826279637298547,
+      "weighted_f1": 0.9814630650682064,
+      "source": "results/phase3/runs/tamnet_leaky_s42/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9814593301435407,
+      "std_sample_ddof1": null,
+      "min": 0.9814593301435407,
+      "max": 0.9814593301435407
+    },
+    "macro_f1": {
+      "mean": 0.9826279637298547,
+      "std_sample_ddof1": null,
+      "min": 0.9826279637298547,
+      "max": 0.9826279637298547
+    },
+    "weighted_f1": {
+      "mean": 0.9814630650682064,
+      "std_sample_ddof1": null,
+      "min": 0.9814630650682064,
+      "max": 0.9814630650682064
+    }
+  }
+}

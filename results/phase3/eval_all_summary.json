@@ -1,0 +1,44 @@
+{
+  "kind": "phase3_eval_all",
+  "created_at": "2026-11-26T13:09:28+00:00",
+  "n_evaluated": 4,
+  "n_ok": 4,
+  "records": [
+    {
+      "run": "shared_unet_brisc_s42+ls0.25+sc2",
+      "ok": true,
+      "returncode": 0,
+      "seconds": 37.5,
+      "accuracy": 0.8923444976076556,
+      "macro_f1": 0.8920279750202177,
+      "weighted_f1": 0.8928540627457344
+    },
+    {
+      "run": "shared_unet_brisc_s43+ls0.25+sc2",
+      "ok": true,
+      "returncode": 0,
+      "seconds": 38.7,
+      "accuracy": 0.9150717703349283,
+      "macro_f1": 0.9156766781629431,
+      "weighted_f1": 0.9159321580353559
+    },
+    {
+      "run": "shared_unet_brisc_s44+ls0.25+sc2",
+      "ok": true,
+      "returncode": 0,
+      "seconds": 37.4,
+      "accuracy": 0.9090909090909091,
+      "macro_f1": 0.908521201635274,
+      "weighted_f1": 0.9099667638979655
+    },
+    {
+      "run": "shared_unet_brisc_s45+ls0.25+sc2",
+      "ok": true,
+      "returncode": 0,
+      "seconds": 38.4,
+      "accuracy": 0.8863636363636364,
+      "macro_f1": 0.8855203542293271,
+      "weighted_f1": 0.8870143531891871
+    }
+  ]
+}

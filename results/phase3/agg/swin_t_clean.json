@@ -1,0 +1,65 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "swin_t_clean",
+  "description": "Swin-T baseline",
+  "created_at": "2026-11-26T13:10:14+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 3,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "swin_t_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 26,
+      "n": 1672,
+      "accuracy": 0.9467703349282297,
+      "macro_f1": 0.9456581796174893,
+      "weighted_f1": 0.946723619414899,
+      "source": "results/phase3/runs/swin_t_clean_s42/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "swin_t_clean_s43",
+      "seed": 43,
+      "checkpoint_best_epoch": 26,
+      "n": 1672,
+      "accuracy": 0.9557416267942583,
+      "macro_f1": 0.9550351932043477,
+      "weighted_f1": 0.9556831841654932,
+      "source": "results/phase3/runs/swin_t_clean_s43/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "swin_t_clean_s44",
+      "seed": 44,
+      "checkpoint_best_epoch": 6,
+      "n": 1672,
+      "accuracy": 0.9324162679425837,
+      "macro_f1": 0.931932250019751,
+      "weighted_f1": 0.932220015873017,
+      "source": "results/phase3/runs/swin_t_clean_s44/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9449760765550238,
+      "std_sample_ddof1": 0.011765738979010771,
+      "min": 0.9324162679425837,
+      "max": 0.9557416267942583
+    },
+    "macro_f1": {
+      "mean": 0.9442085409471961,
+      "std_sample_ddof1": 0.011619491604777004,
+      "min": 0.931932250019751,
+      "max": 0.9550351932043477
+    },
+    "weighted_f1": {
+      "mean": 0.9448756064844698,
+      "std_sample_ddof1": 0.011840246214650338,
+      "min": 0.932220015873017,
+      "max": 0.9556831841654932
+    }
+  }
+}

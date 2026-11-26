@@ -1,0 +1,45 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "vit_b_16_clean",
+  "description": "ViT-B/16 baseline (single seed)",
+  "created_at": "2026-11-26T13:10:16+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 1,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "vit_b_16_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 26,
+      "n": 1672,
+      "accuracy": 0.9282296650717703,
+      "macro_f1": 0.9277432557683651,
+      "weighted_f1": 0.9283191958414813,
+      "source": "results/phase3/runs/vit_b_16_clean_s42/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9282296650717703,
+      "std_sample_ddof1": null,
+      "min": 0.9282296650717703,
+      "max": 0.9282296650717703
+    },
+    "macro_f1": {
+      "mean": 0.9277432557683651,
+      "std_sample_ddof1": null,
+      "min": 0.9277432557683651,
+      "max": 0.9277432557683651
+    },
+    "weighted_f1": {
+      "mean": 0.9283191958414813,
+      "std_sample_ddof1": null,
+      "min": 0.9283191958414813,
+      "max": 0.9283191958414813
+    }
+  }
+}

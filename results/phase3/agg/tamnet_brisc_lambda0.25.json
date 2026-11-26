@@ -1,0 +1,45 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "tamnet_brisc_lambda0.25",
+  "description": "BRISC \u03bb_seg = 0.25",
+  "created_at": "2026-11-26T13:10:19+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 1,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "tamnet_brisc_s42+ls0.25+sc2",
+      "seed": 42,
+      "checkpoint_best_epoch": 26,
+      "n": 1672,
+      "accuracy": 0.9001196172248804,
+      "macro_f1": 0.899845918769816,
+      "weighted_f1": 0.9005113054176233,
+      "source": "results/phase3/runs/tamnet_brisc_s42+ls0.25+sc2/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9001196172248804,
+      "std_sample_ddof1": null,
+      "min": 0.9001196172248804,
+      "max": 0.9001196172248804
+    },
+    "macro_f1": {
+      "mean": 0.899845918769816,
+      "std_sample_ddof1": null,
+      "min": 0.899845918769816,
+      "max": 0.899845918769816
+    },
+    "weighted_f1": {
+      "mean": 0.9005113054176233,
+      "std_sample_ddof1": null,
+      "min": 0.9005113054176233,
+      "max": 0.9005113054176233
+    }
+  }
+}

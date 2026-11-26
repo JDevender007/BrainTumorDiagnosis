@@ -1,0 +1,45 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "tamnet_clean_ep50",
+  "description": "TAMNet 50-epoch budget control",
+  "created_at": "2026-11-26T13:10:17+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 1,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "tamnet_clean_s42_ep50budget",
+      "seed": 42,
+      "checkpoint_best_epoch": 34,
+      "n": 1672,
+      "accuracy": 0.9389952153110048,
+      "macro_f1": 0.9396809516142541,
+      "weighted_f1": 0.9393743753293827,
+      "source": "results/phase3/runs/tamnet_clean_s42_ep50budget/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9389952153110048,
+      "std_sample_ddof1": null,
+      "min": 0.9389952153110048,
+      "max": 0.9389952153110048
+    },
+    "macro_f1": {
+      "mean": 0.9396809516142541,
+      "std_sample_ddof1": null,
+      "min": 0.9396809516142541,
+      "max": 0.9396809516142541
+    },
+    "weighted_f1": {
+      "mean": 0.9393743753293827,
+      "std_sample_ddof1": null,
+      "min": 0.9393743753293827,
+      "max": 0.9393743753293827
+    }
+  }
+}

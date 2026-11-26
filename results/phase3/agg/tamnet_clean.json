@@ -1,0 +1,85 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "tamnet_clean",
+  "description": "TAMNet baseline (g+t fusion), clean protocol",
+  "created_at": "2026-11-26T13:10:10+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": false
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 5,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "tamnet_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 17,
+      "n": 1672,
+      "accuracy": 0.9270334928229665,
+      "macro_f1": 0.9258364651546032,
+      "weighted_f1": 0.9272195175422621,
+      "source": "results/phase3/runs/tamnet_clean_s42/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s43",
+      "seed": 43,
+      "checkpoint_best_epoch": 19,
+      "n": 1672,
+      "accuracy": 0.9300239234449761,
+      "macro_f1": 0.929984726925051,
+      "weighted_f1": 0.9302713191301963,
+      "source": "results/phase3/runs/tamnet_clean_s43/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s44",
+      "seed": 44,
+      "checkpoint_best_epoch": 26,
+      "n": 1672,
+      "accuracy": 0.9485645933014354,
+      "macro_f1": 0.9478100226794308,
+      "weighted_f1": 0.948797836899161,
+      "source": "results/phase3/runs/tamnet_clean_s44/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s45",
+      "seed": 45,
+      "checkpoint_best_epoch": 24,
+      "n": 1672,
+      "accuracy": 0.9473684210526315,
+      "macro_f1": 0.9467903359425549,
+      "weighted_f1": 0.9472394459165149,
+      "source": "results/phase3/runs/tamnet_clean_s45/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "tamnet_clean_s46",
+      "seed": 46,
+      "checkpoint_best_epoch": 11,
+      "n": 1672,
+      "accuracy": 0.9270334928229665,
+      "macro_f1": 0.9268841412790718,
+      "weighted_f1": 0.9269848472300023,
+      "source": "results/phase3/runs/tamnet_clean_s46/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9360047846889952,
+      "std_sample_ddof1": 0.010995679611752499,
+      "min": 0.9270334928229665,
+      "max": 0.9485645933014354
+    },
+    "macro_f1": {
+      "mean": 0.9354611383961423,
+      "std_sample_ddof1": 0.010920576418406531,
+      "min": 0.9258364651546032,
+      "max": 0.9478100226794308
+    },
+    "weighted_f1": {
+      "mean": 0.9361025933436273,
+      "std_sample_ddof1": 0.010968646030870234,
+      "min": 0.9269848472300023,
+      "max": 0.948797836899161
+    }
+  }
+}

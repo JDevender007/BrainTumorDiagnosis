@@ -1,0 +1,45 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "resnet50_clean",
+  "description": "ResNet-50 baseline (single seed)",
+  "created_at": "2026-11-26T13:10:15+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 1,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "resnet50_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 18,
+      "n": 1672,
+      "accuracy": 0.94377990430622,
+      "macro_f1": 0.943281903315129,
+      "weighted_f1": 0.9441486921201807,
+      "source": "results/phase3/runs/resnet50_clean_s42/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.94377990430622,
+      "std_sample_ddof1": null,
+      "min": 0.94377990430622,
+      "max": 0.94377990430622
+    },
+    "macro_f1": {
+      "mean": 0.943281903315129,
+      "std_sample_ddof1": null,
+      "min": 0.943281903315129,
+      "max": 0.943281903315129
+    },
+    "weighted_f1": {
+      "mean": 0.9441486921201807,
+      "std_sample_ddof1": null,
+      "min": 0.9441486921201807,
+      "max": 0.9441486921201807
+    }
+  }
+}

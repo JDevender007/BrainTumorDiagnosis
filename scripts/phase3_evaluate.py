@@ -49,6 +49,7 @@ from datasets.classification import (  # noqa: E402
 from datasets.dataloaders import make_dataloader  # noqa: E402
 from datasets.normalization import build_classification_transform  # noqa: E402
 from models.factory import create_backbone_classifier  # noqa: E402
+from models.shared_unet import SharedUNetMultiTask  # noqa: E402
 from models.tumor_aware import TumorAwareConfig, TumorAwareMultiTaskNet  # noqa: E402
 from scripts.leakage_check import SOURCES, collect_files, label_of  # noqa: E402
 from scripts.phase3_train import DictWrapper  # noqa: E402
@@ -103,6 +104,13 @@ def build_model(run_config: dict) -> torch.nn.Module:
             segmentation_classes=run_config.get("segmentation_classes", 4),
         )
         return TumorAwareMultiTaskNet(cfg)
+    if run_config["model"] == "shared_unet":
+        # Phase 3B shared-encoder U-Net baseline (same dict contract as TAMNet)
+        return SharedUNetMultiTask(
+            num_classes=len(CLASS_NAMES),
+            num_seg_classes=run_config.get("segmentation_classes", 2),
+            pretrained=False,  # weights come from the checkpoint
+        )
     return DictWrapper(
         create_backbone_classifier(
             run_config["model"],

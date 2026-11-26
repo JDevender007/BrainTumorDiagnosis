@@ -1,0 +1,65 @@
+{
+  "kind": "phase3_test_summary_group",
+  "slug": "efficientnet_v2_s_clean",
+  "description": "EfficientNetV2-S baseline",
+  "created_at": "2026-11-26T13:10:13+00:00",
+  "git": {
+    "commit": "52777ce",
+    "agg_dirty": true
+  },
+  "eval_dir": "eval_internal_test",
+  "n_seeds": 3,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1; single seed = point estimate",
+  "per_seed": [
+    {
+      "run": "efficientnet_v2_s_clean_s42",
+      "seed": 42,
+      "checkpoint_best_epoch": 18,
+      "n": 1672,
+      "accuracy": 0.9503588516746412,
+      "macro_f1": 0.9499388622445621,
+      "weighted_f1": 0.9502783092548858,
+      "source": "results/phase3/runs/efficientnet_v2_s_clean_s42/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "efficientnet_v2_s_clean_s43",
+      "seed": 43,
+      "checkpoint_best_epoch": 12,
+      "n": 1672,
+      "accuracy": 0.9461722488038278,
+      "macro_f1": 0.9460330026763051,
+      "weighted_f1": 0.9459596473768599,
+      "source": "results/phase3/runs/efficientnet_v2_s_clean_s43/eval_internal_test/metrics.json"
+    },
+    {
+      "run": "efficientnet_v2_s_clean_s44",
+      "seed": 44,
+      "checkpoint_best_epoch": 18,
+      "n": 1672,
+      "accuracy": 0.9467703349282297,
+      "macro_f1": 0.9465541100894126,
+      "weighted_f1": 0.9469894443643753,
+      "source": "results/phase3/runs/efficientnet_v2_s_clean_s44/eval_internal_test/metrics.json"
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "mean": 0.9477671451355661,
+      "std_sample_ddof1": 0.002264317522248914,
+      "min": 0.9461722488038278,
+      "max": 0.9503588516746412
+    },
+    "macro_f1": {
+      "mean": 0.9475086583367599,
+      "std_sample_ddof1": 0.002120685386643132,
+      "min": 0.9460330026763051,
+      "max": 0.9499388622445621
+    },
+    "weighted_f1": {
+      "mean": 0.947742466998707,
+      "std_sample_ddof1": 0.0022556578685696987,
+      "min": 0.9459596473768599,
+      "max": 0.9502783092548858
+    }
+  }
+}
