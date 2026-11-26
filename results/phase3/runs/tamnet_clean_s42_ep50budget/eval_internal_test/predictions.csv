@@ -1,0 +1,1673 @@
+path,y_true,y_pred,p_Glioma,p_Meningioma,p_Pituitary,p_No_Tumor
+data/raw/classification/Train/glioma/G_675_BR_.jpg,0,0,0.895744,0.033291,0.030458,0.040508
+data/raw/classification/Train/glioma/G_706_DA_.jpg,0,0,0.903483,0.032524,0.030990,0.033004
+data/raw/classification/Train/glioma/G_709.jpg,0,1,0.045015,0.868191,0.041589,0.045204
+data/raw/classification/Train/glioma/G_709_BR_.jpg,0,1,0.085048,0.806691,0.052121,0.056140
+data/raw/classification/Train/glioma/G_709_DA_.jpg,0,0,0.899664,0.032863,0.033156,0.034317
+data/raw/classification/Train/glioma/G_709_RO_.jpg,0,1,0.060831,0.836769,0.050182,0.052218
+data/raw/classification/Train/glioma/G_709_SP_.jpg,0,0,0.862715,0.045711,0.046004,0.045570
+data/raw/classification/Train/glioma/G_710.jpg,0,0,0.900964,0.032250,0.032177,0.034610
+data/raw/classification/Train/glioma/G_710_BR_.jpg,0,0,0.897060,0.032753,0.033673,0.036514
+data/raw/classification/Train/glioma/G_710_RO_.jpg,0,0,0.899990,0.031397,0.031938,0.036675
+data/raw/classification/Train/glioma/G_710_SP_.jpg,0,0,0.895331,0.033841,0.033469,0.037359
+data/raw/classification/Train/glioma/G_711_HF_.jpg,0,0,0.897664,0.034230,0.031121,0.036985
+data/raw/classification/Train/glioma/G_712.jpg,0,0,0.726388,0.106543,0.090013,0.077057
+data/raw/classification/Train/glioma/G_712_BR_.jpg,0,0,0.704753,0.121758,0.090676,0.082813
+data/raw/classification/Train/glioma/G_712_DA_.jpg,0,1,0.167422,0.532394,0.127921,0.172262
+data/raw/classification/Train/glioma/G_712_RO_.jpg,0,0,0.423582,0.213643,0.107443,0.255332
+data/raw/classification/Train/glioma/G_712_SP_.jpg,0,3,0.140150,0.369368,0.089454,0.401029
+data/raw/classification/Train/glioma/G_712_VF_.jpg,0,1,0.041940,0.877010,0.038475,0.042574
+data/raw/classification/Train/glioma/G_713.jpg,0,0,0.903103,0.032408,0.030538,0.033951
+data/raw/classification/Train/glioma/G_713_BR_.jpg,0,0,0.900359,0.032808,0.031180,0.035653
+data/raw/classification/Train/glioma/G_713_SP_.jpg,0,0,0.906050,0.031440,0.029603,0.032908
+data/raw/classification/Train/glioma/G_713_VF_.jpg,0,0,0.897992,0.033609,0.033921,0.034478
+data/raw/classification/Train/glioma/G_714.jpg,0,0,0.899981,0.033839,0.031032,0.035148
+data/raw/classification/Train/glioma/G_714_BR_.jpg,0,0,0.897310,0.034181,0.031528,0.036981
+data/raw/classification/Train/glioma/G_714_SP_.jpg,0,0,0.903694,0.032335,0.029749,0.034222
+data/raw/classification/Train/glioma/G_715_VF_.jpg,0,0,0.885285,0.037709,0.038315,0.038691
+data/raw/classification/Train/glioma/G_718_RO_.jpg,0,0,0.897938,0.032542,0.032284,0.037236
+data/raw/classification/Train/glioma/G_719_DA_.jpg,0,0,0.902124,0.032377,0.031007,0.034493
+data/raw/classification/Train/glioma/G_730_RO_.jpg,0,0,0.886862,0.036133,0.035030,0.041975
+data/raw/classification/Train/glioma/G_730_VF_.jpg,0,0,0.894441,0.034678,0.034248,0.036633
+data/raw/classification/Train/glioma/G_731_RO_.jpg,0,0,0.906257,0.030049,0.029899,0.033794
+data/raw/classification/Train/glioma/G_733_RO_.jpg,0,0,0.905535,0.030414,0.029610,0.034442
+data/raw/classification/Train/glioma/G_734_RO_.jpg,0,0,0.890599,0.035782,0.035142,0.038477
+data/raw/classification/Train/glioma/G_740_RO_.jpg,0,0,0.895403,0.033263,0.033560,0.037774
+data/raw/classification/Train/glioma/G_741_RO_.jpg,0,0,0.893483,0.033345,0.035185,0.037987
+data/raw/classification/Train/glioma/G_742_HF_.jpg,0,0,0.902871,0.032310,0.030058,0.034760
+data/raw/classification/Train/glioma/G_742_RO_.jpg,0,0,0.901705,0.032183,0.031708,0.034403
+data/raw/classification/Train/glioma/G_743_RO_.jpg,0,0,0.896842,0.032374,0.033374,0.037409
+data/raw/classification/Train/glioma/G_744_RO_.jpg,0,0,0.889680,0.035001,0.036056,0.039263
+data/raw/classification/Train/glioma/G_745_HF_.jpg,0,0,0.890576,0.039042,0.036759,0.033623
+data/raw/classification/Train/glioma/G_746_DA_.jpg,0,0,0.911303,0.029475,0.029150,0.030072
+data/raw/classification/Train/glioma/G_747_RO_.jpg,0,0,0.895375,0.033477,0.032849,0.038300
+data/raw/classification/Train/glioma/G_752_VF_.jpg,0,0,0.909282,0.029992,0.029589,0.031136
+data/raw/classification/Train/glioma/G_753_HF_.jpg,0,0,0.904073,0.031676,0.029639,0.034611
+data/raw/classification/Train/glioma/G_753_VF_.jpg,0,0,0.904746,0.031165,0.030817,0.033272
+data/raw/classification/Train/glioma/G_754_HF_.jpg,0,0,0.905468,0.031518,0.029321,0.033694
+data/raw/classification/Train/glioma/G_754_RO_.jpg,0,0,0.898827,0.032780,0.031723,0.036669
+data/raw/classification/Train/glioma/G_754_VF_.jpg,0,0,0.885887,0.036687,0.037743,0.039683
+data/raw/classification/Train/glioma/G_756_HF_.jpg,0,0,0.824504,0.059282,0.054101,0.062113
+data/raw/classification/Train/glioma/G_756_RO_.jpg,0,0,0.389752,0.191416,0.100812,0.318020
+data/raw/classification/Train/glioma/G_756_VF_.jpg,0,0,0.854586,0.048030,0.047952,0.049432
+data/raw/classification/Train/glioma/G_761_DA_.jpg,0,0,0.910626,0.029487,0.027514,0.032373
+data/raw/classification/Train/glioma/G_764_DA_.jpg,0,0,0.909811,0.029476,0.028883,0.031829
+data/raw/classification/Train/glioma/G_764_HF_.jpg,0,0,0.908613,0.030489,0.028338,0.032560
+data/raw/classification/Train/glioma/G_765_RO_.jpg,0,0,0.913291,0.028192,0.027907,0.030610
+data/raw/classification/Train/glioma/G_766_VF_.jpg,0,0,0.901629,0.032660,0.031168,0.034542
+data/raw/classification/Train/glioma/G_768_VF_.jpg,0,0,0.900656,0.032991,0.030725,0.035628
+data/raw/classification/Train/glioma/G_769_VF_.jpg,0,0,0.902232,0.032007,0.030598,0.035163
+data/raw/classification/Train/glioma/G_770_VF_.jpg,0,0,0.904449,0.031424,0.029633,0.034494
+data/raw/classification/Train/glioma/G_771_DA_.jpg,0,0,0.906043,0.031526,0.030353,0.032079
+data/raw/classification/Train/glioma/G_772_VF_.jpg,0,0,0.906374,0.030453,0.028974,0.034199
+data/raw/classification/Train/glioma/G_773_VF_.jpg,0,0,0.906816,0.030750,0.028889,0.033545
+data/raw/classification/Train/glioma/G_774_DA_.jpg,0,0,0.910307,0.029447,0.028332,0.031914
+data/raw/classification/Train/glioma/G_774_RO_.jpg,0,0,0.904041,0.031391,0.030564,0.034004
+data/raw/classification/Train/glioma/G_775_DA_.jpg,0,0,0.910605,0.029115,0.028267,0.032014
+data/raw/classification/Train/glioma/G_775_RO_.jpg,0,0,0.904492,0.031386,0.030622,0.033500
+data/raw/classification/Train/glioma/G_776_RO_.jpg,0,0,0.902692,0.031695,0.030633,0.034980
+data/raw/classification/Train/glioma/G_777_RO_.jpg,0,0,0.910624,0.029023,0.028591,0.031761
+data/raw/classification/Train/glioma/G_778.jpg,0,0,0.819971,0.056459,0.056735,0.066835
+data/raw/classification/Train/glioma/G_778_BR_.jpg,0,0,0.815421,0.058878,0.060557,0.065145
+data/raw/classification/Train/glioma/G_778_DA_.jpg,0,0,0.778804,0.075754,0.070690,0.074752
+data/raw/classification/Train/glioma/G_778_SP_.jpg,0,0,0.643616,0.105593,0.114402,0.136389
+data/raw/classification/Train/glioma/G_778_VF_.jpg,0,0,0.835431,0.054166,0.055202,0.055201
+data/raw/classification/Train/glioma/G_779.jpg,0,0,0.521119,0.071293,0.035929,0.371659
+data/raw/classification/Train/glioma/G_779_BR_.jpg,0,3,0.160030,0.071622,0.040119,0.728230
+data/raw/classification/Train/glioma/G_779_DA_.jpg,0,0,0.884300,0.036670,0.032650,0.046379
+data/raw/classification/Train/glioma/G_779_HF_.jpg,0,0,0.885172,0.036718,0.036869,0.041241
+data/raw/classification/Train/glioma/G_779_SP_.jpg,0,0,0.864600,0.041893,0.032104,0.061404
+data/raw/classification/Train/glioma/G_780_DA_.jpg,0,0,0.907679,0.029910,0.029086,0.033325
+data/raw/classification/Train/glioma/G_781_VF_.jpg,0,0,0.904197,0.032144,0.031528,0.032131
+data/raw/classification/Train/glioma/G_782_VF_.jpg,0,0,0.905930,0.031388,0.030677,0.032005
+data/raw/classification/Train/glioma/G_783_VF_.jpg,0,0,0.906725,0.030970,0.030212,0.032093
+data/raw/classification/Train/glioma/G_784_VF_.jpg,0,0,0.893982,0.035348,0.034605,0.036065
+data/raw/classification/Train/glioma/G_786_VF_.jpg,0,0,0.885914,0.038966,0.037630,0.037491
+data/raw/classification/Train/glioma/G_790_VF_.jpg,0,1,0.100350,0.764596,0.060699,0.074355
+data/raw/classification/Train/glioma/G_791.jpg,0,0,0.902555,0.032198,0.030289,0.034958
+data/raw/classification/Train/glioma/G_791_BR_.jpg,0,0,0.896570,0.033458,0.031926,0.038046
+data/raw/classification/Train/glioma/G_791_RO_.jpg,0,0,0.898945,0.032604,0.031356,0.037095
+data/raw/classification/Train/glioma/G_791_SP_.jpg,0,0,0.901432,0.032565,0.030547,0.035456
+data/raw/classification/Train/glioma/G_792_VF_.jpg,0,0,0.905448,0.031037,0.030192,0.033322
+data/raw/classification/Train/glioma/G_793_VF_.jpg,0,0,0.906159,0.031046,0.029861,0.032933
+data/raw/classification/Train/glioma/G_796_VF_.jpg,0,0,0.909171,0.029975,0.030476,0.030378
+data/raw/classification/Train/glioma/G_798_VF_.jpg,0,0,0.901130,0.032189,0.032602,0.034080
+data/raw/classification/Train/glioma/G_807_HF_.jpg,0,0,0.911131,0.030302,0.027607,0.030960
+data/raw/classification/Train/glioma/G_811_VF_.jpg,0,0,0.900682,0.032669,0.030303,0.036347
+data/raw/classification/Train/glioma/G_812_RO_.jpg,0,0,0.899851,0.031880,0.031435,0.036834
+data/raw/classification/Train/glioma/G_813_VF_.jpg,0,0,0.892667,0.034867,0.035246,0.037221
+data/raw/classification/Train/glioma/G_814_HF_.jpg,0,0,0.910962,0.030022,0.028035,0.030981
+data/raw/classification/Train/glioma/G_814_VF_.jpg,0,0,0.909231,0.029698,0.030962,0.030109
+data/raw/classification/Train/glioma/G_816_VF_.jpg,0,0,0.901751,0.032264,0.032769,0.033216
+data/raw/classification/Train/glioma/G_817_VF_.jpg,0,0,0.881728,0.038769,0.036006,0.043497
+data/raw/classification/Train/glioma/G_818_VF_.jpg,0,0,0.903208,0.031952,0.031760,0.033081
+data/raw/classification/Train/glioma/G_819_VF_.jpg,0,0,0.906331,0.030932,0.030528,0.032210
+data/raw/classification/Train/glioma/G_820_VF_.jpg,0,0,0.903719,0.031676,0.031261,0.033343
+data/raw/classification/Train/glioma/G_821_VF_.jpg,0,0,0.894152,0.034990,0.034586,0.036272
+data/raw/classification/Train/glioma/G_822_VF_.jpg,0,1,0.050361,0.861161,0.042896,0.045582
+data/raw/classification/Train/glioma/G_824_VF_.jpg,0,0,0.901408,0.032028,0.032243,0.034321
+data/raw/classification/Train/glioma/G_825_RO_.jpg,0,0,0.904218,0.030467,0.030550,0.034765
+data/raw/classification/Train/glioma/G_828_RO_.jpg,0,0,0.902893,0.030853,0.031376,0.034879
+data/raw/classification/Train/glioma/G_828_VF_.jpg,0,0,0.889522,0.036300,0.036781,0.037397
+data/raw/classification/Train/glioma/G_829_RO_.jpg,0,0,0.901835,0.031693,0.031922,0.034550
+data/raw/classification/Train/glioma/G_830_RO_.jpg,0,0,0.910151,0.028935,0.028770,0.032145
+data/raw/classification/Train/glioma/G_831_VF_.jpg,0,0,0.908709,0.030408,0.028950,0.031933
+data/raw/classification/Train/glioma/G_832_VF_.jpg,0,0,0.901797,0.032584,0.030887,0.034732
+data/raw/classification/Train/glioma/G_833_VF_.jpg,0,0,0.896749,0.034281,0.032404,0.036565
+data/raw/classification/Train/glioma/G_834_VF_.jpg,0,1,0.039213,0.889033,0.033248,0.038507
+data/raw/classification/Train/glioma/G_835_VF_.jpg,0,0,0.907629,0.030655,0.029291,0.032425
+data/raw/classification/Train/glioma/G_836_VF_.jpg,0,0,0.908244,0.030499,0.028396,0.032860
+data/raw/classification/Train/glioma/G_837_RO_.jpg,0,0,0.905878,0.030349,0.028979,0.034794
+data/raw/classification/Train/glioma/G_838_DA_.jpg,0,0,0.903238,0.031794,0.031546,0.033422
+data/raw/classification/Train/glioma/G_838_VF_.jpg,0,0,0.905772,0.030636,0.029916,0.033676
+data/raw/classification/Train/glioma/G_839_HF_.jpg,0,0,0.896504,0.033547,0.031719,0.038230
+data/raw/classification/Train/glioma/G_839_RO_.jpg,0,0,0.896075,0.032275,0.032269,0.039382
+data/raw/classification/Train/glioma/G_844_VF_.jpg,0,0,0.910048,0.029899,0.026842,0.033211
+data/raw/classification/Train/glioma/G_845.jpg,0,0,0.905264,0.031013,0.029181,0.034541
+data/raw/classification/Train/glioma/G_845_BR_.jpg,0,0,0.900541,0.032049,0.030600,0.036810
+data/raw/classification/Train/glioma/G_845_DA_.jpg,0,0,0.904183,0.031379,0.030070,0.034367
+data/raw/classification/Train/glioma/G_845_SP_.jpg,0,0,0.905060,0.031251,0.030012,0.033676
+data/raw/classification/Train/glioma/G_845_VF_.jpg,0,0,0.897000,0.034073,0.033088,0.035839
+data/raw/classification/Train/glioma/G_846_DA_.jpg,0,0,0.905998,0.030732,0.030423,0.032847
+data/raw/classification/Train/glioma/G_846_HF_.jpg,0,0,0.914167,0.028581,0.026224,0.031028
+data/raw/classification/Train/glioma/G_847_HF_.jpg,0,0,0.915316,0.028149,0.025654,0.030880
+data/raw/classification/Train/glioma/G_848_RO_.jpg,0,0,0.907387,0.029603,0.029849,0.033162
+data/raw/classification/Train/glioma/G_849_RO_.jpg,0,0,0.896995,0.032962,0.032590,0.037453
+data/raw/classification/Train/glioma/G_849_VF_.jpg,0,0,0.901887,0.031689,0.031217,0.035207
+data/raw/classification/Train/glioma/G_853_HF_.jpg,0,0,0.898647,0.033487,0.031364,0.036502
+data/raw/classification/Train/glioma/G_853_RO_.jpg,0,0,0.900171,0.032586,0.031811,0.035432
+data/raw/classification/Train/glioma/G_853_VF_.jpg,0,0,0.885193,0.037360,0.037962,0.039485
+data/raw/classification/Train/glioma/G_854.jpg,0,0,0.894589,0.034415,0.032632,0.038364
+data/raw/classification/Train/glioma/G_854_BR_.jpg,0,0,0.890117,0.035055,0.033989,0.040839
+data/raw/classification/Train/glioma/G_854_SP_.jpg,0,0,0.896786,0.034109,0.032016,0.037089
+data/raw/classification/Train/glioma/G_854_VF_.jpg,0,0,0.892231,0.035769,0.034696,0.037303
+data/raw/classification/Train/glioma/G_855_HF_.jpg,0,0,0.900524,0.033057,0.031076,0.035343
+data/raw/classification/Train/glioma/G_855_RO_.jpg,0,0,0.900213,0.032094,0.031544,0.036148
+data/raw/classification/Train/glioma/G_857_RO_.jpg,0,0,0.893318,0.034289,0.033868,0.038525
+data/raw/classification/Train/glioma/G_857_VF_.jpg,0,0,0.888281,0.034990,0.036277,0.040452
+data/raw/classification/Train/glioma/G_858_HF_.jpg,0,0,0.900694,0.032968,0.030565,0.035774
+data/raw/classification/Train/glioma/G_858_RO_.jpg,0,0,0.895672,0.033641,0.033152,0.037536
+data/raw/classification/Train/glioma/G_859_VF_.jpg,0,0,0.899000,0.033792,0.031218,0.035990
+data/raw/classification/Train/glioma/G_85_RO_.jpg,0,0,0.889363,0.035710,0.035553,0.039374
+data/raw/classification/Train/glioma/G_85_VF_.jpg,0,0,0.896579,0.034206,0.033865,0.035350
+data/raw/classification/Train/glioma/G_860_RO_.jpg,0,0,0.901696,0.031699,0.030905,0.035700
+data/raw/classification/Train/glioma/G_861_DA_.jpg,0,0,0.903353,0.031341,0.030455,0.034851
+data/raw/classification/Train/glioma/G_864_RO_.jpg,0,0,0.895072,0.033902,0.034318,0.036708
+data/raw/classification/Train/glioma/G_864_VF_.jpg,0,0,0.890513,0.035690,0.036636,0.037161
+data/raw/classification/Train/glioma/G_866.jpg,0,0,0.885554,0.036435,0.036637,0.041375
+data/raw/classification/Train/glioma/G_866_BR_.jpg,0,0,0.881536,0.037064,0.038539,0.042861
+data/raw/classification/Train/glioma/G_866_HF_.jpg,0,0,0.891782,0.034784,0.033699,0.039735
+data/raw/classification/Train/glioma/G_866_SP_.jpg,0,0,0.893592,0.033998,0.034083,0.038326
+data/raw/classification/Train/glioma/G_867_RO_.jpg,0,0,0.898333,0.032756,0.032405,0.036505
+data/raw/classification/Train/glioma/G_868_HF_.jpg,0,0,0.898539,0.032502,0.031088,0.037871
+data/raw/classification/Train/glioma/G_868_RO_.jpg,0,0,0.898457,0.032012,0.032633,0.036897
+data/raw/classification/Train/glioma/G_869_RO_.jpg,0,0,0.893299,0.033530,0.034197,0.038974
+data/raw/classification/Train/glioma/G_86_RO_.jpg,0,0,0.878394,0.039360,0.039554,0.042692
+data/raw/classification/Train/glioma/G_86_VF_.jpg,0,0,0.881336,0.039560,0.041052,0.038051
+data/raw/classification/Train/glioma/G_87.jpg,0,0,0.849524,0.051603,0.052610,0.046264
+data/raw/classification/Train/glioma/G_870.jpg,0,0,0.896922,0.033296,0.032137,0.037645
+data/raw/classification/Train/glioma/G_870_BR_.jpg,0,0,0.893970,0.033032,0.033437,0.039561
+data/raw/classification/Train/glioma/G_870_DA_.jpg,0,0,0.896912,0.033113,0.032912,0.037064
+data/raw/classification/Train/glioma/G_870_RO_.jpg,0,0,0.893503,0.034079,0.034881,0.037537
+data/raw/classification/Train/glioma/G_870_SP_.jpg,0,0,0.898171,0.032906,0.031078,0.037845
+data/raw/classification/Train/glioma/G_871_RO_.jpg,0,0,0.905480,0.030826,0.030537,0.033157
+data/raw/classification/Train/glioma/G_872_RO_.jpg,0,0,0.895976,0.033740,0.034033,0.036251
+data/raw/classification/Train/glioma/G_874_VF_.jpg,0,0,0.892869,0.034380,0.036213,0.036538
+data/raw/classification/Train/glioma/G_875_DA_.jpg,0,0,0.904559,0.031267,0.030567,0.033606
+data/raw/classification/Train/glioma/G_876.jpg,0,0,0.899721,0.032862,0.031139,0.036278
+data/raw/classification/Train/glioma/G_876_BR_.jpg,0,0,0.894167,0.033763,0.032009,0.040061
+data/raw/classification/Train/glioma/G_876_DA_.jpg,0,0,0.902154,0.031827,0.031114,0.034905
+data/raw/classification/Train/glioma/G_876_SP_.jpg,0,0,0.901260,0.032407,0.030909,0.035424
+data/raw/classification/Train/glioma/G_877.jpg,0,0,0.902101,0.031601,0.029725,0.036573
+data/raw/classification/Train/glioma/G_877_BR_.jpg,0,0,0.895727,0.032615,0.030870,0.040788
+data/raw/classification/Train/glioma/G_877_SP_.jpg,0,0,0.899606,0.032531,0.031050,0.036813
+data/raw/classification/Train/glioma/G_878_VF_.jpg,0,0,0.891731,0.034958,0.035341,0.037970
+data/raw/classification/Train/glioma/G_87_BR_.jpg,0,0,0.870403,0.042764,0.044018,0.042815
+data/raw/classification/Train/glioma/G_87_DA_.jpg,0,0,0.898995,0.033323,0.032050,0.035632
+data/raw/classification/Train/glioma/G_87_SP_.jpg,0,0,0.895691,0.035113,0.032569,0.036627
+data/raw/classification/Train/glioma/G_87_VF_.jpg,0,0,0.806278,0.076297,0.064889,0.052536
+data/raw/classification/Train/glioma/G_880_HF_.jpg,0,0,0.898076,0.033260,0.031902,0.036762
+data/raw/classification/Train/glioma/G_880_RO_.jpg,0,0,0.897695,0.031895,0.032056,0.038354
+data/raw/classification/Train/glioma/G_881_VF_.jpg,0,0,0.894356,0.034293,0.034174,0.037177
+data/raw/classification/Train/glioma/G_882_RO_.jpg,0,0,0.899167,0.032158,0.031237,0.037438
+data/raw/classification/Train/glioma/G_882_VF_.jpg,0,0,0.892909,0.035085,0.033855,0.038152
+data/raw/classification/Train/glioma/G_883_RO_.jpg,0,0,0.900191,0.031541,0.031343,0.036925
+data/raw/classification/Train/glioma/G_883_VF_.jpg,0,0,0.898493,0.033189,0.033262,0.035057
+data/raw/classification/Train/glioma/G_884_VF_.jpg,0,0,0.898184,0.033331,0.033546,0.034939
+data/raw/classification/Train/glioma/G_886_RO_.jpg,0,0,0.908853,0.029411,0.028740,0.032997
+data/raw/classification/Train/glioma/G_889_HF_.jpg,0,0,0.860052,0.046829,0.048868,0.044250
+data/raw/classification/Train/glioma/G_889_RO_.jpg,0,0,0.889500,0.038206,0.035755,0.036538
+data/raw/classification/Train/glioma/G_889_VF_.jpg,0,0,0.892843,0.035888,0.034491,0.036778
+data/raw/classification/Train/glioma/G_88_RO_.jpg,0,0,0.909530,0.028789,0.028033,0.033648
+data/raw/classification/Train/glioma/G_88_VF_.jpg,0,0,0.910012,0.030034,0.027783,0.032171
+data/raw/classification/Train/glioma/G_890_VF_.jpg,0,0,0.889871,0.035447,0.036234,0.038448
+data/raw/classification/Train/glioma/G_891_VF_.jpg,0,0,0.887747,0.036379,0.037582,0.038291
+data/raw/classification/Train/glioma/gg (341).jpg,0,0,0.902197,0.032754,0.029080,0.035969
+data/raw/classification/Train/glioma/gg (344).jpg,0,0,0.911017,0.029883,0.026660,0.032440
+data/raw/classification/Train/glioma/gg (345).jpg,0,0,0.912055,0.029790,0.026007,0.032148
+data/raw/classification/Train/glioma/gg (346).jpg,0,0,0.910625,0.030215,0.027361,0.031798
+data/raw/classification/Train/glioma/gg (347).jpg,0,0,0.906236,0.031974,0.028984,0.032806
+data/raw/classification/Train/glioma/gg (348).jpg,0,0,0.905642,0.031797,0.028941,0.033620
+data/raw/classification/Train/glioma/gg (349).jpg,0,0,0.905080,0.032193,0.029143,0.033584
+data/raw/classification/Train/glioma/gg (35).jpg,0,0,0.902401,0.031491,0.031140,0.034968
+data/raw/classification/Train/glioma/gg (350).jpg,0,0,0.907508,0.031508,0.027911,0.033072
+data/raw/classification/Train/glioma/gg (369).jpg,0,0,0.904110,0.032033,0.030689,0.033168
+data/raw/classification/Train/glioma/gg (372).jpg,0,0,0.897419,0.033692,0.032027,0.036862
+data/raw/classification/Train/glioma/gg (385).jpg,0,0,0.905509,0.031331,0.028792,0.034368
+data/raw/classification/Train/glioma/gg (39).jpg,0,0,0.904736,0.031410,0.028875,0.034980
+data/raw/classification/Train/glioma/gg (391).jpg,0,0,0.909276,0.030309,0.027321,0.033094
+data/raw/classification/Train/glioma/gg (394).jpg,0,0,0.911177,0.029822,0.027287,0.031715
+data/raw/classification/Train/glioma/gg (413).jpg,0,0,0.903563,0.032087,0.029435,0.034916
+data/raw/classification/Train/glioma/gg (414).jpg,0,0,0.906803,0.030734,0.028625,0.033838
+data/raw/classification/Train/glioma/gg (429).jpg,0,0,0.899264,0.033048,0.032101,0.035588
+data/raw/classification/Train/glioma/gg (430).jpg,0,0,0.899376,0.034182,0.031538,0.034905
+data/raw/classification/Train/glioma/gg (432).jpg,0,0,0.903528,0.032209,0.029528,0.034735
+data/raw/classification/Train/glioma/gg (433).jpg,0,0,0.906611,0.031164,0.028830,0.033394
+data/raw/classification/Train/glioma/gg (44).jpg,0,0,0.904124,0.031246,0.030215,0.034414
+data/raw/classification/Train/glioma/gg (444).jpg,0,1,0.048892,0.860491,0.043166,0.047450
+data/raw/classification/Train/glioma/gg (446).jpg,0,0,0.896899,0.034831,0.031482,0.036787
+data/raw/classification/Train/glioma/gg (45).jpg,0,0,0.903687,0.031566,0.031113,0.033634
+data/raw/classification/Train/glioma/gg (454).jpg,0,0,0.902416,0.031883,0.030624,0.035077
+data/raw/classification/Train/glioma/gg (457).jpg,0,0,0.897624,0.033389,0.033373,0.035614
+data/raw/classification/Train/glioma/gg (48).jpg,0,0,0.904645,0.030762,0.029246,0.035346
+data/raw/classification/Train/glioma/gg (483).jpg,0,0,0.897940,0.034321,0.032337,0.035402
+data/raw/classification/Train/glioma/gg (484).jpg,0,0,0.894478,0.035672,0.034023,0.035828
+data/raw/classification/Train/glioma/gg (503).jpg,0,0,0.918366,0.027081,0.024878,0.029676
+data/raw/classification/Train/glioma/gg (52).jpg,0,0,0.875664,0.039202,0.039981,0.045154
+data/raw/classification/Train/glioma/gg (558).jpg,0,0,0.911581,0.028947,0.027389,0.032083
+data/raw/classification/Train/glioma/gg (573).jpg,0,0,0.909309,0.030262,0.028147,0.032282
+data/raw/classification/Train/glioma/gg (582).jpg,0,0,0.910577,0.029963,0.027832,0.031629
+data/raw/classification/Train/glioma/gg (648).jpg,0,0,0.917638,0.026496,0.024216,0.031650
+data/raw/classification/Train/glioma/gg (674).jpg,0,0,0.905783,0.031289,0.029311,0.033617
+data/raw/classification/Train/glioma/gg (675).jpg,0,0,0.902727,0.032192,0.030463,0.034619
+data/raw/classification/Train/glioma/gg (676).jpg,0,0,0.906431,0.031091,0.029484,0.032993
+data/raw/classification/Train/glioma/gg (677).jpg,0,0,0.903531,0.031582,0.029772,0.035115
+data/raw/classification/Train/glioma/image(20).jpg,0,0,0.878905,0.040635,0.043859,0.036600
+data/raw/classification/Train/glioma/image(21).jpg,0,0,0.521119,0.071293,0.035929,0.371659
+data/raw/classification/Train/glioma/image(23).jpg,0,3,0.041587,0.041844,0.040506,0.876063
+data/raw/classification/Train/glioma/image(24).jpg,0,0,0.819971,0.056459,0.056735,0.066835
+data/raw/classification/Train/glioma/image(27).jpg,0,1,0.055532,0.861000,0.034499,0.048969
+data/raw/classification/Train/glioma/image(3).jpg,0,3,0.038358,0.040611,0.036257,0.884775
+data/raw/classification/Train/glioma/image(31).jpg,0,0,0.872965,0.039834,0.040098,0.047103
+data/raw/classification/Train/glioma/image(34).jpg,0,0,0.875241,0.041438,0.045304,0.038017
+data/raw/classification/Train/glioma/image(4).jpg,0,0,0.910065,0.028521,0.027188,0.034227
+data/raw/classification/Train/glioma/image(55).jpg,0,0,0.784279,0.052589,0.036550,0.126582
+data/raw/classification/Train/glioma/image(56).jpg,0,1,0.069738,0.827060,0.044838,0.058365
+data/raw/classification/Train/glioma/image(57).jpg,0,1,0.061220,0.844972,0.041545,0.052264
+data/raw/classification/Train/glioma/image(58).jpg,0,1,0.079837,0.795587,0.050530,0.074046
+data/raw/classification/Train/glioma/image(59).jpg,0,1,0.048892,0.860491,0.043166,0.047450
+data/raw/classification/Train/glioma/image(64).jpg,0,0,0.904110,0.032033,0.030689,0.033168
+data/raw/classification/Train/glioma/image(65).jpg,0,0,0.904110,0.032033,0.030689,0.033168
+data/raw/classification/Train/glioma/image(82).jpg,0,3,0.049804,0.049717,0.043656,0.856822
+data/raw/classification/Train/glioma/image(83).jpg,0,3,0.040601,0.037234,0.036858,0.885308
+data/raw/classification/Train/glioma/Te-gl_0138.jpg,0,0,0.906041,0.031153,0.029178,0.033628
+data/raw/classification/Train/glioma/Te-gl_0139.jpg,0,0,0.913592,0.028394,0.026285,0.031729
+data/raw/classification/Train/glioma/Te-gl_0147.jpg,0,0,0.903189,0.032995,0.028661,0.035155
+data/raw/classification/Train/glioma/Te-gl_0168.jpg,0,0,0.900973,0.032896,0.029659,0.036472
+data/raw/classification/Train/glioma/Te-gl_0169.jpg,0,0,0.896963,0.033572,0.031541,0.037923
+data/raw/classification/Train/glioma/Te-gl_0171.jpg,0,0,0.905681,0.031453,0.029152,0.033714
+data/raw/classification/Train/glioma/Te-gl_0174.jpg,0,0,0.850000,0.050968,0.051415,0.047617
+data/raw/classification/Train/glioma/Te-gl_0185.jpg,0,0,0.903969,0.031985,0.029739,0.034307
+data/raw/classification/Train/glioma/Te-gl_0187.jpg,0,0,0.898689,0.032550,0.030502,0.038259
+data/raw/classification/Train/glioma/Te-gl_0189.jpg,0,0,0.902321,0.031991,0.030104,0.035584
+data/raw/classification/Train/glioma/Te-gl_0199.jpg,0,0,0.899121,0.032625,0.031047,0.037207
+data/raw/classification/Train/glioma/Te-gl_0205.jpg,0,0,0.902479,0.031826,0.029908,0.035787
+data/raw/classification/Train/glioma/Te-gl_0210.jpg,0,0,0.898411,0.032513,0.030724,0.038352
+data/raw/classification/Train/glioma/Te-gl_0219.jpg,0,0,0.890627,0.036029,0.033738,0.039605
+data/raw/classification/Train/glioma/Te-gl_0224.jpg,0,0,0.896217,0.033755,0.031805,0.038222
+data/raw/classification/Train/glioma/Te-gl_0234.jpg,0,0,0.892302,0.035552,0.033090,0.039056
+data/raw/classification/Train/glioma/Te-gl_0235.jpg,0,1,0.356377,0.502352,0.070706,0.070564
+data/raw/classification/Train/glioma/Te-gl_0237.jpg,0,0,0.883755,0.039925,0.035648,0.040672
+data/raw/classification/Train/glioma/Te-gl_0243.jpg,0,0,0.898293,0.034108,0.031038,0.036560
+data/raw/classification/Train/glioma/Te-gl_0248.jpg,0,0,0.898901,0.034213,0.031753,0.035133
+data/raw/classification/Train/glioma/Te-gl_0249.jpg,0,0,0.895047,0.035425,0.032262,0.037266
+data/raw/classification/Train/glioma/Te-gl_0258.jpg,0,1,0.130359,0.736607,0.062150,0.070884
+data/raw/classification/Train/glioma/Te-gl_0284.jpg,0,0,0.909850,0.029975,0.027584,0.032590
+data/raw/classification/Train/glioma/Te-gl_0290.jpg,0,0,0.902673,0.032603,0.031727,0.032997
+data/raw/classification/Train/glioma/Tr-gl_0092.jpg,0,0,0.906431,0.031091,0.029484,0.032993
+data/raw/classification/Train/glioma/Tr-gl_0096.jpg,0,0,0.902306,0.032252,0.029460,0.035981
+data/raw/classification/Train/glioma/Tr-gl_0128.jpg,0,0,0.913184,0.029191,0.027335,0.030290
+data/raw/classification/Train/glioma/Tr-gl_0140.jpg,0,0,0.905563,0.031055,0.028780,0.034602
+data/raw/classification/Train/glioma/Tr-gl_0146.jpg,0,0,0.909199,0.030345,0.028564,0.031892
+data/raw/classification/Train/glioma/Tr-gl_0147.jpg,0,0,0.904891,0.032224,0.029139,0.033746
+data/raw/classification/Train/glioma/Tr-gl_0185.jpg,0,0,0.903868,0.031823,0.030968,0.033341
+data/raw/classification/Train/glioma/Tr-gl_0186.jpg,0,0,0.922556,0.024566,0.022870,0.030008
+data/raw/classification/Train/glioma/Tr-gl_0187.jpg,0,0,0.917292,0.026851,0.025807,0.030051
+data/raw/classification/Train/glioma/Tr-gl_0248.jpg,0,0,0.910425,0.029611,0.026479,0.033485
+data/raw/classification/Train/glioma/Tr-gl_0287.jpg,0,0,0.905414,0.030877,0.030774,0.032935
+data/raw/classification/Train/glioma/Tr-gl_0301.jpg,0,0,0.909336,0.030272,0.028282,0.032110
+data/raw/classification/Train/glioma/Tr-gl_0305.jpg,0,0,0.911376,0.029358,0.025874,0.033391
+data/raw/classification/Train/glioma/Tr-gl_0329.jpg,0,0,0.910369,0.030075,0.028245,0.031311
+data/raw/classification/Train/glioma/Tr-gl_0330.jpg,0,0,0.909234,0.030664,0.028170,0.031933
+data/raw/classification/Train/glioma/Tr-gl_0338.jpg,0,0,0.913709,0.027913,0.026569,0.031809
+data/raw/classification/Train/glioma/Tr-gl_0339.jpg,0,0,0.911650,0.028943,0.027042,0.032366
+data/raw/classification/Train/glioma/Tr-gl_0340.jpg,0,0,0.912899,0.028768,0.026772,0.031562
+data/raw/classification/Train/glioma/Tr-gl_0392.jpg,0,0,0.909068,0.030179,0.028266,0.032487
+data/raw/classification/Train/glioma/Tr-gl_0393.jpg,0,0,0.907111,0.030641,0.028283,0.033964
+data/raw/classification/Train/glioma/Tr-gl_0417.jpg,0,0,0.903665,0.032097,0.029419,0.034819
+data/raw/classification/Train/glioma/Tr-gl_0423.jpg,0,0,0.907673,0.030929,0.028468,0.032930
+data/raw/classification/Train/glioma/Tr-gl_0436.jpg,0,0,0.912395,0.029066,0.026570,0.031969
+data/raw/classification/Train/glioma/Tr-gl_0447.jpg,0,0,0.909421,0.029697,0.027989,0.032894
+data/raw/classification/Train/glioma/Tr-gl_0454.jpg,0,0,0.907128,0.030774,0.028606,0.033492
+data/raw/classification/Train/glioma/Tr-gl_0462.jpg,0,0,0.904963,0.031341,0.029071,0.034625
+data/raw/classification/Train/glioma/Tr-gl_0466.jpg,0,0,0.911426,0.030258,0.027647,0.030670
+data/raw/classification/Train/glioma/Tr-gl_0470.jpg,0,0,0.911196,0.030108,0.027999,0.030697
+data/raw/classification/Train/glioma/Tr-gl_0480.jpg,0,0,0.906316,0.030417,0.027984,0.035284
+data/raw/classification/Train/glioma/Tr-gl_0481.jpg,0,0,0.904028,0.030709,0.029554,0.035709
+data/raw/classification/Train/glioma/Tr-gl_0495.jpg,0,0,0.912180,0.028825,0.026238,0.032757
+data/raw/classification/Train/glioma/Tr-gl_0509.jpg,0,0,0.913472,0.028854,0.026333,0.031342
+data/raw/classification/Train/glioma/Tr-gl_0510.jpg,0,0,0.914608,0.028456,0.025887,0.031049
+data/raw/classification/Train/glioma/Tr-gl_0555.jpg,0,0,0.915735,0.027243,0.025926,0.031097
+data/raw/classification/Train/glioma/Tr-gl_0564.jpg,0,0,0.907807,0.030932,0.028814,0.032448
+data/raw/classification/Train/glioma/Tr-gl_0565.jpg,0,0,0.909839,0.030373,0.028271,0.031517
+data/raw/classification/Train/glioma/Tr-gl_0566.jpg,0,0,0.908358,0.030327,0.028298,0.033017
+data/raw/classification/Train/glioma/Tr-gl_0567.jpg,0,0,0.907368,0.030794,0.028484,0.033354
+data/raw/classification/Train/glioma/Tr-gl_0569.jpg,0,1,0.077482,0.832879,0.045576,0.044063
+data/raw/classification/Train/glioma/Tr-gl_0570.jpg,0,1,0.048109,0.875362,0.038158,0.038372
+data/raw/classification/Train/glioma/Tr-gl_0571.jpg,0,1,0.174713,0.721147,0.049786,0.054354
+data/raw/classification/Train/glioma/Tr-gl_0576.jpg,0,0,0.907130,0.031125,0.028481,0.033265
+data/raw/classification/Train/glioma/Tr-gl_0578.jpg,0,0,0.906211,0.031410,0.028371,0.034008
+data/raw/classification/Train/glioma/Tr-gl_0579.jpg,0,0,0.905040,0.031563,0.028601,0.034795
+data/raw/classification/Train/glioma/Tr-gl_0583.jpg,0,0,0.909320,0.029726,0.027821,0.033133
+data/raw/classification/Train/glioma/Tr-gl_0584.jpg,0,0,0.907930,0.030193,0.028468,0.033409
+data/raw/classification/Train/glioma/Tr-gl_0585.jpg,0,0,0.902738,0.031839,0.029965,0.035458
+data/raw/classification/Train/glioma/Tr-gl_0597.jpg,0,0,0.914729,0.028745,0.025893,0.030634
+data/raw/classification/Train/glioma/Tr-gl_0598.jpg,0,0,0.913368,0.029454,0.027128,0.030050
+data/raw/classification/Train/glioma/Tr-gl_0599.jpg,0,0,0.912762,0.029603,0.027252,0.030383
+data/raw/classification/Train/glioma/Tr-gl_0606.jpg,0,0,0.907156,0.031199,0.029188,0.032458
+data/raw/classification/Train/glioma/Tr-gl_0619.jpg,0,0,0.906179,0.030552,0.027582,0.035686
+data/raw/classification/Train/glioma/Tr-gl_0640.jpg,0,0,0.909523,0.030695,0.027013,0.032769
+data/raw/classification/Train/glioma/Tr-gl_0688.jpg,0,0,0.917166,0.027359,0.025365,0.030110
+data/raw/classification/Train/glioma/Tr-gl_0689.jpg,0,0,0.914028,0.028458,0.026268,0.031247
+data/raw/classification/Train/glioma/Tr-gl_0798.jpg,0,0,0.914588,0.028519,0.025854,0.031039
+data/raw/classification/Train/glioma/Tr-gl_0800.jpg,0,0,0.906627,0.030406,0.028601,0.034367
+data/raw/classification/Train/glioma/Tr-gl_0809.jpg,0,0,0.903159,0.032550,0.029421,0.034871
+data/raw/classification/Train/glioma/Tr-gl_0810.jpg,0,0,0.909067,0.030609,0.027449,0.032874
+data/raw/classification/Train/glioma/Tr-gl_0816.jpg,0,0,0.908385,0.030673,0.028207,0.032735
+data/raw/classification/Train/glioma/Tr-gl_0847.jpg,0,0,0.911900,0.029566,0.026778,0.031756
+data/raw/classification/Train/glioma/Tr-gl_0848.jpg,0,0,0.906605,0.031154,0.028415,0.033826
+data/raw/classification/Train/glioma/Tr-gl_0851.jpg,0,0,0.905249,0.031307,0.028839,0.034605
+data/raw/classification/Train/glioma/Tr-gl_0852.jpg,0,0,0.904799,0.031541,0.028722,0.034939
+data/raw/classification/Train/glioma/Tr-gl_0863.jpg,0,0,0.905239,0.032002,0.028656,0.034103
+data/raw/classification/Train/glioma/Tr-gl_0867.jpg,0,0,0.912677,0.028322,0.026801,0.032199
+data/raw/classification/Train/glioma/Tr-gl_0872.jpg,0,0,0.904860,0.031060,0.028883,0.035196
+data/raw/classification/Train/glioma/Tr-gl_0873.jpg,0,0,0.901563,0.032063,0.030030,0.036343
+data/raw/classification/Train/glioma/Tr-gl_0875.jpg,0,0,0.910169,0.029420,0.027242,0.033169
+data/raw/classification/Train/glioma/Tr-gl_0876.jpg,0,0,0.908833,0.030241,0.028837,0.032089
+data/raw/classification/Train/glioma/Tr-gl_0877.jpg,0,0,0.908348,0.030187,0.029142,0.032323
+data/raw/classification/Train/glioma/Tr-gl_0883.jpg,0,0,0.900467,0.033940,0.031002,0.034591
+data/raw/classification/Train/glioma/Tr-gl_0885.jpg,0,0,0.897340,0.034225,0.031745,0.036690
+data/raw/classification/Train/glioma/Tr-gl_0887.jpg,0,0,0.902103,0.032185,0.029791,0.035921
+data/raw/classification/Train/glioma/Tr-gl_0889.jpg,0,0,0.894485,0.033856,0.032823,0.038836
+data/raw/classification/Train/glioma/Tr-gl_0900.jpg,0,0,0.904949,0.031002,0.029285,0.034765
+data/raw/classification/Train/glioma/Tr-gl_0908.jpg,0,0,0.906054,0.031469,0.029148,0.033329
+data/raw/classification/Train/glioma/Tr-gl_0924.jpg,0,0,0.902364,0.032773,0.030051,0.034811
+data/raw/classification/Train/glioma/Tr-gl_0944.jpg,0,0,0.905416,0.030401,0.028153,0.036030
+data/raw/classification/Train/glioma/Tr-gl_0947.jpg,0,0,0.910352,0.028974,0.027014,0.033660
+data/raw/classification/Train/glioma/Tr-gl_0948.jpg,0,0,0.890372,0.034613,0.034438,0.040577
+data/raw/classification/Train/glioma/Tr-gl_0949.jpg,0,1,0.049072,0.862476,0.041710,0.046742
+data/raw/classification/Train/glioma/Tr-gl_0950.jpg,0,1,0.045646,0.870908,0.039272,0.044174
+data/raw/classification/Train/glioma/Tr-gl_0951.jpg,0,1,0.087175,0.802619,0.052427,0.057779
+data/raw/classification/Train/glioma/Tr-gl_0954.jpg,0,0,0.907610,0.031053,0.028032,0.033306
+data/raw/classification/Train/glioma/Tr-gl_0963.jpg,0,0,0.892798,0.034127,0.033035,0.040040
+data/raw/classification/Train/glioma/Tr-gl_0964.jpg,0,0,0.894436,0.034137,0.033107,0.038320
+data/raw/classification/Train/glioma/Tr-gl_0973.jpg,0,0,0.898835,0.033731,0.030881,0.036552
+data/raw/classification/Train/glioma/Tr-gl_0977.jpg,0,0,0.898136,0.033773,0.031324,0.036767
+data/raw/classification/Train/glioma/Tr-gl_0982.jpg,0,0,0.907070,0.031352,0.027762,0.033816
+data/raw/classification/Train/glioma/Tr-gl_0995.jpg,0,0,0.902191,0.032407,0.030083,0.035320
+data/raw/classification/Train/glioma/Tr-gl_0996.jpg,0,0,0.908520,0.030137,0.027613,0.033731
+data/raw/classification/Train/glioma/Tr-gl_1007.jpg,0,0,0.909233,0.030206,0.028229,0.032332
+data/raw/classification/Train/glioma/Tr-gl_1020.jpg,0,0,0.901564,0.032349,0.030527,0.035559
+data/raw/classification/Train/glioma/Tr-gl_1025.jpg,0,0,0.907886,0.030018,0.028055,0.034040
+data/raw/classification/Train/glioma/Tr-gl_1029.jpg,0,0,0.891868,0.034336,0.034075,0.039721
+data/raw/classification/Train/glioma/Tr-gl_1030.jpg,0,0,0.896490,0.033311,0.031910,0.038290
+data/raw/classification/Train/glioma/Tr-gl_1037.jpg,0,0,0.904429,0.031455,0.029563,0.034552
+data/raw/classification/Train/glioma/Tr-gl_1038.jpg,0,0,0.905520,0.031258,0.029366,0.033856
+data/raw/classification/Train/glioma/Tr-gl_1042.jpg,0,0,0.899030,0.033339,0.030909,0.036721
+data/raw/classification/Train/glioma/Tr-gl_1043.jpg,0,0,0.900179,0.032878,0.030247,0.036695
+data/raw/classification/Train/glioma/Tr-gl_1053.jpg,0,0,0.898852,0.032770,0.030756,0.037622
+data/raw/classification/Train/glioma/Tr-gl_1054.jpg,0,0,0.899082,0.032585,0.030952,0.037381
+data/raw/classification/Train/glioma/Tr-gl_1055.jpg,0,0,0.901122,0.031965,0.029681,0.037231
+data/raw/classification/Train/glioma/Tr-gl_1056.jpg,0,0,0.907280,0.031765,0.028260,0.032695
+data/raw/classification/Train/glioma/Tr-gl_1057.jpg,0,0,0.906720,0.031045,0.028477,0.033758
+data/raw/classification/Train/glioma/Tr-gl_1058.jpg,0,0,0.902288,0.031967,0.029711,0.036035
+data/raw/classification/Train/glioma/Tr-gl_1059.jpg,0,0,0.901515,0.032653,0.030458,0.035374
+data/raw/classification/Train/glioma/Tr-gl_1069.jpg,0,0,0.899984,0.033284,0.030942,0.035790
+data/raw/classification/Train/glioma/Tr-gl_1071.jpg,0,0,0.901284,0.032825,0.030755,0.035136
+data/raw/classification/Train/glioma/Tr-gl_1072.jpg,0,0,0.900025,0.033277,0.030896,0.035802
+data/raw/classification/Train/glioma/Tr-gl_1074.jpg,0,0,0.900708,0.033300,0.030615,0.035377
+data/raw/classification/Train/glioma/Tr-gl_1078.jpg,0,0,0.907213,0.030673,0.027750,0.034363
+data/raw/classification/Train/glioma/Tr-gl_1080.jpg,0,0,0.915911,0.027634,0.024747,0.031708
+data/raw/classification/Train/glioma/Tr-gl_1082.jpg,0,0,0.894516,0.034171,0.032474,0.038838
+data/raw/classification/Train/glioma/Tr-gl_1084.jpg,0,0,0.900127,0.032219,0.030551,0.037103
+data/raw/classification/Train/glioma/Tr-gl_1091.jpg,0,0,0.900035,0.032533,0.030100,0.037332
+data/raw/classification/Train/glioma/Tr-gl_1092.jpg,0,0,0.897905,0.033662,0.030480,0.037952
+data/raw/classification/Train/glioma/Tr-gl_1099.jpg,0,0,0.897076,0.033469,0.031921,0.037534
+data/raw/classification/Train/glioma/Tr-gl_1101.jpg,0,0,0.912187,0.029423,0.027257,0.031133
+data/raw/classification/Train/glioma/Tr-gl_1102.jpg,0,0,0.904429,0.031494,0.028577,0.035500
+data/raw/classification/Train/glioma/Tr-gl_1110.jpg,0,0,0.897565,0.033314,0.031325,0.037796
+data/raw/classification/Train/glioma/Tr-gl_1111.jpg,0,0,0.895310,0.034197,0.032626,0.037867
+data/raw/classification/Train/glioma/Tr-gl_1115.jpg,0,0,0.904959,0.031699,0.028700,0.034642
+data/raw/classification/Train/glioma/Tr-gl_1116.jpg,0,0,0.903546,0.032034,0.029247,0.035173
+data/raw/classification/Train/glioma/Tr-gl_1128.jpg,0,0,0.907841,0.030345,0.028230,0.033584
+data/raw/classification/Train/glioma/Tr-gl_1129.jpg,0,0,0.902885,0.031896,0.030089,0.035130
+data/raw/classification/Train/glioma/Tr-gl_1132.jpg,0,0,0.899571,0.033397,0.032607,0.034425
+data/raw/classification/Train/glioma/Tr-gl_1157.jpg,0,0,0.893926,0.035311,0.034594,0.036168
+data/raw/classification/Train/glioma/Tr-gl_1159.jpg,0,0,0.912579,0.029187,0.026571,0.031663
+data/raw/classification/Train/glioma/Tr-gl_1168.jpg,0,0,0.901502,0.033529,0.030950,0.034019
+data/raw/classification/Train/glioma/Tr-gl_1190.jpg,0,0,0.901593,0.032841,0.030662,0.034903
+data/raw/classification/Train/glioma/Tr-gl_1207.jpg,0,0,0.909815,0.030058,0.027865,0.032262
+data/raw/classification/Train/glioma/Tr-gl_1208.jpg,0,0,0.902198,0.032227,0.031633,0.033942
+data/raw/classification/Train/glioma/Tr-gl_1209.jpg,0,0,0.896740,0.033970,0.032519,0.036771
+data/raw/classification/Train/glioma/Tr-gl_1210.jpg,0,0,0.896079,0.034148,0.032384,0.037389
+data/raw/classification/Train/glioma/Tr-gl_1212.jpg,0,1,0.040593,0.880788,0.036912,0.041707
+data/raw/classification/Train/glioma/Tr-gl_1214.jpg,0,0,0.907325,0.030505,0.028029,0.034142
+data/raw/classification/Train/glioma/Tr-gl_1225.jpg,0,0,0.909039,0.030471,0.029429,0.031061
+data/raw/classification/Train/glioma/Tr-gl_1227.jpg,0,0,0.904836,0.031872,0.030269,0.033023
+data/raw/classification/Train/glioma/Tr-gl_1229.jpg,0,0,0.903780,0.032662,0.030210,0.033349
+data/raw/classification/Train/glioma/Tr-gl_1233.jpg,0,0,0.907514,0.031696,0.028638,0.032152
+data/raw/classification/Train/glioma/Tr-gl_1240.jpg,0,0,0.902754,0.032566,0.029964,0.034716
+data/raw/classification/Train/glioma/Tr-gl_1241.jpg,0,0,0.899551,0.033171,0.030771,0.036507
+data/raw/classification/Train/glioma/Tr-gl_1259.jpg,0,0,0.905996,0.031056,0.028270,0.034678
+data/raw/classification/Train/glioma/Tr-gl_1260.jpg,0,0,0.832097,0.059429,0.048171,0.060304
+data/raw/classification/Train/glioma/Tr-gl_1267.jpg,0,0,0.908638,0.030728,0.028212,0.032422
+data/raw/classification/Train/glioma/Tr-gl_1269.jpg,0,0,0.899868,0.032502,0.031488,0.036141
+data/raw/classification/Train/meningioma/1301.jpg,1,1,0.038641,0.886735,0.033982,0.040642
+data/raw/classification/Train/meningioma/1302.jpg,1,3,0.033901,0.055026,0.037321,0.873752
+data/raw/classification/Train/meningioma/1303.jpg,1,1,0.037209,0.893405,0.032418,0.036967
+data/raw/classification/Train/meningioma/1309.jpg,1,1,0.035921,0.889788,0.034810,0.039482
+data/raw/classification/Train/meningioma/1323.jpg,1,1,0.074225,0.806313,0.044236,0.075226
+data/raw/classification/Train/meningioma/1324.jpg,1,1,0.039734,0.885966,0.034496,0.039804
+data/raw/classification/Train/meningioma/1328.jpg,1,1,0.056157,0.798483,0.097869,0.047490
+data/raw/classification/Train/meningioma/1329.jpg,1,1,0.034417,0.895327,0.033403,0.036852
+data/raw/classification/Train/meningioma/1331.jpg,1,3,0.057868,0.100469,0.051859,0.789804
+data/raw/classification/Train/meningioma/1337.jpg,1,1,0.038554,0.888233,0.034118,0.039094
+data/raw/classification/Train/meningioma/1338.jpg,1,1,0.047408,0.862922,0.047880,0.041790
+data/raw/classification/Train/meningioma/1340.jpg,1,1,0.040478,0.886119,0.034524,0.038880
+data/raw/classification/Train/meningioma/1356.jpg,1,1,0.035072,0.896374,0.032603,0.035951
+data/raw/classification/Train/meningioma/1360.jpg,1,1,0.039815,0.887399,0.033972,0.038814
+data/raw/classification/Train/meningioma/1361.jpg,1,1,0.039131,0.883517,0.036063,0.041289
+data/raw/classification/Train/meningioma/1364.jpg,1,1,0.037992,0.889345,0.033549,0.039114
+data/raw/classification/Train/meningioma/1368.jpg,1,3,0.057868,0.100469,0.051859,0.789804
+data/raw/classification/Train/meningioma/1372.jpg,1,1,0.033721,0.902119,0.029807,0.034353
+data/raw/classification/Train/meningioma/1379.jpg,1,1,0.035523,0.897402,0.031127,0.035948
+data/raw/classification/Train/meningioma/1381.jpg,1,0,0.846111,0.050221,0.051092,0.052576
+data/raw/classification/Train/meningioma/1384.jpg,1,1,0.044075,0.867711,0.041227,0.046987
+data/raw/classification/Train/meningioma/1388.jpg,1,1,0.036113,0.891531,0.034196,0.038159
+data/raw/classification/Train/meningioma/1390.jpg,1,1,0.035212,0.898171,0.032496,0.034121
+data/raw/classification/Train/meningioma/1393.jpg,1,2,0.042802,0.060313,0.850639,0.046246
+data/raw/classification/Train/meningioma/1396.jpg,1,1,0.037509,0.892051,0.033627,0.036813
+data/raw/classification/Train/meningioma/1404.jpg,1,1,0.037019,0.890378,0.034489,0.038114
+data/raw/classification/Train/meningioma/1413.jpg,1,1,0.034822,0.893403,0.033866,0.037909
+data/raw/classification/Train/meningioma/1422.jpg,1,1,0.040602,0.891430,0.031457,0.036511
+data/raw/classification/Train/meningioma/1428.jpg,1,1,0.036841,0.892645,0.032943,0.037572
+data/raw/classification/Train/meningioma/1433.jpg,1,1,0.037584,0.889622,0.033667,0.039127
+data/raw/classification/Train/meningioma/1439.jpg,1,1,0.036701,0.892477,0.032866,0.037956
+data/raw/classification/Train/meningioma/1446.jpg,1,1,0.038341,0.888534,0.034088,0.039037
+data/raw/classification/Train/meningioma/m1(91).jpg,1,1,0.077477,0.748061,0.044184,0.130278
+data/raw/classification/Train/meningioma/m1(92).jpg,1,1,0.137483,0.573895,0.063363,0.225259
+data/raw/classification/Train/meningioma/m1(94).jpg,1,1,0.042890,0.872365,0.040905,0.043840
+data/raw/classification/Train/meningioma/m2 (105).jpg,1,1,0.034971,0.895082,0.032473,0.037474
+data/raw/classification/Train/meningioma/m2 (116).jpg,1,1,0.038021,0.890637,0.033537,0.037805
+data/raw/classification/Train/meningioma/m2 (126).jpg,1,1,0.034620,0.892845,0.033621,0.038914
+data/raw/classification/Train/meningioma/m2 (13).jpg,1,1,0.035679,0.893677,0.033133,0.037510
+data/raw/classification/Train/meningioma/m2 (14).jpg,1,1,0.035630,0.893882,0.033058,0.037430
+data/raw/classification/Train/meningioma/m2 (142).jpg,1,1,0.038309,0.886732,0.034756,0.040203
+data/raw/classification/Train/meningioma/m2 (151).jpg,1,1,0.051980,0.856629,0.043210,0.048181
+data/raw/classification/Train/meningioma/m2 (163).jpg,1,1,0.034496,0.896220,0.032446,0.036837
+data/raw/classification/Train/meningioma/m2 (167).jpg,1,1,0.035829,0.892846,0.033266,0.038059
+data/raw/classification/Train/meningioma/m2 (168).jpg,1,1,0.035098,0.893550,0.033701,0.037651
+data/raw/classification/Train/meningioma/m2 (177).jpg,1,1,0.037101,0.890597,0.033351,0.038951
+data/raw/classification/Train/meningioma/m2 (32).jpg,1,1,0.035676,0.891969,0.033729,0.038626
+data/raw/classification/Train/meningioma/m2 (38).jpg,1,1,0.034141,0.899314,0.031114,0.035432
+data/raw/classification/Train/meningioma/m2 (43).jpg,1,1,0.038520,0.888713,0.033739,0.039028
+data/raw/classification/Train/meningioma/m2 (49).jpg,1,1,0.032809,0.903417,0.029629,0.034146
+data/raw/classification/Train/meningioma/m2 (50).jpg,1,1,0.034222,0.897311,0.031839,0.036628
+data/raw/classification/Train/meningioma/m2 (53).jpg,1,1,0.033753,0.897940,0.032195,0.036112
+data/raw/classification/Train/meningioma/m2 (54).jpg,1,1,0.035219,0.899253,0.030777,0.034752
+data/raw/classification/Train/meningioma/m2 (55).jpg,1,2,0.029185,0.031954,0.909917,0.028945
+data/raw/classification/Train/meningioma/m2 (78).jpg,1,1,0.035403,0.893035,0.033602,0.037961
+data/raw/classification/Train/meningioma/m2 (80).jpg,1,1,0.035920,0.893316,0.033434,0.037330
+data/raw/classification/Train/meningioma/m2 (84).jpg,1,1,0.035839,0.892970,0.033494,0.037697
+data/raw/classification/Train/meningioma/m2 (87).jpg,1,1,0.034397,0.895373,0.033391,0.036839
+data/raw/classification/Train/meningioma/m2 (92).jpg,1,1,0.034698,0.892913,0.033515,0.038874
+data/raw/classification/Train/meningioma/m2 (94).jpg,1,1,0.033853,0.899349,0.030890,0.035908
+data/raw/classification/Train/meningioma/m2 (99).jpg,1,1,0.034737,0.892111,0.034540,0.038612
+data/raw/classification/Train/meningioma/m3 (100).jpg,1,1,0.034944,0.895903,0.032390,0.036763
+data/raw/classification/Train/meningioma/m3 (101).jpg,1,1,0.033852,0.896649,0.032734,0.036765
+data/raw/classification/Train/meningioma/m3 (104).jpg,1,1,0.036096,0.893020,0.033519,0.037364
+data/raw/classification/Train/meningioma/m3 (109).jpg,1,1,0.037311,0.890565,0.033637,0.038487
+data/raw/classification/Train/meningioma/m3 (130).jpg,1,1,0.042769,0.884843,0.034123,0.038265
+data/raw/classification/Train/meningioma/m3 (131).jpg,1,1,0.048077,0.879488,0.031477,0.040958
+data/raw/classification/Train/meningioma/m3 (138).jpg,1,1,0.038809,0.891971,0.032615,0.036606
+data/raw/classification/Train/meningioma/m3 (143).jpg,1,1,0.074422,0.805324,0.044354,0.075899
+data/raw/classification/Train/meningioma/m3 (15).jpg,1,1,0.036669,0.892235,0.033421,0.037675
+data/raw/classification/Train/meningioma/m3 (158).jpg,1,1,0.034106,0.897770,0.031983,0.036141
+data/raw/classification/Train/meningioma/m3 (159).jpg,1,1,0.033529,0.897130,0.032650,0.036690
+data/raw/classification/Train/meningioma/m3 (16).jpg,1,1,0.035260,0.896633,0.031922,0.036185
+data/raw/classification/Train/meningioma/m3 (160).jpg,1,1,0.036983,0.891150,0.034148,0.037720
+data/raw/classification/Train/meningioma/m3 (176).jpg,1,2,0.069164,0.332756,0.542097,0.055983
+data/raw/classification/Train/meningioma/m3 (177).jpg,1,1,0.035945,0.894132,0.033177,0.036745
+data/raw/classification/Train/meningioma/M_821_VF_.jpg,1,1,0.109395,0.668649,0.097570,0.124387
+data/raw/classification/Train/meningioma/M_823_HF_.jpg,1,1,0.036572,0.893770,0.032828,0.036831
+data/raw/classification/Train/meningioma/M_823_VF_.jpg,1,1,0.039695,0.889525,0.033238,0.037542
+data/raw/classification/Train/meningioma/M_824_VF_.jpg,1,1,0.037171,0.890018,0.034530,0.038281
+data/raw/classification/Train/meningioma/M_825_VF_.jpg,1,1,0.037265,0.888461,0.035450,0.038824
+data/raw/classification/Train/meningioma/M_826_VF_.jpg,1,1,0.038774,0.885245,0.036090,0.039891
+data/raw/classification/Train/meningioma/M_830_RO_.jpg,1,1,0.097673,0.769835,0.056791,0.075701
+data/raw/classification/Train/meningioma/M_831_HF_.jpg,1,1,0.037202,0.889933,0.034621,0.038245
+data/raw/classification/Train/meningioma/M_832_HF_.jpg,1,1,0.038228,0.885665,0.035561,0.040546
+data/raw/classification/Train/meningioma/M_834_HF_.jpg,1,1,0.039915,0.886545,0.034437,0.039103
+data/raw/classification/Train/meningioma/M_835_HF_.jpg,1,1,0.039455,0.882778,0.036237,0.041530
+data/raw/classification/Train/meningioma/M_835_VF_.jpg,1,1,0.039503,0.888779,0.033399,0.038320
+data/raw/classification/Train/meningioma/M_836_RO_.jpg,1,1,0.036767,0.890273,0.034169,0.038791
+data/raw/classification/Train/meningioma/M_837_RO_.jpg,1,1,0.036145,0.893488,0.033052,0.037315
+data/raw/classification/Train/meningioma/M_838_HF_.jpg,1,1,0.036115,0.888707,0.035888,0.039290
+data/raw/classification/Train/meningioma/M_838_RO_.jpg,1,1,0.035739,0.893477,0.033129,0.037654
+data/raw/classification/Train/meningioma/M_838_VF_.jpg,1,1,0.040060,0.880309,0.038135,0.041496
+data/raw/classification/Train/meningioma/M_839_RO_.jpg,1,1,0.035024,0.896959,0.031773,0.036243
+data/raw/classification/Train/meningioma/M_840_VF_.jpg,1,1,0.041009,0.881356,0.036713,0.040922
+data/raw/classification/Train/meningioma/M_841_VF_.jpg,1,1,0.040962,0.882592,0.035948,0.040497
+data/raw/classification/Train/meningioma/M_842.jpg,1,1,0.035522,0.897727,0.030959,0.035793
+data/raw/classification/Train/meningioma/M_842_BR_.jpg,1,1,0.036119,0.895192,0.031900,0.036789
+data/raw/classification/Train/meningioma/M_842_DA_.jpg,1,1,0.035787,0.897724,0.030855,0.035633
+data/raw/classification/Train/meningioma/M_842_RO_.jpg,1,1,0.036548,0.895083,0.031708,0.036660
+data/raw/classification/Train/meningioma/M_842_SP_.jpg,1,1,0.034459,0.898788,0.030833,0.035919
+data/raw/classification/Train/meningioma/M_842_VF_.jpg,1,1,0.035321,0.896882,0.031766,0.036031
+data/raw/classification/Train/meningioma/M_845_HF_.jpg,1,0,0.800743,0.066779,0.062871,0.069607
+data/raw/classification/Train/meningioma/M_845_RO_.jpg,1,1,0.042468,0.877814,0.037294,0.042424
+data/raw/classification/Train/meningioma/M_848_VF_.jpg,1,1,0.035200,0.894032,0.033591,0.037178
+data/raw/classification/Train/meningioma/M_849_RO_.jpg,1,1,0.036053,0.892808,0.033861,0.037278
+data/raw/classification/Train/meningioma/M_849_VF_.jpg,1,1,0.034806,0.895449,0.033144,0.036601
+data/raw/classification/Train/meningioma/M_850_RO_.jpg,1,1,0.035962,0.892941,0.033748,0.037350
+data/raw/classification/Train/meningioma/M_850_VF_.jpg,1,1,0.034594,0.896021,0.033123,0.036262
+data/raw/classification/Train/meningioma/M_851_HF_.jpg,1,1,0.037902,0.890819,0.033365,0.037914
+data/raw/classification/Train/meningioma/M_851_RO_.jpg,1,1,0.038271,0.890505,0.033347,0.037878
+data/raw/classification/Train/meningioma/M_851_VF_.jpg,1,1,0.037033,0.892570,0.033082,0.037316
+data/raw/classification/Train/meningioma/M_852_VF_.jpg,1,1,0.037373,0.890922,0.033804,0.037901
+data/raw/classification/Train/meningioma/M_853_HF_.jpg,1,1,0.034613,0.896556,0.032273,0.036557
+data/raw/classification/Train/meningioma/M_853_RO_.jpg,1,1,0.034711,0.895023,0.033037,0.037229
+data/raw/classification/Train/meningioma/M_854_DA_.jpg,1,1,0.036123,0.894339,0.032429,0.037109
+data/raw/classification/Train/meningioma/M_854_HF_.jpg,1,1,0.035879,0.893987,0.032714,0.037420
+data/raw/classification/Train/meningioma/M_856_HF_.jpg,1,1,0.044430,0.873973,0.038697,0.042900
+data/raw/classification/Train/meningioma/M_856_RO_.jpg,1,1,0.053869,0.853973,0.043131,0.049027
+data/raw/classification/Train/meningioma/M_856_VF_.jpg,1,1,0.043164,0.876293,0.038233,0.042311
+data/raw/classification/Train/meningioma/M_863_RO_.jpg,1,1,0.035412,0.891353,0.034521,0.038714
+data/raw/classification/Train/meningioma/M_865_VF_.jpg,1,1,0.034437,0.899844,0.030650,0.035070
+data/raw/classification/Train/meningioma/M_866_RO_.jpg,1,1,0.034828,0.895120,0.032717,0.037335
+data/raw/classification/Train/meningioma/M_866_VF_.jpg,1,1,0.034073,0.898857,0.031667,0.035403
+data/raw/classification/Train/meningioma/M_868_RO_.jpg,1,1,0.034366,0.894894,0.033132,0.037609
+data/raw/classification/Train/meningioma/M_868_VF_.jpg,1,1,0.035355,0.893772,0.033670,0.037204
+data/raw/classification/Train/meningioma/M_869_VF_.jpg,1,1,0.036000,0.892265,0.033987,0.037747
+data/raw/classification/Train/meningioma/M_879_HF_.jpg,1,1,0.035053,0.895799,0.032058,0.037090
+data/raw/classification/Train/meningioma/M_880_VF_.jpg,1,1,0.036872,0.891581,0.033498,0.038049
+data/raw/classification/Train/meningioma/M_881.jpg,1,1,0.034360,0.896288,0.032677,0.036675
+data/raw/classification/Train/meningioma/M_881_BR_.jpg,1,1,0.034494,0.895749,0.032908,0.036849
+data/raw/classification/Train/meningioma/M_881_DA_.jpg,1,1,0.034810,0.894957,0.033138,0.037096
+data/raw/classification/Train/meningioma/M_881_SP_.jpg,1,1,0.033145,0.896779,0.033156,0.036920
+data/raw/classification/Train/meningioma/M_881_VF_.jpg,1,1,0.036880,0.891429,0.033573,0.038118
+data/raw/classification/Train/meningioma/M_882_RO_.jpg,1,1,0.033167,0.899545,0.031767,0.035521
+data/raw/classification/Train/meningioma/M_884_RO_.jpg,1,1,0.034688,0.898838,0.031207,0.035267
+data/raw/classification/Train/meningioma/M_884_VF_.jpg,1,1,0.035613,0.893328,0.033521,0.037538
+data/raw/classification/Train/meningioma/M_885.jpg,1,1,0.034323,0.897276,0.031900,0.036501
+data/raw/classification/Train/meningioma/M_885_BR_.jpg,1,1,0.034493,0.896457,0.032087,0.036963
+data/raw/classification/Train/meningioma/M_885_DA_.jpg,1,1,0.034969,0.895077,0.032787,0.037167
+data/raw/classification/Train/meningioma/M_885_SP_.jpg,1,1,0.035020,0.894099,0.032996,0.037885
+data/raw/classification/Train/meningioma/M_887_VF_.jpg,1,1,0.033944,0.899128,0.031454,0.035475
+data/raw/classification/Train/meningioma/Te-me_0064.jpg,1,0,0.892413,0.035899,0.036912,0.034776
+data/raw/classification/Train/meningioma/Te-me_0067.jpg,1,0,0.833235,0.057831,0.056978,0.051956
+data/raw/classification/Train/meningioma/Te-me_0085.jpg,1,1,0.042330,0.878545,0.038291,0.040835
+data/raw/classification/Train/meningioma/Te-me_0092.jpg,1,1,0.035241,0.898157,0.032485,0.034117
+data/raw/classification/Train/meningioma/Te-me_0099.jpg,1,1,0.047322,0.871423,0.037226,0.044029
+data/raw/classification/Train/meningioma/Te-me_0100.jpg,1,1,0.039405,0.891916,0.032089,0.036590
+data/raw/classification/Train/meningioma/Te-me_0115.jpg,1,0,0.823163,0.063537,0.052704,0.060596
+data/raw/classification/Train/meningioma/Te-me_0129.jpg,1,1,0.035733,0.890752,0.034847,0.038668
+data/raw/classification/Train/meningioma/Te-me_0141.jpg,1,1,0.283112,0.589037,0.057592,0.070259
+data/raw/classification/Train/meningioma/Te-me_0173.jpg,1,1,0.036544,0.892574,0.033173,0.037709
+data/raw/classification/Train/meningioma/Te-me_0184.jpg,1,1,0.034690,0.895377,0.033046,0.036888
+data/raw/classification/Train/meningioma/Te-me_0187.jpg,1,1,0.036278,0.891694,0.033936,0.038092
+data/raw/classification/Train/meningioma/Te-me_0195.jpg,1,1,0.036727,0.892405,0.032884,0.037984
+data/raw/classification/Train/meningioma/Te-me_0202.jpg,1,1,0.038058,0.889215,0.033580,0.039147
+data/raw/classification/Train/meningioma/Te-me_0204.jpg,1,1,0.036118,0.891533,0.034188,0.038161
+data/raw/classification/Train/meningioma/Te-me_0210.jpg,1,1,0.034859,0.893320,0.033890,0.037932
+data/raw/classification/Train/meningioma/Te-me_0211.jpg,1,1,0.034323,0.896242,0.032246,0.037190
+data/raw/classification/Train/meningioma/Te-me_0214.jpg,1,1,0.035610,0.896300,0.032081,0.036009
+data/raw/classification/Train/meningioma/Te-me_0215.jpg,1,1,0.036743,0.891852,0.033058,0.038347
+data/raw/classification/Train/meningioma/Te-me_0227.jpg,1,1,0.033733,0.902126,0.029798,0.034343
+data/raw/classification/Train/meningioma/Te-me_0228.jpg,1,1,0.033062,0.898716,0.032385,0.035838
+data/raw/classification/Train/meningioma/Te-me_0229.jpg,1,1,0.037588,0.889617,0.033682,0.039113
+data/raw/classification/Train/meningioma/Te-me_0230.jpg,1,1,0.035048,0.896344,0.032597,0.036010
+data/raw/classification/Train/meningioma/Te-me_0232.jpg,1,1,0.037741,0.891145,0.033262,0.037852
+data/raw/classification/Train/meningioma/Te-me_0242.jpg,1,1,0.035145,0.895152,0.033041,0.036662
+data/raw/classification/Train/meningioma/Te-me_0251.jpg,1,1,0.036401,0.895377,0.032193,0.036029
+data/raw/classification/Train/meningioma/Te-me_0254.jpg,1,1,0.039716,0.884125,0.034799,0.041360
+data/raw/classification/Train/meningioma/Te-me_0255.jpg,1,1,0.036982,0.890444,0.034473,0.038102
+data/raw/classification/Train/meningioma/Te-me_0260.jpg,1,1,0.037528,0.886839,0.036233,0.039399
+data/raw/classification/Train/meningioma/Te-me_0265.jpg,1,1,0.038314,0.885737,0.035643,0.040306
+data/raw/classification/Train/meningioma/Te-me_0285.jpg,1,1,0.039820,0.887415,0.033958,0.038806
+data/raw/classification/Train/meningioma/Te-me_0297.jpg,1,1,0.038383,0.885948,0.036235,0.039434
+data/raw/classification/Train/meningioma/Tr-me_0104.jpg,1,1,0.038347,0.885298,0.035847,0.040509
+data/raw/classification/Train/meningioma/Tr-me_0105.jpg,1,1,0.035780,0.892775,0.033052,0.038393
+data/raw/classification/Train/meningioma/Tr-me_0112.jpg,1,1,0.037929,0.885820,0.035528,0.040723
+data/raw/classification/Train/meningioma/Tr-me_0119.jpg,1,1,0.047792,0.862531,0.047562,0.042115
+data/raw/classification/Train/meningioma/Tr-me_0155.jpg,1,1,0.035590,0.892684,0.033118,0.038607
+data/raw/classification/Train/meningioma/Tr-me_0156.jpg,1,1,0.034786,0.893898,0.032955,0.038360
+data/raw/classification/Train/meningioma/Tr-me_0157.jpg,1,1,0.035705,0.892228,0.033385,0.038682
+data/raw/classification/Train/meningioma/Tr-me_0158.jpg,1,1,0.034886,0.893750,0.033019,0.038345
+data/raw/classification/Train/meningioma/Tr-me_0172.jpg,1,1,0.071737,0.820441,0.054083,0.053739
+data/raw/classification/Train/meningioma/Tr-me_0173.jpg,1,1,0.038845,0.888016,0.035254,0.037885
+data/raw/classification/Train/meningioma/Tr-me_0174.jpg,1,1,0.036141,0.891729,0.034461,0.037670
+data/raw/classification/Train/meningioma/Tr-me_0175.jpg,1,1,0.043250,0.870763,0.040179,0.045807
+data/raw/classification/Train/meningioma/Tr-me_0185.jpg,1,1,0.041876,0.879091,0.038076,0.040957
+data/raw/classification/Train/meningioma/Tr-me_0193.jpg,1,1,0.035241,0.898157,0.032485,0.034117
+data/raw/classification/Train/meningioma/Tr-me_0195.jpg,1,3,0.034072,0.056015,0.037459,0.872454
+data/raw/classification/Train/meningioma/Tr-me_0200.jpg,1,1,0.043496,0.881962,0.034847,0.039694
+data/raw/classification/Train/meningioma/Tr-me_0202.jpg,1,0,0.842413,0.051632,0.052865,0.053090
+data/raw/classification/Train/meningioma/Tr-me_0204.jpg,1,1,0.040601,0.891482,0.031430,0.036488
+data/raw/classification/Train/meningioma/Tr-me_0205.jpg,1,1,0.044043,0.867744,0.041248,0.046965
+data/raw/classification/Train/meningioma/Tr-me_0216.jpg,1,3,0.058212,0.102170,0.051949,0.787668
+data/raw/classification/Train/meningioma/Tr-me_0221.jpg,1,1,0.037157,0.888552,0.035013,0.039278
+data/raw/classification/Train/meningioma/Tr-me_0224.jpg,1,2,0.044015,0.063136,0.845480,0.047369
+data/raw/classification/Train/meningioma/Tr-me_0225.jpg,1,1,0.037634,0.891840,0.033671,0.036854
+data/raw/classification/Train/meningioma/Tr-me_0229.jpg,1,1,0.038352,0.888562,0.034077,0.039009
+data/raw/classification/Train/meningioma/Tr-me_0230.jpg,1,1,0.041193,0.887606,0.033141,0.038060
+data/raw/classification/Train/meningioma/Tr-me_0231.jpg,1,1,0.036869,0.892588,0.032953,0.037590
+data/raw/classification/Train/meningioma/Tr-me_0233.jpg,1,1,0.037142,0.888538,0.035021,0.039300
+data/raw/classification/Train/meningioma/Tr-me_0235.jpg,1,1,0.039137,0.887033,0.035112,0.038717
+data/raw/classification/Train/meningioma/Tr-me_0236.jpg,1,1,0.044334,0.869160,0.041115,0.045391
+data/raw/classification/Train/meningioma/Tr-me_0239.jpg,1,1,0.043422,0.872777,0.040040,0.043761
+data/raw/classification/Train/meningioma/Tr-me_0240.jpg,1,1,0.036426,0.893163,0.032891,0.037520
+data/raw/classification/Train/meningioma/Tr-me_0241.jpg,1,1,0.040514,0.886049,0.034548,0.038889
+data/raw/classification/Train/meningioma/Tr-me_0245.jpg,1,0,0.833235,0.057831,0.056978,0.051956
+data/raw/classification/Train/meningioma/Tr-me_0262.jpg,1,1,0.042330,0.878545,0.038291,0.040835
+data/raw/classification/Train/meningioma/Tr-me_0276.jpg,1,1,0.047322,0.871423,0.037226,0.044029
+data/raw/classification/Train/meningioma/Tr-me_0277.jpg,1,1,0.039405,0.891916,0.032089,0.036590
+data/raw/classification/Train/meningioma/Tr-me_0281.jpg,1,1,0.043250,0.870763,0.040179,0.045807
+data/raw/classification/Train/meningioma/Tr-me_0288.jpg,1,1,0.035284,0.893217,0.033610,0.037889
+data/raw/classification/Train/meningioma/Tr-me_0315.jpg,1,1,0.040173,0.882264,0.036389,0.041173
+data/raw/classification/Train/meningioma/Tr-me_0330.jpg,1,1,0.034862,0.897992,0.031165,0.035981
+data/raw/classification/Train/meningioma/Tr-me_0334.jpg,1,1,0.038481,0.886138,0.035368,0.040013
+data/raw/classification/Train/meningioma/Tr-me_0359.jpg,1,1,0.077477,0.748061,0.044184,0.130278
+data/raw/classification/Train/meningioma/Tr-me_0360.jpg,1,1,0.137483,0.573895,0.063363,0.225259
+data/raw/classification/Train/meningioma/Tr-me_0362.jpg,1,1,0.042890,0.872365,0.040905,0.043840
+data/raw/classification/Train/meningioma/Tr-me_0375.jpg,1,1,0.034971,0.895082,0.032473,0.037474
+data/raw/classification/Train/meningioma/Tr-me_0387.jpg,1,1,0.038021,0.890637,0.033537,0.037805
+data/raw/classification/Train/meningioma/Tr-me_0398.jpg,1,1,0.034620,0.892845,0.033621,0.038914
+data/raw/classification/Train/meningioma/Tr-me_0402.jpg,1,1,0.035679,0.893677,0.033133,0.037510
+data/raw/classification/Train/meningioma/Tr-me_0413.jpg,1,1,0.035630,0.893882,0.033058,0.037430
+data/raw/classification/Train/meningioma/Tr-me_0416.jpg,1,1,0.038309,0.886732,0.034756,0.040203
+data/raw/classification/Train/meningioma/Tr-me_0426.jpg,1,1,0.051980,0.856629,0.043210,0.048181
+data/raw/classification/Train/meningioma/Tr-me_0439.jpg,1,1,0.034496,0.896220,0.032446,0.036837
+data/raw/classification/Train/meningioma/Tr-me_0443.jpg,1,1,0.035829,0.892846,0.033266,0.038059
+data/raw/classification/Train/meningioma/Tr-me_0444.jpg,1,1,0.035098,0.893550,0.033701,0.037651
+data/raw/classification/Train/meningioma/Tr-me_0454.jpg,1,1,0.037101,0.890597,0.033351,0.038951
+data/raw/classification/Train/meningioma/Tr-me_0471.jpg,1,1,0.035676,0.891969,0.033729,0.038626
+data/raw/classification/Train/meningioma/Tr-me_0477.jpg,1,1,0.034141,0.899314,0.031114,0.035432
+data/raw/classification/Train/meningioma/Tr-me_0483.jpg,1,1,0.038520,0.888713,0.033739,0.039028
+data/raw/classification/Train/meningioma/Tr-me_0489.jpg,1,1,0.032809,0.903417,0.029629,0.034146
+data/raw/classification/Train/meningioma/Tr-me_0491.jpg,1,1,0.034222,0.897311,0.031839,0.036628
+data/raw/classification/Train/meningioma/Tr-me_0494.jpg,1,1,0.033753,0.897940,0.032195,0.036112
+data/raw/classification/Train/meningioma/Tr-me_0495.jpg,1,1,0.035219,0.899253,0.030777,0.034752
+data/raw/classification/Train/meningioma/Tr-me_0496.jpg,1,2,0.029185,0.031954,0.909917,0.028945
+data/raw/classification/Train/meningioma/Tr-me_0521.jpg,1,1,0.035403,0.893035,0.033602,0.037961
+data/raw/classification/Train/meningioma/Tr-me_0524.jpg,1,1,0.035920,0.893316,0.033434,0.037330
+data/raw/classification/Train/meningioma/Tr-me_0528.jpg,1,1,0.035839,0.892970,0.033494,0.037697
+data/raw/classification/Train/meningioma/Tr-me_0531.jpg,1,1,0.034397,0.895373,0.033391,0.036839
+data/raw/classification/Train/meningioma/Tr-me_0537.jpg,1,1,0.034698,0.892913,0.033515,0.038874
+data/raw/classification/Train/meningioma/Tr-me_0539.jpg,1,1,0.033853,0.899349,0.030890,0.035908
+data/raw/classification/Train/meningioma/Tr-me_0544.jpg,1,1,0.034737,0.892111,0.034540,0.038612
+data/raw/classification/Train/meningioma/Tr-me_0547.jpg,1,1,0.034944,0.895903,0.032390,0.036763
+data/raw/classification/Train/meningioma/Tr-me_0548.jpg,1,1,0.033852,0.896649,0.032734,0.036765
+data/raw/classification/Train/meningioma/Tr-me_0551.jpg,1,1,0.036096,0.893020,0.033519,0.037364
+data/raw/classification/Train/meningioma/Tr-me_0556.jpg,1,1,0.037311,0.890565,0.033637,0.038487
+data/raw/classification/Train/meningioma/Tr-me_0594.jpg,1,1,0.074422,0.805324,0.044354,0.075899
+data/raw/classification/Train/meningioma/Tr-me_0600.jpg,1,1,0.036669,0.892235,0.033421,0.037675
+data/raw/classification/Train/meningioma/Tr-me_0609.jpg,1,1,0.034106,0.897770,0.031983,0.036141
+data/raw/classification/Train/meningioma/Tr-me_0610.jpg,1,1,0.033529,0.897130,0.032650,0.036690
+data/raw/classification/Train/meningioma/Tr-me_0611.jpg,1,1,0.035260,0.896633,0.031922,0.036185
+data/raw/classification/Train/meningioma/Tr-me_0612.jpg,1,1,0.036983,0.891150,0.034148,0.037720
+data/raw/classification/Train/meningioma/Tr-me_0613.jpg,1,1,0.039986,0.886765,0.034015,0.039234
+data/raw/classification/Train/meningioma/Tr-me_0839.jpg,1,1,0.036114,0.892624,0.033376,0.037886
+data/raw/classification/Train/meningioma/Tr-me_0849.jpg,1,1,0.037786,0.890297,0.033851,0.038066
+data/raw/classification/Train/meningioma/Tr-me_0853.jpg,1,1,0.038566,0.888220,0.034119,0.039096
+data/raw/classification/Train/meningioma/Tr-me_0857.jpg,1,1,0.039022,0.887690,0.035068,0.038220
+data/raw/classification/Train/meningioma/Tr-me_0893.jpg,1,1,0.036048,0.893489,0.032969,0.037494
+data/raw/classification/Train/meningioma/Tr-me_0896.jpg,1,1,0.036014,0.890256,0.035005,0.038724
+data/raw/classification/Train/meningioma/Tr-me_0907.jpg,1,1,0.036368,0.888377,0.035072,0.040183
+data/raw/classification/Train/meningioma/Tr-me_0908.jpg,1,1,0.035864,0.889933,0.034769,0.039434
+data/raw/classification/Train/meningioma/Tr-me_0909.jpg,1,1,0.035930,0.897461,0.031170,0.035439
+data/raw/classification/Train/meningioma/Tr-me_0913.jpg,1,1,0.035290,0.893063,0.033679,0.037968
+data/raw/classification/Train/meningioma/Tr-me_0918.jpg,1,1,0.033844,0.897815,0.031660,0.036682
+data/raw/classification/Train/meningioma/Tr-me_0933.jpg,1,1,0.036223,0.890700,0.034326,0.038751
+data/raw/classification/Train/meningioma/Tr-me_0948.jpg,1,1,0.038250,0.887725,0.034230,0.039795
+data/raw/classification/Train/meningioma/Tr-me_0957.jpg,1,1,0.040841,0.881641,0.035224,0.042294
+data/raw/classification/Train/meningioma/Tr-me_0959.jpg,1,1,0.036149,0.895954,0.031494,0.036404
+data/raw/classification/Train/meningioma/Tr-me_0973.jpg,1,1,0.035051,0.895870,0.032404,0.036675
+data/raw/classification/Train/meningioma/Tr-me_0974.jpg,1,1,0.035511,0.894357,0.033080,0.037052
+data/raw/classification/Train/meningioma/Tr-me_0975.jpg,1,1,0.036174,0.891912,0.034101,0.037813
+data/raw/classification/Train/meningioma/Tr-me_0977.jpg,1,1,0.041329,0.880549,0.036370,0.041752
+data/raw/classification/Train/meningioma/Tr-me_0978.jpg,1,1,0.037448,0.890640,0.033561,0.038351
+data/raw/classification/Train/meningioma/Tr-me_0981.jpg,1,1,0.033770,0.901695,0.029866,0.034669
+data/raw/classification/Train/meningioma/Tr-me_0990.jpg,1,1,0.035860,0.893298,0.033158,0.037685
+data/raw/classification/Train/meningioma/Tr-me_1000.jpg,1,1,0.034902,0.892622,0.034254,0.038222
+data/raw/classification/Train/meningioma/Tr-me_1001.jpg,1,1,0.035057,0.892561,0.034248,0.038133
+data/raw/classification/Train/meningioma/Tr-me_1004.jpg,1,1,0.106701,0.763613,0.060072,0.069614
+data/raw/classification/Train/meningioma/Tr-me_1010.jpg,1,1,0.035122,0.893613,0.033934,0.037331
+data/raw/classification/Train/meningioma/Tr-me_1017.jpg,1,1,0.036775,0.892182,0.032946,0.038097
+data/raw/classification/Train/meningioma/Tr-me_1019.jpg,1,1,0.036967,0.890216,0.033975,0.038841
+data/raw/classification/Train/meningioma/Tr-me_1020.jpg,1,1,0.036657,0.891651,0.033578,0.038114
+data/raw/classification/Train/meningioma/Tr-me_1021.jpg,1,1,0.033718,0.897730,0.031990,0.036562
+data/raw/classification/Train/meningioma/Tr-me_1025.jpg,1,1,0.041468,0.888018,0.032979,0.037535
+data/raw/classification/Train/meningioma/Tr-me_1026.jpg,1,1,0.038120,0.891289,0.033253,0.037338
+data/raw/classification/Train/meningioma/Tr-me_1053.jpg,1,1,0.035571,0.895896,0.031211,0.037322
+data/raw/classification/Train/meningioma/Tr-me_1055.jpg,1,1,0.036996,0.890335,0.033770,0.038898
+data/raw/classification/Train/meningioma/Tr-me_1056.jpg,1,1,0.074293,0.842718,0.034907,0.048082
+data/raw/classification/Train/meningioma/Tr-me_1057.jpg,1,1,0.033972,0.897279,0.032558,0.036190
+data/raw/classification/Train/meningioma/Tr-me_1062.jpg,1,1,0.056478,0.852812,0.043710,0.046999
+data/raw/classification/Train/meningioma/Tr-me_1064.jpg,1,1,0.037338,0.889530,0.034640,0.038491
+data/raw/classification/Train/meningioma/Tr-me_1102.jpg,1,1,0.035906,0.893236,0.033534,0.037324
+data/raw/classification/Train/meningioma/Tr-me_1103.jpg,1,1,0.035564,0.893268,0.033785,0.037383
+data/raw/classification/Train/meningioma/Tr-me_1105.jpg,1,1,0.047082,0.869079,0.038924,0.044915
+data/raw/classification/Train/meningioma/Tr-me_1119.jpg,1,1,0.058450,0.777200,0.115039,0.049311
+data/raw/classification/Train/meningioma/Tr-me_1127.jpg,1,1,0.036022,0.890891,0.034459,0.038629
+data/raw/classification/Train/meningioma/Tr-me_1128.jpg,1,1,0.057425,0.847802,0.047002,0.047771
+data/raw/classification/Train/meningioma/Tr-me_1131.jpg,1,1,0.036723,0.892857,0.033004,0.037416
+data/raw/classification/Train/meningioma/Tr-me_1132.jpg,1,1,0.035241,0.896932,0.031868,0.035960
+data/raw/classification/Train/meningioma/Tr-me_1133.jpg,1,1,0.035194,0.894528,0.033231,0.037047
+data/raw/classification/Train/meningioma/Tr-me_1138.jpg,1,1,0.036837,0.892090,0.033185,0.037888
+data/raw/classification/Train/meningioma/Tr-me_1142.jpg,1,1,0.039762,0.886055,0.034280,0.039903
+data/raw/classification/Train/meningioma/Tr-me_1146.jpg,1,1,0.034441,0.898109,0.031681,0.035768
+data/raw/classification/Train/meningioma/Tr-me_1156.jpg,1,1,0.036936,0.890590,0.034425,0.038049
+data/raw/classification/Train/meningioma/Tr-me_1157.jpg,1,1,0.036271,0.892741,0.033038,0.037950
+data/raw/classification/Train/meningioma/Tr-me_1172.jpg,1,1,0.034725,0.896448,0.032670,0.036157
+data/raw/classification/Train/meningioma/Tr-me_1174.jpg,1,1,0.044052,0.880330,0.037374,0.038244
+data/raw/classification/Train/meningioma/Tr-me_1188.jpg,1,1,0.037448,0.887317,0.035151,0.040084
+data/raw/classification/Train/meningioma/Tr-me_1191.jpg,1,1,0.036427,0.887634,0.036359,0.039580
+data/raw/classification/Train/meningioma/Tr-me_1199.jpg,1,1,0.037176,0.893472,0.032402,0.036950
+data/raw/classification/Train/meningioma/Tr-me_1201.jpg,1,1,0.035459,0.895360,0.032253,0.036928
+data/raw/classification/Train/meningioma/Tr-me_1206.jpg,1,2,0.029798,0.036988,0.903468,0.029747
+data/raw/classification/Train/meningioma/Tr-me_1217.jpg,1,1,0.035502,0.895130,0.032086,0.037282
+data/raw/classification/Train/meningioma/Tr-me_1227.jpg,1,1,0.042511,0.872079,0.040281,0.045130
+data/raw/classification/Train/meningioma/Tr-me_1231.jpg,1,1,0.038341,0.890970,0.033030,0.037659
+data/raw/classification/Train/meningioma/Tr-me_1242.jpg,1,1,0.035654,0.893259,0.034030,0.037056
+data/raw/classification/Train/meningioma/Tr-me_1299.jpg,1,1,0.035221,0.897215,0.031443,0.036121
+data/raw/classification/Train/meningioma/Tr-me_1336.jpg,1,0,0.874984,0.041126,0.040202,0.043689
+data/raw/classification/Train/no tumor/1587.jpg,3,3,0.039593,0.041521,0.039918,0.878968
+data/raw/classification/Train/no tumor/1614.jpg,3,3,0.052379,0.059064,0.038750,0.849806
+data/raw/classification/Train/no tumor/1621.jpg,3,3,0.045672,0.044628,0.038122,0.871578
+data/raw/classification/Train/no tumor/1628.jpg,3,3,0.037570,0.039307,0.033521,0.889602
+data/raw/classification/Train/no tumor/1632.jpg,3,3,0.052379,0.059064,0.038750,0.849806
+data/raw/classification/Train/no tumor/1633.jpg,3,3,0.035963,0.033327,0.038192,0.892518
+data/raw/classification/Train/no tumor/1645.jpg,3,3,0.040770,0.038170,0.043503,0.877557
+data/raw/classification/Train/no tumor/1657.jpg,3,3,0.037365,0.037484,0.040531,0.884620
+data/raw/classification/Train/no tumor/1672.jpg,3,3,0.034802,0.037668,0.035120,0.892410
+data/raw/classification/Train/no tumor/1674.jpg,3,3,0.034647,0.034790,0.037190,0.893373
+data/raw/classification/Train/no tumor/1677.jpg,3,3,0.038954,0.038956,0.038250,0.883840
+data/raw/classification/Train/no tumor/1691.jpg,3,3,0.038897,0.034582,0.038128,0.888393
+data/raw/classification/Train/no tumor/1692.jpg,3,3,0.038309,0.037496,0.035317,0.888879
+data/raw/classification/Train/no tumor/1697.jpg,3,3,0.035070,0.035032,0.037037,0.892861
+data/raw/classification/Train/no tumor/1706.jpg,3,3,0.030384,0.031493,0.032559,0.905563
+data/raw/classification/Train/no tumor/1711.jpg,3,3,0.033864,0.037668,0.035165,0.893303
+data/raw/classification/Train/no tumor/1723.jpg,3,3,0.040158,0.041967,0.041792,0.876084
+data/raw/classification/Train/no tumor/1727.jpg,3,3,0.034354,0.035701,0.033486,0.896459
+data/raw/classification/Train/no tumor/1736.jpg,3,3,0.032190,0.034794,0.035839,0.897176
+data/raw/classification/Train/no tumor/1741.jpg,3,3,0.040164,0.037723,0.040369,0.881744
+data/raw/classification/Train/no tumor/1762.jpg,3,3,0.028564,0.036181,0.030915,0.904340
+data/raw/classification/Train/no tumor/1770.jpg,3,3,0.042331,0.039837,0.042283,0.875549
+data/raw/classification/Train/no tumor/1771.jpg,3,3,0.035189,0.037712,0.035764,0.891336
+data/raw/classification/Train/no tumor/1777.jpg,3,3,0.036266,0.035961,0.036999,0.890774
+data/raw/classification/Train/no tumor/1801.jpg,3,3,0.042675,0.043066,0.038243,0.876016
+data/raw/classification/Train/no tumor/1804.jpg,3,3,0.037343,0.046758,0.037548,0.878352
+data/raw/classification/Train/no tumor/1817.jpg,3,1,0.042976,0.893190,0.029954,0.033879
+data/raw/classification/Train/no tumor/1821.jpg,3,3,0.033794,0.038126,0.032942,0.895137
+data/raw/classification/Train/no tumor/1831.jpg,3,3,0.041500,0.038688,0.037613,0.882199
+data/raw/classification/Train/no tumor/1832.jpg,3,3,0.036759,0.037047,0.040011,0.886183
+data/raw/classification/Train/no tumor/1835.jpg,3,3,0.042439,0.040083,0.042747,0.874731
+data/raw/classification/Train/no tumor/1838.jpg,3,3,0.033948,0.034118,0.031682,0.900252
+data/raw/classification/Train/no tumor/1845.jpg,3,3,0.038679,0.037066,0.039335,0.884920
+data/raw/classification/Train/no tumor/1847.jpg,3,3,0.032717,0.031714,0.033494,0.902076
+data/raw/classification/Train/no tumor/1854.jpg,3,3,0.036629,0.034646,0.037063,0.891661
+data/raw/classification/Train/no tumor/1855.jpg,3,3,0.033934,0.037275,0.033777,0.895015
+data/raw/classification/Train/no tumor/1860.jpg,3,3,0.036343,0.035970,0.037067,0.890620
+data/raw/classification/Train/no tumor/1872.jpg,3,3,0.039301,0.036905,0.039664,0.884130
+data/raw/classification/Train/no tumor/1874.jpg,3,3,0.040294,0.037282,0.040635,0.881790
+data/raw/classification/Train/no tumor/1879.jpg,3,3,0.039848,0.036689,0.040542,0.882921
+data/raw/classification/Train/no tumor/1924.jpg,3,3,0.033562,0.034156,0.036099,0.896184
+data/raw/classification/Train/no tumor/35 no.jpg,3,3,0.034196,0.037780,0.035878,0.892146
+data/raw/classification/Train/no tumor/image(13).jpg,3,3,0.033697,0.037614,0.035057,0.893632
+data/raw/classification/Train/no tumor/image(140) - Copy.jpg,3,3,0.044235,0.044483,0.044816,0.866466
+data/raw/classification/Train/no tumor/image(140).jpg,3,3,0.044235,0.044483,0.044816,0.866466
+data/raw/classification/Train/no tumor/image(147) - Copy.jpg,3,3,0.041530,0.041586,0.040839,0.876044
+data/raw/classification/Train/no tumor/image(147).jpg,3,3,0.041530,0.041586,0.040839,0.876044
+data/raw/classification/Train/no tumor/image(158) - Copy.jpg,3,3,0.047391,0.064386,0.053397,0.834826
+data/raw/classification/Train/no tumor/image(158).jpg,3,3,0.047391,0.064386,0.053397,0.834826
+data/raw/classification/Train/no tumor/image(16) - Copy.jpg,3,3,0.056261,0.060439,0.039680,0.843620
+data/raw/classification/Train/no tumor/image(16).jpg,3,3,0.056261,0.060439,0.039680,0.843620
+data/raw/classification/Train/no tumor/image(162).jpg,3,3,0.040049,0.035522,0.037445,0.886984
+data/raw/classification/Train/no tumor/image(179).jpg,3,3,0.038721,0.037730,0.039557,0.883993
+data/raw/classification/Train/no tumor/image(191).jpg,3,3,0.034787,0.034161,0.036109,0.894943
+data/raw/classification/Train/no tumor/N16.jpg,3,1,0.062096,0.461196,0.422706,0.054003
+data/raw/classification/Train/no tumor/N17.jpg,3,1,0.040764,0.827210,0.096155,0.035870
+data/raw/classification/Train/no tumor/N22.JPG,3,3,0.034295,0.035597,0.036351,0.893756
+data/raw/classification/Train/no tumor/N_368_RO_.jpg,3,3,0.113646,0.132395,0.087407,0.666552
+data/raw/classification/Train/no tumor/N_369_RO_.jpg,3,3,0.043100,0.040795,0.037882,0.878223
+data/raw/classification/Train/no tumor/N_371.jpg,3,3,0.038743,0.046986,0.039245,0.875027
+data/raw/classification/Train/no tumor/N_371_BR_.jpg,3,3,0.033689,0.046002,0.034688,0.885621
+data/raw/classification/Train/no tumor/N_371_DA_.jpg,3,3,0.041819,0.045727,0.041148,0.871306
+data/raw/classification/Train/no tumor/N_371_SP_.jpg,3,3,0.040868,0.051183,0.042124,0.865826
+data/raw/classification/Train/no tumor/N_375_RO_.jpg,3,3,0.038666,0.037483,0.037265,0.886586
+data/raw/classification/Train/no tumor/N_376_VF_.jpg,3,3,0.033708,0.039135,0.037523,0.889634
+data/raw/classification/Train/no tumor/N_377_RO_.jpg,3,3,0.033025,0.037157,0.030744,0.899074
+data/raw/classification/Train/no tumor/N_378_RO_.jpg,3,3,0.040807,0.041195,0.037146,0.880852
+data/raw/classification/Train/no tumor/N_379.jpg,3,3,0.034648,0.035045,0.036702,0.893605
+data/raw/classification/Train/no tumor/N_379_BR_.jpg,3,3,0.031884,0.032131,0.033480,0.902506
+data/raw/classification/Train/no tumor/N_379_DA_.jpg,3,3,0.033836,0.034983,0.035944,0.895237
+data/raw/classification/Train/no tumor/N_379_SP_.jpg,3,3,0.042104,0.049203,0.038182,0.870511
+data/raw/classification/Train/no tumor/N_381_HF_.jpg,3,3,0.046971,0.041197,0.041027,0.870804
+data/raw/classification/Train/no tumor/N_381_VF_.jpg,3,3,0.046381,0.040797,0.042203,0.870620
+data/raw/classification/Train/no tumor/N_382_HF_.jpg,3,3,0.045893,0.040491,0.040911,0.872706
+data/raw/classification/Train/no tumor/N_382_VF_.jpg,3,3,0.046560,0.040467,0.042697,0.870276
+data/raw/classification/Train/no tumor/N_383.jpg,3,3,0.036040,0.039031,0.037332,0.887597
+data/raw/classification/Train/no tumor/N_383_BR_.jpg,3,3,0.038180,0.043081,0.038021,0.880719
+data/raw/classification/Train/no tumor/N_383_DA_.jpg,3,3,0.035532,0.037163,0.036978,0.890327
+data/raw/classification/Train/no tumor/N_383_SP_.jpg,3,3,0.034989,0.045982,0.037959,0.881070
+data/raw/classification/Train/no tumor/N_384_HF_.jpg,3,3,0.035051,0.037002,0.037468,0.890479
+data/raw/classification/Train/no tumor/N_384_VF_.jpg,3,3,0.034613,0.035930,0.032094,0.897363
+data/raw/classification/Train/no tumor/N_385_HF_.jpg,3,3,0.039976,0.038798,0.038285,0.882940
+data/raw/classification/Train/no tumor/N_387_HF_.jpg,3,3,0.037769,0.040556,0.035978,0.885697
+data/raw/classification/Train/no tumor/N_390_HF_.jpg,3,3,0.035330,0.037141,0.037288,0.890241
+data/raw/classification/Train/no tumor/N_390_VF_.jpg,3,3,0.034783,0.034992,0.032255,0.897970
+data/raw/classification/Train/no tumor/N_391.jpg,3,3,0.035373,0.035571,0.036964,0.892092
+data/raw/classification/Train/no tumor/N_391_BR_.jpg,3,3,0.034353,0.035623,0.036370,0.893653
+data/raw/classification/Train/no tumor/N_391_DA_.jpg,3,3,0.035854,0.035897,0.038256,0.889992
+data/raw/classification/Train/no tumor/N_391_SP_.jpg,3,3,0.035508,0.043221,0.037342,0.883929
+data/raw/classification/Train/no tumor/N_391_VF_.jpg,3,3,0.038135,0.038085,0.037670,0.886110
+data/raw/classification/Train/no tumor/N_392.jpg,3,3,0.038273,0.037364,0.036362,0.888001
+data/raw/classification/Train/no tumor/N_392_BR_.jpg,3,3,0.033453,0.039419,0.033693,0.893435
+data/raw/classification/Train/no tumor/N_392_DA_.jpg,3,3,0.038130,0.035801,0.036718,0.889352
+data/raw/classification/Train/no tumor/N_392_RO_.jpg,3,3,0.037619,0.037910,0.035378,0.889094
+data/raw/classification/Train/no tumor/N_392_SP_.jpg,3,3,0.036651,0.045254,0.035476,0.882619
+data/raw/classification/Train/no tumor/N_393_HF_.jpg,3,3,0.037830,0.038843,0.035395,0.887932
+data/raw/classification/Train/no tumor/N_393_RO_.jpg,3,3,0.039098,0.040131,0.035377,0.885393
+data/raw/classification/Train/no tumor/N_397_RO_.jpg,3,3,0.036737,0.040513,0.034381,0.888369
+data/raw/classification/Train/no tumor/N_397_SP_.jpg,3,3,0.041171,0.051918,0.041685,0.865226
+data/raw/classification/Train/no tumor/N_398_HF_.jpg,3,3,0.035407,0.036983,0.037587,0.890022
+data/raw/classification/Train/no tumor/N_398_VF_.jpg,3,3,0.033965,0.035045,0.032183,0.898807
+data/raw/classification/Train/no tumor/N_399_HF_.jpg,3,3,0.044756,0.043381,0.040068,0.871795
+data/raw/classification/Train/no tumor/N_39_VF_.jpg,3,0,0.887098,0.036015,0.033947,0.042940
+data/raw/classification/Train/no tumor/N_400_HF_.jpg,3,3,0.046973,0.042108,0.040809,0.870111
+data/raw/classification/Train/no tumor/N_400_RO_.jpg,3,3,0.043498,0.039500,0.038145,0.878857
+data/raw/classification/Train/no tumor/N_400_VF_.jpg,3,3,0.046836,0.041307,0.042231,0.869627
+data/raw/classification/Train/no tumor/N_401_HF_.jpg,3,3,0.036150,0.038030,0.038594,0.887227
+data/raw/classification/Train/no tumor/N_401_VF_.jpg,3,3,0.034557,0.034638,0.031952,0.898853
+data/raw/classification/Train/no tumor/N_402_HF_.jpg,3,3,0.034954,0.034676,0.036646,0.893724
+data/raw/classification/Train/no tumor/N_404.jpg,3,3,0.039559,0.039771,0.042409,0.878262
+data/raw/classification/Train/no tumor/N_404_BR_.jpg,3,3,0.037176,0.037727,0.038882,0.886214
+data/raw/classification/Train/no tumor/N_404_DA_.jpg,3,3,0.038970,0.040175,0.043523,0.877331
+data/raw/classification/Train/no tumor/N_404_HF_.jpg,3,3,0.040977,0.040211,0.043909,0.874904
+data/raw/classification/Train/no tumor/N_404_SP_.jpg,3,3,0.043507,0.055425,0.040081,0.860986
+data/raw/classification/Train/no tumor/N_405_HF_.jpg,3,3,0.033533,0.038043,0.033495,0.894929
+data/raw/classification/Train/no tumor/N_406_HF_.jpg,3,3,0.039115,0.041444,0.039068,0.880373
+data/raw/classification/Train/no tumor/N_406_VF_.jpg,3,3,0.035055,0.036714,0.033092,0.895140
+data/raw/classification/Train/no tumor/N_407_RO_.jpg,3,3,0.040469,0.041248,0.036654,0.881630
+data/raw/classification/Train/no tumor/N_408_SP_.jpg,3,3,0.047296,0.052835,0.046889,0.852979
+data/raw/classification/Train/no tumor/N_411_HF_.jpg,3,3,0.032495,0.033884,0.035304,0.898317
+data/raw/classification/Train/no tumor/N_411_RO_.jpg,3,3,0.037110,0.036735,0.034528,0.891627
+data/raw/classification/Train/no tumor/N_413_HF_.jpg,3,3,0.037650,0.040259,0.036345,0.885746
+data/raw/classification/Train/no tumor/N_415_VF_.jpg,3,3,0.035480,0.036295,0.037263,0.890962
+data/raw/classification/Train/no tumor/N_416_RO_.jpg,3,3,0.038438,0.037364,0.037374,0.886824
+data/raw/classification/Train/no tumor/N_419_RO_.jpg,3,0,0.876975,0.038795,0.041659,0.042571
+data/raw/classification/Train/no tumor/N_419_VF_.jpg,3,3,0.025751,0.032750,0.028138,0.913361
+data/raw/classification/Train/no tumor/N_41_RO_.jpg,3,3,0.033025,0.037157,0.030744,0.899074
+data/raw/classification/Train/no tumor/N_420_HF_.jpg,3,3,0.036346,0.040135,0.035574,0.887945
+data/raw/classification/Train/no tumor/N_421_HF_.jpg,3,3,0.040172,0.039753,0.040584,0.879491
+data/raw/classification/Train/no tumor/N_422_RO_.jpg,3,3,0.039219,0.049261,0.041270,0.870251
+data/raw/classification/Train/no tumor/N_422_VF_.jpg,3,3,0.037037,0.050975,0.043178,0.868810
+data/raw/classification/Train/no tumor/N_423.jpg,3,3,0.039246,0.038473,0.035868,0.886413
+data/raw/classification/Train/no tumor/N_423_BR_.jpg,3,3,0.039214,0.041628,0.035291,0.883868
+data/raw/classification/Train/no tumor/N_423_DA_.jpg,3,3,0.041259,0.039129,0.036828,0.882784
+data/raw/classification/Train/no tumor/N_423_SP_.jpg,3,3,0.046632,0.052859,0.041959,0.858550
+data/raw/classification/Train/no tumor/N_424_HF_.jpg,3,3,0.039244,0.039507,0.039297,0.881953
+data/raw/classification/Train/no tumor/N_426_VF_.jpg,3,0,0.887098,0.036015,0.033947,0.042940
+data/raw/classification/Train/no tumor/N_428_HF_.jpg,3,2,0.043330,0.049373,0.811115,0.096182
+data/raw/classification/Train/no tumor/N_428_RO_.jpg,3,3,0.082823,0.118045,0.375003,0.424129
+data/raw/classification/Train/no tumor/N_429_RO_.jpg,3,3,0.040870,0.039300,0.038490,0.881341
+data/raw/classification/Train/no tumor/N_429_VF_.jpg,3,3,0.035384,0.035900,0.038275,0.890442
+data/raw/classification/Train/no tumor/N_42_RO_.jpg,3,3,0.040469,0.041248,0.036654,0.881630
+data/raw/classification/Train/no tumor/N_430_RO_.jpg,3,3,0.046719,0.044860,0.037608,0.870814
+data/raw/classification/Train/no tumor/N_431_VF_.jpg,3,3,0.034889,0.037117,0.037161,0.890833
+data/raw/classification/Train/no tumor/N_432.jpg,3,3,0.041107,0.039212,0.036346,0.883335
+data/raw/classification/Train/no tumor/N_432_BR_.jpg,3,3,0.040103,0.042493,0.035404,0.882000
+data/raw/classification/Train/no tumor/N_432_DA_.jpg,3,3,0.040605,0.038113,0.037541,0.883741
+data/raw/classification/Train/no tumor/N_432_HF_.jpg,3,3,0.043807,0.040961,0.039435,0.875796
+data/raw/classification/Train/no tumor/N_432_RO_.jpg,3,3,0.031462,0.035564,0.029117,0.903857
+data/raw/classification/Train/no tumor/N_432_SP_.jpg,3,3,0.034459,0.043516,0.035749,0.886276
+data/raw/classification/Train/no tumor/N_435_RO_.jpg,3,3,0.039072,0.037602,0.036894,0.886433
+data/raw/classification/Train/no tumor/N_435_VF_.jpg,3,3,0.033447,0.035000,0.033151,0.898402
+data/raw/classification/Train/no tumor/N_438_RO_.jpg,3,3,0.038404,0.043941,0.037628,0.880027
+data/raw/classification/Train/no tumor/N_43_HF_.jpg,3,3,0.036346,0.040135,0.035574,0.887945
+data/raw/classification/Train/no tumor/N_45_VF_.jpg,3,3,0.034889,0.037117,0.037161,0.890833
+data/raw/classification/Train/no tumor/N_46_HF_.jpg,3,3,0.040172,0.039753,0.040584,0.879491
+data/raw/classification/Train/no tumor/N_49_HF_.jpg,3,3,0.045893,0.040491,0.040911,0.872706
+data/raw/classification/Train/no tumor/N_49_VF_.jpg,3,3,0.046560,0.040467,0.042697,0.870276
+data/raw/classification/Train/no tumor/N_4_VF_.jpg,3,3,0.034651,0.036478,0.035599,0.893272
+data/raw/classification/Train/no tumor/N_50_HF_.jpg,3,3,0.039244,0.039507,0.039297,0.881953
+data/raw/classification/Train/no tumor/N_56_VF_.jpg,3,3,0.035055,0.036714,0.033092,0.895140
+data/raw/classification/Train/no tumor/N_58_HF_.jpg,3,3,0.038153,0.039048,0.035395,0.887403
+data/raw/classification/Train/no tumor/no 95.jpg,3,3,0.041365,0.038771,0.042050,0.877815
+data/raw/classification/Train/no tumor/no 98.jpg,3,3,0.032684,0.033416,0.036366,0.897534
+data/raw/classification/Train/no tumor/No12.jpg,3,3,0.041052,0.040496,0.036114,0.882338
+data/raw/classification/Train/no tumor/No16.jpg,3,3,0.032808,0.041378,0.030790,0.895024
+data/raw/classification/Train/no tumor/Te-no_0086.jpg,3,3,0.038243,0.037474,0.035291,0.888993
+data/raw/classification/Train/no tumor/Te-no_0094.jpg,3,3,0.041695,0.038856,0.036691,0.882759
+data/raw/classification/Train/no tumor/Te-no_0118.jpg,3,3,0.037608,0.039312,0.033537,0.889544
+data/raw/classification/Train/no tumor/Te-no_0119.jpg,3,3,0.034012,0.037239,0.033741,0.895009
+data/raw/classification/Train/no tumor/Te-no_0153.jpg,3,3,0.040202,0.041972,0.041849,0.875977
+data/raw/classification/Train/no tumor/Te-no_0154.jpg,3,3,0.033907,0.034100,0.031718,0.900275
+data/raw/classification/Train/no tumor/Te-no_0156.jpg,3,3,0.038982,0.038975,0.038245,0.883797
+data/raw/classification/Train/no tumor/Te-no_0176.jpg,3,3,0.036757,0.037035,0.039970,0.886238
+data/raw/classification/Train/no tumor/Te-no_0182.jpg,3,3,0.040156,0.037711,0.040388,0.881745
+data/raw/classification/Train/no tumor/Te-no_0187.jpg,3,3,0.035905,0.033266,0.038134,0.892695
+data/raw/classification/Train/no tumor/Te-no_0193.jpg,3,3,0.033534,0.030695,0.033689,0.902082
+data/raw/classification/Train/no tumor/Te-no_0208.jpg,3,3,0.039737,0.036565,0.040356,0.883341
+data/raw/classification/Train/no tumor/Te-no_0210.jpg,3,3,0.033620,0.037527,0.035843,0.893010
+data/raw/classification/Train/no tumor/Te-no_0216.jpg,3,3,0.037064,0.039819,0.039007,0.884110
+data/raw/classification/Train/no tumor/Te-no_0229.jpg,3,3,0.040283,0.037291,0.040605,0.881821
+data/raw/classification/Train/no tumor/Te-no_0231.jpg,3,3,0.039402,0.038194,0.033375,0.889030
+data/raw/classification/Train/no tumor/Te-no_0243.jpg,3,3,0.034377,0.035697,0.033514,0.896412
+data/raw/classification/Train/no tumor/Te-no_0254.jpg,3,3,0.035185,0.037708,0.035761,0.891346
+data/raw/classification/Train/no tumor/Te-no_0266.jpg,3,3,0.042355,0.039859,0.042307,0.875479
+data/raw/classification/Train/no tumor/Te-no_0271.jpg,3,3,0.041795,0.038576,0.042276,0.877352
+data/raw/classification/Train/no tumor/Te-no_0286.jpg,3,3,0.037325,0.037408,0.040465,0.884802
+data/raw/classification/Train/no tumor/Te-no_0289.jpg,3,3,0.040808,0.038212,0.043494,0.877486
+data/raw/classification/Train/no tumor/Te-no_0305.jpg,3,3,0.039433,0.036422,0.040054,0.884091
+data/raw/classification/Train/no tumor/Te-no_0314.jpg,3,3,0.032996,0.032755,0.036773,0.897475
+data/raw/classification/Train/no tumor/Te-no_0315.jpg,3,3,0.036348,0.033633,0.038514,0.891505
+data/raw/classification/Train/no tumor/Te-no_0362.jpg,3,3,0.035137,0.034734,0.034642,0.895487
+data/raw/classification/Train/no tumor/Tr-no_0030.jpg,3,3,0.042229,0.042410,0.035541,0.879821
+data/raw/classification/Train/no tumor/Tr-no_0054.jpg,3,3,0.036610,0.034580,0.037119,0.891691
+data/raw/classification/Train/no tumor/Tr-no_0060.jpg,3,3,0.042119,0.043725,0.042019,0.872137
+data/raw/classification/Train/no tumor/Tr-no_0065.jpg,3,3,0.030381,0.031518,0.032589,0.905512
+data/raw/classification/Train/no tumor/Tr-no_0070.jpg,3,3,0.033678,0.038180,0.032870,0.895271
+data/raw/classification/Train/no tumor/Tr-no_0082.jpg,3,3,0.046494,0.042114,0.041995,0.869397
+data/raw/classification/Train/no tumor/Tr-no_0083.jpg,3,3,0.046003,0.045699,0.044821,0.863477
+data/raw/classification/Train/no tumor/Tr-no_0089.jpg,3,3,0.040148,0.039563,0.042085,0.878205
+data/raw/classification/Train/no tumor/Tr-no_0094.jpg,3,3,0.044900,0.044637,0.043663,0.866800
+data/raw/classification/Train/no tumor/Tr-no_0096.jpg,3,3,0.034516,0.035858,0.034820,0.894807
+data/raw/classification/Train/no tumor/Tr-no_0097.jpg,3,3,0.036790,0.036446,0.039627,0.887136
+data/raw/classification/Train/no tumor/Tr-no_0098.jpg,3,3,0.039825,0.043008,0.035710,0.881457
+data/raw/classification/Train/no tumor/Tr-no_0101.jpg,3,3,0.039077,0.037765,0.038608,0.884550
+data/raw/classification/Train/no tumor/Tr-no_0102.jpg,3,3,0.033697,0.037614,0.035057,0.893632
+data/raw/classification/Train/no tumor/Tr-no_0105.jpg,3,3,0.030611,0.034792,0.029160,0.905437
+data/raw/classification/Train/no tumor/Tr-no_0106.jpg,3,0,0.892876,0.033343,0.025286,0.048495
+data/raw/classification/Train/no tumor/Tr-no_0114.jpg,3,3,0.044235,0.044483,0.044816,0.866466
+data/raw/classification/Train/no tumor/Tr-no_0121.jpg,3,3,0.041530,0.041586,0.040839,0.876044
+data/raw/classification/Train/no tumor/Tr-no_0133.jpg,3,3,0.047391,0.064386,0.053397,0.834826
+data/raw/classification/Train/no tumor/Tr-no_0135.jpg,3,3,0.056261,0.060439,0.039680,0.843620
+data/raw/classification/Train/no tumor/Tr-no_0138.jpg,3,3,0.040049,0.035522,0.037445,0.886984
+data/raw/classification/Train/no tumor/Tr-no_0156.jpg,3,3,0.038721,0.037730,0.039557,0.883993
+data/raw/classification/Train/no tumor/Tr-no_0170.jpg,3,3,0.034787,0.034161,0.036109,0.894943
+data/raw/classification/Train/no tumor/Tr-no_0174.jpg,3,3,0.023906,0.029422,0.084779,0.861893
+data/raw/classification/Train/no tumor/Tr-no_0175.jpg,3,3,0.034142,0.037790,0.035856,0.892212
+data/raw/classification/Train/no tumor/Tr-no_0177.jpg,3,3,0.042743,0.045520,0.042028,0.869709
+data/raw/classification/Train/no tumor/Tr-no_0181.jpg,3,3,0.042656,0.042622,0.042628,0.872094
+data/raw/classification/Train/no tumor/Tr-no_0189.jpg,3,3,0.023906,0.029422,0.084779,0.861893
+data/raw/classification/Train/no tumor/Tr-no_0207.jpg,3,3,0.035095,0.032700,0.033942,0.898263
+data/raw/classification/Train/no tumor/Tr-no_0208.jpg,3,3,0.038050,0.036274,0.037344,0.888332
+data/raw/classification/Train/no tumor/Tr-no_0210.jpg,3,3,0.043767,0.064996,0.041600,0.849636
+data/raw/classification/Train/no tumor/Tr-no_0211.jpg,3,3,0.040197,0.036681,0.040264,0.882858
+data/raw/classification/Train/no tumor/Tr-no_0216.jpg,3,3,0.037735,0.034206,0.037088,0.890970
+data/raw/classification/Train/no tumor/Tr-no_0227.jpg,3,3,0.034257,0.035600,0.036265,0.893878
+data/raw/classification/Train/no tumor/Tr-no_0232.jpg,3,3,0.039253,0.039822,0.038503,0.882422
+data/raw/classification/Train/no tumor/Tr-no_0234.jpg,3,3,0.035029,0.036094,0.034906,0.893971
+data/raw/classification/Train/no tumor/Tr-no_0239.jpg,3,3,0.035029,0.036094,0.034906,0.893971
+data/raw/classification/Train/no tumor/Tr-no_0240.jpg,3,2,0.026293,0.027121,0.918215,0.028370
+data/raw/classification/Train/no tumor/Tr-no_0244.jpg,3,3,0.034634,0.036180,0.036907,0.892280
+data/raw/classification/Train/no tumor/Tr-no_0245.jpg,3,3,0.032503,0.034515,0.036545,0.896437
+data/raw/classification/Train/no tumor/Tr-no_0246.jpg,3,3,0.038183,0.036860,0.036279,0.888678
+data/raw/classification/Train/no tumor/Tr-no_0247.jpg,3,3,0.041595,0.039544,0.039997,0.878864
+data/raw/classification/Train/no tumor/Tr-no_0249.jpg,3,0,0.622697,0.111027,0.088978,0.177299
+data/raw/classification/Train/no tumor/Tr-no_0251.jpg,3,3,0.039644,0.039543,0.042913,0.877900
+data/raw/classification/Train/no tumor/Tr-no_0257.jpg,3,3,0.056261,0.060439,0.039680,0.843620
+data/raw/classification/Train/no tumor/Tr-no_0258.jpg,3,3,0.035009,0.034840,0.036912,0.893239
+data/raw/classification/Train/no tumor/Tr-no_0259.jpg,3,3,0.035403,0.037889,0.034564,0.892145
+data/raw/classification/Train/no tumor/Tr-no_0275.jpg,3,3,0.038271,0.040306,0.041162,0.880261
+data/raw/classification/Train/no tumor/Tr-no_0277.jpg,3,3,0.032684,0.033333,0.036315,0.897668
+data/raw/classification/Train/no tumor/Tr-no_0288.jpg,3,3,0.035636,0.036487,0.035738,0.892139
+data/raw/classification/Train/no tumor/Tr-no_0289.jpg,3,3,0.029652,0.031104,0.031818,0.907427
+data/raw/classification/Train/no tumor/Tr-no_0296.jpg,3,3,0.046022,0.045029,0.044463,0.864487
+data/raw/classification/Train/no tumor/Tr-no_0299.jpg,3,3,0.032752,0.034367,0.031808,0.901073
+data/raw/classification/Train/no tumor/Tr-no_0300.jpg,3,3,0.041109,0.038588,0.041885,0.878417
+data/raw/classification/Train/no tumor/Tr-no_0305.jpg,3,3,0.030322,0.033296,0.034304,0.902079
+data/raw/classification/Train/no tumor/Tr-no_0317.jpg,3,3,0.098904,0.317215,0.060327,0.523554
+data/raw/classification/Train/no tumor/Tr-no_0318.jpg,3,3,0.039643,0.038392,0.038128,0.883837
+data/raw/classification/Train/no tumor/Tr-no_0320.jpg,3,3,0.033569,0.034132,0.036061,0.896239
+data/raw/classification/Train/no tumor/Tr-no_0322.jpg,3,3,0.042867,0.043293,0.038314,0.875526
+data/raw/classification/Train/no tumor/Tr-no_0349.jpg,3,3,0.038243,0.037474,0.035291,0.888993
+data/raw/classification/Train/no tumor/Tr-no_0357.jpg,3,3,0.041695,0.038856,0.036691,0.882759
+data/raw/classification/Train/no tumor/Tr-no_0363.jpg,3,3,0.034197,0.042028,0.031714,0.892061
+data/raw/classification/Train/no tumor/Tr-no_0370.jpg,3,3,0.047391,0.064386,0.053397,0.834826
+data/raw/classification/Train/no tumor/Tr-no_0377.jpg,3,3,0.037163,0.039053,0.038491,0.885293
+data/raw/classification/Train/no tumor/Tr-no_0378.jpg,3,3,0.042810,0.041389,0.038844,0.876957
+data/raw/classification/Train/no tumor/Tr-no_0379.jpg,3,3,0.043277,0.042774,0.038277,0.875672
+data/raw/classification/Train/no tumor/Tr-no_0385.jpg,3,3,0.022822,0.027395,0.030190,0.919592
+data/raw/classification/Train/no tumor/Tr-no_0388.jpg,3,3,0.070970,0.093406,0.069855,0.765769
+data/raw/classification/Train/no tumor/Tr-no_0391.jpg,3,3,0.051529,0.073044,0.042667,0.832760
+data/raw/classification/Train/no tumor/Tr-no_0417.jpg,3,3,0.033274,0.032177,0.033842,0.900707
+data/raw/classification/Train/no tumor/Tr-no_0418.jpg,3,3,0.033425,0.030619,0.033285,0.902670
+data/raw/classification/Train/no tumor/Tr-no_0442.jpg,3,3,0.039221,0.040586,0.040506,0.879686
+data/raw/classification/Train/no tumor/Tr-no_0444.jpg,3,3,0.037642,0.039771,0.039768,0.882819
+data/raw/classification/Train/no tumor/Tr-no_0447.jpg,3,3,0.037278,0.039664,0.037953,0.885105
+data/raw/classification/Train/no tumor/Tr-no_0459.jpg,3,3,0.034786,0.037673,0.035122,0.892420
+data/raw/classification/Train/no tumor/Tr-no_0464.jpg,3,1,0.041134,0.887999,0.033415,0.037452
+data/raw/classification/Train/no tumor/Tr-no_0465.jpg,3,1,0.042103,0.883083,0.035471,0.039342
+data/raw/classification/Train/no tumor/Tr-no_0490.jpg,3,3,0.045015,0.047673,0.045469,0.861843
+data/raw/classification/Train/no tumor/Tr-no_0508.jpg,3,3,0.039432,0.037452,0.036635,0.886482
+data/raw/classification/Train/no tumor/Tr-no_0509.jpg,3,3,0.032284,0.036907,0.028368,0.902442
+data/raw/classification/Train/no tumor/Tr-no_0520.jpg,3,3,0.032631,0.032647,0.036517,0.898205
+data/raw/classification/Train/no tumor/Tr-no_0521.jpg,3,3,0.039217,0.036879,0.039597,0.884307
+data/raw/classification/Train/no tumor/Tr-no_0530.jpg,3,3,0.038723,0.036921,0.039952,0.884405
+data/raw/classification/Train/no tumor/Tr-no_0537.jpg,3,3,0.033948,0.034141,0.031181,0.900730
+data/raw/classification/Train/no tumor/Tr-no_0552.jpg,3,3,0.037115,0.037274,0.033364,0.892247
+data/raw/classification/Train/no tumor/Tr-no_0554.jpg,3,3,0.034679,0.038411,0.034331,0.892580
+data/raw/classification/Train/no tumor/Tr-no_0586.jpg,3,3,0.034507,0.034781,0.036970,0.893742
+data/raw/classification/Train/no tumor/Tr-no_0592.jpg,3,3,0.038704,0.036702,0.039593,0.885001
+data/raw/classification/Train/no tumor/Tr-no_0595.jpg,3,3,0.037447,0.035784,0.039114,0.887655
+data/raw/classification/Train/no tumor/Tr-no_0605.jpg,3,3,0.038480,0.037133,0.039255,0.885132
+data/raw/classification/Train/no tumor/Tr-no_0608.jpg,3,3,0.038918,0.036796,0.040455,0.883831
+data/raw/classification/Train/no tumor/Tr-no_0609.jpg,3,3,0.045017,0.044874,0.034745,0.875364
+data/raw/classification/Train/no tumor/Tr-no_0621.jpg,3,3,0.031366,0.032663,0.031199,0.904772
+data/raw/classification/Train/no tumor/Tr-no_0630.jpg,3,3,0.040145,0.045282,0.036823,0.877750
+data/raw/classification/Train/no tumor/Tr-no_0637.jpg,3,3,0.044207,0.042159,0.042606,0.871028
+data/raw/classification/Train/no tumor/Tr-no_0640.jpg,3,3,0.040517,0.037746,0.042666,0.879071
+data/raw/classification/Train/no tumor/Tr-no_0642.jpg,3,3,0.045195,0.043442,0.038706,0.872657
+data/raw/classification/Train/no tumor/Tr-no_0645.jpg,3,3,0.040002,0.039198,0.039754,0.881046
+data/raw/classification/Train/no tumor/Tr-no_0649.jpg,3,3,0.036176,0.038394,0.034632,0.890798
+data/raw/classification/Train/no tumor/Tr-no_0650.jpg,3,3,0.034298,0.039922,0.033455,0.892324
+data/raw/classification/Train/no tumor/Tr-no_0667.jpg,3,3,0.035061,0.032917,0.035853,0.896169
+data/raw/classification/Train/no tumor/Tr-no_0671.jpg,3,3,0.036363,0.044463,0.039420,0.879753
+data/raw/classification/Train/pituitary/1181.jpg,2,0,0.707377,0.112073,0.100239,0.080311
+data/raw/classification/Train/pituitary/1185.jpg,2,2,0.028902,0.029334,0.913391,0.028374
+data/raw/classification/Train/pituitary/1191.jpg,2,2,0.030292,0.029362,0.909927,0.030418
+data/raw/classification/Train/pituitary/1194.jpg,2,2,0.030896,0.029883,0.909770,0.029451
+data/raw/classification/Train/pituitary/1199.jpg,2,2,0.028319,0.026090,0.918191,0.027400
+data/raw/classification/Train/pituitary/p (485).jpg,2,2,0.027708,0.027209,0.917321,0.027763
+data/raw/classification/Train/pituitary/p (486).jpg,2,2,0.029390,0.028408,0.913921,0.028281
+data/raw/classification/Train/pituitary/p (499).jpg,2,2,0.029904,0.027652,0.914205,0.028239
+data/raw/classification/Train/pituitary/p (508).jpg,2,2,0.030026,0.027246,0.915013,0.027714
+data/raw/classification/Train/pituitary/p (511).jpg,2,2,0.028775,0.027149,0.916011,0.028066
+data/raw/classification/Train/pituitary/p (525).jpg,2,2,0.029193,0.031495,0.908829,0.030484
+data/raw/classification/Train/pituitary/P_706_VF_.jpg,2,2,0.067824,0.030539,0.872338,0.029299
+data/raw/classification/Train/pituitary/P_707.jpg,2,2,0.030123,0.030267,0.908898,0.030712
+data/raw/classification/Train/pituitary/P_707_BR_.jpg,2,2,0.031025,0.030625,0.905350,0.033000
+data/raw/classification/Train/pituitary/P_712_VF_.jpg,2,1,0.049449,0.862192,0.045091,0.043268
+data/raw/classification/Train/pituitary/P_713_VF_.jpg,2,2,0.027551,0.025906,0.919656,0.026887
+data/raw/classification/Train/pituitary/P_715_VF_.jpg,2,2,0.026833,0.025483,0.920807,0.026877
+data/raw/classification/Train/pituitary/P_716_VF_.jpg,2,2,0.028719,0.028888,0.913714,0.028679
+data/raw/classification/Train/pituitary/P_718_DA_.jpg,2,2,0.031148,0.030467,0.908944,0.029440
+data/raw/classification/Train/pituitary/P_71_HF_.jpg,2,2,0.029528,0.027358,0.914640,0.028474
+data/raw/classification/Train/pituitary/P_71_VF_.jpg,2,2,0.027944,0.025780,0.919903,0.026373
+data/raw/classification/Train/pituitary/P_727_DA_.jpg,2,2,0.025330,0.024738,0.924136,0.025795
+data/raw/classification/Train/pituitary/P_727_HF_.jpg,2,2,0.023831,0.024647,0.927340,0.024183
+data/raw/classification/Train/pituitary/P_727_VF_.jpg,2,2,0.027373,0.028804,0.916904,0.026919
+data/raw/classification/Train/pituitary/P_728_VF_.jpg,2,2,0.026679,0.027306,0.919310,0.026706
+data/raw/classification/Train/pituitary/P_730_RO_.jpg,2,2,0.026040,0.025425,0.922949,0.025587
+data/raw/classification/Train/pituitary/P_730_VF_.jpg,2,2,0.027652,0.027919,0.916945,0.027485
+data/raw/classification/Train/pituitary/P_731_RO_.jpg,2,2,0.028299,0.028036,0.915812,0.027854
+data/raw/classification/Train/pituitary/P_732_RO_.jpg,2,2,0.030133,0.029472,0.910801,0.029593
+data/raw/classification/Train/pituitary/P_732_VF_.jpg,2,1,0.047507,0.834745,0.080878,0.036869
+data/raw/classification/Train/pituitary/P_733_RO_.jpg,2,2,0.028535,0.027641,0.915738,0.028085
+data/raw/classification/Train/pituitary/P_733_VF_.jpg,2,2,0.027268,0.026454,0.919115,0.027164
+data/raw/classification/Train/pituitary/P_734_HF_.jpg,2,2,0.026544,0.027555,0.918958,0.026944
+data/raw/classification/Train/pituitary/P_734_RO_.jpg,2,2,0.029390,0.028827,0.912940,0.028843
+data/raw/classification/Train/pituitary/P_735_HF_.jpg,2,2,0.025058,0.023742,0.926716,0.024484
+data/raw/classification/Train/pituitary/P_735_RO_.jpg,2,2,0.026337,0.025263,0.922200,0.026200
+data/raw/classification/Train/pituitary/P_736_HF_.jpg,2,2,0.024433,0.023833,0.927778,0.023955
+data/raw/classification/Train/pituitary/P_736_RO_.jpg,2,2,0.025852,0.025241,0.923170,0.025736
+data/raw/classification/Train/pituitary/P_736_VF_.jpg,2,2,0.026645,0.026093,0.921283,0.025980
+data/raw/classification/Train/pituitary/P_737_HF_.jpg,2,2,0.024736,0.024138,0.926726,0.024401
+data/raw/classification/Train/pituitary/P_737_RO_.jpg,2,2,0.028246,0.026957,0.917057,0.027741
+data/raw/classification/Train/pituitary/P_739_RO_.jpg,2,2,0.029101,0.029223,0.911380,0.030296
+data/raw/classification/Train/pituitary/P_739_VF_.jpg,2,2,0.030140,0.026625,0.916757,0.026478
+data/raw/classification/Train/pituitary/P_740_VF_.jpg,2,2,0.032077,0.023312,0.920669,0.023943
+data/raw/classification/Train/pituitary/P_741_RO_.jpg,2,2,0.027344,0.026310,0.919582,0.026764
+data/raw/classification/Train/pituitary/P_741_VF_.jpg,2,2,0.028863,0.029011,0.913721,0.028404
+data/raw/classification/Train/pituitary/P_744_HF_.jpg,2,2,0.024307,0.024181,0.927218,0.024294
+data/raw/classification/Train/pituitary/P_748.jpg,2,2,0.026379,0.027961,0.917441,0.028219
+data/raw/classification/Train/pituitary/P_748_BR_.jpg,2,2,0.027796,0.029746,0.911174,0.031284
+data/raw/classification/Train/pituitary/P_748_DA_.jpg,2,2,0.025529,0.025965,0.922234,0.026272
+data/raw/classification/Train/pituitary/P_74_HF_.jpg,2,2,0.026342,0.025321,0.922293,0.026044
+data/raw/classification/Train/pituitary/P_764_RO_.jpg,2,2,0.033085,0.036269,0.895132,0.035513
+data/raw/classification/Train/pituitary/P_768_VF_.jpg,2,2,0.026910,0.026554,0.920600,0.025935
+data/raw/classification/Train/pituitary/P_76_HF_.jpg,2,2,0.028937,0.026420,0.917524,0.027120
+data/raw/classification/Train/pituitary/P_772_RO_.jpg,2,2,0.033295,0.031002,0.903079,0.032623
+data/raw/classification/Train/pituitary/P_775_RO_.jpg,2,2,0.034689,0.032672,0.900824,0.031815
+data/raw/classification/Train/pituitary/P_776_RO_.jpg,2,2,0.034236,0.031322,0.903331,0.031111
+data/raw/classification/Train/pituitary/P_778_RO_.jpg,2,2,0.034073,0.031852,0.903410,0.030666
+data/raw/classification/Train/pituitary/P_778_VF_.jpg,2,2,0.026013,0.023530,0.924058,0.026399
+data/raw/classification/Train/pituitary/P_779_DA_.jpg,2,2,0.028508,0.026793,0.918093,0.026607
+data/raw/classification/Train/pituitary/P_779_RO_.jpg,2,2,0.034431,0.032990,0.901731,0.030848
+data/raw/classification/Train/pituitary/P_779_VF_.jpg,2,2,0.024839,0.023053,0.926243,0.025865
+data/raw/classification/Train/pituitary/P_77_VF_.jpg,2,2,0.030933,0.029428,0.910081,0.029558
+data/raw/classification/Train/pituitary/P_785_HF_.jpg,2,2,0.028285,0.026977,0.915915,0.028823
+data/raw/classification/Train/pituitary/P_787_RO_.jpg,2,2,0.035043,0.033444,0.899817,0.031697
+data/raw/classification/Train/pituitary/P_788_RO_.jpg,2,2,0.033624,0.031692,0.904457,0.030227
+data/raw/classification/Train/pituitary/P_789_RO_.jpg,2,2,0.035160,0.034100,0.899780,0.030960
+data/raw/classification/Train/pituitary/P_789_VF_.jpg,2,2,0.026648,0.025505,0.920807,0.027039
+data/raw/classification/Train/pituitary/P_78_RO_.jpg,2,2,0.035306,0.035578,0.895550,0.033565
+data/raw/classification/Train/pituitary/P_78_VF_.jpg,2,2,0.030925,0.029767,0.909162,0.030146
+data/raw/classification/Train/pituitary/P_790_DA_.jpg,2,2,0.028224,0.027676,0.914996,0.029104
+data/raw/classification/Train/pituitary/P_790_VF_.jpg,2,2,0.027511,0.025181,0.919631,0.027678
+data/raw/classification/Train/pituitary/P_791_VF_.jpg,2,2,0.029160,0.026961,0.915581,0.028298
+data/raw/classification/Train/pituitary/P_795_HF_.jpg,2,0,0.780461,0.065636,0.090042,0.063860
+data/raw/classification/Train/pituitary/P_795_RO_.jpg,2,2,0.038871,0.048294,0.875121,0.037715
+data/raw/classification/Train/pituitary/P_796_HF_.jpg,2,0,0.759898,0.083850,0.073226,0.083026
+data/raw/classification/Train/pituitary/P_797_RO_.jpg,2,2,0.035486,0.035230,0.895238,0.034046
+data/raw/classification/Train/pituitary/P_799.jpg,2,2,0.027719,0.028559,0.915560,0.028162
+data/raw/classification/Train/pituitary/P_799_BR_.jpg,2,2,0.028224,0.029311,0.912661,0.029804
+data/raw/classification/Train/pituitary/P_799_DA_.jpg,2,2,0.027481,0.027941,0.917063,0.027515
+data/raw/classification/Train/pituitary/P_799_HF_.jpg,2,2,0.027019,0.027940,0.918173,0.026868
+data/raw/classification/Train/pituitary/P_799_SP_.jpg,2,2,0.160884,0.034078,0.781915,0.023123
+data/raw/classification/Train/pituitary/P_79_BR_.jpg,2,2,0.032344,0.033201,0.902652,0.031803
+data/raw/classification/Train/pituitary/P_79_HF_.jpg,2,2,0.033001,0.034486,0.901319,0.031194
+data/raw/classification/Train/pituitary/P_79_SP_.jpg,2,2,0.030913,0.032399,0.905953,0.030736
+data/raw/classification/Train/pituitary/P_800_RO_.jpg,2,2,0.035420,0.035899,0.895046,0.033635
+data/raw/classification/Train/pituitary/P_801_RO_.jpg,2,2,0.035547,0.036584,0.894939,0.032930
+data/raw/classification/Train/pituitary/P_802_RO_.jpg,2,2,0.037869,0.038954,0.891819,0.031359
+data/raw/classification/Train/pituitary/P_803_RO_.jpg,2,2,0.036099,0.036014,0.894173,0.033714
+data/raw/classification/Train/pituitary/P_808_VF_.jpg,2,2,0.030015,0.030162,0.909756,0.030067
+data/raw/classification/Train/pituitary/P_810.jpg,2,2,0.031506,0.029657,0.908459,0.030377
+data/raw/classification/Train/pituitary/P_810_BR_.jpg,2,2,0.031393,0.029710,0.907629,0.031268
+data/raw/classification/Train/pituitary/P_810_RO_.jpg,2,2,0.032018,0.031734,0.905222,0.031026
+data/raw/classification/Train/pituitary/P_810_SP_.jpg,2,2,0.030530,0.028198,0.911888,0.029384
+data/raw/classification/Train/pituitary/P_812.jpg,2,2,0.028984,0.027768,0.915730,0.027518
+data/raw/classification/Train/pituitary/P_812_BR_.jpg,2,2,0.029706,0.028638,0.912830,0.028825
+data/raw/classification/Train/pituitary/P_812_DA_.jpg,2,2,0.029408,0.028567,0.914338,0.027687
+data/raw/classification/Train/pituitary/P_812_SP_.jpg,2,2,0.029639,0.028258,0.914354,0.027750
+data/raw/classification/Train/pituitary/P_813_VF_.jpg,2,2,0.035401,0.033939,0.896651,0.034010
+data/raw/classification/Train/pituitary/P_814.jpg,2,2,0.029093,0.027897,0.912367,0.030643
+data/raw/classification/Train/pituitary/P_814_BR_.jpg,2,2,0.028602,0.026223,0.915989,0.029186
+data/raw/classification/Train/pituitary/P_814_RO_.jpg,2,2,0.031047,0.029741,0.906832,0.032380
+data/raw/classification/Train/pituitary/P_814_SP_.jpg,2,2,0.034619,0.035261,0.896396,0.033723
+data/raw/classification/Train/pituitary/P_815.jpg,2,2,0.031911,0.030215,0.908810,0.029064
+data/raw/classification/Train/pituitary/P_815_BR_.jpg,2,2,0.032294,0.030590,0.907425,0.029690
+data/raw/classification/Train/pituitary/P_815_DA_.jpg,2,2,0.030947,0.029535,0.911168,0.028350
+data/raw/classification/Train/pituitary/P_815_RO_.jpg,2,2,0.031055,0.028964,0.911175,0.028806
+data/raw/classification/Train/pituitary/P_815_SP_.jpg,2,2,0.032522,0.031326,0.906479,0.029673
+data/raw/classification/Train/pituitary/P_815_VF_.jpg,2,2,0.031702,0.029087,0.909542,0.029669
+data/raw/classification/Train/pituitary/P_818_RO_.jpg,2,3,0.045423,0.057373,0.084213,0.812991
+data/raw/classification/Train/pituitary/P_819_HF_.jpg,2,2,0.029351,0.027632,0.915323,0.027694
+data/raw/classification/Train/pituitary/P_820_RO_.jpg,2,2,0.032566,0.030523,0.905205,0.031707
+data/raw/classification/Train/pituitary/P_821.jpg,2,2,0.033752,0.033118,0.903254,0.029876
+data/raw/classification/Train/pituitary/P_821_BR_.jpg,2,2,0.034562,0.034103,0.900082,0.031253
+data/raw/classification/Train/pituitary/P_821_DA_.jpg,2,2,0.032524,0.032367,0.905833,0.029276
+data/raw/classification/Train/pituitary/P_821_SP_.jpg,2,2,0.034441,0.034542,0.900196,0.030821
+data/raw/classification/Train/pituitary/P_822_RO_.jpg,2,3,0.048308,0.059833,0.083089,0.808770
+data/raw/classification/Train/pituitary/P_823_SP_.jpg,2,2,0.029955,0.025308,0.916441,0.028296
+data/raw/classification/Train/pituitary/P_824_VF_.jpg,2,2,0.030887,0.030371,0.908889,0.029852
+data/raw/classification/Train/pituitary/P_825.jpg,2,1,0.044185,0.877167,0.037166,0.041482
+data/raw/classification/Train/pituitary/P_825_BR_.jpg,2,1,0.042959,0.881539,0.035484,0.040017
+data/raw/classification/Train/pituitary/P_825_DA_.jpg,2,1,0.044353,0.881300,0.034833,0.039515
+data/raw/classification/Train/pituitary/P_825_RO_.jpg,2,1,0.042440,0.879742,0.037164,0.040654
+data/raw/classification/Train/pituitary/P_825_SP_.jpg,2,1,0.044441,0.881292,0.034982,0.039286
+data/raw/classification/Train/pituitary/P_827.jpg,2,2,0.032690,0.033913,0.902635,0.030761
+data/raw/classification/Train/pituitary/P_827_BR_.jpg,2,2,0.032417,0.033235,0.903498,0.030850
+data/raw/classification/Train/pituitary/P_827_DA_.jpg,2,2,0.032456,0.032624,0.904085,0.030835
+data/raw/classification/Train/pituitary/P_827_RO_.jpg,2,2,0.035244,0.037563,0.892532,0.034662
+data/raw/classification/Train/pituitary/P_828_RO_.jpg,2,2,0.034650,0.032512,0.901368,0.031470
+data/raw/classification/Train/pituitary/P_829.jpg,2,2,0.030016,0.029471,0.910039,0.030474
+data/raw/classification/Train/pituitary/P_829_BR_.jpg,2,2,0.030411,0.029451,0.908755,0.031384
+data/raw/classification/Train/pituitary/P_829_DA_.jpg,2,2,0.030249,0.029703,0.909099,0.030949
+data/raw/classification/Train/pituitary/P_829_RO_.jpg,2,2,0.031544,0.031751,0.903684,0.033021
+data/raw/classification/Train/pituitary/P_829_SP_.jpg,2,2,0.030263,0.028979,0.910163,0.030594
+data/raw/classification/Train/pituitary/P_830.jpg,2,3,0.038796,0.043456,0.270629,0.647119
+data/raw/classification/Train/pituitary/P_830_BR_.jpg,2,3,0.031412,0.036541,0.047883,0.884164
+data/raw/classification/Train/pituitary/P_830_DA_.jpg,2,2,0.039128,0.044019,0.822918,0.093934
+data/raw/classification/Train/pituitary/P_830_SP_.jpg,2,2,0.033327,0.032889,0.899822,0.033961
+data/raw/classification/Train/pituitary/P_830_VF_.jpg,2,2,0.033926,0.035517,0.851264,0.079293
+data/raw/classification/Train/pituitary/P_832_DA_.jpg,2,2,0.026962,0.027057,0.916485,0.029497
+data/raw/classification/Train/pituitary/P_834_VF_.jpg,2,1,0.180712,0.617279,0.088357,0.113652
+data/raw/classification/Train/pituitary/P_836_RO_.jpg,2,1,0.035229,0.894069,0.033243,0.037459
+data/raw/classification/Train/pituitary/P_836_VF_.jpg,2,1,0.042183,0.877911,0.037366,0.042540
+data/raw/classification/Train/pituitary/P_838_VF_.jpg,2,2,0.032928,0.033118,0.901353,0.032601
+data/raw/classification/Train/pituitary/P_839_BR_.jpg,2,2,0.032425,0.031147,0.905588,0.030840
+data/raw/classification/Train/pituitary/P_839_DA_.jpg,2,2,0.032979,0.032721,0.903094,0.031206
+data/raw/classification/Train/pituitary/P_839_SP_.jpg,2,2,0.032226,0.030951,0.905900,0.030923
+data/raw/classification/Train/pituitary/P_839_VF_.jpg,2,2,0.028812,0.027652,0.915030,0.028506
+data/raw/classification/Train/pituitary/P_840_HF_.jpg,2,2,0.030324,0.032724,0.907199,0.029753
+data/raw/classification/Train/pituitary/P_840_RO_.jpg,2,2,0.035188,0.042050,0.893741,0.029020
+data/raw/classification/Train/pituitary/P_841_HF_.jpg,2,2,0.030391,0.029111,0.911904,0.028594
+data/raw/classification/Train/pituitary/P_842_RO_.jpg,2,2,0.033056,0.031776,0.904853,0.030316
+data/raw/classification/Train/pituitary/P_842_VF_.jpg,2,2,0.031427,0.028746,0.910039,0.029788
+data/raw/classification/Train/pituitary/P_843_VF_.jpg,2,1,0.051085,0.859790,0.042293,0.046832
+data/raw/classification/Train/pituitary/P_88_RO_.jpg,2,2,0.036341,0.037145,0.892935,0.033580
+data/raw/classification/Train/pituitary/Te-pi_0019.jpg,2,2,0.024902,0.024856,0.924651,0.025590
+data/raw/classification/Train/pituitary/Te-pi_0024.jpg,2,2,0.025248,0.024361,0.925658,0.024733
+data/raw/classification/Train/pituitary/Te-pi_0026.jpg,2,2,0.024782,0.023874,0.927501,0.023844
+data/raw/classification/Train/pituitary/Te-pi_0038.jpg,2,2,0.026172,0.026481,0.921141,0.026206
+data/raw/classification/Train/pituitary/Te-pi_0047.jpg,2,2,0.027414,0.023992,0.923005,0.025589
+data/raw/classification/Train/pituitary/Te-pi_0081.jpg,2,2,0.030139,0.028034,0.914167,0.027660
+data/raw/classification/Train/pituitary/Te-pi_0088.jpg,2,2,0.030406,0.029292,0.911265,0.029037
+data/raw/classification/Train/pituitary/Te-pi_0089.jpg,2,2,0.030891,0.029698,0.910543,0.028868
+data/raw/classification/Train/pituitary/Te-pi_0090.jpg,2,2,0.031694,0.031198,0.907791,0.029318
+data/raw/classification/Train/pituitary/Te-pi_0099.jpg,2,2,0.029867,0.028314,0.913238,0.028581
+data/raw/classification/Train/pituitary/Te-pi_0102.jpg,2,2,0.034956,0.035013,0.898587,0.031444
+data/raw/classification/Train/pituitary/Te-pi_0107.jpg,2,2,0.029494,0.026829,0.915844,0.027834
+data/raw/classification/Train/pituitary/Te-pi_0108.jpg,2,2,0.032319,0.035726,0.900081,0.031874
+data/raw/classification/Train/pituitary/Te-pi_0111.jpg,2,2,0.076651,0.405643,0.471615,0.046090
+data/raw/classification/Train/pituitary/Te-pi_0123.jpg,2,2,0.025633,0.026320,0.921487,0.026559
+data/raw/classification/Train/pituitary/Te-pi_0124.jpg,2,2,0.026356,0.025181,0.922963,0.025501
+data/raw/classification/Train/pituitary/Te-pi_0125.jpg,2,2,0.028361,0.030006,0.911534,0.030100
+data/raw/classification/Train/pituitary/Te-pi_0133.jpg,2,2,0.027457,0.027317,0.918287,0.026939
+data/raw/classification/Train/pituitary/Te-pi_0136.jpg,2,2,0.024487,0.024554,0.926471,0.024489
+data/raw/classification/Train/pituitary/Te-pi_0142.jpg,2,2,0.030050,0.033527,0.906454,0.029969
+data/raw/classification/Train/pituitary/Te-pi_0149.jpg,2,2,0.024369,0.023974,0.927099,0.024557
+data/raw/classification/Train/pituitary/Te-pi_0196.jpg,2,2,0.029171,0.027679,0.915655,0.027495
+data/raw/classification/Train/pituitary/Te-pi_0200.jpg,2,2,0.028718,0.026679,0.917966,0.026637
+data/raw/classification/Train/pituitary/Te-pi_0207.jpg,2,2,0.028823,0.027613,0.914493,0.029070
+data/raw/classification/Train/pituitary/Tr-pi_0110.jpg,2,2,0.033563,0.037209,0.888285,0.040943
+data/raw/classification/Train/pituitary/Tr-pi_0128.jpg,2,2,0.033999,0.033319,0.899979,0.032703
+data/raw/classification/Train/pituitary/Tr-pi_0139.jpg,2,2,0.026802,0.026493,0.918677,0.028027
+data/raw/classification/Train/pituitary/Tr-pi_0157.jpg,2,3,0.019630,0.026986,0.047424,0.905959
+data/raw/classification/Train/pituitary/Tr-pi_0172.jpg,2,2,0.032526,0.033007,0.904047,0.030420
+data/raw/classification/Train/pituitary/Tr-pi_0188.jpg,2,2,0.030277,0.029377,0.909893,0.030453
+data/raw/classification/Train/pituitary/Tr-pi_0197.jpg,2,2,0.033782,0.034674,0.897799,0.033745
+data/raw/classification/Train/pituitary/Tr-pi_0199.jpg,2,2,0.028293,0.027001,0.918242,0.026464
+data/raw/classification/Train/pituitary/Tr-pi_0204.jpg,2,2,0.032411,0.035476,0.897571,0.034542
+data/raw/classification/Train/pituitary/Tr-pi_0206.jpg,2,2,0.034416,0.033905,0.899622,0.032057
+data/raw/classification/Train/pituitary/Tr-pi_0215.jpg,2,2,0.034105,0.033525,0.900770,0.031599
+data/raw/classification/Train/pituitary/Tr-pi_0225.jpg,2,2,0.034236,0.034500,0.898741,0.032522
+data/raw/classification/Train/pituitary/Tr-pi_0226.jpg,2,2,0.031743,0.031254,0.907200,0.029803
+data/raw/classification/Train/pituitary/Tr-pi_0227.jpg,2,2,0.031743,0.031254,0.907200,0.029803
+data/raw/classification/Train/pituitary/Tr-pi_0231.jpg,2,2,0.031568,0.030726,0.907836,0.029870
+data/raw/classification/Train/pituitary/Tr-pi_0232.jpg,2,2,0.029115,0.028522,0.913890,0.028473
+data/raw/classification/Train/pituitary/Tr-pi_0238.jpg,2,2,0.030396,0.029389,0.911127,0.029089
+data/raw/classification/Train/pituitary/Tr-pi_0240.jpg,2,2,0.029805,0.027993,0.913707,0.028494
+data/raw/classification/Train/pituitary/Tr-pi_0241.jpg,2,2,0.029680,0.027748,0.913743,0.028828
+data/raw/classification/Train/pituitary/Tr-pi_0242.jpg,2,2,0.030357,0.029833,0.910443,0.029367
+data/raw/classification/Train/pituitary/Tr-pi_0243.jpg,2,2,0.032651,0.031865,0.904672,0.030812
+data/raw/classification/Train/pituitary/Tr-pi_0244.jpg,2,2,0.031207,0.032112,0.906926,0.029755
+data/raw/classification/Train/pituitary/Tr-pi_0246.jpg,2,2,0.032844,0.032321,0.904592,0.030243
+data/raw/classification/Train/pituitary/Tr-pi_0249.jpg,2,2,0.031618,0.031298,0.906834,0.030251
+data/raw/classification/Train/pituitary/Tr-pi_0250.jpg,2,2,0.025547,0.035646,0.541780,0.397027
+data/raw/classification/Train/pituitary/Tr-pi_0251.jpg,2,3,0.021175,0.028306,0.099720,0.850799
+data/raw/classification/Train/pituitary/Tr-pi_0261.jpg,2,2,0.027763,0.026297,0.919778,0.026162
+data/raw/classification/Train/pituitary/Tr-pi_0264.jpg,2,2,0.030670,0.029238,0.910702,0.029390
+data/raw/classification/Train/pituitary/Tr-pi_0268.jpg,2,2,0.028209,0.026714,0.917649,0.027428
+data/raw/classification/Train/pituitary/Tr-pi_0269.jpg,2,2,0.029284,0.027589,0.915086,0.028041
+data/raw/classification/Train/pituitary/Tr-pi_0270.jpg,2,2,0.028792,0.026298,0.917849,0.027061
+data/raw/classification/Train/pituitary/Tr-pi_0271.jpg,2,2,0.028880,0.026335,0.917700,0.027085
+data/raw/classification/Train/pituitary/Tr-pi_0273.jpg,2,1,0.041978,0.853710,0.069419,0.034892
+data/raw/classification/Train/pituitary/Tr-pi_0274.jpg,2,2,0.051235,0.069346,0.810532,0.068886
+data/raw/classification/Train/pituitary/Tr-pi_0290.jpg,2,2,0.032826,0.030410,0.907348,0.029416
+data/raw/classification/Train/pituitary/Tr-pi_0291.jpg,2,2,0.029754,0.030525,0.908584,0.031137
+data/raw/classification/Train/pituitary/Tr-pi_0292.jpg,2,2,0.027834,0.025451,0.919214,0.027501
+data/raw/classification/Train/pituitary/Tr-pi_0293.jpg,2,2,0.029528,0.026754,0.915479,0.028239
+data/raw/classification/Train/pituitary/Tr-pi_0332.jpg,2,2,0.027364,0.025736,0.919611,0.027290
+data/raw/classification/Train/pituitary/Tr-pi_0340.jpg,2,2,0.033747,0.033718,0.902074,0.030461
+data/raw/classification/Train/pituitary/Tr-pi_0341.jpg,2,2,0.032671,0.032093,0.906559,0.028677
+data/raw/classification/Train/pituitary/Tr-pi_0342.jpg,2,2,0.032346,0.032249,0.905965,0.029440
+data/raw/classification/Train/pituitary/Tr-pi_0343.jpg,2,2,0.032346,0.032249,0.905965,0.029440
+data/raw/classification/Train/pituitary/Tr-pi_0351.jpg,2,2,0.032275,0.031285,0.906028,0.030412
+data/raw/classification/Train/pituitary/Tr-pi_0352.jpg,2,2,0.030066,0.029188,0.912732,0.028014
+data/raw/classification/Train/pituitary/Tr-pi_0354.jpg,2,2,0.037442,0.041026,0.887125,0.034407
+data/raw/classification/Train/pituitary/Tr-pi_0380.jpg,2,2,0.031642,0.032414,0.906391,0.029553
+data/raw/classification/Train/pituitary/Tr-pi_0381.jpg,2,2,0.032352,0.033247,0.904087,0.030315
+data/raw/classification/Train/pituitary/Tr-pi_0382.jpg,2,2,0.032899,0.033083,0.903189,0.030829
+data/raw/classification/Train/pituitary/Tr-pi_0383.jpg,2,2,0.032002,0.031782,0.904531,0.031685
+data/raw/classification/Train/pituitary/Tr-pi_0384.jpg,2,2,0.030847,0.029855,0.909905,0.029392
+data/raw/classification/Train/pituitary/Tr-pi_0385.jpg,2,2,0.031605,0.031961,0.903358,0.033077
+data/raw/classification/Train/pituitary/Tr-pi_0386.jpg,2,2,0.031282,0.031041,0.906828,0.030849
+data/raw/classification/Train/pituitary/Tr-pi_0389.jpg,2,2,0.030355,0.028066,0.913029,0.028549
+data/raw/classification/Train/pituitary/Tr-pi_0394.jpg,2,2,0.031744,0.030432,0.908406,0.029418
+data/raw/classification/Train/pituitary/Tr-pi_0395.jpg,2,2,0.030767,0.030565,0.909090,0.029578
+data/raw/classification/Train/pituitary/Tr-pi_0403.jpg,2,2,0.028039,0.025716,0.919333,0.026912
+data/raw/classification/Train/pituitary/Tr-pi_0409.jpg,2,2,0.029098,0.028150,0.913707,0.029045
+data/raw/classification/Train/pituitary/Tr-pi_0428.jpg,2,2,0.027708,0.027209,0.917321,0.027763
+data/raw/classification/Train/pituitary/Tr-pi_0429.jpg,2,2,0.029390,0.028408,0.913921,0.028281
+data/raw/classification/Train/pituitary/Tr-pi_0430.jpg,2,2,0.028059,0.026882,0.917232,0.027828
+data/raw/classification/Train/pituitary/Tr-pi_0443.jpg,2,2,0.029904,0.027652,0.914205,0.028239
+data/raw/classification/Train/pituitary/Tr-pi_0446.jpg,2,2,0.032837,0.032019,0.902908,0.032236
+data/raw/classification/Train/pituitary/Tr-pi_0454.jpg,2,2,0.030026,0.027246,0.915013,0.027714
+data/raw/classification/Train/pituitary/Tr-pi_0458.jpg,2,2,0.028775,0.027149,0.916011,0.028066
+data/raw/classification/Train/pituitary/Tr-pi_0473.jpg,2,2,0.029193,0.031495,0.908829,0.030484
+data/raw/classification/Train/pituitary/Tr-pi_0522.jpg,2,2,0.027669,0.026485,0.919935,0.025911
+data/raw/classification/Train/pituitary/Tr-pi_0532.jpg,2,2,0.035824,0.044200,0.878155,0.041822
+data/raw/classification/Train/pituitary/Tr-pi_0533.jpg,2,2,0.027134,0.028695,0.913834,0.030337
+data/raw/classification/Train/pituitary/Tr-pi_0534.jpg,2,2,0.030338,0.032330,0.904921,0.032411
+data/raw/classification/Train/pituitary/Tr-pi_0536.jpg,2,2,0.027960,0.028471,0.915221,0.028348
+data/raw/classification/Train/pituitary/Tr-pi_0546.jpg,2,2,0.028318,0.027171,0.917143,0.027367
+data/raw/classification/Train/pituitary/Tr-pi_0554.jpg,2,2,0.030621,0.030043,0.910096,0.029240
+data/raw/classification/Train/pituitary/Tr-pi_0563.jpg,2,2,0.028987,0.028070,0.914287,0.028657
+data/raw/classification/Train/pituitary/Tr-pi_0571.jpg,2,2,0.028105,0.026286,0.917643,0.027965
+data/raw/classification/Train/pituitary/Tr-pi_0580.jpg,2,2,0.028895,0.027423,0.915525,0.028157
+data/raw/classification/Train/pituitary/Tr-pi_0588.jpg,2,2,0.027964,0.026070,0.918767,0.027199
+data/raw/classification/Train/pituitary/Tr-pi_0589.jpg,2,2,0.025913,0.024950,0.924264,0.024873
+data/raw/classification/Train/pituitary/Tr-pi_0592.jpg,2,2,0.028905,0.028077,0.915321,0.027697
+data/raw/classification/Train/pituitary/Tr-pi_0601.jpg,2,2,0.024791,0.024052,0.926958,0.024199
+data/raw/classification/Train/pituitary/Tr-pi_0612.jpg,2,2,0.032063,0.038958,0.894149,0.034831
+data/raw/classification/Train/pituitary/Tr-pi_0614.jpg,2,2,0.031042,0.029489,0.909663,0.029805
+data/raw/classification/Train/pituitary/Tr-pi_0623.jpg,2,2,0.024757,0.025451,0.924568,0.025224
+data/raw/classification/Train/pituitary/Tr-pi_0632.jpg,2,2,0.030798,0.029400,0.910545,0.029257
+data/raw/classification/Train/pituitary/Tr-pi_0643.jpg,2,2,0.026853,0.026816,0.919805,0.026526
+data/raw/classification/Train/pituitary/Tr-pi_0651.jpg,2,2,0.024572,0.025464,0.923762,0.026203
+data/raw/classification/Train/pituitary/Tr-pi_0661.jpg,2,2,0.024588,0.025598,0.924418,0.025395
+data/raw/classification/Train/pituitary/Tr-pi_0666.jpg,2,2,0.027470,0.026454,0.919438,0.026639
+data/raw/classification/Train/pituitary/Tr-pi_0696.jpg,2,2,0.027340,0.025577,0.921331,0.025752
+data/raw/classification/Train/pituitary/Tr-pi_0725.jpg,2,2,0.026379,0.027961,0.917441,0.028219
+data/raw/classification/Train/pituitary/Tr-pi_0800.jpg,2,2,0.029316,0.028433,0.913993,0.028258
+data/raw/classification/Train/pituitary/Tr-pi_0801.jpg,2,2,0.029944,0.027689,0.914586,0.027780
+data/raw/classification/Train/pituitary/Tr-pi_0803.jpg,2,2,0.030393,0.028552,0.912951,0.028104
+data/raw/classification/Train/pituitary/Tr-pi_0952.jpg,2,2,0.031477,0.031508,0.906434,0.030581
+data/raw/classification/Train/pituitary/Tr-pi_0957.jpg,2,2,0.027470,0.030597,0.911571,0.030362
+data/raw/classification/Train/pituitary/Tr-pi_0958.jpg,2,2,0.028246,0.030975,0.912451,0.028328
+data/raw/classification/Train/pituitary/Tr-pi_0996.jpg,2,2,0.027473,0.026480,0.919563,0.026484
+data/raw/classification/Train/pituitary/Tr-pi_1003.jpg,2,2,0.027985,0.027030,0.918239,0.026747
+data/raw/classification/Train/pituitary/Tr-pi_1039.jpg,2,2,0.026090,0.025687,0.921966,0.026256
+data/raw/classification/Train/pituitary/Tr-pi_1052.jpg,2,2,0.025165,0.023940,0.926975,0.023919
+data/raw/classification/Train/pituitary/Tr-pi_1104.jpg,2,2,0.027793,0.028193,0.916675,0.027339
+data/raw/classification/Train/pituitary/Tr-pi_1114.jpg,2,2,0.030167,0.029851,0.910346,0.029636
+data/raw/classification/Train/pituitary/Tr-pi_1123.jpg,2,2,0.027546,0.024874,0.920984,0.026595
+data/raw/classification/Train/pituitary/Tr-pi_1125.jpg,2,2,0.025234,0.024704,0.924889,0.025174
+data/raw/classification/Train/pituitary/Tr-pi_1126.jpg,2,2,0.026922,0.026332,0.920308,0.026439
+data/raw/classification/Train/pituitary/Tr-pi_1130.jpg,2,2,0.029382,0.026120,0.917165,0.027333
+data/raw/classification/Train/pituitary/Tr-pi_1140.jpg,2,2,0.031065,0.031432,0.908626,0.028878
+data/raw/classification/Train/pituitary/Tr-pi_1164.jpg,2,2,0.031769,0.032433,0.902731,0.033066
+data/raw/classification/Train/pituitary/Tr-pi_1174.jpg,2,2,0.028767,0.027732,0.914610,0.028891
+data/raw/classification/Train/pituitary/Tr-pi_1198.jpg,2,2,0.024905,0.024049,0.924963,0.026083
+data/raw/classification/Train/pituitary/Tr-pi_1209.jpg,2,2,0.027368,0.025001,0.920425,0.027206
+data/raw/classification/Train/pituitary/Tr-pi_1217.jpg,2,2,0.030704,0.027026,0.914405,0.027865
+data/raw/classification/Train/pituitary/Tr-pi_1223.jpg,2,2,0.026927,0.024934,0.921634,0.026504
+data/raw/classification/Train/pituitary/Tr-pi_1260.jpg,2,2,0.029265,0.026990,0.915729,0.028016
+data/raw/classification/Train/pituitary/Tr-pi_1267.jpg,2,2,0.028764,0.029617,0.914428,0.027191
+data/raw/classification/Train/pituitary/Tr-pi_1268.jpg,2,2,0.029622,0.029616,0.912355,0.028406
+data/raw/classification/Train/pituitary/Tr-pi_1270.jpg,2,2,0.030077,0.030936,0.909456,0.029531
+data/raw/classification/Train/pituitary/Tr-pi_1272.jpg,2,2,0.027885,0.026319,0.919689,0.026107
+data/raw/classification/Train/pituitary/Tr-pi_1292.jpg,2,2,0.032071,0.036612,0.899951,0.031366
+data/raw/classification/Train/pituitary/Tr-pi_1293.jpg,2,2,0.045425,0.120960,0.791680,0.041935
+data/raw/classification/Train/pituitary/Tr-pi_1305.jpg,2,2,0.027698,0.026728,0.918939,0.026635
+data/raw/classification/Train/pituitary/Tr-pi_1311.jpg,2,2,0.030782,0.031360,0.908374,0.029484
+data/raw/classification/Train/pituitary/Tr-pi_1324.jpg,2,2,0.031533,0.031803,0.907048,0.029615
+data/raw/classification/Train/pituitary/Tr-pi_1333.jpg,2,2,0.030271,0.030475,0.907607,0.031647
+data/raw/classification/Train/pituitary/Tr-pi_1334.jpg,2,2,0.032625,0.031871,0.905438,0.030066
+data/raw/classification/Train/pituitary/Tr-pi_1337.jpg,2,2,0.030394,0.031090,0.908730,0.029786
+data/raw/classification/Train/pituitary/Tr-pi_1338.jpg,2,2,0.029968,0.028925,0.911634,0.029473
+data/raw/classification/Train/pituitary/Tr-pi_1339.jpg,2,2,0.030565,0.030361,0.909017,0.030057
+data/raw/classification/Train/pituitary/Tr-pi_1342.jpg,2,2,0.032177,0.032535,0.905518,0.029770
+data/raw/classification/Train/pituitary/Tr-pi_1343.jpg,2,2,0.030454,0.030404,0.910652,0.028490
+data/raw/classification/Train/pituitary/Tr-pi_1344.jpg,2,2,0.029455,0.029367,0.912252,0.028926
+data/raw/classification/Train/pituitary/Tr-pi_1345.jpg,2,2,0.028455,0.027975,0.915565,0.028006
+data/raw/classification/Train/pituitary/Tr-pi_1346.jpg,2,2,0.030878,0.029776,0.910319,0.029027
+data/raw/classification/Train/pituitary/Tr-pi_1349.jpg,2,2,0.030525,0.030496,0.906043,0.032936
+data/raw/classification/Train/pituitary/Tr-pi_1350.jpg,2,2,0.031829,0.032738,0.901610,0.033823
+data/raw/classification/Train/pituitary/Tr-pi_1355.jpg,2,1,0.043544,0.865366,0.051113,0.039977
+data/raw/classification/Train/pituitary/Tr-pi_1357.jpg,2,2,0.045677,0.064463,0.850554,0.039306
+data/raw/classification/Train/pituitary/Tr-pi_1358.jpg,2,2,0.030171,0.033288,0.908409,0.028133
+data/raw/classification/Train/pituitary/Tr-pi_1359.jpg,2,2,0.029566,0.029661,0.912442,0.028331
+data/raw/classification/Train/pituitary/Tr-pi_1406.jpg,2,2,0.032997,0.036445,0.891605,0.038952
+data/raw/classification/Train/pituitary/Tr-pi_1452.jpg,2,2,0.028773,0.026046,0.919210,0.025971
+data/raw/classification/Test/glioma/1090.jpg,0,1,0.089517,0.799034,0.053066,0.058384
+data/raw/classification/Test/glioma/1113.jpg,0,0,0.909349,0.029722,0.027814,0.033115
+data/raw/classification/Test/glioma/1114.jpg,0,0,0.910159,0.029690,0.027294,0.032857
+data/raw/classification/Test/glioma/1116.jpg,0,0,0.895218,0.034224,0.032645,0.037913
+data/raw/classification/Test/glioma/1131.jpg,0,0,0.911720,0.029836,0.026982,0.031462
+data/raw/classification/Test/glioma/1134.jpg,0,0,0.899959,0.033287,0.030923,0.035830
+data/raw/classification/Test/glioma/1136.jpg,0,0,0.907131,0.031328,0.027740,0.033801
+data/raw/classification/Test/glioma/1137.jpg,0,0,0.893980,0.035311,0.034567,0.036142
+data/raw/classification/Test/glioma/1139.jpg,0,0,0.910796,0.029695,0.027063,0.032445
+data/raw/classification/Test/glioma/1150.jpg,0,0,0.900405,0.033957,0.031041,0.034596
+data/raw/classification/Test/glioma/1160.jpg,0,0,0.908392,0.030866,0.027882,0.032860
+data/raw/classification/Test/glioma/1165.jpg,0,0,0.905590,0.030828,0.030694,0.032888
+data/raw/classification/Test/glioma/1176.jpg,0,0,0.599363,0.285386,0.064491,0.050760
+data/raw/classification/Test/glioma/1179.jpg,0,0,0.903254,0.032676,0.029083,0.034986
+data/raw/classification/Test/glioma/1181.jpg,0,0,0.910644,0.029897,0.027094,0.032365
+data/raw/classification/Test/glioma/1184.jpg,0,0,0.917230,0.027341,0.025344,0.030084
+data/raw/classification/Test/glioma/1187.jpg,0,0,0.905072,0.031459,0.028597,0.034872
+data/raw/classification/Test/glioma/1194.jpg,0,0,0.909022,0.030483,0.029433,0.031063
+data/raw/classification/Test/glioma/1199.jpg,0,0,0.906604,0.030755,0.027883,0.034758
+data/raw/classification/Test/glioma/1200.jpg,0,0,0.900115,0.032900,0.030273,0.036712
+data/raw/classification/Test/glioma/1209.jpg,0,0,0.911064,0.029875,0.026652,0.032409
+data/raw/classification/Test/glioma/1211.jpg,0,0,0.900915,0.032037,0.029743,0.037305
+data/raw/classification/Test/glioma/1215.jpg,0,0,0.910358,0.028960,0.027017,0.033665
+data/raw/classification/Test/glioma/1223.jpg,0,0,0.904410,0.031497,0.028578,0.035516
+data/raw/classification/Test/glioma/1252.jpg,0,0,0.903426,0.032229,0.029551,0.034794
+data/raw/classification/Test/glioma/1261.jpg,0,0,0.908770,0.030264,0.028854,0.032113
+data/raw/classification/Test/glioma/1265.jpg,0,0,0.917401,0.026815,0.025766,0.030018
+data/raw/classification/Test/glioma/1269.jpg,0,0,0.899037,0.033333,0.030908,0.036721
+data/raw/classification/Test/glioma/1274.jpg,0,0,0.905540,0.031640,0.028824,0.033996
+data/raw/classification/Test/glioma/1275.jpg,0,0,0.898871,0.034248,0.031610,0.035270
+data/raw/classification/Test/glioma/1285.jpg,0,0,0.900024,0.033267,0.030930,0.035780
+data/raw/classification/Test/glioma/1293.jpg,0,0,0.908453,0.030156,0.027627,0.033763
+data/raw/classification/Test/glioma/1302.jpg,0,0,0.914583,0.028469,0.025896,0.031052
+data/raw/classification/Test/glioma/1305.jpg,0,0,0.902241,0.032932,0.030100,0.034727
+data/raw/classification/Test/glioma/1308.jpg,0,0,0.900148,0.032209,0.030547,0.037096
+data/raw/classification/Test/glioma/1310.jpg,0,0,0.906006,0.031155,0.028876,0.033963
+data/raw/classification/Test/glioma/1324.jpg,0,0,0.903092,0.032410,0.030542,0.033956
+data/raw/classification/Test/glioma/1364.jpg,0,0,0.899022,0.034163,0.031722,0.035093
+data/raw/classification/Test/glioma/1372.jpg,0,0,0.902470,0.031817,0.029903,0.035810
+data/raw/classification/Test/glioma/1376.jpg,0,0,0.903896,0.032008,0.029770,0.034326
+data/raw/classification/Test/glioma/1381.jpg,0,0,0.895134,0.035404,0.032237,0.037225
+data/raw/classification/Test/glioma/1383.jpg,0,0,0.901642,0.032862,0.030894,0.034602
+data/raw/classification/Test/glioma/1388.jpg,0,0,0.907283,0.030744,0.027894,0.034079
+data/raw/classification/Test/glioma/1399.jpg,0,0,0.902719,0.032593,0.031716,0.032972
+data/raw/classification/Test/glioma/1401.jpg,0,0,0.898452,0.032501,0.030718,0.038329
+data/raw/classification/Test/glioma/1402.jpg,0,0,0.899122,0.032631,0.031032,0.037215
+data/raw/classification/Test/glioma/1412.jpg,0,0,0.897045,0.033553,0.031509,0.037892
+data/raw/classification/Test/glioma/1413.jpg,0,1,0.364678,0.493869,0.071043,0.070410
+data/raw/classification/Test/glioma/1425.jpg,0,0,0.892144,0.035608,0.033166,0.039081
+data/raw/classification/Test/glioma/1433.jpg,0,0,0.909695,0.030324,0.027706,0.032275
+data/raw/classification/Test/glioma/1435.jpg,0,0,0.909392,0.030230,0.028127,0.032250
+data/raw/classification/Test/glioma/1445.jpg,0,0,0.896600,0.033946,0.031898,0.037556
+data/raw/classification/Test/glioma/1447.jpg,0,0,0.898231,0.034120,0.031062,0.036587
+data/raw/classification/Test/glioma/1457.jpg,0,0,0.905927,0.031185,0.029249,0.033639
+data/raw/classification/Test/glioma/1500.jpg,0,0,0.882939,0.040179,0.035880,0.041002
+data/raw/classification/Test/glioma/G_675_DA_.jpg,0,0,0.909557,0.029319,0.027368,0.033756
+data/raw/classification/Test/glioma/G_675_SP_.jpg,0,0,0.906050,0.031047,0.028828,0.034074
+data/raw/classification/Test/glioma/G_67_RO_.jpg,0,0,0.902435,0.031495,0.030566,0.035505
+data/raw/classification/Test/glioma/G_683.jpg,0,0,0.911763,0.029473,0.027543,0.031221
+data/raw/classification/Test/glioma/G_683_BR_.jpg,0,0,0.898564,0.032554,0.030741,0.038141
+data/raw/classification/Test/glioma/G_683_SP_.jpg,0,0,0.902872,0.032784,0.029570,0.034773
+data/raw/classification/Test/glioma/G_684_RO_.jpg,0,0,0.891292,0.033704,0.035279,0.039725
+data/raw/classification/Test/glioma/G_687.jpg,0,0,0.867650,0.045583,0.040377,0.046390
+data/raw/classification/Test/glioma/G_687_BR_.jpg,0,0,0.857427,0.047872,0.043348,0.051353
+data/raw/classification/Test/glioma/G_687_DA_.jpg,0,0,0.900428,0.032741,0.030559,0.036272
+data/raw/classification/Test/glioma/G_687_HF_.jpg,0,0,0.890437,0.036903,0.034078,0.038582
+data/raw/classification/Test/glioma/G_687_SP_.jpg,0,0,0.891844,0.035779,0.032526,0.039852
+data/raw/classification/Test/glioma/G_688_HF_.jpg,0,0,0.903650,0.032666,0.030238,0.033445
+data/raw/classification/Test/glioma/G_688_RO_.jpg,0,0,0.897788,0.032691,0.031308,0.038213
+data/raw/classification/Test/glioma/G_688_VF_.jpg,0,0,0.887962,0.036149,0.034842,0.041047
+data/raw/classification/Test/glioma/G_689_RO_.jpg,0,0,0.781198,0.096987,0.058804,0.063011
+data/raw/classification/Test/glioma/G_68_BR_.jpg,0,0,0.840967,0.050962,0.048206,0.059865
+data/raw/classification/Test/glioma/G_68_DA_.jpg,0,0,0.846448,0.047750,0.047195,0.058607
+data/raw/classification/Test/glioma/G_68_SP_.jpg,0,0,0.771961,0.099174,0.063637,0.065228
+data/raw/classification/Test/glioma/G_69.jpg,0,0,0.896293,0.033610,0.034243,0.035853
+data/raw/classification/Test/glioma/G_690_RO_.jpg,0,3,0.034756,0.037815,0.030384,0.897045
+data/raw/classification/Test/glioma/G_696_DA_.jpg,0,0,0.906412,0.030871,0.030360,0.032357
+data/raw/classification/Test/glioma/G_69_BR_.jpg,0,0,0.885196,0.036516,0.038935,0.039353
+data/raw/classification/Test/glioma/G_69_DA_.jpg,0,0,0.895355,0.033589,0.034737,0.036319
+data/raw/classification/Test/glioma/G_69_HF_.jpg,0,0,0.895666,0.034058,0.032920,0.037356
+data/raw/classification/Test/glioma/G_69_SP_.jpg,0,0,0.892499,0.035548,0.034319,0.037634
+data/raw/classification/Test/glioma/G_6_RO_.jpg,0,0,0.907719,0.029915,0.029978,0.032389
+data/raw/classification/Test/glioma/G_701_HF_.jpg,0,0,0.891371,0.040013,0.037886,0.030730
+data/raw/classification/Test/glioma/G_701_VF_.jpg,0,0,0.895773,0.036778,0.037149,0.030300
+data/raw/classification/Test/glioma/G_70_BR_.jpg,0,0,0.891946,0.033489,0.035465,0.039100
+data/raw/classification/Test/glioma/G_70_DA_.jpg,0,0,0.893818,0.033468,0.034768,0.037946
+data/raw/classification/Test/glioma/G_70_HF_.jpg,0,0,0.895584,0.034019,0.032515,0.037882
+data/raw/classification/Test/glioma/G_70_SP_.jpg,0,0,0.888323,0.036110,0.035003,0.040564
+data/raw/classification/Test/glioma/G_72_DA_.jpg,0,1,0.043420,0.877152,0.037230,0.042198
+data/raw/classification/Test/glioma/G_73_VF_.jpg,0,1,0.042639,0.877498,0.038014,0.041849
+data/raw/classification/Test/glioma/G_74.jpg,0,1,0.034881,0.896134,0.032202,0.036782
+data/raw/classification/Test/glioma/G_74_BR_.jpg,0,1,0.033701,0.899685,0.030825,0.035789
+data/raw/classification/Test/glioma/G_74_DA_.jpg,0,1,0.036413,0.892461,0.033309,0.037818
+data/raw/classification/Test/glioma/G_74_HF_.jpg,0,1,0.041829,0.877670,0.037827,0.042674
+data/raw/classification/Test/glioma/G_74_SP_.jpg,0,1,0.036722,0.889985,0.033988,0.039305
+data/raw/classification/Test/glioma/G_74_VF_.jpg,0,1,0.047557,0.860928,0.044003,0.047512
+data/raw/classification/Test/glioma/G_75.jpg,0,0,0.900707,0.032020,0.031137,0.036136
+data/raw/classification/Test/glioma/G_75_BR_.jpg,0,0,0.893943,0.032982,0.032770,0.040305
+data/raw/classification/Test/glioma/G_75_DA_.jpg,0,0,0.903289,0.031160,0.030894,0.034657
+data/raw/classification/Test/glioma/G_75_SP_.jpg,0,0,0.898972,0.032843,0.032079,0.036105
+data/raw/classification/Test/glioma/G_78_HF_.jpg,0,0,0.906993,0.030502,0.027952,0.034552
+data/raw/classification/Test/glioma/G_7_RO_.jpg,0,0,0.907681,0.030240,0.029667,0.032412
+data/raw/classification/Test/glioma/G_7_VF_.jpg,0,0,0.895771,0.034760,0.032538,0.036931
+data/raw/classification/Test/glioma/G_80_DA_.jpg,0,0,0.917746,0.026567,0.025669,0.030019
+data/raw/classification/Test/glioma/G_81_VF_.jpg,0,0,0.715634,0.145246,0.072134,0.066985
+data/raw/classification/Test/glioma/G_83.jpg,0,0,0.844708,0.048485,0.051920,0.054887
+data/raw/classification/Test/glioma/G_83_BR_.jpg,0,0,0.848145,0.047506,0.051786,0.052563
+data/raw/classification/Test/glioma/G_83_DA_.jpg,0,0,0.860683,0.043276,0.045349,0.050692
+data/raw/classification/Test/glioma/G_83_SP_.jpg,0,0,0.861455,0.043389,0.044503,0.050653
+data/raw/classification/Test/glioma/G_83_VF_.jpg,0,0,0.877083,0.038752,0.040661,0.043504
+data/raw/classification/Test/meningioma/1298.jpg,1,1,0.036396,0.891948,0.033289,0.038366
+data/raw/classification/Test/meningioma/1456.jpg,1,1,0.034653,0.895488,0.033007,0.036852
+data/raw/classification/Test/meningioma/1458.jpg,1,1,0.139926,0.559985,0.063919,0.236170
+data/raw/classification/Test/meningioma/1465.jpg,1,0,0.822646,0.063812,0.052775,0.060767
+data/raw/classification/Test/meningioma/1466.jpg,1,1,0.035737,0.890731,0.034859,0.038673
+data/raw/classification/Test/meningioma/1476.jpg,1,1,0.037151,0.888526,0.035026,0.039297
+data/raw/classification/Test/meningioma/1485.jpg,1,1,0.037151,0.888515,0.035025,0.039308
+data/raw/classification/Test/meningioma/1487.jpg,1,1,0.042334,0.878399,0.038359,0.040908
+data/raw/classification/Test/meningioma/1492.jpg,1,1,0.035626,0.896278,0.032105,0.035991
+data/raw/classification/Test/meningioma/1499.jpg,1,1,0.244729,0.630427,0.055840,0.069005
+data/raw/classification/Test/meningioma/1505.jpg,1,0,0.892251,0.035968,0.036964,0.034818
+data/raw/classification/Test/meningioma/1508.jpg,1,1,0.038304,0.885753,0.035642,0.040301
+data/raw/classification/Test/meningioma/1512.jpg,1,1,0.047258,0.871488,0.037256,0.043998
+data/raw/classification/Test/meningioma/1520.jpg,1,0,0.837363,0.056008,0.055244,0.051386
+data/raw/classification/Test/meningioma/1544.jpg,1,1,0.036674,0.892717,0.032806,0.037803
+data/raw/classification/Test/meningioma/1545.jpg,1,1,0.039365,0.892000,0.032065,0.036570
+data/raw/classification/Test/meningioma/image(51).jpg,1,1,0.035558,0.897269,0.031176,0.035997
+data/raw/classification/Test/meningioma/M_776_HF_.jpg,1,1,0.036872,0.892288,0.033172,0.037667
+data/raw/classification/Test/meningioma/M_776_VF_.jpg,1,1,0.035772,0.893319,0.033704,0.037204
+data/raw/classification/Test/meningioma/M_778_HF_.jpg,1,1,0.038706,0.893204,0.031387,0.036703
+data/raw/classification/Test/meningioma/M_778_RO_.jpg,1,1,0.037427,0.894754,0.031686,0.036132
+data/raw/classification/Test/meningioma/M_779_HF_.jpg,1,1,0.038461,0.887964,0.034966,0.038609
+data/raw/classification/Test/meningioma/M_780_HF_.jpg,1,1,0.035616,0.895814,0.032194,0.036376
+data/raw/classification/Test/meningioma/M_780_RO_.jpg,1,1,0.035860,0.892300,0.033750,0.038090
+data/raw/classification/Test/meningioma/M_780_VF_.jpg,1,1,0.036530,0.892505,0.033329,0.037636
+data/raw/classification/Test/meningioma/M_781_HF_.jpg,1,1,0.035458,0.894043,0.033294,0.037206
+data/raw/classification/Test/meningioma/M_781_RO_.jpg,1,1,0.036189,0.890519,0.034714,0.038578
+data/raw/classification/Test/meningioma/M_782_RO_.jpg,1,1,0.037310,0.889594,0.034726,0.038371
+data/raw/classification/Test/meningioma/M_782_VF_.jpg,1,1,0.037319,0.886427,0.036438,0.039817
+data/raw/classification/Test/meningioma/M_783_RO_.jpg,1,1,0.038529,0.884972,0.035994,0.040505
+data/raw/classification/Test/meningioma/M_783_VF_.jpg,1,1,0.053139,0.845285,0.048766,0.052810
+data/raw/classification/Test/meningioma/M_784.jpg,1,1,0.045198,0.870968,0.039422,0.044412
+data/raw/classification/Test/meningioma/M_784_BR_.jpg,1,1,0.056442,0.835326,0.049781,0.058451
+data/raw/classification/Test/meningioma/M_784_DA_.jpg,1,1,0.053840,0.843648,0.048830,0.053681
+data/raw/classification/Test/meningioma/M_784_SP_.jpg,1,1,0.227824,0.646686,0.061186,0.064304
+data/raw/classification/Test/meningioma/M_784_VF_.jpg,1,1,0.149773,0.684191,0.061783,0.104254
+data/raw/classification/Test/meningioma/M_786_HF_.jpg,1,1,0.036300,0.892581,0.033061,0.038057
+data/raw/classification/Test/meningioma/M_787_VF_.jpg,1,1,0.035523,0.895712,0.031974,0.036792
+data/raw/classification/Test/meningioma/M_788.jpg,1,1,0.033033,0.901663,0.030477,0.034828
+data/raw/classification/Test/meningioma/M_788_BR_.jpg,1,1,0.032302,0.902694,0.030150,0.034854
+data/raw/classification/Test/meningioma/M_788_RO_.jpg,1,1,0.034055,0.899917,0.030186,0.035841
+data/raw/classification/Test/meningioma/M_788_SP_.jpg,1,1,0.032675,0.901971,0.030282,0.035072
+data/raw/classification/Test/meningioma/M_788_VF_.jpg,1,1,0.035061,0.894386,0.033101,0.037452
+data/raw/classification/Test/meningioma/M_78_VF_.jpg,1,1,0.077957,0.781587,0.067044,0.073411
+data/raw/classification/Test/meningioma/M_790_RO_.jpg,1,1,0.039531,0.881931,0.037300,0.041238
+data/raw/classification/Test/meningioma/M_790_VF_.jpg,1,1,0.037380,0.887686,0.035435,0.039499
+data/raw/classification/Test/meningioma/M_792_HF_.jpg,1,1,0.037101,0.890728,0.033632,0.038539
+data/raw/classification/Test/meningioma/M_793_DA_.jpg,1,1,0.034444,0.896738,0.032470,0.036349
+data/raw/classification/Test/meningioma/M_793_VF_.jpg,1,1,0.037525,0.886881,0.036120,0.039474
+data/raw/classification/Test/meningioma/M_795_VF_.jpg,1,1,0.035490,0.894100,0.033503,0.036906
+data/raw/classification/Test/meningioma/M_796_VF_.jpg,1,1,0.035096,0.894977,0.033130,0.036796
+data/raw/classification/Test/meningioma/M_79_RO_.jpg,1,1,0.039647,0.883105,0.036512,0.040736
+data/raw/classification/Test/meningioma/M_7_HF_.jpg,1,1,0.039220,0.884044,0.036890,0.039846
+data/raw/classification/Test/meningioma/M_7_RO_.jpg,1,1,0.041301,0.877164,0.038788,0.042746
+data/raw/classification/Test/meningioma/M_7_VF_.jpg,1,1,0.042273,0.885896,0.034060,0.037771
+data/raw/classification/Test/meningioma/M_800_VF_.jpg,1,1,0.033988,0.899729,0.030715,0.035568
+data/raw/classification/Test/meningioma/M_801_HF_.jpg,1,1,0.037759,0.891422,0.033179,0.037639
+data/raw/classification/Test/meningioma/M_807_RO_.jpg,1,1,0.034944,0.896184,0.031773,0.037098
+data/raw/classification/Test/meningioma/M_808_HF_.jpg,1,1,0.034753,0.896028,0.032873,0.036347
+data/raw/classification/Test/meningioma/M_80_VF_.jpg,1,1,0.046316,0.866316,0.041632,0.045736
+data/raw/classification/Test/meningioma/M_810.jpg,1,1,0.033509,0.900139,0.031390,0.034961
+data/raw/classification/Test/meningioma/M_810_BR_.jpg,1,1,0.033155,0.899913,0.031643,0.035289
+data/raw/classification/Test/meningioma/M_810_SP_.jpg,1,1,0.033918,0.899681,0.031129,0.035272
+data/raw/classification/Test/meningioma/M_811_VF_.jpg,1,1,0.047547,0.865636,0.041254,0.045563
+data/raw/classification/Test/meningioma/M_812_VF_.jpg,1,1,0.038571,0.886109,0.035760,0.039560
+data/raw/classification/Test/meningioma/M_813_HF_.jpg,1,1,0.057240,0.866109,0.040200,0.036451
+data/raw/classification/Test/meningioma/M_813_VF_.jpg,1,0,0.746712,0.101748,0.099128,0.052412
+data/raw/classification/Test/meningioma/M_818_VF_.jpg,1,1,0.039278,0.887708,0.034004,0.039010
+data/raw/classification/Test/meningioma/M_82_VF_.jpg,1,1,0.041932,0.878451,0.037444,0.042173
+data/raw/classification/Test/meningioma/M_83_VF_.jpg,1,1,0.373043,0.446272,0.085339,0.095346
+data/raw/classification/Test/meningioma/M_84_VF_.jpg,1,1,0.043684,0.874126,0.038649,0.043541
+data/raw/classification/Test/meningioma/M_85_VF_.jpg,1,0,0.907452,0.030296,0.027884,0.034368
+data/raw/classification/Test/meningioma/M_86_VF_.jpg,1,0,0.811563,0.068993,0.063235,0.056210
+data/raw/classification/Test/no tumor/1107.jpg,3,3,0.041273,0.038679,0.041934,0.878115
+data/raw/classification/Test/no tumor/1111.jpg,3,3,0.034192,0.037755,0.035878,0.892176
+data/raw/classification/Test/no tumor/1117.jpg,3,3,0.034794,0.038352,0.032710,0.894144
+data/raw/classification/Test/no tumor/1120.jpg,3,3,0.038394,0.040397,0.041310,0.879900
+data/raw/classification/Test/no tumor/1122.jpg,3,3,0.038787,0.037754,0.039621,0.883838
+data/raw/classification/Test/no tumor/1141.jpg,3,3,0.047006,0.044891,0.043040,0.865062
+data/raw/classification/Test/no tumor/1153.jpg,3,1,0.042242,0.882671,0.035594,0.039493
+data/raw/classification/Test/no tumor/1156.jpg,3,3,0.036293,0.033397,0.038573,0.891738
+data/raw/classification/Test/no tumor/1157.jpg,3,3,0.039632,0.038369,0.038065,0.883934
+data/raw/classification/Test/no tumor/1165.jpg,3,3,0.042553,0.044551,0.042842,0.870053
+data/raw/classification/Test/no tumor/1173.jpg,3,3,0.035036,0.036034,0.034936,0.893994
+data/raw/classification/Test/no tumor/1180.jpg,3,3,0.037634,0.034147,0.037043,0.891176
+data/raw/classification/Test/no tumor/1212.jpg,3,3,0.037563,0.037773,0.034403,0.890261
+data/raw/classification/Test/no tumor/1217.jpg,3,3,0.032072,0.034512,0.035522,0.897894
+data/raw/classification/Test/no tumor/1232.jpg,3,3,0.042024,0.043710,0.042166,0.872101
+data/raw/classification/Test/no tumor/1243.jpg,3,3,0.035485,0.042528,0.035380,0.886607
+data/raw/classification/Test/no tumor/1245.jpg,3,3,0.036907,0.036513,0.039668,0.886912
+data/raw/classification/Test/no tumor/1250.jpg,3,3,0.033337,0.041565,0.031414,0.893684
+data/raw/classification/Test/no tumor/1252.jpg,3,3,0.040811,0.042257,0.042297,0.874634
+data/raw/classification/Test/no tumor/1255.jpg,3,3,0.045941,0.045009,0.044449,0.864601
+data/raw/classification/Test/no tumor/1263.jpg,3,3,0.042683,0.041443,0.038913,0.876961
+data/raw/classification/Test/no tumor/1274.jpg,3,3,0.042408,0.045173,0.041607,0.870812
+data/raw/classification/Test/no tumor/1277.jpg,3,3,0.047390,0.054064,0.048533,0.850013
+data/raw/classification/Test/no tumor/1283.jpg,3,3,0.041093,0.040490,0.036111,0.882306
+data/raw/classification/Test/no tumor/1284.jpg,3,3,0.034782,0.037671,0.035119,0.892428
+data/raw/classification/Test/no tumor/1291.jpg,3,3,0.039974,0.039332,0.039589,0.881104
+data/raw/classification/Test/no tumor/1293.jpg,3,3,0.035424,0.037206,0.036832,0.890538
+data/raw/classification/Test/no tumor/1305.jpg,3,3,0.037456,0.037544,0.033743,0.891256
+data/raw/classification/Test/no tumor/1341.jpg,3,3,0.046826,0.044877,0.043054,0.865243
+data/raw/classification/Test/no tumor/1361.jpg,3,3,0.035712,0.038166,0.033180,0.892943
+data/raw/classification/Test/no tumor/1376.jpg,3,3,0.032677,0.033326,0.036303,0.897694
+data/raw/classification/Test/no tumor/1387.jpg,3,0,0.892831,0.033361,0.025379,0.048429
+data/raw/classification/Test/no tumor/1397.jpg,3,3,0.034480,0.038082,0.036476,0.890961
+data/raw/classification/Test/no tumor/1400.jpg,3,3,0.033287,0.033673,0.034884,0.898156
+data/raw/classification/Test/no tumor/1402.jpg,3,3,0.029612,0.031093,0.031790,0.907505
+data/raw/classification/Test/no tumor/1403.jpg,3,3,0.036402,0.039263,0.038039,0.886296
+data/raw/classification/Test/no tumor/1404.jpg,3,3,0.043852,0.040679,0.039753,0.875715
+data/raw/classification/Test/no tumor/1406.jpg,3,3,0.039461,0.039388,0.042651,0.878500
+data/raw/classification/Test/no tumor/1408.jpg,3,3,0.038631,0.036954,0.039809,0.884606
+data/raw/classification/Test/no tumor/1412.jpg,3,3,0.040029,0.035461,0.037523,0.886987
+data/raw/classification/Test/no tumor/1418.jpg,3,3,0.034836,0.037791,0.037660,0.889714
+data/raw/classification/Test/no tumor/1419.jpg,3,3,0.037131,0.037304,0.033299,0.892266
+data/raw/classification/Test/no tumor/1428.jpg,3,3,0.044248,0.044494,0.044807,0.866451
+data/raw/classification/Test/no tumor/1449.jpg,3,3,0.039014,0.036810,0.040608,0.883568
+data/raw/classification/Test/no tumor/1468.jpg,3,3,0.034950,0.036869,0.033981,0.894201
+data/raw/classification/Test/no tumor/1478.jpg,3,3,0.047078,0.063782,0.053194,0.835946
+data/raw/classification/Test/no tumor/1494.jpg,3,3,0.032660,0.032654,0.036530,0.898156
+data/raw/classification/Test/no tumor/1506.jpg,3,3,0.100292,0.328958,0.060250,0.510500
+data/raw/classification/Test/no tumor/1523.jpg,3,3,0.039129,0.038189,0.033353,0.889330
+data/raw/classification/Test/no tumor/1524.jpg,3,1,0.040515,0.889190,0.033141,0.037154
+data/raw/classification/Test/no tumor/1530.jpg,3,3,0.038743,0.046989,0.043307,0.870960
+data/raw/classification/Test/no tumor/1537.jpg,3,3,0.041044,0.038516,0.041828,0.878612
+data/raw/classification/Test/no tumor/1544.jpg,3,3,0.039632,0.038369,0.038065,0.883934
+data/raw/classification/Test/no tumor/1546.jpg,3,3,0.040087,0.039258,0.039693,0.880962
+data/raw/classification/Test/no tumor/1547.jpg,3,3,0.043510,0.041578,0.041153,0.873759
+data/raw/classification/Test/no tumor/1556.jpg,3,3,0.061227,0.056311,0.035110,0.847351
+data/raw/classification/Test/pituitary/1202.jpg,2,2,0.029092,0.028135,0.913767,0.029006
+data/raw/classification/Test/pituitary/1206.jpg,2,2,0.032938,0.036311,0.892034,0.038718
+data/raw/classification/Test/pituitary/1220.jpg,2,2,0.026412,0.028011,0.917315,0.028262
+data/raw/classification/Test/pituitary/1230.jpg,2,2,0.033078,0.032481,0.904320,0.030120
+data/raw/classification/Test/pituitary/1236.jpg,2,2,0.027546,0.024903,0.920939,0.026612
+data/raw/classification/Test/pituitary/1240.jpg,2,2,0.026798,0.027967,0.916258,0.028976
+data/raw/classification/Test/pituitary/1264.jpg,2,2,0.029810,0.027993,0.913680,0.028517
+data/raw/classification/Test/pituitary/1277.jpg,2,2,0.028479,0.028020,0.915447,0.028055
+data/raw/classification/Test/pituitary/1279.jpg,2,2,0.034005,0.033343,0.899919,0.032733
+data/raw/classification/Test/pituitary/1281.jpg,2,2,0.030691,0.029236,0.910644,0.029430
+data/raw/classification/Test/pituitary/1288.jpg,2,2,0.028717,0.029547,0.914587,0.027149
+data/raw/classification/Test/pituitary/1290.jpg,2,2,0.028552,0.028167,0.915440,0.027841
+data/raw/classification/Test/pituitary/1298.jpg,2,2,0.032532,0.033008,0.904152,0.030308
+data/raw/classification/Test/pituitary/1301.jpg,2,2,0.030550,0.030357,0.909049,0.030045
+data/raw/classification/Test/pituitary/1302.jpg,2,2,0.029667,0.029663,0.912235,0.028435
+data/raw/classification/Test/pituitary/1313.jpg,2,2,0.032562,0.030786,0.905609,0.031043
+data/raw/classification/Test/pituitary/1323.jpg,2,2,0.028132,0.026312,0.917574,0.027982
+data/raw/classification/Test/pituitary/1327.jpg,2,2,0.027682,0.028502,0.915694,0.028121
+data/raw/classification/Test/pituitary/1330.jpg,2,2,0.030844,0.031594,0.908871,0.028690
+data/raw/classification/Test/pituitary/1333.jpg,2,2,0.030816,0.029829,0.910066,0.029288
+data/raw/classification/Test/pituitary/1355.jpg,2,2,0.032285,0.031262,0.906047,0.030407
+data/raw/classification/Test/pituitary/1360.jpg,2,2,0.031719,0.032327,0.903010,0.032944
+data/raw/classification/Test/pituitary/1361.jpg,2,2,0.030410,0.030351,0.910786,0.028453
+data/raw/classification/Test/pituitary/1363.jpg,2,2,0.030794,0.029365,0.910599,0.029242
+data/raw/classification/Test/pituitary/1377.jpg,2,2,0.028091,0.028431,0.912829,0.030649
+data/raw/classification/Test/pituitary/1384.jpg,2,2,0.032024,0.036459,0.900181,0.031336
+data/raw/classification/Test/pituitary/1388.jpg,2,2,0.027944,0.028524,0.915144,0.028388
+data/raw/classification/Test/pituitary/1390.jpg,2,2,0.030280,0.030393,0.907702,0.031624
+data/raw/classification/Test/pituitary/1396.jpg,2,2,0.030353,0.032313,0.904950,0.032385
+data/raw/classification/Test/pituitary/1399.jpg,2,2,0.031601,0.030768,0.907736,0.029894
+data/raw/classification/Test/pituitary/1408.jpg,2,2,0.030201,0.028220,0.913983,0.027596
+data/raw/classification/Test/pituitary/1428.jpg,2,2,0.030015,0.027467,0.914915,0.027602
+data/raw/classification/Test/pituitary/1442.jpg,2,2,0.030903,0.031274,0.906739,0.031084
+data/raw/classification/Test/pituitary/1452.jpg,2,2,0.027755,0.027224,0.917240,0.027782
+data/raw/classification/Test/pituitary/1458.jpg,2,2,0.025264,0.024327,0.925691,0.024718
+data/raw/classification/Test/pituitary/1462.jpg,2,2,0.025640,0.026292,0.921518,0.026550
+data/raw/classification/Test/pituitary/1469.jpg,2,2,0.027426,0.024014,0.922929,0.025632
+data/raw/classification/Test/pituitary/1480.jpg,2,2,0.031638,0.031127,0.907961,0.029275
+data/raw/classification/Test/pituitary/1483.jpg,2,2,0.030133,0.033690,0.906156,0.030021
+data/raw/classification/Test/pituitary/1484.jpg,2,2,0.046116,0.062615,0.849540,0.041729
+data/raw/classification/Test/pituitary/1485.jpg,2,2,0.030066,0.027941,0.913236,0.028757
+data/raw/classification/Test/pituitary/1486.jpg,2,2,0.032223,0.031791,0.904067,0.031919
+data/raw/classification/Test/pituitary/1495.jpg,2,2,0.028388,0.030057,0.911403,0.030152
+data/raw/classification/Test/pituitary/1496.jpg,2,2,0.030100,0.028316,0.912436,0.029148
+data/raw/classification/Test/pituitary/1499.jpg,2,2,0.024795,0.023893,0.927460,0.023852
+data/raw/classification/Test/pituitary/1510.jpg,2,2,0.026204,0.026505,0.921036,0.026254
+data/raw/classification/Test/pituitary/1512.jpg,2,2,0.027467,0.025078,0.922107,0.025348
+data/raw/classification/Test/pituitary/1520.jpg,2,2,0.031273,0.033580,0.903268,0.031878
+data/raw/classification/Test/pituitary/1536.jpg,2,2,0.029092,0.026435,0.917387,0.027085
+data/raw/classification/Test/pituitary/1537.jpg,2,2,0.029974,0.030343,0.910691,0.028992
+data/raw/classification/Test/pituitary/1541.jpg,2,2,0.030499,0.027426,0.914309,0.027766
+data/raw/classification/Test/pituitary/1558.jpg,2,2,0.024283,0.023904,0.927322,0.024490
+data/raw/classification/Test/pituitary/1561.jpg,2,2,0.029505,0.026827,0.915830,0.027839
+data/raw/classification/Test/pituitary/1562.jpg,2,2,0.024384,0.024780,0.925718,0.025118
+data/raw/classification/Test/pituitary/1564.jpg,2,2,0.027483,0.027324,0.918237,0.026956
+data/raw/classification/Test/pituitary/1568.jpg,2,2,0.028098,0.027073,0.918344,0.026484
+data/raw/classification/Test/pituitary/1571.jpg,2,2,0.028696,0.026659,0.918025,0.026621
+data/raw/classification/Test/pituitary/1574.jpg,2,2,0.031443,0.032648,0.903565,0.032344
+data/raw/classification/Test/pituitary/1576.jpg,2,2,0.028863,0.027643,0.914396,0.029097
+data/raw/classification/Test/pituitary/1588.jpg,2,2,0.027654,0.025252,0.920441,0.026652
+data/raw/classification/Test/pituitary/1594.jpg,2,2,0.030326,0.033391,0.907564,0.028719
+data/raw/classification/Test/pituitary/1599.jpg,2,2,0.024906,0.024850,0.924650,0.025594
+data/raw/classification/Test/pituitary/1601.jpg,2,2,0.030114,0.029646,0.911717,0.028523
+data/raw/classification/Test/pituitary/1617.jpg,2,2,0.025162,0.024592,0.923723,0.026523
+data/raw/classification/Test/pituitary/1655.jpg,2,2,0.030739,0.029562,0.911104,0.028594
+data/raw/classification/Test/pituitary/1658.jpg,2,2,0.030821,0.030341,0.908547,0.030291

@@ -1,0 +1,84 @@
+{
+  "n": 422,
+  "accuracy": 0.943127962085308,
+  "macro_f1": 0.9421191099306993,
+  "weighted_f1": 0.9426709504513825,
+  "per_class": {
+    "Glioma": {
+      "precision": 0.8901098901098901,
+      "recall": 0.9759036144578314,
+      "f1": 0.9310344827586207,
+      "support": 83
+    },
+    "Meningioma": {
+      "precision": 0.9428571428571428,
+      "recall": 0.8608695652173913,
+      "f1": 0.9,
+      "support": 115
+    },
+    "Pituitary": {
+      "precision": 0.9739130434782609,
+      "recall": 0.9824561403508771,
+      "f1": 0.9781659388646288,
+      "support": 114
+    },
+    "No Tumor": {
+      "precision": 0.954954954954955,
+      "recall": 0.9636363636363636,
+      "f1": 0.9592760180995475,
+      "support": 110
+    }
+  },
+  "confusion_matrix": [
+    [
+      81,
+      1,
+      1,
+      0
+    ],
+    [
+      9,
+      99,
+      2,
+      5
+    ],
+    [
+      1,
+      1,
+      112,
+      0
+    ],
+    [
+      0,
+      4,
+      0,
+      106
+    ]
+  ],
+  "confusion_matrix_order": [
+    "Glioma",
+    "Meningioma",
+    "Pituitary",
+    "No Tumor"
+  ],
+  "checkpoint_best_epoch": 11,
+  "checkpoint_val_f1": 0.9443892312976612,
+  "provenance": {
+    "evaluated_at": "2026-11-26T13:19:16+00:00",
+    "run_name": "tamnet_clean_s46",
+    "run_git": {
+      "commit": "35d5e20",
+      "dirty": true
+    },
+    "seed": 46,
+    "checkpoint": "results\\phase3\\runs\\tamnet_clean_s46\\best.pt",
+    "checkpoint_sha256": "9e239932620461c1ccf2a4eb76096c3d6dfa457d7e62e0766797cd8812222edc",
+    "run_config_sha256": "f3580152bb1e600f0a98acd94357e4c34327bd0dc2dedfc344396cf2489403b5",
+    "evaluator": "scripts/phase3_evaluate.py",
+    "dataset": "kaggle_testing",
+    "split": "external",
+    "manifest": "results\\phase3\\external_dedup_manifest.json",
+    "manifest_sha256": "f81abe43758136899d55b6beac76035530f45c0bb2b94f48d0d09e5f1112e793",
+    "dedup_applied": true
+  }
+}

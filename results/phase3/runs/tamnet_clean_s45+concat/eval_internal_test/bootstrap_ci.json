@@ -1,0 +1,60 @@
+{
+  "kind": "phase3_bootstrap_ci",
+  "run": "tamnet_clean_s45+concat",
+  "n": 1672,
+  "splits": 1000,
+  "method": "percentile bootstrap over test images (i.i.d. resampling)",
+  "caveat": "resamples test images, not patients; splits are image-level (see Phase 1)",
+  "created_at": "2026-11-26T13:19:08+00:00",
+  "accuracy": {
+    "point": 0.944377990430622,
+    "ci95_low": 0.9336124401913876,
+    "ci95_high": 0.9545454545454546,
+    "boot_mean": 0.9443050239234451,
+    "boot_std": 0.005587238062584879
+  },
+  "macro_f1": {
+    "point": 0.9430477548018066,
+    "ci95_low": 0.9318013799556435,
+    "ci95_high": 0.9536274751541807,
+    "boot_mean": 0.9429030007858835,
+    "boot_std": 0.0057243460794937015
+  },
+  "weighted_f1": {
+    "point": 0.9444287470023167,
+    "ci95_low": 0.9336700566874149,
+    "ci95_high": 0.9546205098260248,
+    "boot_mean": 0.9443502629694087,
+    "boot_std": 0.00558162881805045
+  },
+  "mcc": {
+    "point": 0.9250710896601825,
+    "ci95_low": 0.9104958977362932,
+    "ci95_high": 0.9388223482734798,
+    "boot_mean": 0.9249662333525426,
+    "boot_std": 0.007513133787099647
+  },
+  "per_class": {
+    "Glioma": {
+      "support": 543,
+      "roc_auc": 0.9800994051027083,
+      "pr_auc": 0.9691891889530432
+    },
+    "Meningioma": {
+      "support": 393,
+      "roc_auc": 0.9695054382101156,
+      "pr_auc": 0.9028189000327633
+    },
+    "Pituitary": {
+      "support": 386,
+      "roc_auc": 0.9954028638425773,
+      "pr_auc": 0.9864065429539556
+    },
+    "No Tumor": {
+      "support": 350,
+      "roc_auc": 0.9857164469418629,
+      "pr_auc": 0.9692618020340654
+    }
+  },
+  "source": "results/phase3/runs/tamnet_clean_s45+concat/eval_internal_test/predictions.csv"
+}
