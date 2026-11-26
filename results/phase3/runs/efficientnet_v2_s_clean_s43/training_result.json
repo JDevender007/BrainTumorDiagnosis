@@ -1,0 +1,14 @@
+{
+  "run_name": "efficientnet_v2_s_clean_s43",
+  "finished_at": "2026-11-26T09:19:16+00:00",
+  "duration_s": 10567.0,
+  "best_val_f1_weighted": 0.9634262131669791,
+  "best_epoch": 12,
+  "epochs_run": 19,
+  "checkpoint": "results/phase3/runs/efficientnet_v2_s_clean_s43/best.pt",
+  "git": {
+    "commit": "0699204",
+    "dirty": true
+  },
+  "seed": 43
+}

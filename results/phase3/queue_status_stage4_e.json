@@ -1,0 +1,10 @@
+{
+  "queue": "results\\phase3\\queue_stage4_e.json",
+  "started_at": "2026-11-25T13:50:16+00:00",
+  "current": "shared_unet_brisc_s44+ls0.25+sc2",
+  "completed": [],
+  "failed": null,
+  "total_entries": 3,
+  "updated_at": "2026-11-25T13:50:16+00:00",
+  "current_started_at": "2026-11-25T13:50:16+00:00"
+}

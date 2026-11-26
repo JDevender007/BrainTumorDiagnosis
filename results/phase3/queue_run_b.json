@@ -1,0 +1,10 @@
+[
+  {
+    "name": "swin_t_clean_s44",
+    "args": ["--model", "swin_t", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "0"]
+  },
+  {
+    "name": "efficientnet_v2_s_clean_s43",
+    "args": ["--model", "efficientnet_v2_s", "--protocol", "clean", "--seed", "43", "--epochs", "30", "--num-workers", "0"]
+  }
+]

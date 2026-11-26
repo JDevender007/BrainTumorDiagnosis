@@ -1,0 +1,15 @@
+{
+  "queue": "results\\phase3\\queue_run_a.json",
+  "started_at": "2026-11-26T04:30:09+00:00",
+  "current": null,
+  "completed": [
+    "swin_t_clean_s43",
+    "tamnet_clean_s45+concat",
+    "tamnet_clean_s43+concat"
+  ],
+  "failed": null,
+  "total_entries": 3,
+  "updated_at": "2026-11-26T12:17:48+00:00",
+  "current_started_at": "2026-11-26T10:43:56+00:00",
+  "finished_at": "2026-11-26T12:17:48+00:00"
+}

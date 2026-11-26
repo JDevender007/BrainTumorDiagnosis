@@ -1,0 +1,15 @@
+{
+  "queue": "results\\phase3\\queue_run_c.json",
+  "started_at": "2026-11-26T04:33:10+00:00",
+  "current": null,
+  "completed": [
+    "efficientnet_v2_s_clean_s44",
+    "shared_unet_brisc_s44+ls0.25+sc2",
+    "tamnet_clean_s44+concat"
+  ],
+  "failed": null,
+  "total_entries": 3,
+  "updated_at": "2026-11-26T12:08:34+00:00",
+  "current_started_at": "2026-11-26T09:45:26+00:00",
+  "finished_at": "2026-11-26T12:08:34+00:00"
+}

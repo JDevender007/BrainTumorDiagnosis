@@ -1,0 +1,27 @@
+{
+  "ts": "2026-11-26T09:57:30+05:30",
+  "memory_before": {
+    "ceiling_gb": 44.26,
+    "avail_gb": 36.8,
+    "ram_total_gb": 15.26,
+    "ram_avail_gb": 8.42
+  },
+  "started_queues": [],
+  "pids": {},
+  "skipped": [
+    {
+      "tag": "a",
+      "reason": "all entries complete"
+    },
+    {
+      "tag": "b",
+      "reason": "all entries complete"
+    },
+    {
+      "tag": "c",
+      "reason": "all entries complete"
+    }
+  ],
+  "started": false,
+  "reason": "all 3 queues complete"
+}

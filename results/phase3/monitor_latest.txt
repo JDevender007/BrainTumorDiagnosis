@@ -1,5 +1,8 @@
-- commit 28.5/30.5 ✓
+- effnet s44: ep3 in progress — 0.9317
+- shared_unet s44: ep5 in progress — best 0.9799@3
+- s45 +concat: ep19 in progress — best 0.9410@16
+- commit 38.1/44.3 ✓
 
 
 
-GPU 30% / 755 MiB · 0 trainers · 28 completed runs on disk · 2026-11-24T17:07:27+00:00
+GPU 100% / 3873 MiB · 3 trainers · 33 completed runs on disk · 2026-11-25T14:35:19+00:00

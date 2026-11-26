@@ -1,0 +1,14 @@
+{
+  "run_name": "shared_unet_brisc_s45+ls0.25+sc2",
+  "finished_at": "2026-11-25T11:18:01+00:00",
+  "duration_s": 4739.9,
+  "best_val_f1_weighted": 0.9859604570894613,
+  "best_epoch": 5,
+  "epochs_run": 12,
+  "checkpoint": "results/phase3/runs/shared_unet_brisc_s45+ls0.25+sc2/best.pt",
+  "git": {
+    "commit": "df56277",
+    "dirty": true
+  },
+  "seed": 45
+}

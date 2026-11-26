@@ -1,0 +1,66 @@
+{
+  "run_name": "shared_unet_brisc_s43+ls0.25+sc2",
+  "created_at": "2026-11-25T09:33:48+00:00",
+  "git": {
+    "commit": "32181bc",
+    "dirty": true
+  },
+  "model": "shared_unet",
+  "protocol": "brisc",
+  "flags": {},
+  "seed": 43,
+  "epochs": 30,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "patience": 7,
+  "label_smoothing": 0.1,
+  "seg_weight": 0.25,
+  "segmentation_classes": 2,
+  "optimizer": "AdamW+CosineAnnealingLR",
+  "selection_metric": "val_f1_weighted",
+  "image_size": [
+    224,
+    224
+  ],
+  "transform": "Resize->ToTensor->Normalize(ImageNet)",
+  "num_workers": 0,
+  "pretrained": true,
+  "smoke": false,
+  "split": {
+    "protocol": "brisc",
+    "manifest": null,
+    "sha256": null,
+    "note": "BRISC 2025 paired split built at runtime (load_brisc_split): labels from classification_task/, aligned masks from segmentation_task/; official test held out untouched"
+  },
+  "dataset": {
+    "n_total": {
+      "train": 4002,
+      "val": 998,
+      "test": 1000
+    },
+    "classes": {
+      "train": {
+        "Glioma": 918,
+        "Meningioma": 1064,
+        "No Tumor": 854,
+        "Pituitary": 1166
+      },
+      "val": {
+        "Glioma": 229,
+        "Meningioma": 265,
+        "No Tumor": 213,
+        "Pituitary": 291
+      },
+      "test": {
+        "Glioma": 254,
+        "Meningioma": 306,
+        "No Tumor": 140,
+        "Pituitary": 300
+      }
+    }
+  },
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "command": "D:\\BrainTumorDiagnosis\\scripts\\phase3_train.py --model shared_unet --protocol brisc --seed 43 --epochs 30 --num-workers 0 --seg-weight 0.25 --seg-classes 2"
+}

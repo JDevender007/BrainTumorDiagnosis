@@ -1,0 +1,14 @@
+[
+  {
+    "name": "efficientnet_v2_s_clean_s44",
+    "args": ["--model", "efficientnet_v2_s", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "0"]
+  },
+  {
+    "name": "shared_unet_brisc_s44+ls0.25+sc2",
+    "args": ["--model", "shared_unet", "--protocol", "brisc", "--seed", "44", "--epochs", "30", "--num-workers", "0", "--seg-weight", "0.25", "--seg-classes", "2"]
+  },
+  {
+    "name": "tamnet_clean_s44+concat",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "44", "--epochs", "30", "--num-workers", "0", "--no-attention-fusion"]
+  }
+]

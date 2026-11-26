@@ -1,0 +1,12 @@
+{
+  "queue": "results\\phase3\\queue_stage4_d.json",
+  "started_at": "2026-11-25T11:25:47+00:00",
+  "current": "tamnet_clean_s45+concat",
+  "completed": [
+    "shared_unet_brisc_s45+ls0.25+sc2"
+  ],
+  "failed": null,
+  "total_entries": 2,
+  "updated_at": "2026-11-25T11:25:47+00:00",
+  "current_started_at": "2026-11-25T11:25:47+00:00"
+}

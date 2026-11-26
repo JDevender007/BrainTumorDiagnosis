@@ -1,0 +1,14 @@
+[
+  {
+    "name": "swin_t_clean_s43",
+    "args": ["--model", "swin_t", "--protocol", "clean", "--seed", "43", "--epochs", "30", "--num-workers", "0"]
+  },
+  {
+    "name": "tamnet_clean_s45+concat",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "45", "--epochs", "30", "--num-workers", "0", "--no-attention-fusion"]
+  },
+  {
+    "name": "tamnet_clean_s43+concat",
+    "args": ["--model", "tamnet", "--protocol", "clean", "--seed", "43", "--epochs", "30", "--num-workers", "0", "--no-attention-fusion"]
+  }
+]

@@ -162,6 +162,32 @@ python -X utf8 scripts/phase3_queue.py --queue results/phase3/queue_stage4_fast.
 | **`densenet121_clean_s43` DONE 19:14** | **DONE** | best val F1(w) **0.9653 @ ep28**, full 30 epochs, 195.8 min — **densenet121 clean = 4 seeds** (s42 0.9514, s43 0.9653, s44 0.9471, s45 0.9452) |
 | Remaining stage 4 (7 runs) | RUNNING | `queue_stage4_e.json`: shared_unet_brisc_s44 → efficientnet_v2_s_s43 → tamnet_clean_s43+concat (resumes ep5); `queue_stage4_f.json`: efficientnet_v2_s_s44 → swin_t_s43 → swin_t_s44 → tamnet_clean_s44+concat (resumes ep8). All **nw0** |
 
+## Phase 3 — training complete (2026-11-26)
+
+All planned trainings are done: **41 runs with `training_result.json`** (8 new today, launched
+10:00 IST via `run_remaining_8.bat` → 3 balanced queues, all `--num-workers 0`, 8 h 15 m wall).
+
+| Run | best val F1(w) | epochs | notes |
+|---|---|---|---|
+| `swin_t_clean_s43` | **0.9665 @ ep26** | 30/30 | 4 h 56 m (slowest of the set) |
+| `swin_t_clean_s44` | **0.9516 @ ep6** | 13/30 | early stop; `swin_t` = 3 seeds (s42 0.9641, s43 0.9665, s44 0.9516) |
+| `efficientnet_v2_s_clean_s43` | **0.9634 @ ep12** | 19/30 | `efficientnet_v2_s` = 3 seeds (s42 0.9688, s43 0.9634, s44 0.9695) |
+| `efficientnet_v2_s_clean_s44` | **0.9695 @ ep18** | 25/30 | best efficientnet seed |
+| `shared_unet_brisc_s44+ls0.25+sc2` | **0.9950 @ ep16** | 23/30 | `shared_unet` = 4 seeds (s42, s43 0.9950, s44 0.9950, s45 0.9860) |
+| `tamnet_clean_s43+concat` | **0.9433 @ ep12** | 19/30 | `+concat` ablation complete (n=4: s42 0.9525, s43 0.9433, s44 0.9522, s45 0.9480) |
+| `tamnet_clean_s44+concat` | **0.9522 @ ep30** | 30/30 | still improving at the cap |
+| `tamnet_clean_s45+concat` | **0.9480 @ ep30** | 30/30 | resumed from ep18 after yesterday's kills |
+
+**Consequence for the paper (val-side, seeds now complete):** every clean-protocol baseline —
+efficientnet_v2_s (0.9634/0.9695/0.9688), swin_t (0.9665/0.9516/0.9641), resnet50 (0.9636),
+convnext_tiny (0.9623), densenet121 (0.9471–0.9653) — sits at or above TAMNet and its `+concat`
+variant (0.9433–0.9522). The "TAMNet beats baselines" claim is contradicted at the training-signal
+level too, not just on TEST.
+
+**Next (in order):** 36 TEST evaluations → aggregation (mean ± sd per model) → external
+de-duplicated evals + MC-dropout/uncertainty + seg-aux metrics → Phase 4 figures → Phase 5 paper
+rewrite (needs the 3 open user FILLs) → Phase 6 QA.
+
 ## Phase 4 — Figures _(pending)_
 ## Phase 5 — Paper rewrite _(pending)_
 ## Phase 6 — Reproducibility & QA _(pending)_

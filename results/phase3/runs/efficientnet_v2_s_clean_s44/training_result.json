@@ -1,0 +1,14 @@
+{
+  "run_name": "efficientnet_v2_s_clean_s44",
+  "finished_at": "2026-11-26T07:59:42+00:00",
+  "duration_s": 12379.5,
+  "best_val_f1_weighted": 0.9695300269406588,
+  "best_epoch": 18,
+  "epochs_run": 25,
+  "checkpoint": "results/phase3/runs/efficientnet_v2_s_clean_s44/best.pt",
+  "git": {
+    "commit": "801fd8a",
+    "dirty": true
+  },
+  "seed": 44
+}

@@ -1,0 +1,12 @@
+# densenet121_clean_s43 started 2026-11-25T07:21:33+00:00
+RUN densenet121_clean_s43
+  out      : D:\BrainTumorDiagnosis\results\phase3\runs\densenet121_clean_s43
+  protocol : clean | seed 43 | epochs 30
+  data     : train 7804 | val 1672 | test 1672 (untouched)
+  model    : densenet121 
+  device   : NVIDIA GeForce RTX 3050 Laptop GPU
+Epoch 1/30:   0%|          | 0/976 [00:00<?, ?it/s]forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFF21C779FD  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFF237FDDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFF245B9C5C  Unknown               Unknown  Unknown
