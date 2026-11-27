@@ -535,6 +535,12 @@ print("sections I-II written")
 # ==========================================================================
 h1("III.  PROPOSED METHOD")
 
+figure("fig1_architecture.png",
+       "Executed TAMNet architecture. Every tensor shape in the diagram was "
+       "captured with a forward hook on TumorAwareMultiTaskNet in eval mode "
+       "(batch 1, 224\u00d7224 input); the dashed path carries no gradient in "
+       "the executed configuration (D2).")
+
 para("This section states the executed model exactly as implemented in "
      "the source module `models/tumor_aware.py`. Where an earlier draft of "
      "this paper disagreed with the code, the code is the specification and "
@@ -718,6 +724,16 @@ table("Datasets, locations, sizes and roles. Class columns are "
       _ds_rows,
       note="Source: `results/dataset_table.csv`. Rows carrying [VERIFY] or "
            "[CITATION NEEDED] are unresolved provenance, not estimates.")
+
+figure("fig2_data_pipeline.png",
+       "Data flow and the leakage audit. Counts are read from "
+       "`dataset_table.csv`, `leakage_report.json`, "
+       "`external_dedup_manifest.json` and the run configuration; nothing in "
+       "this diagram is typed by hand.")
+figure("fig3_samples.png",
+       "First sorted slice per class from each source, with the BRISC "
+       "ground-truth mask overlaid in the last column. Selection is "
+       "mechanical, not cherry-picked.")
 
 para(f"**Split.** All classification experiments use one manifest-pinned "
      f"split of the internal pool: {N_TRAIN} training, {N_VAL} validation "
@@ -1002,6 +1018,12 @@ table("Binary tumour Dice of the auxiliary segmentation head on the BRISC "
       _seg_rows,
       note="Source: `results/phase3/seg_metrics_summary.json`. Single-seed "
            "rows have no standard deviation. These are not WT/TC/ET numbers.")
+
+figure("fig8_seg_box.png",
+       "Per-slice Dice distributions for every BRISC segmentation evaluation. "
+       "The WT/TC/ET values from the standalone 3-D U-Net are deliberately "
+       "absent: no per-case record of them exists under `results/`, so they "
+       "cannot be plotted honestly.")
 
 para("**(b) The whole-tumour / tumor-core / enhancing-tumour numbers.** "
      "The values 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft are "
