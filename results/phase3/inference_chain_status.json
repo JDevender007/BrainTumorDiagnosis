@@ -1,0 +1,10 @@
+{
+  "started_at": "2026-11-26T15:09:19+00:00",
+  "steps": [],
+  "current": {
+    "step": 1,
+    "name": "uncertainty",
+    "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\inference_uncertainty.log",
+    "started": 1795705759.7884777
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "kind": "phase3_seg_summary",
+  "created_at": "2026-11-26T15:30:05+00:00",
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1",
+  "note": "These are the ONLY segmentation numbers this repo can defend for the multi-task net. The paper's 0.9005/0.5803/0.6010 WT/TC/ET come from a standalone 3-D U-Net on BraTS (D3) and must be relabelled, not reused.",
+  "groups": [
+    {
+      "slug": "tamnet_brisc_lambda0",
+      "n_seeds": 1,
+      "runs": [
+        "tamnet_brisc_s42+sc2"
+      ],
+      "dice_tumor_mean": 0.7270971242893972,
+      "dice_tumor_std_sample_ddof1": null,
+      "iou_tumor_mean": 0.6054427895517637,
+      "pixel_acc_mean": 0.9914330625964048,
+      "empty_gt_empty_pred_mean": 0.8214285714285714,
+      "per_seed_dice": {
+        "tamnet_brisc_s42+sc2": 0.7270971242893972
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda0.1",
+      "n_seeds": 1,
+      "runs": [
+        "tamnet_brisc_s42+ls0.1+sc2"
+      ],
+      "dice_tumor_mean": 0.6656696077447365,
+      "dice_tumor_std_sample_ddof1": null,
+      "iou_tumor_mean": 0.5351633112228366,
+      "pixel_acc_mean": 0.9891093119660656,
+      "empty_gt_empty_pred_mean": 0.95,
+      "per_seed_dice": {
+        "tamnet_brisc_s42+ls0.1+sc2": 0.6656696077447365
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda0.25",
+      "n_seeds": 1,
+      "runs": [
+        "tamnet_brisc_s42+ls0.25+sc2"
+      ],
+      "dice_tumor_mean": 0.7021317647301604,
+      "dice_tumor_std_sample_ddof1": null,
+      "iou_tumor_mean": 0.5764805326694021,
+      "pixel_acc_mean": 0.9904992333961201,
+      "empty_gt_empty_pred_mean": 0.9785714285714285,
+      "per_seed_dice": {
+        "tamnet_brisc_s42+ls0.25+sc2": 0.7021317647301604
+      }
+    },
+    {
+      "slug": "tamnet_brisc_lambda1",
+      "n_seeds": 1,
+      "runs": [
+        "tamnet_brisc_s42+ls1+sc2"
+      ],
+      "dice_tumor_mean": 0.6874791993057577,
+      "dice_tumor_std_sample_ddof1": null,
+      "iou_tumor_mean": 0.5583722730143669,
+      "pixel_acc_mean": 0.9885024713010204,
+      "empty_gt_empty_pred_mean": 0.8571428571428571,
+      "per_seed_dice": {
+        "tamnet_brisc_s42+ls1+sc2": 0.6874791993057577
+      }
+    },
+    {
+      "slug": "shared_unet_brisc",
+      "n_seeds": 4,
+      "runs": [
+        "shared_unet_brisc_s42+ls0.25+sc2",
+        "shared_unet_brisc_s43+ls0.25+sc2",
+        "shared_unet_brisc_s44+ls0.25+sc2",
+        "shared_unet_brisc_s45+ls0.25+sc2"
+      ],
+      "dice_tumor_mean": 0.8033917238596533,
+      "dice_tumor_std_sample_ddof1": 0.035654028665575564,
+      "iou_tumor_mean": 0.7134898031570305,
+      "pixel_acc_mean": 0.9941997482813983,
+      "empty_gt_empty_pred_mean": 0.5589285714285714,
+      "per_seed_dice": {
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.7924807007139377,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.8339503769599887,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.8293989910139733,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.7577368267507133
+      }
+    }
+  ],
+  "failed_this_batch": []
+}

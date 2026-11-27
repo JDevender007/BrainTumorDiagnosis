@@ -44,24 +44,34 @@ value matches a legacy artifact exactly, all computed on the **1857-image leaky 
 | ViT-B/16 | 97.52 % | `outputs/vit_b_16_evaluation/evaluation_metrics.json` | 0.9752 | traceable (leaky split) |
 | TAMNet | 96.45 % | `outputs/research_experiments/calibration/calibration_tumor_aware.json` | 0.9645 | traceable (leaky split) |
 
-**Action.** Replace the whole table with Phase 3 clean-protocol numbers. Currently available
-(val weighted F1, seed 42 unless noted; TEST column fills in as `phase3_evaluate_all.py` runs):
+**Action.** Replace the whole table with Phase 3 clean-protocol numbers. All 41 runs are now
+trained and TEST-evaluated (`results/phase3/agg/combined_summary.json`), and every comparison
+below has a paired bootstrap test (`results/phase3/bootstrap_ci.json`):
 
-| Model | params | clean val F1w | seeds |
-|---|---|---|---|
-| EfficientNetV2-S | 20.2 M | 0.9688 | 1 (s43/s44 queued) |
-| Swin-T | 27.5 M | 0.9641 | 1 (s43/s44 queued) |
-| ResNet-50 | 23.5 M | 0.9636 | 1 |
-| ConvNeXt-T | 27.8 M | 0.9623 | 1 |
-| TAMNet +MC | 9.0 M | 0.9564 | 1 |
-| TAMNet +concat | 9.0 M | 0.9525 | 1 |
-| DenseNet-121 | 6.96 M | 0.9514 | 1 |
-| TAMNet full | 9.03 M | 0.9473 ± 0.0029 | **5** |
-| TAMNet t-only | 9.0 M | 0.9430 ± 0.0059 | 4 |
-| ViT-B/16 | 85.8 M | 0.9392 | 1 |
+| Model | params | TEST accuracy (mean ± SD) | TEST macro-F1 | seeds | vs TAMNet (paired Δ) |
+|---|---|---|---|---|---|
+| ConvNeXt-T | 27.82 M | 0.9498 (n=1) | 0.9493 | 1 | −2.27 pp, p<0.05 |
+| EfficientNetV2-S | 20.18 M | **0.9478 ± 0.0023** | 0.9475 ± 0.0021 | 3 | **−2.33 pp, p<0.05** |
+| Swin-T | 27.52 M | 0.9450 ± 0.0118 | 0.9442 ± 0.0116 | 3 | **−1.97 pp, p<0.05** |
+| ResNet-50 | 23.52 M | 0.9438 (n=1) | 0.9433 | 1 | **−1.67 pp, p<0.05** |
+| TAMNet +MC | 9.17 M | 0.9420 ± 0.0059 | 0.9416 ± 0.0059 | 4 | — |
+| TAMNet +concat | 8.84 M | 0.9402 ± 0.0085 | 0.9398 ± 0.0080 | 4 | — |
+| **TAMNet full** | 9.034 M | **0.9360 ± 0.0110** | 0.9355 ± 0.0109 | **5** | reference |
+| DenseNet-121 | 6.96 M | 0.9360 ± 0.0125 | 0.9369 ± 0.0113 | 4 | −0.18 pp, n.s. |
+| TAMNet t-only | 8.57 M | 0.9329 ± 0.0095 | 0.9326 ± 0.0092 | 4 | — |
+| ViT-B/16 | 85.80 M | 0.9282 (n=1) | 0.9277 | 1 | −0.12 pp, n.s. |
+| shared-encoder U-Net | 11.94 M | 0.9007 ± 0.0136 | 0.9004 ± 0.0140 | 4 | +3.47 pp, p<0.05 (TAMNet better) |
 
-The "External Accuracy" column has no artifact for the backbones and must be dropped or
-re-measured.
+Read honestly: TAMNet is **significantly worse** than EfficientNetV2-S, Swin-T, ResNet-50 and
+ConvNeXt-T, statistically indistinguishable from DenseNet-121 and ViT-B/16, and clearly better
+than the shared-encoder U-Net baseline. It is *not* the best classifier, and it is dominated on
+the accuracy–size plane by DenseNet-121 (same 0.9360 accuracy with 2.07 M fewer parameters), so
+the "efficiency" argument cannot be made either (`fig5`).
+
+The per-run 95 % bootstrap CIs are ≈ ±1.1 pp (`results/phase3/bootstrap_ci.json`), so the
+differences in the 0.1–0.5 pp range that the paper's Table 1 relies on are inside the noise.
+The "External Accuracy" column has no artifact for the backbones and must be re-measured or
+dropped.
 
 ---
 
@@ -73,11 +83,23 @@ Artifact: `outputs/kaggle_evaluation/results.json` — `accuracy` 0.9916, `f1_we
 `mcc` 0.9888, `kappa` 0.9887, `total_images` 1311, `num_mc_passes` 10. Confusion matrix sums to
 1311 and reproduces 1300/1311 = 0.9916.
 
-**Verdict: VERIFIED.** Two caveats to state in the paper:
-1. `inference_time_sec` and `images_per_sec` in that file are both **0** — timing was not recorded.
-2. This is the legacy checkpoint (leaky-trained), so it must be labelled as such, or re-run with a
-   clean-protocol checkpoint. Re-running requires the Kaggle dataset present locally
-   → **decision needed from user** (dataset provenance is still an open FILL).
+**Verdict: VERIFIED as a legacy (leaky, old-checkpoint) number — and now superseded.**
+
+Phase 3 re-ran external validation properly, five seeds, on both the full sets and the
+de-duplicated keep-lists (`results/phase3/external_eval_summary.json`):
+
+| Evaluation set | Images | Accuracy (mean ± SD) | Macro-F1 |
+|---|---|---|---|
+| Kaggle Testing — all images (leaky) | 1311 | 0.9788 ± 0.0050 | — |
+| Kaggle Testing — de-duplicated | 422 | **0.9431 ± 0.0073** | — |
+| BRISC test — all images (leaky) | 1000 | 0.9634 ± 0.0118 | — |
+| BRISC test — de-duplicated | 431 | **0.9234 ± 0.0218** | — |
+
+So even the *leaky* re-run does not reach 99.16 % / 97.70 % — those came from a different
+checkpoint and a different (historical) training protocol. And the defensible external numbers
+are 94.31 % (Kaggle) and 92.34 % (BRISC), i.e. **3.6–4.0 pp below their leaky counterparts**;
+that gap is the leakage the old table was measuring. The paper must report the de-duplicated
+rows and state the drop counts (67.8 % Kaggle, 56.9 % BRISC).
 
 ---
 

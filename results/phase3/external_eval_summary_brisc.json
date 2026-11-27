@@ -1,0 +1,116 @@
+{
+  "kind": "phase3_external_eval",
+  "created_at": "2026-11-27T11:18:25+00:00",
+  "headline_rule": "mean over seeds; sample SD (ddof=1); n=1 -> no SD",
+  "note": "'dedup' = leakage-free images only (see external_dedup_manifest.json); 'full' = every image, comparable to the legacy paper numbers",
+  "runs": [
+    "tamnet_brisc_s42+sc2",
+    "tamnet_brisc_s42+ls0.1+sc2",
+    "tamnet_brisc_s42+ls0.25+sc2",
+    "tamnet_brisc_s42+ls1+sc2",
+    "shared_unet_brisc_s42+ls0.25+sc2",
+    "shared_unet_brisc_s43+ls0.25+sc2",
+    "shared_unet_brisc_s44+ls0.25+sc2",
+    "shared_unet_brisc_s45+ls0.25+sc2"
+  ],
+  "aggregate": {
+    "kaggle_testing_dedup": {
+      "datasets": "kaggle_testing",
+      "dedup": true,
+      "n_seeds": 8,
+      "n_images_per_seed": 422,
+      "accuracy_mean": 0.9511255924170616,
+      "accuracy_std": 0.011037778496589809,
+      "macro_f1_mean": 0.9514277311361372,
+      "macro_f1_std": 0.01081116410467478,
+      "per_seed": {
+        "tamnet_brisc_s42+sc2": 0.943127962085308,
+        "tamnet_brisc_s42+ls0.1+sc2": 0.9549763033175356,
+        "tamnet_brisc_s42+ls0.25+sc2": 0.957345971563981,
+        "tamnet_brisc_s42+ls1+sc2": 0.9407582938388626,
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.957345971563981,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.9715639810426541,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.943127962085308,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.9407582938388626
+      }
+    },
+    "kaggle_testing_full": {
+      "datasets": "kaggle_testing",
+      "dedup": false,
+      "n_seeds": 8,
+      "n_images_per_seed": 1311,
+      "accuracy_mean": 0.9532799389778794,
+      "accuracy_std": 0.011515868382084956,
+      "macro_f1_mean": 0.9543215052303404,
+      "macro_f1_std": 0.010871750468919916,
+      "per_seed": {
+        "tamnet_brisc_s42+sc2": 0.9366895499618612,
+        "tamnet_brisc_s42+ls0.1+sc2": 0.9511823035850496,
+        "tamnet_brisc_s42+ls0.25+sc2": 0.965675057208238,
+        "tamnet_brisc_s42+ls1+sc2": 0.9519450800915332,
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.9595728451563692,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.9710144927536232,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.9466056445461479,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.9435545385202135
+      }
+    },
+    "brisc_test_dedup": {
+      "datasets": "brisc_test",
+      "dedup": true,
+      "n_seeds": 8,
+      "n_images_per_seed": 431,
+      "accuracy_mean": 0.9814385150812065,
+      "accuracy_std": 0.008681339644487095,
+      "macro_f1_mean": 0.9796254449493453,
+      "macro_f1_std": 0.00923980952789296,
+      "per_seed": {
+        "tamnet_brisc_s42+sc2": 0.9814385150812065,
+        "tamnet_brisc_s42+ls0.1+sc2": 0.9907192575406032,
+        "tamnet_brisc_s42+ls0.25+sc2": 0.9814385150812065,
+        "tamnet_brisc_s42+ls1+sc2": 0.962877030162413,
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.9767981438515081,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.988399071925754,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.9860788863109049,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.9837587006960556
+      }
+    },
+    "brisc_test_full": {
+      "datasets": "brisc_test",
+      "dedup": false,
+      "n_seeds": 8,
+      "n_images_per_seed": 1000,
+      "accuracy_mean": 0.9804999999999999,
+      "accuracy_std": 0.0075592894601845505,
+      "macro_f1_mean": 0.9818557783933601,
+      "macro_f1_std": 0.00677603289530315,
+      "per_seed": {
+        "tamnet_brisc_s42+sc2": 0.983,
+        "tamnet_brisc_s42+ls0.1+sc2": 0.985,
+        "tamnet_brisc_s42+ls0.25+sc2": 0.983,
+        "tamnet_brisc_s42+ls1+sc2": 0.962,
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.981,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.983,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.984,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.983
+      }
+    }
+  },
+  "this_batch": [],
+  "history": [
+    {
+      "created_at": "2026-11-26T13:21:09+00:00",
+      "n_jobs": 20,
+      "n_ok": 20
+    },
+    {
+      "created_at": "2026-11-26T16:09:55+00:00",
+      "n_jobs": 25,
+      "n_ok": 25
+    },
+    {
+      "created_at": "2026-11-27T11:18:25+00:00",
+      "n_jobs": 0,
+      "n_ok": 0
+    }
+  ]
+}

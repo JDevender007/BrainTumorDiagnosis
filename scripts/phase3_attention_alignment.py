@@ -186,9 +186,11 @@ def main() -> int:
         x_all.append(img)
         y_all.append(int(lab))
         m_all.append((msk > 0).float())
-    x = torch.stack(x_all).to(device)
+    # host-resident: a full BRISC test tensor does not fit on a 4 GiB card
+    # together with activations, and spilling to shared memory is ~18x slower
+    x = torch.stack(x_all)
     y = np.asarray(y_all)
-    masks = torch.stack(m_all).to(device)
+    masks = torch.stack(m_all)
 
     records: dict[str, list] = {"tamnet_attention": [], "densenet121_gradcam": [], "uniform": []}
     fusion_weights: list[np.ndarray] = []
@@ -204,7 +206,8 @@ def main() -> int:
         t0 = time.time()
         catcher = FusionWeightCatcher().attach(model)
         for i in range(0, len(x), args.batch_size):
-            xb, mb = x[i:i + args.batch_size], masks[i:i + args.batch_size]
+            xb = x[i:i + args.batch_size].to(device)
+            mb = masks[i:i + args.batch_size].to(device)
             cam = upsample_normalise(tamnet_maps(model, xb))
             mass = mass_in_mask(cam, mb)
             hit = pointing_hit(cam, mb)
@@ -226,7 +229,7 @@ def main() -> int:
     # uniform reference
     for i in range(len(tumor_samples)):
         uni = torch.full((1, 224, 224), 1.0 / (224 * 224), device=device)
-        mb = masks[i:i + 1]
+        mb = masks[i:i + 1].to(device)
         records["uniform"].append({
             "slice": tumor_samples[i], "class": CLASS_NAMES[y[i]],
             "mass_in_mask": float(mass_in_mask(uni, mb)[0]),
@@ -250,7 +253,8 @@ def main() -> int:
             t0 = time.time()
             try:
                 for i in range(0, len(x), args.batch_size):
-                    xb, mb = x[i:i + args.batch_size], masks[i:i + args.batch_size]
+                    xb = x[i:i + args.batch_size].to(device)
+                    mb = masks[i:i + args.batch_size].to(device)
                     cam = upsample_normalise(cam_gen(net, xb))
                     mass = mass_in_mask(cam, mb)
                     hit = pointing_hit(cam, mb)

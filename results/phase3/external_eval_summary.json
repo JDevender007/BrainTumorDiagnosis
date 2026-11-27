@@ -1,6 +1,6 @@
 {
   "kind": "phase3_external_eval",
-  "created_at": "2026-11-26T13:21:09+00:00",
+  "created_at": "2026-11-27T11:18:27+00:00",
   "headline_rule": "mean over seeds; sample SD (ddof=1); n=1 -> no SD",
   "note": "'dedup' = leakage-free images only (see external_dedup_manifest.json); 'full' = every image, comparable to the legacy paper numbers",
   "runs": [
@@ -80,233 +80,27 @@
       }
     }
   },
-  "this_batch": [
-    {
-      "run": "tamnet_clean_s42",
-      "dataset": "kaggle_testing",
-      "dedup": true,
-      "ok": true,
-      "n": 422,
-      "accuracy": 0.9383886255924171,
-      "macro_f1": 0.9383964560390541,
-      "weighted_f1": 0.9379506680886115,
-      "seconds": 27.7
-    },
-    {
-      "run": "tamnet_clean_s42",
-      "dataset": "kaggle_testing",
-      "dedup": false,
-      "ok": true,
-      "n": 1311,
-      "accuracy": 0.9778794813119756,
-      "macro_f1": 0.9772435614569217,
-      "weighted_f1": 0.9778121234851119,
-      "seconds": 43.2
-    },
-    {
-      "run": "tamnet_clean_s42",
-      "dataset": "brisc_test",
-      "dedup": true,
-      "ok": true,
-      "n": 431,
-      "accuracy": 0.9095127610208816,
-      "macro_f1": 0.9059775774147399,
-      "weighted_f1": 0.9102644769996189,
-      "seconds": 29.0
-    },
-    {
-      "run": "tamnet_clean_s42",
-      "dataset": "brisc_test",
-      "dedup": false,
-      "ok": true,
-      "n": 1000,
-      "accuracy": 0.958,
-      "macro_f1": 0.9508288122315063,
-      "weighted_f1": 0.9577536718868708,
-      "seconds": 37.1
-    },
-    {
-      "run": "tamnet_clean_s43",
-      "dataset": "kaggle_testing",
-      "dedup": true,
-      "ok": true,
-      "n": 422,
-      "accuracy": 0.9502369668246445,
-      "macro_f1": 0.9497451345064565,
-      "weighted_f1": 0.950142495000866,
-      "seconds": 24.9
-    },
-    {
-      "run": "tamnet_clean_s43",
-      "dataset": "kaggle_testing",
-      "dedup": false,
-      "ok": true,
-      "n": 1311,
-      "accuracy": 0.9824561403508771,
-      "macro_f1": 0.9818235338601142,
-      "weighted_f1": 0.9824359817056846,
-      "seconds": 33.9
-    },
-    {
-      "run": "tamnet_clean_s43",
-      "dataset": "brisc_test",
-      "dedup": true,
-      "ok": true,
-      "n": 431,
-      "accuracy": 0.9489559164733179,
-      "macro_f1": 0.9452561779528862,
-      "weighted_f1": 0.9492409148949744,
-      "seconds": 24.7
-    },
-    {
-      "run": "tamnet_clean_s43",
-      "dataset": "brisc_test",
-      "dedup": false,
-      "ok": true,
-      "n": 1000,
-      "accuracy": 0.976,
-      "macro_f1": 0.9748598848640067,
-      "weighted_f1": 0.97600106494293,
-      "seconds": 31.6
-    },
-    {
-      "run": "tamnet_clean_s44",
-      "dataset": "kaggle_testing",
-      "dedup": true,
-      "ok": true,
-      "n": 422,
-      "accuracy": 0.9502369668246445,
-      "macro_f1": 0.9500153376293622,
-      "weighted_f1": 0.9500747106553861,
-      "seconds": 25.3
-    },
-    {
-      "run": "tamnet_clean_s44",
-      "dataset": "kaggle_testing",
-      "dedup": false,
-      "ok": true,
-      "n": 1311,
-      "accuracy": 0.9839816933638444,
-      "macro_f1": 0.9835768611612536,
-      "weighted_f1": 0.9839555368235341,
-      "seconds": 34.3
-    },
-    {
-      "run": "tamnet_clean_s44",
-      "dataset": "brisc_test",
-      "dedup": true,
-      "ok": true,
-      "n": 431,
-      "accuracy": 0.9443155452436195,
-      "macro_f1": 0.9436810964283534,
-      "weighted_f1": 0.9443443631185519,
-      "seconds": 25.4
-    },
-    {
-      "run": "tamnet_clean_s44",
-      "dataset": "brisc_test",
-      "dedup": false,
-      "ok": true,
-      "n": 1000,
-      "accuracy": 0.976,
-      "macro_f1": 0.9730689670782301,
-      "weighted_f1": 0.9759209271188273,
-      "seconds": 32.2
-    },
-    {
-      "run": "tamnet_clean_s45",
-      "dataset": "kaggle_testing",
-      "dedup": true,
-      "ok": true,
-      "n": 422,
-      "accuracy": 0.933649289099526,
-      "macro_f1": 0.9319038307702701,
-      "weighted_f1": 0.9334211713120755,
-      "seconds": 25.3
-    },
-    {
-      "run": "tamnet_clean_s45",
-      "dataset": "kaggle_testing",
-      "dedup": false,
-      "ok": true,
-      "n": 1311,
-      "accuracy": 0.9786422578184591,
-      "macro_f1": 0.9776546521665113,
-      "weighted_f1": 0.9785846698164382,
-      "seconds": 34.0
-    },
-    {
-      "run": "tamnet_clean_s45",
-      "dataset": "brisc_test",
-      "dedup": true,
-      "ok": true,
-      "n": 431,
-      "accuracy": 0.9002320185614849,
-      "macro_f1": 0.8969738933193303,
-      "weighted_f1": 0.9011866975774186,
-      "seconds": 23.0
-    },
-    {
-      "run": "tamnet_clean_s45",
-      "dataset": "brisc_test",
-      "dedup": false,
-      "ok": true,
-      "n": 1000,
-      "accuracy": 0.956,
-      "macro_f1": 0.9492176510311617,
-      "weighted_f1": 0.9555986684529169,
-      "seconds": 29.3
-    },
-    {
-      "run": "tamnet_clean_s46",
-      "dataset": "kaggle_testing",
-      "dedup": true,
-      "ok": true,
-      "n": 422,
-      "accuracy": 0.943127962085308,
-      "macro_f1": 0.9421191099306993,
-      "weighted_f1": 0.9426709504513825,
-      "seconds": 30.1
-    },
-    {
-      "run": "tamnet_clean_s46",
-      "dataset": "kaggle_testing",
-      "dedup": false,
-      "ok": true,
-      "n": 1311,
-      "accuracy": 0.9710144927536232,
-      "macro_f1": 0.9697959828413981,
-      "weighted_f1": 0.9709326797605289,
-      "seconds": 43.6
-    },
-    {
-      "run": "tamnet_clean_s46",
-      "dataset": "brisc_test",
-      "dedup": true,
-      "ok": true,
-      "n": 431,
-      "accuracy": 0.91415313225058,
-      "macro_f1": 0.9111038389030134,
-      "weighted_f1": 0.9145915270286215,
-      "seconds": 26.1
-    },
-    {
-      "run": "tamnet_clean_s46",
-      "dataset": "brisc_test",
-      "dedup": false,
-      "ok": true,
-      "n": 1000,
-      "accuracy": 0.951,
-      "macro_f1": 0.9451024531759129,
-      "weighted_f1": 0.9507113548568389,
-      "seconds": 41.7
-    }
-  ],
+  "this_batch": [],
   "history": [
     {
       "created_at": "2026-11-26T13:21:09+00:00",
       "n_jobs": 20,
       "n_ok": 20
+    },
+    {
+      "created_at": "2026-11-26T16:09:55+00:00",
+      "n_jobs": 25,
+      "n_ok": 25
+    },
+    {
+      "created_at": "2026-11-27T11:18:25+00:00",
+      "n_jobs": 0,
+      "n_ok": 0
+    },
+    {
+      "created_at": "2026-11-27T11:18:27+00:00",
+      "n_jobs": 0,
+      "n_ok": 0
     }
   ]
 }

@@ -1,14 +1,50 @@
 {
   "kind": "phase4_figures",
-  "created_at": "2026-11-24T14:33:50+00:00",
-  "n_runs": 25,
-  "n_runs_with_test_eval": 5,
+  "created_at": "2026-11-27T11:18:31+00:00",
+  "n_runs": 41,
+  "n_runs_with_test_eval": 41,
   "input_files_sha256_16": {
+    "results\\phase3\\runs\\convnext_tiny_clean_s42\\eval_internal_test\\metrics.json": "50a86ef846871323",
+    "results\\phase3\\runs\\densenet121_clean_s42\\eval_internal_test\\metrics.json": "f5060cd798baa1e7",
+    "results\\phase3\\runs\\densenet121_clean_s43\\eval_internal_test\\metrics.json": "47ef6999ff46d0e6",
+    "results\\phase3\\runs\\densenet121_clean_s44\\eval_internal_test\\metrics.json": "dd6f6ab506a86100",
+    "results\\phase3\\runs\\densenet121_clean_s45\\eval_internal_test\\metrics.json": "b486d49deb8392f3",
+    "results\\phase3\\runs\\efficientnet_v2_s_clean_s42\\eval_internal_test\\metrics.json": "dd4d664185b046e1",
+    "results\\phase3\\runs\\efficientnet_v2_s_clean_s43\\eval_internal_test\\metrics.json": "97a07801ce9ea9ce",
+    "results\\phase3\\runs\\efficientnet_v2_s_clean_s44\\eval_internal_test\\metrics.json": "2200562ebc7b5dab",
+    "results\\phase3\\runs\\resnet50_clean_s42\\eval_internal_test\\metrics.json": "9dc0d98d8055716d",
+    "results\\phase3\\runs\\shared_unet_brisc_s42+ls0.25+sc2\\eval_internal_test\\metrics.json": "6b320302865aea75",
+    "results\\phase3\\runs\\shared_unet_brisc_s43+ls0.25+sc2\\eval_internal_test\\metrics.json": "09b98d59e2ae5494",
+    "results\\phase3\\runs\\shared_unet_brisc_s44+ls0.25+sc2\\eval_internal_test\\metrics.json": "1489e26ec2723b90",
+    "results\\phase3\\runs\\shared_unet_brisc_s45+ls0.25+sc2\\eval_internal_test\\metrics.json": "77654ec30211d27b",
+    "results\\phase3\\runs\\swin_t_clean_s42\\eval_internal_test\\metrics.json": "3c05312c57de6e05",
+    "results\\phase3\\runs\\swin_t_clean_s43\\eval_internal_test\\metrics.json": "256fcfcf61366caa",
+    "results\\phase3\\runs\\swin_t_clean_s44\\eval_internal_test\\metrics.json": "7eeb1e53cb4e35d8",
+    "results\\phase3\\runs\\tamnet_brisc_s42+ls0+sc2\\eval_internal_test\\metrics.json": "97115ca20324ef22",
+    "results\\phase3\\runs\\tamnet_brisc_s42+ls0.1+sc2\\eval_internal_test\\metrics.json": "426b97bca060191c",
+    "results\\phase3\\runs\\tamnet_brisc_s42+ls0.25+sc2\\eval_internal_test\\metrics.json": "c3d1eda6149df9dc",
+    "results\\phase3\\runs\\tamnet_brisc_s42+ls1+sc2\\eval_internal_test\\metrics.json": "9b35e25042565c22",
+    "results\\phase3\\runs\\tamnet_brisc_s42+sc2\\eval_internal_test\\metrics.json": "b7a0b430395a1121",
     "results\\phase3\\runs\\tamnet_clean_s42\\eval_internal_test\\metrics.json": "00894eaae97074fd",
+    "results\\phase3\\runs\\tamnet_clean_s42+concat\\eval_internal_test\\metrics.json": "5095d015084f596c",
+    "results\\phase3\\runs\\tamnet_clean_s42+mc\\eval_internal_test\\metrics.json": "1f1af48a170be12b",
+    "results\\phase3\\runs\\tamnet_clean_s42-tonly\\eval_internal_test\\metrics.json": "6a764b3b89e699ef",
+    "results\\phase3\\runs\\tamnet_clean_s42_ep50budget\\eval_internal_test\\metrics.json": "a8e31ccf99d6f34a",
     "results\\phase3\\runs\\tamnet_clean_s43\\eval_internal_test\\metrics.json": "df4af1edfd58e616",
+    "results\\phase3\\runs\\tamnet_clean_s43+concat\\eval_internal_test\\metrics.json": "31efe6f69408eeea",
+    "results\\phase3\\runs\\tamnet_clean_s43+mc\\eval_internal_test\\metrics.json": "a77ae7215b8b76f6",
+    "results\\phase3\\runs\\tamnet_clean_s43-tonly\\eval_internal_test\\metrics.json": "5387f730922db81d",
     "results\\phase3\\runs\\tamnet_clean_s44\\eval_internal_test\\metrics.json": "351025bd86282823",
+    "results\\phase3\\runs\\tamnet_clean_s44+concat\\eval_internal_test\\metrics.json": "808aa91a062f1af8",
+    "results\\phase3\\runs\\tamnet_clean_s44+mc\\eval_internal_test\\metrics.json": "b8514f104951fc13",
+    "results\\phase3\\runs\\tamnet_clean_s44-tonly\\eval_internal_test\\metrics.json": "8e831b0ab77aa961",
     "results\\phase3\\runs\\tamnet_clean_s45\\eval_internal_test\\metrics.json": "f2c3d65c9d7d88c8",
-    "results\\phase3\\runs\\tamnet_clean_s46\\eval_internal_test\\metrics.json": "f615b7e0e7598caf"
+    "results\\phase3\\runs\\tamnet_clean_s45+concat\\eval_internal_test\\metrics.json": "c87e9b948efc558d",
+    "results\\phase3\\runs\\tamnet_clean_s45+mc\\eval_internal_test\\metrics.json": "ce49a3d29b57f368",
+    "results\\phase3\\runs\\tamnet_clean_s45-tonly\\eval_internal_test\\metrics.json": "47d79df5026a4132",
+    "results\\phase3\\runs\\tamnet_clean_s46\\eval_internal_test\\metrics.json": "f615b7e0e7598caf",
+    "results\\phase3\\runs\\tamnet_leaky_s42\\eval_internal_test\\metrics.json": "cddf62deec729a85",
+    "results\\phase3\\runs\\vit_b_16_clean_s42\\eval_internal_test\\metrics.json": "39815c5c0ddf6f95"
   },
   "figures": {
     "fig4_ablation_val.png": {
@@ -24,16 +60,16 @@
         {
           "label": "DenseNet-121",
           "protocol": "clean",
-          "n": 1,
-          "mean": 0.9513828102480156,
-          "std": 0.0
+          "n": 4,
+          "mean": 0.9522589747675234,
+          "std": 0.009099633197532195
         },
         {
           "label": "EfficientNetV2-S",
           "protocol": "clean",
-          "n": 1,
-          "mean": 0.9688473397144529,
-          "std": 0.0
+          "n": 3,
+          "mean": 0.967267859940697,
+          "std": 0.0033444286377076163
         },
         {
           "label": "ResNet-50",
@@ -45,16 +81,16 @@
         {
           "label": "shared U-Net",
           "protocol": "brisc",
-          "n": 1,
-          "mean": 0.9909837214580753,
-          "std": 0.0
+          "n": 4,
+          "mean": 0.9917273020880388,
+          "std": 0.00428183195000955
         },
         {
           "label": "Swin-T",
           "protocol": "clean",
-          "n": 1,
-          "mean": 0.9640575411926694,
-          "std": 0.0
+          "n": 3,
+          "mean": 0.960712966929068,
+          "std": 0.007983651087681698
         },
         {
           "label": "TAMNet \u03bb=0",
@@ -101,16 +137,16 @@
         {
           "label": "TAMNet +concat",
           "protocol": "clean",
-          "n": 1,
-          "mean": 0.9524677057329288,
-          "std": 0.0
+          "n": 4,
+          "mean": 0.9489745698180576,
+          "std": 0.0043189581512017685
         },
         {
           "label": "TAMNet +MC",
           "protocol": "clean",
-          "n": 1,
-          "mean": 0.9564078084593163,
-          "std": 0.0
+          "n": 4,
+          "mean": 0.951467075456816,
+          "std": 0.00394178381732492
         },
         {
           "label": "TAMNet t-only",
@@ -138,6 +174,402 @@
         }
       ],
       "note": "TEST-set version pending; only configs with eval_internal_test are eligible"
+    },
+    "fig4b_test_accuracy": {
+      "source": "results\\phase3\\agg\\combined_summary.json",
+      "rule": "mean over seeds, sample SD ddof=1; n=1 has no SD",
+      "values": {
+        "tamnet_brisc_lambda1": {
+          "mean": 0.8779904306220095,
+          "std_sample_ddof1": null,
+          "min": 0.8779904306220095,
+          "max": 0.8779904306220095
+        },
+        "tamnet_brisc_lambda0.1": {
+          "mean": 0.8893540669856459,
+          "std_sample_ddof1": null,
+          "min": 0.8893540669856459,
+          "max": 0.8893540669856459
+        },
+        "tamnet_brisc_lambda0.25": {
+          "mean": 0.9001196172248804,
+          "std_sample_ddof1": null,
+          "min": 0.9001196172248804,
+          "max": 0.9001196172248804
+        },
+        "shared_unet_brisc": {
+          "mean": 0.9007177033492824,
+          "std_sample_ddof1": 0.013568340930760408,
+          "min": 0.8863636363636364,
+          "max": 0.9150717703349283
+        },
+        "tamnet_brisc_lambda0": {
+          "mean": 0.9043062200956937,
+          "std_sample_ddof1": null,
+          "min": 0.9043062200956937,
+          "max": 0.9043062200956937
+        },
+        "vit_b_16_clean": {
+          "mean": 0.9282296650717703,
+          "std_sample_ddof1": null,
+          "min": 0.9282296650717703,
+          "max": 0.9282296650717703
+        },
+        "tamnet_clean_tonly": {
+          "mean": 0.9328648325358851,
+          "std_sample_ddof1": 0.009486470496792347,
+          "min": 0.9192583732057417,
+          "max": 0.9401913875598086
+        },
+        "tamnet_clean": {
+          "mean": 0.9360047846889952,
+          "std_sample_ddof1": 0.010995679611752499,
+          "min": 0.9270334928229665,
+          "max": 0.9485645933014354
+        },
+        "densenet121_clean": {
+          "mean": 0.9360047846889952,
+          "std_sample_ddof1": 0.012517015273000188,
+          "min": 0.9252392344497608,
+          "max": 0.9521531100478469
+        },
+        "tamnet_clean_ep50": {
+          "mean": 0.9389952153110048,
+          "std_sample_ddof1": null,
+          "min": 0.9389952153110048,
+          "max": 0.9389952153110048
+        },
+        "tamnet_clean_concat": {
+          "mean": 0.9401913875598087,
+          "std_sample_ddof1": 0.008500400959062118,
+          "min": 0.9276315789473685,
+          "max": 0.9461722488038278
+        },
+        "tamnet_clean_mc": {
+          "mean": 0.9419856459330144,
+          "std_sample_ddof1": 0.005940855034191137,
+          "min": 0.937200956937799,
+          "max": 0.9503588516746412
+        },
+        "resnet50_clean": {
+          "mean": 0.94377990430622,
+          "std_sample_ddof1": null,
+          "min": 0.94377990430622,
+          "max": 0.94377990430622
+        },
+        "swin_t_clean": {
+          "mean": 0.9449760765550238,
+          "std_sample_ddof1": 0.011765738979010771,
+          "min": 0.9324162679425837,
+          "max": 0.9557416267942583
+        },
+        "efficientnet_v2_s_clean": {
+          "mean": 0.9477671451355661,
+          "std_sample_ddof1": 0.002264317522248914,
+          "min": 0.9461722488038278,
+          "max": 0.9503588516746412
+        },
+        "convnext_tiny_clean": {
+          "mean": 0.9497607655502392,
+          "std_sample_ddof1": null,
+          "min": 0.9497607655502392,
+          "max": 0.9497607655502392
+        },
+        "tamnet_leaky_control": {
+          "mean": 0.9814593301435407,
+          "std_sample_ddof1": null,
+          "min": 0.9814593301435407,
+          "max": 0.9814593301435407
+        }
+      },
+      "paper_claim_line": 0.9645
+    },
+    "fig5_pareto_params_accuracy": {
+      "sources": [
+        "results\\phase3\\params_table.json",
+        "results\\phase3\\agg\\combined_summary.json"
+      ],
+      "points": [
+        {
+          "slug": "tamnet_clean",
+          "params_m": 9.034416,
+          "accuracy": 0.9360047846889952,
+          "std": 0.010995679611752499,
+          "kind": "tamnet"
+        },
+        {
+          "slug": "tamnet_clean_mc",
+          "params_m": 9.165488,
+          "accuracy": 0.9419856459330144,
+          "std": 0.005940855034191137,
+          "kind": "tamnet"
+        },
+        {
+          "slug": "tamnet_clean_concat",
+          "params_m": 8.84011,
+          "accuracy": 0.9401913875598087,
+          "std": 0.008500400959062118,
+          "kind": "tamnet"
+        },
+        {
+          "slug": "tamnet_clean_tonly",
+          "params_m": 8.57387,
+          "accuracy": 0.9328648325358851,
+          "std": 0.009486470496792347,
+          "kind": "tamnet"
+        },
+        {
+          "slug": "densenet121_clean",
+          "params_m": 6.957956,
+          "accuracy": 0.9360047846889952,
+          "std": 0.012517015273000188,
+          "kind": "backbone"
+        },
+        {
+          "slug": "efficientnet_v2_s_clean",
+          "params_m": 20.182612,
+          "accuracy": 0.9477671451355661,
+          "std": 0.002264317522248914,
+          "kind": "backbone"
+        },
+        {
+          "slug": "swin_t_clean",
+          "params_m": 27.52243,
+          "accuracy": 0.9449760765550238,
+          "std": 0.011765738979010771,
+          "kind": "backbone"
+        },
+        {
+          "slug": "resnet50_clean",
+          "params_m": 23.516228,
+          "accuracy": 0.94377990430622,
+          "std": 0.0,
+          "kind": "backbone"
+        },
+        {
+          "slug": "convnext_tiny_clean",
+          "params_m": 27.823204,
+          "accuracy": 0.9497607655502392,
+          "std": 0.0,
+          "kind": "backbone"
+        },
+        {
+          "slug": "vit_b_16_clean",
+          "params_m": 85.801732,
+          "accuracy": 0.9282296650717703,
+          "std": 0.0,
+          "kind": "backbone"
+        }
+      ]
+    },
+    "fig6_confusion_internal.png": {
+      "runs": [
+        {
+          "run": "densenet121_clean_s42",
+          "n": 1672,
+          "accuracy": 0.9252392344497608,
+          "source": "results\\phase3\\runs\\densenet121_clean_s42\\eval_internal_test\\metrics.json"
+        },
+        {
+          "run": "efficientnet_v2_s_clean_s42",
+          "n": 1672,
+          "accuracy": 0.9503588516746412,
+          "source": "results\\phase3\\runs\\efficientnet_v2_s_clean_s42\\eval_internal_test\\metrics.json"
+        },
+        {
+          "run": "swin_t_clean_s42",
+          "n": 1672,
+          "accuracy": 0.9467703349282297,
+          "source": "results\\phase3\\runs\\swin_t_clean_s42\\eval_internal_test\\metrics.json"
+        },
+        {
+          "run": "tamnet_clean_s42",
+          "n": 1672,
+          "accuracy": 0.9270334928229665,
+          "source": "results\\phase3\\runs\\tamnet_clean_s42\\eval_internal_test\\metrics.json"
+        }
+      ]
+    },
+    "fig6b_per_class_f1.png": {
+      "runs": [
+        "tamnet_clean_s42",
+        "tamnet_clean_s43",
+        "tamnet_clean_s44",
+        "tamnet_clean_s45",
+        "tamnet_clean_s46"
+      ],
+      "values": {
+        "Glioma": [
+          0.9430438842203548,
+          0.9361296472831268,
+          0.9598506069094305,
+          0.9550870760769936,
+          0.9294225481209899
+        ],
+        "Meningioma": [
+          0.8888888888888888,
+          0.8930348258706468,
+          0.9245982694684796,
+          0.9161290322580645,
+          0.8877419354838709
+        ],
+        "Pituitary": [
+          0.941952506596306,
+          0.9544863459037711,
+          0.9568627450980393,
+          0.959792477302205,
+          0.9647058823529412
+        ],
+        "No Tumor": [
+          0.9294605809128631,
+          0.9362880886426593,
+          0.949928469241774,
+          0.9561527581329562,
+          0.9256661991584852
+        ]
+      }
+    },
+    "fig9_reliability": {
+      "source": "results\\phase3\\reliability.json",
+      "ece": {
+        "tamnet_clean_s42": 0.07712371606361924,
+        "densenet121_clean_s42": 0.0553401552996282,
+        "efficientnet_v2_s_clean_s42": 0.04314640053864303
+      }
+    },
+    "fig10_uncertainty": {
+      "source": "results\\phase3\\uncertainty_summary.json",
+      "groups": [
+        "tamnet_clean",
+        "tamnet_clean_mc",
+        "densenet121_clean",
+        "efficientnet_v2_s_clean",
+        "swin_t_clean",
+        "shared_unet_brisc",
+        "resnet50_clean",
+        "convnext_tiny_clean",
+        "vit_b_16_clean"
+      ]
+    },
+    "fig11_attention_alignment": {
+      "source": "results\\phase3\\attention_alignment.json",
+      "summaries": {
+        "tamnet_attention": {
+          "n": 860,
+          "mass_in_mask_mean": 0.010293705831357984,
+          "mass_in_mask_std": 0.014030265806546751,
+          "mass_in_mask_median": 0.005936024710536003,
+          "pointing_hit_rate": 0.0,
+          "mask_fraction_mean": 0.019058981760700103,
+          "lift_over_mask_fraction": 0.5400973651480037
+        },
+        "uniform": {
+          "n": 860,
+          "mass_in_mask_mean": 0.019058981767265386,
+          "mass_in_mask_std": 0.01905861862235595,
+          "mass_in_mask_median": 0.012426258996129036,
+          "pointing_hit_rate": 0.0,
+          "mask_fraction_mean": 0.019058981760700103,
+          "lift_over_mask_fraction": 1.0000000003444718
+        }
+      },
+      "paired_tamnet_minus_gradcam": null,
+      "fusion_weights": {
+        "n": 860,
+        "alpha_global_mean": 0.9707183436598888,
+        "alpha_tumor_mean": 0.029281656364108996,
+        "alpha_tumor_std": 0.04678354201620702,
+        "note": "2-way softmax over (global, tumour) features; see models/tumor_aware.py AttentionFusion"
+      }
+    },
+    "fig13_robustness_heatmap": {
+      "source": "results\\phase3\\robustness.json",
+      "mrrs_definition": "MRRS = mean over the 27 corruptions of acc(corruption)/acc(clean); reported as mean over seeds, never the best seed",
+      "groups": {
+        "tamnet_clean": {
+          "n_seeds": 5,
+          "mrrs_mean": 0.8508270444053512,
+          "mrrs_std_sample_ddof1": 0.0035119631123181018,
+          "mrrs_best_seed": 0.8540907466952482,
+          "per_seed": {
+            "tamnet_clean_s42": 0.853405017921147,
+            "tamnet_clean_s43": 0.8540907466952482,
+            "tamnet_clean_s44": 0.8458269114006819,
+            "tamnet_clean_s45": 0.8485783763561543,
+            "tamnet_clean_s46": 0.8522341696535244
+          }
+        },
+        "densenet121_clean": {
+          "n_seeds": 4,
+          "mrrs_mean": 0.8141678195461729,
+          "mrrs_std_sample_ddof1": 0.026041390925886653,
+          "mrrs_best_seed": 0.8451749488181648,
+          "per_seed": {
+            "densenet121_clean_s42": 0.8120855179678709,
+            "densenet121_clean_s43": 0.8451749488181648,
+            "densenet121_clean_s44": 0.781672640382318,
+            "densenet121_clean_s45": 0.8177381710163378
+          }
+        }
+      },
+      "types": [
+        "brightness",
+        "contrast",
+        "defocus_blur",
+        "gaussian_noise",
+        "impulse_noise",
+        "jpeg_compression",
+        "motion_blur",
+        "pixelate",
+        "shot_noise"
+      ]
+    },
+    "fig14_intensity_curves": {
+      "source": "results\\phase3\\robustness.json",
+      "runs": [
+        "tamnet_clean_s42",
+        "densenet121_clean_s42"
+      ],
+      "paper_claim": "contrast 0.5 -> 22.40% accuracy"
+    },
+    "fig15_generalization_matrix": {
+      "columns": [
+        "internal TEST",
+        "Kaggle full",
+        "Kaggle de-dup",
+        "BRISC full",
+        "BRISC de-dup"
+      ],
+      "rows": {
+        "TAMNet (internal train)": {
+          "internal TEST": 0.9360047846889952,
+          "Kaggle full": 0.9787948131197559,
+          "Kaggle de-dup": 0.9431279620853081,
+          "BRISC full": 0.9634,
+          "BRISC de-dup": 0.9234338747099768
+        },
+        "BRISC-trained TAMNet": {
+          "internal TEST": 0.9001196172248804,
+          "Kaggle full": 0.965675057208238,
+          "Kaggle de-dup": 0.957345971563981,
+          "BRISC full": 0.983,
+          "BRISC de-dup": 0.9814385150812065
+        },
+        "BRISC-trained shared U-Net": {
+          "internal TEST": 0.9007177033492823,
+          "Kaggle full": 0.9551868802440885,
+          "Kaggle de-dup": 0.9531990521327014,
+          "BRISC full": 0.98275,
+          "BRISC de-dup": 0.9837587006960558
+        },
+        "Leaky control (historical)": {
+          "internal TEST": 0.9814593301435407,
+          "Kaggle full": null,
+          "Kaggle de-dup": null,
+          "BRISC full": null,
+          "BRISC de-dup": null
+        }
+      }
     }
   }
 }

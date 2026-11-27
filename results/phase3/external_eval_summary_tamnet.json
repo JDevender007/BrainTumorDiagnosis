@@ -1,0 +1,106 @@
+{
+  "kind": "phase3_external_eval",
+  "created_at": "2026-11-27T11:18:27+00:00",
+  "headline_rule": "mean over seeds; sample SD (ddof=1); n=1 -> no SD",
+  "note": "'dedup' = leakage-free images only (see external_dedup_manifest.json); 'full' = every image, comparable to the legacy paper numbers",
+  "runs": [
+    "tamnet_clean_s42",
+    "tamnet_clean_s43",
+    "tamnet_clean_s44",
+    "tamnet_clean_s45",
+    "tamnet_clean_s46"
+  ],
+  "aggregate": {
+    "kaggle_testing_dedup": {
+      "datasets": "kaggle_testing",
+      "dedup": true,
+      "n_seeds": 5,
+      "n_images_per_seed": 422,
+      "accuracy_mean": 0.9431279620853081,
+      "accuracy_std": 0.007303808060389777,
+      "macro_f1_mean": 0.9424359737751684,
+      "macro_f1_std": 0.007717103237970935,
+      "per_seed": {
+        "tamnet_clean_s42": 0.9383886255924171,
+        "tamnet_clean_s43": 0.9502369668246445,
+        "tamnet_clean_s44": 0.9502369668246445,
+        "tamnet_clean_s45": 0.933649289099526,
+        "tamnet_clean_s46": 0.943127962085308
+      }
+    },
+    "kaggle_testing_full": {
+      "datasets": "kaggle_testing",
+      "dedup": false,
+      "n_seeds": 5,
+      "n_images_per_seed": 1311,
+      "accuracy_mean": 0.9787948131197559,
+      "accuracy_std": 0.005042408506800443,
+      "macro_f1_mean": 0.9780189182972399,
+      "macro_f1_std": 0.005331893753997518,
+      "per_seed": {
+        "tamnet_clean_s42": 0.9778794813119756,
+        "tamnet_clean_s43": 0.9824561403508771,
+        "tamnet_clean_s44": 0.9839816933638444,
+        "tamnet_clean_s45": 0.9786422578184591,
+        "tamnet_clean_s46": 0.9710144927536232
+      }
+    },
+    "brisc_test_dedup": {
+      "datasets": "brisc_test",
+      "dedup": true,
+      "n_seeds": 5,
+      "n_images_per_seed": 431,
+      "accuracy_mean": 0.9234338747099768,
+      "accuracy_std": 0.0218270159190566,
+      "macro_f1_mean": 0.9205985168036646,
+      "macro_f1_std": 0.022376602441547138,
+      "per_seed": {
+        "tamnet_clean_s42": 0.9095127610208816,
+        "tamnet_clean_s43": 0.9489559164733179,
+        "tamnet_clean_s44": 0.9443155452436195,
+        "tamnet_clean_s45": 0.9002320185614849,
+        "tamnet_clean_s46": 0.91415313225058
+      }
+    },
+    "brisc_test_full": {
+      "datasets": "brisc_test",
+      "dedup": false,
+      "n_seeds": 5,
+      "n_images_per_seed": 1000,
+      "accuracy_mean": 0.9634,
+      "accuracy_std": 0.011781341180018522,
+      "macro_f1_mean": 0.9586155536761636,
+      "macro_f1_std": 0.014180420095082854,
+      "per_seed": {
+        "tamnet_clean_s42": 0.958,
+        "tamnet_clean_s43": 0.976,
+        "tamnet_clean_s44": 0.976,
+        "tamnet_clean_s45": 0.956,
+        "tamnet_clean_s46": 0.951
+      }
+    }
+  },
+  "this_batch": [],
+  "history": [
+    {
+      "created_at": "2026-11-26T13:21:09+00:00",
+      "n_jobs": 20,
+      "n_ok": 20
+    },
+    {
+      "created_at": "2026-11-26T16:09:55+00:00",
+      "n_jobs": 25,
+      "n_ok": 25
+    },
+    {
+      "created_at": "2026-11-27T11:18:25+00:00",
+      "n_jobs": 0,
+      "n_ok": 0
+    },
+    {
+      "created_at": "2026-11-27T11:18:27+00:00",
+      "n_jobs": 0,
+      "n_ok": 0
+    }
+  ]
+}

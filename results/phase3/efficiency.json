@@ -1,0 +1,326 @@
+{
+  "kind": "phase3_efficiency",
+  "created_at": "2026-11-26T16:00:00+00:00",
+  "protocol": {
+    "batch_size": 1,
+    "dtype": "fp32",
+    "warmup_iterations": 20,
+    "timed_iterations": 200,
+    "synchronize": "torch.cuda.synchronize() before and after every timed iteration",
+    "mc_passes": 10,
+    "mc_mode": "model.eval() with only Dropout in train mode (D5 protocol)",
+    "input": "1x3x224x224 random tensor",
+    "note": "backbones are classification-only; TAMNet/shared_unet include the segmentation and uncertainty heads, so their latency is not head-to-head with the backbones"
+  },
+  "hardware": {
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8"
+  },
+  "models": {
+    "densenet121": {
+      "params_total": 6957956,
+      "params_trainable": 6957956,
+      "params_millions": 6.958,
+      "weights_mib": 26.54,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 65.74387249995198,
+        "std_ms": 2.860103832560646,
+        "median_ms": 65.65909999699215,
+        "p95_ms": 70.26069999847095,
+        "min_ms": 58.179799998470116,
+        "fps_from_mean": 15.21054300536876,
+        "fps_from_median": 15.23018134646698
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 638.8720904999354,
+        "std_ms": 15.526300217376827,
+        "median_ms": 636.7231500043999,
+        "p95_ms": 670.7116999969003,
+        "min_ms": 607.376199994178,
+        "fps_from_mean": 1.5652585468516425,
+        "fps_from_median": 1.570541294113603
+      },
+      "mc_pass_overhead_x": 9.697409042060709
+    },
+    "resnet50": {
+      "params_total": 23516228,
+      "params_trainable": 23516228,
+      "params_millions": 23.5162,
+      "weights_mib": 89.71,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 41.88416850014619,
+        "std_ms": 1.4607017855980466,
+        "median_ms": 41.69970000293688,
+        "p95_ms": 43.37400000076741,
+        "min_ms": 39.35099999944214,
+        "fps_from_mean": 23.87536952050295,
+        "fps_from_median": 23.98098787112547
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 415.16578249971644,
+        "std_ms": 2.309002684993459,
+        "median_ms": 415.2338999992935,
+        "p95_ms": 418.7392999956501,
+        "min_ms": 408.59420000197133,
+        "fps_from_mean": 2.4086763460586567,
+        "fps_from_median": 2.408281212111298
+      },
+      "mc_pass_overhead_x": 9.957719119563183
+    },
+    "efficientnet_v2_s": {
+      "params_total": 20182612,
+      "params_trainable": 20182612,
+      "params_millions": 20.1826,
+      "weights_mib": 76.99,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 66.22175850003259,
+        "std_ms": 7.690388094810946,
+        "median_ms": 65.49965000158409,
+        "p95_ms": 71.298900002148,
+        "min_ms": 59.742600002209656,
+        "fps_from_mean": 15.100776884375668,
+        "fps_from_median": 15.267257152913265
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 648.6651750003875,
+        "std_ms": 355.352641098214,
+        "median_ms": 636.5588000007847,
+        "p95_ms": 687.6850000044215,
+        "min_ms": 426.93030000373255,
+        "fps_from_mean": 1.541627388890428,
+        "fps_from_median": 1.570946784489928
+      },
+      "mc_pass_overhead_x": 9.718506892561864
+    },
+    "convnext_tiny": {
+      "params_total": 27823204,
+      "params_trainable": 27823204,
+      "params_millions": 27.8232,
+      "weights_mib": 106.14,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 44.183208500180626,
+        "std_ms": 1.46381449616308,
+        "median_ms": 44.12425000191433,
+        "p95_ms": 46.290600002976134,
+        "min_ms": 38.66890000062995,
+        "fps_from_mean": 22.63303263718188,
+        "fps_from_median": 22.66327472889885
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 391.58186900000146,
+        "std_ms": 68.78017143211096,
+        "median_ms": 435.4155000037281,
+        "p95_ms": 444.34480000199983,
+        "min_ms": 277.991100003419,
+        "fps_from_mean": 2.5537443869751697,
+        "fps_from_median": 2.2966568714054456
+      },
+      "mc_pass_overhead_x": 9.867941097805346
+    },
+    "swin_t": {
+      "params_total": 27522430,
+      "params_trainable": 27522430,
+      "params_millions": 27.5224,
+      "weights_mib": 104.99,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 63.004688000146416,
+        "std_ms": 1.8541838079967734,
+        "median_ms": 63.15825000274344,
+        "p95_ms": 65.61259999580216,
+        "min_ms": 56.890400002885144,
+        "fps_from_mean": 15.871834806922243,
+        "fps_from_median": 15.83324427064655
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 543.1390854998608,
+        "std_ms": 105.93153125393599,
+        "median_ms": 627.2613000037381,
+        "p95_ms": 641.841899996507,
+        "min_ms": 401.610900000378,
+        "fps_from_mean": 1.8411490292209072,
+        "fps_from_median": 1.5942319412883283
+      },
+      "mc_pass_overhead_x": 9.931581384482493
+    },
+    "vit_b_16": {
+      "params_total": 85801732,
+      "params_trainable": 85801732,
+      "params_millions": 85.8017,
+      "weights_mib": 327.31,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 82.43800899970665,
+        "std_ms": 3.425488864890871,
+        "median_ms": 83.32700000028126,
+        "p95_ms": 84.12870000029216,
+        "min_ms": 75.28319999983069,
+        "fps_from_mean": 12.130326922421894,
+        "fps_from_median": 12.00091206927676
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 1078.2458410001345,
+        "std_ms": 237.99639403558731,
+        "median_ms": 1238.8653000016348,
+        "p95_ms": 1245.3561000002082,
+        "min_ms": 253.66909999866039,
+        "fps_from_mean": 0.9274322811877883,
+        "fps_from_median": 0.8071902570833814
+      },
+      "mc_pass_overhead_x": 14.867513530997794
+    },
+    "shared_unet": {
+      "params_total": 11937158,
+      "params_trainable": 11937158,
+      "params_millions": 11.9372,
+      "weights_mib": 45.54,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 75.27380850016925,
+        "std_ms": 4.022957292861443,
+        "median_ms": 75.32684999750927,
+        "p95_ms": 81.16989999689395,
+        "min_ms": 61.67960000311723,
+        "fps_from_mean": 13.284833329480751,
+        "fps_from_median": 13.275478797176115
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 724.0173024999967,
+        "std_ms": 84.4062500989423,
+        "median_ms": 748.2496999982686,
+        "p95_ms": 781.2620999975479,
+        "min_ms": 493.86210000375286,
+        "fps_from_mean": 1.381182461450919,
+        "fps_from_median": 1.336452256515858
+      },
+      "mc_pass_overhead_x": 9.933373027320403
+    },
+    "tamnet_full": {
+      "params_total": 9034416,
+      "params_trainable": 9034416,
+      "params_millions": 9.0344,
+      "weights_mib": 34.46,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 51.13009449989477,
+        "std_ms": 3.5769693063225927,
+        "median_ms": 50.755749998643296,
+        "p95_ms": 57.39610000455286,
+        "min_ms": 43.21649999474175,
+        "fps_from_mean": 19.557953291129905,
+        "fps_from_median": 19.702201228958888
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 545.521711999827,
+        "std_ms": 45.171399008887796,
+        "median_ms": 530.2712999982759,
+        "p95_ms": 622.1569999979693,
+        "min_ms": 443.78950000100303,
+        "fps_from_mean": 1.8331076069073438,
+        "fps_from_median": 1.8858271228392924
+      },
+      "mc_pass_overhead_x": 10.447511858507658
+    },
+    "tamnet_tonly": {
+      "params_total": 8573870,
+      "params_trainable": 8573870,
+      "params_millions": 8.5739,
+      "weights_mib": 32.71,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 50.450945000156935,
+        "std_ms": 4.213963083786435,
+        "median_ms": 49.900499998329906,
+        "p95_ms": 56.39849999715807,
+        "min_ms": 40.78190000291215,
+        "fps_from_mean": 19.821234270178476,
+        "fps_from_median": 20.03987936059696
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 546.221298500277,
+        "std_ms": 47.77905591240658,
+        "median_ms": 551.9332500007295,
+        "p95_ms": 609.5363999993424,
+        "min_ms": 440.37699999898905,
+        "fps_from_mean": 1.8307598087911119,
+        "fps_from_median": 1.8118132944494254
+      },
+      "mc_pass_overhead_x": 11.06067574511682
+    },
+    "tamnet_concat": {
+      "params_total": 8840110,
+      "params_trainable": 8840110,
+      "params_millions": 8.8401,
+      "weights_mib": 33.72,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 57.054001500109734,
+        "std_ms": 8.106027370801527,
+        "median_ms": 56.20154999996885,
+        "p95_ms": 68.97790000220994,
+        "min_ms": 40.63550000137184,
+        "fps_from_mean": 17.52725442049979,
+        "fps_from_median": 17.793103570996784
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 545.8182884996859,
+        "std_ms": 46.13464177839748,
+        "median_ms": 533.6683499990613,
+        "p95_ms": 626.1381000003894,
+        "min_ms": 465.6900000045425,
+        "fps_from_mean": 1.832111567292373,
+        "fps_from_median": 1.8738229464081182
+      },
+      "mc_pass_overhead_x": 9.49561622409626
+    },
+    "tamnet_mc": {
+      "params_total": 9165488,
+      "params_trainable": 9165488,
+      "params_millions": 9.1655,
+      "weights_mib": 34.96,
+      "single_pass": {
+        "n": 200,
+        "mean_ms": 59.79506499978015,
+        "std_ms": 8.704639644504617,
+        "median_ms": 60.305349998088786,
+        "p95_ms": 71.42670000030193,
+        "min_ms": 42.538399997283705,
+        "fps_from_mean": 16.723788158833454,
+        "fps_from_median": 16.582276697369178
+      },
+      "mc_10_pass": {
+        "n": 200,
+        "mean_ms": 552.0356835001439,
+        "std_ms": 34.72672404718288,
+        "median_ms": 544.7243500020704,
+        "p95_ms": 611.7930000036722,
+        "min_ms": 479.2775999958394,
+        "fps_from_mean": 1.811477101732934,
+        "fps_from_median": 1.8357908912942833
+      },
+      "mc_pass_overhead_x": 9.032769895528904
+    }
+  },
+  "paper_claims_to_check": {
+    "params": 9034416,
+    "model_size_mb": 34.46,
+    "latency_ms": 48.63,
+    "fps": 20.6,
+    "latency_includes_mc_passes": "UNSTATED in the paper - compare both columns"
+  }
+}

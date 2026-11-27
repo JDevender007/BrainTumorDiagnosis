@@ -1,0 +1,53 @@
+{
+  "updated_at": "2026-11-27T11:18:47+00:00",
+  "chain": null,
+  "alive": false,
+  "finished_steps": [
+    "retry_1_uncertainty",
+    "retry_2_calibration",
+    "retry_6_robustness",
+    "restore_external_brisc",
+    "restore_external_tamnet",
+    "phase4_figures",
+    "phase4_tables"
+  ],
+  "current_step": null,
+  "current_step_elapsed_s": null,
+  "current_step_budget_s": null,
+  "elapsed_measured_s": 5838.6,
+  "elapsed_measured_min": 97.3,
+  "remaining_budget_s": 0,
+  "remaining_budget_min": 0.0,
+  "eta_measured_min": null,
+  "failed": [],
+  "steps": {
+    "retry_1_uncertainty": {
+      "rc": 0,
+      "sec": 2161.6
+    },
+    "retry_2_calibration": {
+      "rc": 0,
+      "sec": 299.3
+    },
+    "retry_6_robustness": {
+      "rc": 0,
+      "sec": 3362.5
+    },
+    "restore_external_brisc": {
+      "rc": 0,
+      "sec": 2.2
+    },
+    "restore_external_tamnet": {
+      "rc": 0,
+      "sec": 1.0
+    },
+    "phase4_figures": {
+      "rc": 0,
+      "sec": 11.4
+    },
+    "phase4_tables": {
+      "rc": 0,
+      "sec": 0.6
+    }
+  }
+}

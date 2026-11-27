@@ -1,0 +1,61 @@
+{
+  "kind": "paper_tables_sources",
+  "tables": {
+    "main_results": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/agg/combined_summary.json"
+      ],
+      "rows": 17,
+      "generated_at": "2026-11-27T11:18:38+00:00"
+    },
+    "bootstrap": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/bootstrap_ci.json"
+      ],
+      "rows": 41,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "external_dedup": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/external_eval_summary.json"
+      ],
+      "rows": 4,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "calibration": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/uncertainty_summary.json"
+      ],
+      "rows": 9,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "robustness": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/robustness.json"
+      ],
+      "rows": 9,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "efficiency": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/efficiency.json"
+      ],
+      "rows": 11,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "segmentation": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/seg_metrics_summary.json"
+      ],
+      "rows": 5,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    },
+    "attention": {
+      "source": [
+        "D:/BrainTumorDiagnosis/results/phase3/attention_alignment.json"
+      ],
+      "rows": 3,
+      "generated_at": "2026-11-27T11:18:39+00:00"
+    }
+  }
+}

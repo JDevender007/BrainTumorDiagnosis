@@ -1,0 +1,745 @@
+{
+  "kind": "phase3_uncertainty_summary",
+  "created_at": "2026-11-27T10:17:20+00:00",
+  "protocol": "MC-Dropout T passes, BN in eval mode (D5 fix); TEST split used once per config",
+  "passes": 10,
+  "headline_rule": "mean over seeds (never best seed); std = sample ddof=1",
+  "groups": [
+    {
+      "slug": "tamnet_clean",
+      "description": "TAMNet baseline (g+t fusion), clean protocol",
+      "n_seeds": 5,
+      "runs": [
+        "tamnet_clean_s42",
+        "tamnet_clean_s43",
+        "tamnet_clean_s44",
+        "tamnet_clean_s45",
+        "tamnet_clean_s46"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9358851674641148,
+          "std_sample_ddof1": 0.010990798789016636,
+          "min": 0.9258373205741627,
+          "max": 0.9497607655502392
+        },
+        "ece_15": {
+          "mean": 0.07598201389731973,
+          "std_sample_ddof1": 0.010205028401417496,
+          "min": 0.060842742368079836,
+          "max": 0.0887412036898319
+        },
+        "mce_15": {
+          "mean": 0.4028042747424199,
+          "std_sample_ddof1": 0.16405631723605002,
+          "min": 0.17444214912561273,
+          "max": 0.6285669207572937
+        },
+        "nll": {
+          "mean": 0.28036614656448366,
+          "std_sample_ddof1": 0.021242851496330702,
+          "min": 0.2564581632614136,
+          "max": 0.29896631836891174
+        },
+        "brier": {
+          "mean": 0.11295682936906815,
+          "std_sample_ddof1": 0.013049504444006026,
+          "min": 0.09738820046186447,
+          "max": 0.12425170093774796
+        },
+        "mean_confidence": {
+          "mean": 0.8736342906951904,
+          "std_sample_ddof1": 0.01290241968447408,
+          "min": 0.8531009554862976,
+          "max": 0.8850940465927124
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.48878071904182435,
+          "std_sample_ddof1": 0.026830115345221346,
+          "min": 0.4628346860408783,
+          "max": 0.5282190442085266
+        },
+        "mean_mutual_information": {
+          "mean": 0.049393884092569354,
+          "std_sample_ddof1": 0.011667033116272253,
+          "min": 0.04082396999001503,
+          "max": 0.06974812597036362
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.01574570722877979,
+          "std_sample_ddof1": 0.00460341429092906,
+          "min": 0.012185247614979744,
+          "max": 0.023666277527809143
+        },
+        "error_detection_auroc": {
+          "mean": 0.721373208593624,
+          "std_sample_ddof1": 0.07459494034050666,
+          "min": 0.6413106185402201,
+          "max": 0.8127334537568404
+        }
+      },
+      "per_seed_accuracy": {
+        "tamnet_clean_s42": 0.9258373205741627,
+        "tamnet_clean_s43": 0.930622009569378,
+        "tamnet_clean_s44": 0.9497607655502392,
+        "tamnet_clean_s45": 0.9455741626794258,
+        "tamnet_clean_s46": 0.9276315789473685
+      },
+      "per_seed_ece": {
+        "tamnet_clean_s42": 0.07950176191672183,
+        "tamnet_clean_s43": 0.060842742368079836,
+        "tamnet_clean_s44": 0.0778140452775088,
+        "tamnet_clean_s45": 0.07301031623445631,
+        "tamnet_clean_s46": 0.0887412036898319
+      }
+    },
+    {
+      "slug": "tamnet_clean_mc",
+      "description": "TAMNet + channel attention (MC)",
+      "n_seeds": 4,
+      "runs": [
+        "tamnet_clean_s42+mc",
+        "tamnet_clean_s43+mc",
+        "tamnet_clean_s44+mc",
+        "tamnet_clean_s45+mc"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.941238038277512,
+          "std_sample_ddof1": 0.004668010157084562,
+          "min": 0.937200956937799,
+          "max": 0.9479665071770335
+        },
+        "ece_15": {
+          "mean": 0.070753591273283,
+          "std_sample_ddof1": 0.003259501246637955,
+          "min": 0.06797771918716614,
+          "max": 0.07536483315403378
+        },
+        "mce_15": {
+          "mean": 0.5158215463161469,
+          "std_sample_ddof1": 0.21547071921817348,
+          "min": 0.20371395349502563,
+          "max": 0.6715002655982971
+        },
+        "nll": {
+          "mean": 0.26760753989219666,
+          "std_sample_ddof1": 0.019609270546358276,
+          "min": 0.2421010434627533,
+          "max": 0.2897879183292389
+        },
+        "brier": {
+          "mean": 0.10593961551785469,
+          "std_sample_ddof1": 0.009192223269047544,
+          "min": 0.09355205297470093,
+          "max": 0.11556385457515717
+        },
+        "mean_confidence": {
+          "mean": 0.8816158026456833,
+          "std_sample_ddof1": 0.004684862634690929,
+          "min": 0.8761366009712219,
+          "max": 0.8871784210205078
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.4719061255455017,
+          "std_sample_ddof1": 0.013518248984259589,
+          "min": 0.45616376399993896,
+          "max": 0.48776549100875854
+        },
+        "mean_mutual_information": {
+          "mean": 0.04277842864394188,
+          "std_sample_ddof1": 0.002345356882568064,
+          "min": 0.03984547406435013,
+          "max": 0.04486416280269623
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.012937980936840177,
+          "std_sample_ddof1": 0.000723921379107193,
+          "min": 0.012075689621269703,
+          "max": 0.013597766868770123
+        },
+        "error_detection_auroc": {
+          "mean": 0.7132481647760657,
+          "std_sample_ddof1": 0.026855658144681768,
+          "min": 0.6802929765401211,
+          "max": 0.7453733248245054
+        }
+      },
+      "per_seed_accuracy": {
+        "tamnet_clean_s42+mc": 0.9401913875598086,
+        "tamnet_clean_s43+mc": 0.937200956937799,
+        "tamnet_clean_s44+mc": 0.9479665071770335,
+        "tamnet_clean_s45+mc": 0.9395933014354066
+      },
+      "per_seed_ece": {
+        "tamnet_clean_s42+mc": 0.06905496576756387,
+        "tamnet_clean_s43+mc": 0.0706168469843682,
+        "tamnet_clean_s44+mc": 0.07536483315403378,
+        "tamnet_clean_s45+mc": 0.06797771918716614
+      }
+    },
+    {
+      "slug": "densenet121_clean",
+      "description": "DenseNet-121 classification-only baseline",
+      "n_seeds": 4,
+      "runs": [
+        "densenet121_clean_s42",
+        "densenet121_clean_s43",
+        "densenet121_clean_s44",
+        "densenet121_clean_s45"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9363038277511961,
+          "std_sample_ddof1": 0.01224251763783416,
+          "min": 0.9252392344497608,
+          "max": 0.9521531100478469
+        },
+        "ece_15": {
+          "mean": 0.05454151629599513,
+          "std_sample_ddof1": 0.0011151860962591196,
+          "min": 0.05287932932519457,
+          "max": 0.055235342314226166
+        },
+        "mce_15": {
+          "mean": 0.3447910802506815,
+          "std_sample_ddof1": 0.1404547935683439,
+          "min": 0.219687442990798,
+          "max": 0.5026633143424988
+        },
+        "nll": {
+          "mean": 0.25086570903658867,
+          "std_sample_ddof1": 0.025648388971664732,
+          "min": 0.22475357353687286,
+          "max": 0.2777897119522095
+        },
+        "brier": {
+          "mean": 0.10753799229860306,
+          "std_sample_ddof1": 0.01630729621071376,
+          "min": 0.08777777850627899,
+          "max": 0.12365598231554031
+        },
+        "mean_confidence": {
+          "mean": 0.9027962982654572,
+          "std_sample_ddof1": 0.00886933386690623,
+          "min": 0.895950436592102,
+          "max": 0.9155420660972595
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.3928558677434921,
+          "std_sample_ddof1": 0.013611870267354092,
+          "min": 0.37515419721603394,
+          "max": 0.40827077627182007
+        },
+        "mean_mutual_information": {
+          "mean": 0.0048944170121103525,
+          "std_sample_ddof1": 0.0012725750874020179,
+          "min": 0.003269089385867119,
+          "max": 0.0063795289024710655
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.0011124442098662257,
+          "std_sample_ddof1": 0.0004994474191256709,
+          "min": 0.0004894044250249863,
+          "max": 0.0017115268856287003
+        },
+        "error_detection_auroc": {
+          "mean": 0.7523622689529501,
+          "std_sample_ddof1": 0.044446709463149325,
+          "min": 0.7074544279250161,
+          "max": 0.8137781951333263
+        }
+      },
+      "per_seed_accuracy": {
+        "densenet121_clean_s42": 0.9252392344497608,
+        "densenet121_clean_s43": 0.9521531100478469,
+        "densenet121_clean_s44": 0.9282296650717703,
+        "densenet121_clean_s45": 0.9395933014354066
+      },
+      "per_seed_ece": {
+        "densenet121_clean_s42": 0.055120032744116726,
+        "densenet121_clean_s43": 0.05287932932519457,
+        "densenet121_clean_s44": 0.055235342314226166,
+        "densenet121_clean_s45": 0.054931360800443065
+      }
+    },
+    {
+      "slug": "efficientnet_v2_s_clean",
+      "description": "EfficientNetV2-S baseline",
+      "n_seeds": 3,
+      "runs": [
+        "efficientnet_v2_s_clean_s42",
+        "efficientnet_v2_s_clean_s43",
+        "efficientnet_v2_s_clean_s44"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9479665071770335,
+          "std_sample_ddof1": 0.0020718311095321447,
+          "min": 0.9467703349282297,
+          "max": 0.9503588516746412
+        },
+        "ece_15": {
+          "mean": 0.03992462977529333,
+          "std_sample_ddof1": 0.0030082965598570185,
+          "min": 0.037649318415439885,
+          "max": 0.043335403765787935
+        },
+        "mce_15": {
+          "mean": 0.6042010314536818,
+          "std_sample_ddof1": 0.08792236431653784,
+          "min": 0.5379180908203125,
+          "max": 0.7039403319358826
+        },
+        "nll": {
+          "mean": 0.23538426061471304,
+          "std_sample_ddof1": 0.01028203533596856,
+          "min": 0.22522638738155365,
+          "max": 0.24578611552715302
+        },
+        "brier": {
+          "mean": 0.09395859638849895,
+          "std_sample_ddof1": 0.0051338027182818114,
+          "min": 0.088030606508255,
+          "max": 0.09693409502506256
+        },
+        "mean_confidence": {
+          "mean": 0.9212735295295715,
+          "std_sample_ddof1": 0.0013315757244400667,
+          "min": 0.9202169179916382,
+          "max": 0.9227691888809204
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.3538322448730469,
+          "std_sample_ddof1": 0.0031929111577875023,
+          "min": 0.3506101369857788,
+          "max": 0.3569951355457306
+        },
+        "mean_mutual_information": {
+          "mean": 0.0007774294548047086,
+          "std_sample_ddof1": 9.250003743378474e-05,
+          "min": 0.0006870548822917044,
+          "max": 0.0008719176985323429
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.00012873827654402703,
+          "std_sample_ddof1": 1.7957448483905626e-05,
+          "min": 0.00010899698827415705,
+          "max": 0.00014410265430342406
+        },
+        "error_detection_auroc": {
+          "mean": 0.6922158642520205,
+          "std_sample_ddof1": 0.02033044570390902,
+          "min": 0.6786832667359178,
+          "max": 0.7155947674377338
+        }
+      },
+      "per_seed_accuracy": {
+        "efficientnet_v2_s_clean_s42": 0.9503588516746412,
+        "efficientnet_v2_s_clean_s43": 0.9467703349282297,
+        "efficientnet_v2_s_clean_s44": 0.9467703349282297
+      },
+      "per_seed_ece": {
+        "efficientnet_v2_s_clean_s42": 0.043335403765787935,
+        "efficientnet_v2_s_clean_s43": 0.03878916714465218,
+        "efficientnet_v2_s_clean_s44": 0.037649318415439885
+      }
+    },
+    {
+      "slug": "swin_t_clean",
+      "description": "Swin-T baseline",
+      "n_seeds": 3,
+      "runs": [
+        "swin_t_clean_s42",
+        "swin_t_clean_s43",
+        "swin_t_clean_s44"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9449760765550238,
+          "std_sample_ddof1": 0.012358838707997524,
+          "min": 0.9318181818181818,
+          "max": 0.9563397129186603
+        },
+        "ece_15": {
+          "mean": 0.04487099578719961,
+          "std_sample_ddof1": 0.009395937276051048,
+          "min": 0.03780278210577209,
+          "max": 0.05553348980950965
+        },
+        "mce_15": {
+          "mean": 0.5171389281749725,
+          "std_sample_ddof1": 0.07222957257670531,
+          "min": 0.4351777136325836,
+          "max": 0.5714941620826721
+        },
+        "nll": {
+          "mean": 0.23983405033747354,
+          "std_sample_ddof1": 0.024166680728735068,
+          "min": 0.21324139833450317,
+          "max": 0.26045510172843933
+        },
+        "brier": {
+          "mean": 0.09731294463078181,
+          "std_sample_ddof1": 0.015946315567480572,
+          "min": 0.08110193908214569,
+          "max": 0.1129806861281395
+        },
+        "mean_confidence": {
+          "mean": 0.9161457022031149,
+          "std_sample_ddof1": 0.009128791226699684,
+          "min": 0.9056361317634583,
+          "max": 0.9221051335334778
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.3689451615015666,
+          "std_sample_ddof1": 0.02243110389336283,
+          "min": 0.3550785183906555,
+          "max": 0.39482423663139343
+        },
+        "mean_mutual_information": {
+          "mean": 0.0007051729674761494,
+          "std_sample_ddof1": 0.00027841287178163957,
+          "min": 0.000540649052709341,
+          "max": 0.0010266265599057078
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.00012834856897825375,
+          "std_sample_ddof1": 7.162415777554354e-05,
+          "min": 8.526653982698917e-05,
+          "max": 0.00021102855680510402
+        },
+        "error_detection_auroc": {
+          "mean": 0.6661577431980549,
+          "std_sample_ddof1": 0.05835107537947245,
+          "min": 0.6179171960507357,
+          "max": 0.7310147962975475
+        }
+      },
+      "per_seed_accuracy": {
+        "swin_t_clean_s42": 0.9467703349282297,
+        "swin_t_clean_s43": 0.9563397129186603,
+        "swin_t_clean_s44": 0.9318181818181818
+      },
+      "per_seed_ece": {
+        "swin_t_clean_s42": 0.03780278210577209,
+        "swin_t_clean_s43": 0.04127671544631708,
+        "swin_t_clean_s44": 0.05553348980950965
+      }
+    },
+    {
+      "slug": "shared_unet_brisc",
+      "description": "Shared-encoder U-Net multi-task baseline (BRISC trained)",
+      "n_seeds": 4,
+      "runs": [
+        "shared_unet_brisc_s42+ls0.25+sc2",
+        "shared_unet_brisc_s43+ls0.25+sc2",
+        "shared_unet_brisc_s44+ls0.25+sc2",
+        "shared_unet_brisc_s45+ls0.25+sc2"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.8989234449760766,
+          "std_sample_ddof1": 0.013820837330492027,
+          "min": 0.8845693779904307,
+          "max": 0.9132775119617225
+        },
+        "ece_15": {
+          "mean": 0.05078758291775389,
+          "std_sample_ddof1": 0.010665560345172105,
+          "min": 0.038198107006874975,
+          "max": 0.06309033351010114
+        },
+        "mce_15": {
+          "mean": 0.3378891632908962,
+          "std_sample_ddof1": 0.23796580790186442,
+          "min": 0.1236710317280828,
+          "max": 0.6732788383960724
+        },
+        "nll": {
+          "mean": 0.372429758310318,
+          "std_sample_ddof1": 0.026611153609939125,
+          "min": 0.3411162793636322,
+          "max": 0.4054313600063324
+        },
+        "brier": {
+          "mean": 0.16967957466840744,
+          "std_sample_ddof1": 0.018844319020389064,
+          "min": 0.1465134173631668,
+          "max": 0.1922597736120224
+        },
+        "mean_confidence": {
+          "mean": 0.8516364842653275,
+          "std_sample_ddof1": 0.019812709598627957,
+          "min": 0.8249387145042419,
+          "max": 0.8696965575218201
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.4861612990498543,
+          "std_sample_ddof1": 0.03192451860452864,
+          "min": 0.4545201063156128,
+          "max": 0.5304695963859558
+        },
+        "mean_mutual_information": {
+          "mean": 0.004997983749490231,
+          "std_sample_ddof1": 0.0019672583449339273,
+          "min": 0.003401828231289983,
+          "max": 0.007547462824732065
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.0019249436154495925,
+          "std_sample_ddof1": 0.0010999705491464915,
+          "min": 0.0010598229710012674,
+          "max": 0.0033551149535924196
+        },
+        "error_detection_auroc": {
+          "mean": 0.7596238039993634,
+          "std_sample_ddof1": 0.058297714303735974,
+          "min": 0.6980818917577809,
+          "max": 0.8257089323281908
+        }
+      },
+      "per_seed_accuracy": {
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.8899521531100478,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.9132775119617225,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.9078947368421053,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.8845693779904307
+      },
+      "per_seed_ece": {
+        "shared_unet_brisc_s42+ls0.25+sc2": 0.04697058884578462,
+        "shared_unet_brisc_s43+ls0.25+sc2": 0.05489130230825484,
+        "shared_unet_brisc_s44+ls0.25+sc2": 0.038198107006874975,
+        "shared_unet_brisc_s45+ls0.25+sc2": 0.06309033351010114
+      }
+    },
+    {
+      "slug": "resnet50_clean",
+      "description": "ResNet-50 baseline (single seed)",
+      "n_seeds": 1,
+      "runs": [
+        "resnet50_clean_s42"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.94377990430622,
+          "std_sample_ddof1": null,
+          "min": 0.94377990430622,
+          "max": 0.94377990430622
+        },
+        "ece_15": {
+          "mean": 0.04664249137115253,
+          "std_sample_ddof1": null,
+          "min": 0.04664249137115253,
+          "max": 0.04664249137115253
+        },
+        "mce_15": {
+          "mean": 0.21629883561815533,
+          "std_sample_ddof1": null,
+          "min": 0.21629883561815533,
+          "max": 0.21629883561815533
+        },
+        "nll": {
+          "mean": 0.24407294392585754,
+          "std_sample_ddof1": null,
+          "min": 0.24407294392585754,
+          "max": 0.24407294392585754
+        },
+        "brier": {
+          "mean": 0.10001891851425171,
+          "std_sample_ddof1": null,
+          "min": 0.10001891851425171,
+          "max": 0.10001891851425171
+        },
+        "mean_confidence": {
+          "mean": 0.9072502255439758,
+          "std_sample_ddof1": null,
+          "min": 0.9072502255439758,
+          "max": 0.9072502255439758
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.39141443371772766,
+          "std_sample_ddof1": null,
+          "min": 0.39141443371772766,
+          "max": 0.39141443371772766
+        },
+        "mean_mutual_information": {
+          "mean": 0.0010057190665975213,
+          "std_sample_ddof1": null,
+          "min": 0.0010057190665975213,
+          "max": 0.0010057190665975213
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.0002809978905133903,
+          "std_sample_ddof1": null,
+          "min": 0.0002809978905133903,
+          "max": 0.0002809978905133903
+        },
+        "error_detection_auroc": {
+          "mean": 0.7200604050373486,
+          "std_sample_ddof1": null,
+          "min": 0.7200604050373486,
+          "max": 0.7200604050373486
+        }
+      },
+      "per_seed_accuracy": {
+        "resnet50_clean_s42": 0.94377990430622
+      },
+      "per_seed_ece": {
+        "resnet50_clean_s42": 0.04664249137115253
+      }
+    },
+    {
+      "slug": "convnext_tiny_clean",
+      "description": "ConvNeXt-Tiny baseline (single seed)",
+      "n_seeds": 1,
+      "runs": [
+        "convnext_tiny_clean_s42"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9497607655502392,
+          "std_sample_ddof1": null,
+          "min": 0.9497607655502392,
+          "max": 0.9497607655502392
+        },
+        "ece_15": {
+          "mean": 0.04095015671264612,
+          "std_sample_ddof1": null,
+          "min": 0.04095015671264612,
+          "max": 0.04095015671264612
+        },
+        "mce_15": {
+          "mean": 0.7095018625259399,
+          "std_sample_ddof1": null,
+          "min": 0.7095018625259399,
+          "max": 0.7095018625259399
+        },
+        "nll": {
+          "mean": 0.23160144686698914,
+          "std_sample_ddof1": null,
+          "min": 0.23160144686698914,
+          "max": 0.23160144686698914
+        },
+        "brier": {
+          "mean": 0.09032214432954788,
+          "std_sample_ddof1": null,
+          "min": 0.09032214432954788,
+          "max": 0.09032214432954788
+        },
+        "mean_confidence": {
+          "mean": 0.9217314720153809,
+          "std_sample_ddof1": null,
+          "min": 0.9217314720153809,
+          "max": 0.9217314720153809
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.35449764132499695,
+          "std_sample_ddof1": null,
+          "min": 0.35449764132499695,
+          "max": 0.35449764132499695
+        },
+        "mean_mutual_information": {
+          "mean": 0.0004994057817384601,
+          "std_sample_ddof1": null,
+          "min": 0.0004994057817384601,
+          "max": 0.0004994057817384601
+        },
+        "mean_aleatoric_variance": {
+          "mean": 8.097726095002145e-05,
+          "std_sample_ddof1": null,
+          "min": 8.097726095002145e-05,
+          "max": 8.097726095002145e-05
+        },
+        "error_detection_auroc": {
+          "mean": 0.6685595837831354,
+          "std_sample_ddof1": null,
+          "min": 0.6685595837831354,
+          "max": 0.6685595837831354
+        }
+      },
+      "per_seed_accuracy": {
+        "convnext_tiny_clean_s42": 0.9497607655502392
+      },
+      "per_seed_ece": {
+        "convnext_tiny_clean_s42": 0.04095015671264612
+      }
+    },
+    {
+      "slug": "vit_b_16_clean",
+      "description": "ViT-B/16 baseline (single seed)",
+      "n_seeds": 1,
+      "runs": [
+        "vit_b_16_clean_s42"
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.9282296650717703,
+          "std_sample_ddof1": null,
+          "min": 0.9282296650717703,
+          "max": 0.9282296650717703
+        },
+        "ece_15": {
+          "mean": 0.03425952617488981,
+          "std_sample_ddof1": null,
+          "min": 0.03425952617488981,
+          "max": 0.03425952617488981
+        },
+        "mce_15": {
+          "mean": 0.5055279016494751,
+          "std_sample_ddof1": null,
+          "min": 0.5055279016494751,
+          "max": 0.5055279016494751
+        },
+        "nll": {
+          "mean": 0.2951551675796509,
+          "std_sample_ddof1": null,
+          "min": 0.2951551675796509,
+          "max": 0.2951551675796509
+        },
+        "brier": {
+          "mean": 0.1257408857345581,
+          "std_sample_ddof1": null,
+          "min": 0.1257408857345581,
+          "max": 0.1257408857345581
+        },
+        "mean_confidence": {
+          "mean": 0.9130759835243225,
+          "std_sample_ddof1": null,
+          "min": 0.9130759835243225,
+          "max": 0.9130759835243225
+        },
+        "mean_predictive_entropy": {
+          "mean": 0.37675708532333374,
+          "std_sample_ddof1": null,
+          "min": 0.37675708532333374,
+          "max": 0.37675708532333374
+        },
+        "mean_mutual_information": {
+          "mean": 0.0005745050148107111,
+          "std_sample_ddof1": null,
+          "min": 0.0005745050148107111,
+          "max": 0.0005745050148107111
+        },
+        "mean_aleatoric_variance": {
+          "mean": 0.00010298575944034383,
+          "std_sample_ddof1": null,
+          "min": 0.00010298575944034383,
+          "max": 0.00010298575944034383
+        },
+        "error_detection_auroc": {
+          "mean": 0.702477985395189,
+          "std_sample_ddof1": null,
+          "min": 0.702477985395189,
+          "max": 0.702477985395189
+        }
+      },
+      "per_seed_accuracy": {
+        "vit_b_16_clean_s42": 0.9282296650717703
+      },
+      "per_seed_ece": {
+        "vit_b_16_clean_s42": 0.03425952617488981
+      }
+    }
+  ],
+  "failed_this_batch": []
+}

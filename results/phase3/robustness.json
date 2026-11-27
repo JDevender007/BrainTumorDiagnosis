@@ -1,0 +1,2531 @@
+{
+  "kind": "phase3_robustness",
+  "created_at": "2026-11-27T11:18:20+00:00",
+  "dataset": "internal TEST split (n=1672), clean protocol",
+  "mrrs_definition": "MRRS = mean over the 27 corruptions of acc(corruption)/acc(clean); reported as mean over seeds, never the best seed",
+  "corruption_set": [
+    {
+      "corruption": "gaussian_noise",
+      "severity": 1,
+      "level": 0.05
+    },
+    {
+      "corruption": "gaussian_noise",
+      "severity": 2,
+      "level": 0.1
+    },
+    {
+      "corruption": "gaussian_noise",
+      "severity": 3,
+      "level": 0.2
+    },
+    {
+      "corruption": "shot_noise",
+      "severity": 1,
+      "level": 200.0
+    },
+    {
+      "corruption": "shot_noise",
+      "severity": 2,
+      "level": 100.0
+    },
+    {
+      "corruption": "shot_noise",
+      "severity": 3,
+      "level": 50.0
+    },
+    {
+      "corruption": "impulse_noise",
+      "severity": 1,
+      "level": 0.03
+    },
+    {
+      "corruption": "impulse_noise",
+      "severity": 2,
+      "level": 0.07
+    },
+    {
+      "corruption": "impulse_noise",
+      "severity": 3,
+      "level": 0.14
+    },
+    {
+      "corruption": "defocus_blur",
+      "severity": 1,
+      "level": 1.0
+    },
+    {
+      "corruption": "defocus_blur",
+      "severity": 2,
+      "level": 2.0
+    },
+    {
+      "corruption": "defocus_blur",
+      "severity": 3,
+      "level": 3.0
+    },
+    {
+      "corruption": "motion_blur",
+      "severity": 1,
+      "level": 3.0
+    },
+    {
+      "corruption": "motion_blur",
+      "severity": 2,
+      "level": 5.0
+    },
+    {
+      "corruption": "motion_blur",
+      "severity": 3,
+      "level": 9.0
+    },
+    {
+      "corruption": "brightness",
+      "severity": 1,
+      "level": 0.7
+    },
+    {
+      "corruption": "brightness",
+      "severity": 2,
+      "level": 0.5
+    },
+    {
+      "corruption": "brightness",
+      "severity": 3,
+      "level": 0.3
+    },
+    {
+      "corruption": "contrast",
+      "severity": 1,
+      "level": 0.6
+    },
+    {
+      "corruption": "contrast",
+      "severity": 2,
+      "level": 0.4
+    },
+    {
+      "corruption": "contrast",
+      "severity": 3,
+      "level": 0.2
+    },
+    {
+      "corruption": "pixelate",
+      "severity": 1,
+      "level": 112.0
+    },
+    {
+      "corruption": "pixelate",
+      "severity": 2,
+      "level": 56.0
+    },
+    {
+      "corruption": "pixelate",
+      "severity": 3,
+      "level": 28.0
+    },
+    {
+      "corruption": "jpeg_compression",
+      "severity": 1,
+      "level": 50.0
+    },
+    {
+      "corruption": "jpeg_compression",
+      "severity": 2,
+      "level": 25.0
+    },
+    {
+      "corruption": "jpeg_compression",
+      "severity": 3,
+      "level": 10.0
+    }
+  ],
+  "corruption_contract": {
+    "pixel_space": "[0,1] after uint8->float; clipped before normalisation",
+    "normalisation": "identical ImageNet statistics as training (build_classification_transform)",
+    "clean_path_bit_identical": true,
+    "smoke_test": {
+      "gaussian_noise_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": -0.23399187624454498,
+        "pixel_max": 1.1550017595291138,
+        "mean_abs_delta": 0.039896074682474136
+      },
+      "gaussian_noise_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": -0.46798375248908997,
+        "pixel_max": 1.310003399848938,
+        "mean_abs_delta": 0.07979214936494827
+      },
+      "gaussian_noise_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": -0.9359675049781799,
+        "pixel_max": 1.620006799697876,
+        "mean_abs_delta": 0.15958429872989655
+      },
+      "shot_noise_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.2100000381469727,
+        "mean_abs_delta": 0.019917063415050507
+      },
+      "shot_noise_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.3899999856948853,
+        "mean_abs_delta": 0.028164805844426155
+      },
+      "shot_noise_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.4600000381469727,
+        "mean_abs_delta": 0.0398324616253376
+      },
+      "impulse_noise_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.014970939606428146
+      },
+      "impulse_noise_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.03499498963356018
+      },
+      "impulse_noise_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.0699366107583046
+      },
+      "defocus_blur_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9843137264251709,
+        "mean_abs_delta": 0.013391797430813313
+      },
+      "defocus_blur_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9232941269874573,
+        "mean_abs_delta": 0.02140040695667267
+      },
+      "defocus_blur_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.8484993577003479,
+        "mean_abs_delta": 0.027625884860754013
+      },
+      "motion_blur_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.008822139352560043
+      },
+      "motion_blur_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.014996548183262348
+      },
+      "motion_blur_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9995642900466919,
+        "mean_abs_delta": 0.024257615208625793
+      },
+      "brightness_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.699999988079071,
+        "mean_abs_delta": 0.05525878816843033
+      },
+      "brightness_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.5,
+        "mean_abs_delta": 0.09209799021482468
+      },
+      "brightness_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.30000001192092896,
+        "mean_abs_delta": 0.12893716990947723
+      },
+      "contrast_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.019118865951895714,
+        "pixel_max": 0.7327062487602234,
+        "mean_abs_delta": 0.05315440148115158
+      },
+      "contrast_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.028678299859166145,
+        "pixel_max": 0.5990593433380127,
+        "mean_abs_delta": 0.07973160594701767
+      },
+      "contrast_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.03823773190379143,
+        "pixel_max": 0.4654124975204468,
+        "mean_abs_delta": 0.10630881041288376
+      },
+      "pixelate_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9990196228027344,
+        "mean_abs_delta": 0.016159847378730774
+      },
+      "pixelate_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9960784316062927,
+        "mean_abs_delta": 0.02788335084915161
+      },
+      "pixelate_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 0.9754902124404907,
+        "mean_abs_delta": 0.043742213398218155
+      },
+      "jpeg_compression_s1": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.01092394907027483
+      },
+      "jpeg_compression_s2": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.0140600074082613
+      },
+      "jpeg_compression_s3": {
+        "shape": [
+          8,
+          3,
+          224,
+          224
+        ],
+        "pixel_min": 0.0,
+        "pixel_max": 1.0,
+        "mean_abs_delta": 0.022593127563595772
+      }
+    },
+    "deterministic": "seeded numpy Generator per corruption"
+  },
+  "hardware": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "runs": {
+    "tamnet_clean_s42": {
+      "run": "tamnet_clean_s42",
+      "clean_accuracy": 0.9270334928229665,
+      "mrrs": 0.853405017921147,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.9090909090909091,
+          "retention": 0.9806451612903225
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.8744019138755981,
+          "retention": 0.9432258064516128
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.6130382775119617,
+          "retention": 0.6612903225806451
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9120813397129187,
+          "retention": 0.9838709677419355
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.9001196172248804,
+          "retention": 0.9709677419354839
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.8809808612440191,
+          "retention": 0.9503225806451612
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5550239234449761,
+          "retention": 0.5987096774193549
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.4623205741626794,
+          "retention": 0.4987096774193548
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.24760765550239233,
+          "retention": 0.2670967741935484
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.847488038277512,
+          "retention": 0.9141935483870968
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.7535885167464115,
+          "retention": 0.8129032258064516
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.6860047846889952,
+          "retention": 0.7399999999999999
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9222488038277512,
+          "retention": 0.9948387096774193
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9228468899521531,
+          "retention": 0.9954838709677419
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8929425837320574,
+          "retention": 0.9632258064516128
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9276315789473685,
+          "retention": 1.0006451612903227
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9216507177033493,
+          "retention": 0.9941935483870967
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.9114832535885168,
+          "retention": 0.983225806451613
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9192583732057417,
+          "retention": 0.9916129032258064
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9090909090909091,
+          "retention": 0.9806451612903225
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8235645933014354,
+          "retention": 0.8883870967741935
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9192583732057417,
+          "retention": 0.9916129032258064
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.6901913875598086,
+          "retention": 0.744516129032258
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.23863636363636365,
+          "retention": 0.2574193548387097
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9258373205741627,
+          "retention": 0.9987096774193548
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9168660287081339,
+          "retention": 0.9890322580645161
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.8773923444976076,
+          "retention": 0.9464516129032258
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.7988437001594897,
+        "shot_noise": 0.8977272727272728,
+        "impulse_noise": 0.4216507177033493,
+        "defocus_blur": 0.7623604465709729,
+        "motion_blur": 0.9126794258373206,
+        "brightness": 0.9202551834130782,
+        "contrast": 0.8839712918660286,
+        "pixelate": 0.6160287081339714,
+        "jpeg_compression": 0.9066985645933014
+      },
+      "checkpoint_sha256": "5166153f7d5b4e33327ea6d5fc93e70c96d80cb1a68a377529309576dd9de392",
+      "seed": 42,
+      "seconds": 342.1
+    },
+    "tamnet_clean_s43": {
+      "run": "tamnet_clean_s43",
+      "clean_accuracy": 0.9300239234449761,
+      "mrrs": 0.8540907466952482,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.9198564593301436,
+          "retention": 0.9890675241157557
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.8528708133971292,
+          "retention": 0.9170418006430868
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.27811004784689,
+          "retention": 0.2990353697749196
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9216507177033493,
+          "retention": 0.9909967845659163
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.895933014354067,
+          "retention": 0.9633440514469453
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.8660287081339713,
+          "retention": 0.9311897106109325
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5424641148325359,
+          "retention": 0.5832797427652733
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.33253588516746413,
+          "retention": 0.357556270096463
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.21411483253588517,
+          "retention": 0.2302250803858521
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9156698564593302,
+          "retention": 0.9845659163987138
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8666267942583732,
+          "retention": 0.9318327974276527
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8295454545454546,
+          "retention": 0.8919614147909968
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9300239234449761,
+          "retention": 1.0
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9228468899521531,
+          "retention": 0.992282958199357
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8911483253588517,
+          "retention": 0.9581993569131833
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9348086124401914,
+          "retention": 1.005144694533762
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9270334928229665,
+          "retention": 0.9967845659163987
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.8767942583732058,
+          "retention": 0.9427652733118972
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9318181818181818,
+          "retention": 1.0019292604501606
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9132775119617225,
+          "retention": 0.9819935691318328
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8020334928229665,
+          "retention": 0.862379421221865
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9270334928229665,
+          "retention": 0.9967845659163987
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.8008373205741627,
+          "retention": 0.8610932475884244
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.3881578947368421,
+          "retention": 0.4173633440514469
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9330143540669856,
+          "retention": 1.0032154340836013
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9276315789473685,
+          "retention": 0.9974276527331191
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.9049043062200957,
+          "retention": 0.9729903536977491
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.6836124401913876,
+        "shot_noise": 0.8945374800637959,
+        "impulse_noise": 0.36303827751196177,
+        "defocus_blur": 0.8706140350877193,
+        "motion_blur": 0.9146730462519935,
+        "brightness": 0.912878787878788,
+        "contrast": 0.8823763955342904,
+        "pixelate": 0.7053429027113238,
+        "jpeg_compression": 0.9218500797448166
+      },
+      "checkpoint_sha256": "e4e6668361f45b3fef96b51c7232ff0eb0c3720380cfbffc119f49d756ffddf6",
+      "seed": 43,
+      "seconds": 335.7
+    },
+    "tamnet_clean_s44": {
+      "run": "tamnet_clean_s44",
+      "clean_accuracy": 0.9485645933014354,
+      "mrrs": 0.8458269114006819,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.9108851674641149,
+          "retention": 0.9602774274905422
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.840311004784689,
+          "retention": 0.8858764186633039
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.31519138755980863,
+          "retention": 0.33228247162673397
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9240430622009569,
+          "retention": 0.9741488020176544
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.909688995215311,
+          "retention": 0.9590163934426229
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.882177033492823,
+          "retention": 0.9300126103404792
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.562200956937799,
+          "retention": 0.592686002522068
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.3450956937799043,
+          "retention": 0.36380832282471626
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.22188995215311005,
+          "retention": 0.23392181588902902
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9222488038277512,
+          "retention": 0.9722572509457755
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8905502392344498,
+          "retention": 0.9388398486759143
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8283492822966507,
+          "retention": 0.873266078184111
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9383971291866029,
+          "retention": 0.989281210592686
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.916267942583732,
+          "retention": 0.965952080706179
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8708133971291866,
+          "retention": 0.9180327868852459
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9449760765550239,
+          "retention": 0.9962168978562421
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.93122009569378,
+          "retention": 0.9817150063051703
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.9061004784688995,
+          "retention": 0.955233291298865
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9449760765550239,
+          "retention": 0.9962168978562421
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9324162679425837,
+          "retention": 0.9829760403530895
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8726076555023924,
+          "retention": 0.9199243379571249
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9090909090909091,
+          "retention": 0.9583858764186632
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.7721291866028708,
+          "retention": 0.8139974779319041
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.39593301435406697,
+          "retention": 0.41740226986128626
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9407894736842105,
+          "retention": 0.9918032786885246
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9270334928229665,
+          "retention": 0.9773013871374527
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.9072966507177034,
+          "retention": 0.9564943253467845
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.6887958532695375,
+        "shot_noise": 0.9053030303030303,
+        "impulse_noise": 0.37639553429027117,
+        "defocus_blur": 0.8803827751196173,
+        "motion_blur": 0.9084928229665071,
+        "brightness": 0.9274322169059012,
+        "contrast": 0.9166666666666666,
+        "pixelate": 0.692384370015949,
+        "jpeg_compression": 0.9250398724082934
+      },
+      "checkpoint_sha256": "52438cc5ca88194175c367b7b0a606f5faa8c4af16959ebfce9e529d547d6501",
+      "seed": 44,
+      "seconds": 330.8
+    },
+    "tamnet_clean_s45": {
+      "run": "tamnet_clean_s45",
+      "clean_accuracy": 0.9473684210526315,
+      "mrrs": 0.8485783763561543,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.9252392344497608,
+          "retention": 0.9766414141414141
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.8145933014354066,
+          "retention": 0.8598484848484849
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.2822966507177033,
+          "retention": 0.29797979797979796
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9288277511961722,
+          "retention": 0.9804292929292929
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.9150717703349283,
+          "retention": 0.9659090909090909
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.8660287081339713,
+          "retention": 0.9141414141414141
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5442583732057417,
+          "retention": 0.5744949494949496
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.35287081339712917,
+          "retention": 0.37247474747474746
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.2284688995215311,
+          "retention": 0.24116161616161616
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9294258373205742,
+          "retention": 0.9810606060606061
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8893540669856459,
+          "retention": 0.9387626262626263
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8229665071770335,
+          "retention": 0.8686868686868687
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9467703349282297,
+          "retention": 0.999368686868687
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9348086124401914,
+          "retention": 0.9867424242424243
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.9066985645933014,
+          "retention": 0.9570707070707072
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9473684210526315,
+          "retention": 1.0
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9401913875598086,
+          "retention": 0.9924242424242424
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.9192583732057417,
+          "retention": 0.9703282828282829
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.94377990430622,
+          "retention": 0.9962121212121212
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9395933014354066,
+          "retention": 0.9917929292929293
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.9049043062200957,
+          "retention": 0.9551767676767677
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9282296650717703,
+          "retention": 0.9797979797979798
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.812799043062201,
+          "retention": 0.8579545454545455
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.2900717703349282,
+          "retention": 0.3061868686868687
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9425837320574163,
+          "retention": 0.994949494949495
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9336124401913876,
+          "retention": 0.985479797979798
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.9156698564593302,
+          "retention": 0.9665404040404041
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.6740430622009569,
+        "shot_noise": 0.9033094098883572,
+        "impulse_noise": 0.3751993620414673,
+        "defocus_blur": 0.8805821371610846,
+        "motion_blur": 0.9294258373205743,
+        "brightness": 0.9356060606060606,
+        "contrast": 0.929425837320574,
+        "pixelate": 0.6770334928229665,
+        "jpeg_compression": 0.9306220095693781
+      },
+      "checkpoint_sha256": "4ccf586cfb06efae451aac466ff78fca6e84455ab2d748f08b69a6108a01838f",
+      "seed": 45,
+      "seconds": 402.8
+    },
+    "tamnet_clean_s46": {
+      "run": "tamnet_clean_s46",
+      "clean_accuracy": 0.9270334928229665,
+      "mrrs": 0.8522341696535244,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.9037081339712919,
+          "retention": 0.9748387096774194
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.8564593301435407,
+          "retention": 0.9238709677419354
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.34330143540669855,
+          "retention": 0.37032258064516127
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9037081339712919,
+          "retention": 0.9748387096774194
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.8929425837320574,
+          "retention": 0.9632258064516128
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.8660287081339713,
+          "retention": 0.9341935483870967
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5023923444976076,
+          "retention": 0.5419354838709677
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.38217703349282295,
+          "retention": 0.412258064516129
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.2553827751196172,
+          "retention": 0.2754838709677419
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9102870813397129,
+          "retention": 0.9819354838709677
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8797846889952153,
+          "retention": 0.9490322580645161
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8098086124401914,
+          "retention": 0.8735483870967742
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9222488038277512,
+          "retention": 0.9948387096774193
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9043062200956937,
+          "retention": 0.9754838709677418
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8421052631578947,
+          "retention": 0.9083870967741935
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9234449760765551,
+          "retention": 0.9961290322580645
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9049043062200957,
+          "retention": 0.9761290322580645
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.7996411483253588,
+          "retention": 0.8625806451612903
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9204545454545454,
+          "retention": 0.9929032258064515
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.8965311004784688,
+          "retention": 0.9670967741935483
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.7918660287081339,
+          "retention": 0.8541935483870967
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9037081339712919,
+          "retention": 0.9748387096774194
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.8361244019138756,
+          "retention": 0.9019354838709677
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.4485645933014354,
+          "retention": 0.48387096774193544
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9234449760765551,
+          "retention": 0.9961290322580645
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9156698564593302,
+          "retention": 0.987741935483871
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.8923444976076556,
+          "retention": 0.9625806451612904
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.7011562998405104,
+        "shot_noise": 0.8875598086124402,
+        "impulse_noise": 0.3799840510366826,
+        "defocus_blur": 0.8666267942583733,
+        "motion_blur": 0.8895534290271132,
+        "brightness": 0.8759968102073366,
+        "contrast": 0.8696172248803827,
+        "pixelate": 0.7294657097288676,
+        "jpeg_compression": 0.9104864433811803
+      },
+      "checkpoint_sha256": "9e239932620461c1ccf2a4eb76096c3d6dfa457d7e62e0766797cd8812222edc",
+      "seed": 46,
+      "seconds": 328.7
+    },
+    "densenet121_clean_s42": {
+      "run": "densenet121_clean_s42",
+      "clean_accuracy": 0.9252392344497608,
+      "mrrs": 0.8120855179678709,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.8869617224880383,
+          "retention": 0.9586296056884293
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.5400717703349283,
+          "retention": 0.583710407239819
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.24700956937799043,
+          "retention": 0.2669683257918552
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9132775119617225,
+          "retention": 0.9870717517776342
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.8899521531100478,
+          "retention": 0.9618616677440207
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.7811004784688995,
+          "retention": 0.8442146089204913
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.33373205741626794,
+          "retention": 0.36069812540400775
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.26674641148325356,
+          "retention": 0.28829993535875886
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.21650717703349281,
+          "retention": 0.23400129282482224
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.8923444976076556,
+          "retention": 0.9644473173884939
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8564593301435407,
+          "retention": 0.9256625727213963
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.7966507177033493,
+          "retention": 0.861021331609567
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9090909090909091,
+          "retention": 0.982546864899806
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.8971291866028708,
+          "retention": 0.9696186166774402
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.861244019138756,
+          "retention": 0.9308338720103426
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9270334928229665,
+          "retention": 1.0019392372333549
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9174641148325359,
+          "retention": 0.9915966386554622
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.9066985645933014,
+          "retention": 0.979961215255333
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9222488038277512,
+          "retention": 0.9967679379444085
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9084928229665071,
+          "retention": 0.9819004524886877
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8917464114832536,
+          "retention": 0.9638009049773756
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9019138755980861,
+          "retention": 0.9747899159663865
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.6854066985645934,
+          "retention": 0.7407886231415644
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.25239234449760767,
+          "retention": 0.2727860374919199
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9252392344497608,
+          "retention": 1.0
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9132775119617225,
+          "retention": 0.9870717517776342
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.84688995215311,
+          "retention": 0.9153199741435035
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.5580143540669856,
+        "shot_noise": 0.8614433811802232,
+        "impulse_noise": 0.2723285486443381,
+        "defocus_blur": 0.8484848484848485,
+        "motion_blur": 0.8891547049441786,
+        "brightness": 0.9170653907496013,
+        "contrast": 0.9074960127591707,
+        "pixelate": 0.613237639553429,
+        "jpeg_compression": 0.8951355661881978
+      },
+      "checkpoint_sha256": "db2f1fa20c0d9ad0599ba1a0a851f4508eb30e0277831a67c28e2d8a9201c66c",
+      "seed": 42,
+      "seconds": 322.2
+    },
+    "densenet121_clean_s43": {
+      "run": "densenet121_clean_s43",
+      "clean_accuracy": 0.9521531100478469,
+      "mrrs": 0.8451749488181648,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.8755980861244019,
+          "retention": 0.9195979899497488
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.7033492822966507,
+          "retention": 0.7386934673366834
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.39892344497607657,
+          "retention": 0.4189698492462312
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9132775119617225,
+          "retention": 0.9591708542713568
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.867822966507177,
+          "retention": 0.9114321608040201
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.791267942583732,
+          "retention": 0.8310301507537688
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5598086124401914,
+          "retention": 0.5879396984924624
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.4126794258373206,
+          "retention": 0.4334170854271357
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.22966507177033493,
+          "retention": 0.2412060301507538
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9419856459330144,
+          "retention": 0.9893216080402011
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.9132775119617225,
+          "retention": 0.9591708542713568
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8528708133971292,
+          "retention": 0.8957286432160805
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9467703349282297,
+          "retention": 0.9943467336683418
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9294258373205742,
+          "retention": 0.9761306532663316
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8803827751196173,
+          "retention": 0.9246231155778896
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9425837320574163,
+          "retention": 0.9899497487437187
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9395933014354066,
+          "retention": 0.9868090452261307
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.9198564593301436,
+          "retention": 0.9660804020100503
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9425837320574163,
+          "retention": 0.9899497487437187
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9383971291866029,
+          "retention": 0.9855527638190955
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.9066985645933014,
+          "retention": 0.9522613065326634
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9204545454545454,
+          "retention": 0.9667085427135679
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.8044258373205742,
+          "retention": 0.8448492462311558
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.3845693779904306,
+          "retention": 0.40389447236180903
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9503588516746412,
+          "retention": 0.9981155778894473
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9419856459330144,
+          "retention": 0.9893216080402011
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.9192583732057417,
+          "retention": 0.9654522613065327
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.6592902711323764,
+        "shot_noise": 0.8574561403508771,
+        "impulse_noise": 0.40071770334928236,
+        "defocus_blur": 0.9027113237639552,
+        "motion_blur": 0.918859649122807,
+        "brightness": 0.9340111642743222,
+        "contrast": 0.929226475279107,
+        "pixelate": 0.7031499202551834,
+        "jpeg_compression": 0.937200956937799
+      },
+      "checkpoint_sha256": "32a423a7d471c548c316453a419c435105df30326c5dd5a54604b5d58237f570",
+      "seed": 43,
+      "seconds": 321.7
+    },
+    "densenet121_clean_s44": {
+      "run": "densenet121_clean_s44",
+      "clean_accuracy": 0.9270334928229665,
+      "mrrs": 0.781672640382318,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.8827751196172249,
+          "retention": 0.952258064516129
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.45633971291866027,
+          "retention": 0.49225806451612897
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.2117224880382775,
+          "retention": 0.22838709677419353
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.9102870813397129,
+          "retention": 0.9819354838709677
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.8744019138755981,
+          "retention": 0.9432258064516128
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.7595693779904307,
+          "retention": 0.8193548387096774
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.2458133971291866,
+          "retention": 0.2651612903225806
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.21650717703349281,
+          "retention": 0.23354838709677417
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.20933014354066987,
+          "retention": 0.22580645161290322
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9019138755980861,
+          "retention": 0.9729032258064516
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8253588516746412,
+          "retention": 0.8903225806451613
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.7332535885167464,
+          "retention": 0.7909677419354838
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9270334928229665,
+          "retention": 1.0
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.8965311004784688,
+          "retention": 0.9670967741935483
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.8397129186602871,
+          "retention": 0.9058064516129032
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.9282296650717703,
+          "retention": 1.001290322580645
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9240430622009569,
+          "retention": 0.996774193548387
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.8977272727272727,
+          "retention": 0.9683870967741934
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.9252392344497608,
+          "retention": 0.9980645161290322
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9126794258373205,
+          "retention": 0.9845161290322579
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8738038277511961,
+          "retention": 0.9425806451612903
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.8935406698564593,
+          "retention": 0.9638709677419354
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.4796650717703349,
+          "retention": 0.5174193548387096
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.21949760765550239,
+          "retention": 0.23677419354838708
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9258373205741627,
+          "retention": 0.9987096774193548
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9084928229665071,
+          "retention": 0.9799999999999999
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.7858851674641149,
+          "retention": 0.847741935483871
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.5169457735247208,
+        "shot_noise": 0.848086124401914,
+        "impulse_noise": 0.2238835725677831,
+        "defocus_blur": 0.8201754385964911,
+        "motion_blur": 0.8877591706539074,
+        "brightness": 0.9166666666666666,
+        "contrast": 0.9039074960127591,
+        "pixelate": 0.5309011164274322,
+        "jpeg_compression": 0.8734051036682615
+      },
+      "checkpoint_sha256": "0ab6af7e7e697cdea90c997cc3460729fd94213ce11839ffcbd21201c3181b4e",
+      "seed": 44,
+      "seconds": 322.4
+    },
+    "densenet121_clean_s45": {
+      "run": "densenet121_clean_s45",
+      "clean_accuracy": 0.9395933014354066,
+      "mrrs": 0.8177381710163378,
+      "n_corruptions": 27,
+      "corruptions": [
+        {
+          "corruption": "gaussian_noise",
+          "severity": 1,
+          "level": 0.05,
+          "accuracy": 0.8606459330143541,
+          "retention": 0.9159770846594527
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 2,
+          "level": 0.1,
+          "accuracy": 0.632177033492823,
+          "retention": 0.6728198599618078
+        },
+        {
+          "corruption": "gaussian_noise",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.21830143540669855,
+          "retention": 0.23233609166136218
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 1,
+          "level": 200.0,
+          "accuracy": 0.8624401913875598,
+          "retention": 0.9178866963717378
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 2,
+          "level": 100.0,
+          "accuracy": 0.8241626794258373,
+          "retention": 0.8771483131763209
+        },
+        {
+          "corruption": "shot_noise",
+          "severity": 3,
+          "level": 50.0,
+          "accuracy": 0.7649521531100478,
+          "retention": 0.8141311266709103
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 1,
+          "level": 0.03,
+          "accuracy": 0.5352870813397129,
+          "retention": 0.5697008274984087
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 2,
+          "level": 0.07,
+          "accuracy": 0.263755980861244,
+          "retention": 0.2807129217059198
+        },
+        {
+          "corruption": "impulse_noise",
+          "severity": 3,
+          "level": 0.14,
+          "accuracy": 0.20992822966507177,
+          "retention": 0.22342457033736474
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 1,
+          "level": 1.0,
+          "accuracy": 0.9252392344497608,
+          "retention": 0.9847231063017187
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 2,
+          "level": 2.0,
+          "accuracy": 0.8654306220095693,
+          "retention": 0.9210693825588797
+        },
+        {
+          "corruption": "defocus_blur",
+          "severity": 3,
+          "level": 3.0,
+          "accuracy": 0.8080143540669856,
+          "retention": 0.8599618077657544
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 1,
+          "level": 3.0,
+          "accuracy": 0.9360047846889952,
+          "retention": 0.9961807765754297
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 2,
+          "level": 5.0,
+          "accuracy": 0.9192583732057417,
+          "retention": 0.9783577339274349
+        },
+        {
+          "corruption": "motion_blur",
+          "severity": 3,
+          "level": 9.0,
+          "accuracy": 0.895933014354067,
+          "retention": 0.9535327816677277
+        },
+        {
+          "corruption": "brightness",
+          "severity": 1,
+          "level": 0.7,
+          "accuracy": 0.937200956937799,
+          "retention": 0.9974538510502865
+        },
+        {
+          "corruption": "brightness",
+          "severity": 2,
+          "level": 0.5,
+          "accuracy": 0.9252392344497608,
+          "retention": 0.9847231063017187
+        },
+        {
+          "corruption": "brightness",
+          "severity": 3,
+          "level": 0.3,
+          "accuracy": 0.902511961722488,
+          "retention": 0.9605346912794399
+        },
+        {
+          "corruption": "contrast",
+          "severity": 1,
+          "level": 0.6,
+          "accuracy": 0.930622009569378,
+          "retention": 0.9904519414385743
+        },
+        {
+          "corruption": "contrast",
+          "severity": 2,
+          "level": 0.4,
+          "accuracy": 0.9234449760765551,
+          "retention": 0.9828134945894336
+        },
+        {
+          "corruption": "contrast",
+          "severity": 3,
+          "level": 0.2,
+          "accuracy": 0.8929425837320574,
+          "retention": 0.9503500954805856
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 1,
+          "level": 112.0,
+          "accuracy": 0.9007177033492823,
+          "retention": 0.9586250795671547
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 2,
+          "level": 56.0,
+          "accuracy": 0.8116028708133971,
+          "retention": 0.8637810311903247
+        },
+        {
+          "corruption": "pixelate",
+          "severity": 3,
+          "level": 28.0,
+          "accuracy": 0.2631578947368421,
+          "retention": 0.2800763844684914
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 1,
+          "level": 50.0,
+          "accuracy": 0.9288277511961722,
+          "retention": 0.988542329726289
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 2,
+          "level": 25.0,
+          "accuracy": 0.9204545454545454,
+          "retention": 0.9796308084022916
+        },
+        {
+          "corruption": "jpeg_compression",
+          "severity": 3,
+          "level": 10.0,
+          "accuracy": 0.8869617224880383,
+          "retention": 0.9439847231063018
+        }
+      ],
+      "by_type": {
+        "gaussian_noise": 0.5703748006379585,
+        "shot_noise": 0.8171850079744817,
+        "impulse_noise": 0.3363237639553429,
+        "defocus_blur": 0.8662280701754385,
+        "motion_blur": 0.9170653907496013,
+        "brightness": 0.9216507177033493,
+        "contrast": 0.9156698564593301,
+        "pixelate": 0.6584928229665071,
+        "jpeg_compression": 0.9120813397129187
+      },
+      "checkpoint_sha256": "72cb08eeec937ff5a88cfb7ddc2d9eb4971ad39a224f152c9318f6e72c0f024b",
+      "seed": 45,
+      "seconds": 322.9
+    }
+  },
+  "groups": {
+    "tamnet_clean": {
+      "n_seeds": 5,
+      "mrrs_mean": 0.8508270444053512,
+      "mrrs_std_sample_ddof1": 0.0035119631123181018,
+      "mrrs_best_seed": 0.8540907466952482,
+      "per_seed": {
+        "tamnet_clean_s42": 0.853405017921147,
+        "tamnet_clean_s43": 0.8540907466952482,
+        "tamnet_clean_s44": 0.8458269114006819,
+        "tamnet_clean_s45": 0.8485783763561543,
+        "tamnet_clean_s46": 0.8522341696535244
+      }
+    },
+    "densenet121_clean": {
+      "n_seeds": 4,
+      "mrrs_mean": 0.8141678195461729,
+      "mrrs_std_sample_ddof1": 0.026041390925886653,
+      "mrrs_best_seed": 0.8451749488181648,
+      "per_seed": {
+        "densenet121_clean_s42": 0.8120855179678709,
+        "densenet121_clean_s43": 0.8451749488181648,
+        "densenet121_clean_s44": 0.781672640382318,
+        "densenet121_clean_s45": 0.8177381710163378
+      }
+    }
+  },
+  "intensity_curves": {
+    "tamnet_clean_s42": {
+      "contrast": [
+        {
+          "multiplier": 0.1,
+          "accuracy": 0.5376794258373205
+        },
+        {
+          "multiplier": 0.2,
+          "accuracy": 0.8235645933014354
+        },
+        {
+          "multiplier": 0.3,
+          "accuracy": 0.8863636363636364
+        },
+        {
+          "multiplier": 0.4,
+          "accuracy": 0.9090909090909091
+        },
+        {
+          "multiplier": 0.5,
+          "accuracy": 0.916267942583732
+        },
+        {
+          "multiplier": 0.75,
+          "accuracy": 0.9258373205741627
+        },
+        {
+          "multiplier": 1.0,
+          "accuracy": 0.9270334928229665
+        },
+        {
+          "multiplier": 1.25,
+          "accuracy": 0.9282296650717703
+        },
+        {
+          "multiplier": 1.5,
+          "accuracy": 0.9246411483253588
+        },
+        {
+          "multiplier": 2.0,
+          "accuracy": 0.8905502392344498
+        }
+      ],
+      "brightness": [
+        {
+          "multiplier": 0.25,
+          "accuracy": 0.8965311004784688
+        },
+        {
+          "multiplier": 0.5,
+          "accuracy": 0.9216507177033493
+        },
+        {
+          "multiplier": 0.75,
+          "accuracy": 0.9270334928229665
+        },
+        {
+          "multiplier": 1.0,
+          "accuracy": 0.9270334928229665
+        },
+        {
+          "multiplier": 1.25,
+          "accuracy": 0.9288277511961722
+        },
+        {
+          "multiplier": 1.5,
+          "accuracy": 0.9168660287081339
+        },
+        {
+          "multiplier": 2.0,
+          "accuracy": 0.8522727272727273
+        }
+      ]
+    },
+    "densenet121_clean_s42": {
+      "contrast": [
+        {
+          "multiplier": 0.1,
+          "accuracy": 0.8157894736842105
+        },
+        {
+          "multiplier": 0.2,
+          "accuracy": 0.8917464114832536
+        },
+        {
+          "multiplier": 0.3,
+          "accuracy": 0.90311004784689
+        },
+        {
+          "multiplier": 0.4,
+          "accuracy": 0.9084928229665071
+        },
+        {
+          "multiplier": 0.5,
+          "accuracy": 0.9198564593301436
+        },
+        {
+          "multiplier": 0.75,
+          "accuracy": 0.9264354066985646
+        },
+        {
+          "multiplier": 1.0,
+          "accuracy": 0.9252392344497608
+        },
+        {
+          "multiplier": 1.25,
+          "accuracy": 0.9132775119617225
+        },
+        {
+          "multiplier": 1.5,
+          "accuracy": 0.9055023923444976
+        },
+        {
+          "multiplier": 2.0,
+          "accuracy": 0.8827751196172249
+        }
+      ],
+      "brightness": [
+        {
+          "multiplier": 0.25,
+          "accuracy": 0.8989234449760766
+        },
+        {
+          "multiplier": 0.5,
+          "accuracy": 0.9174641148325359
+        },
+        {
+          "multiplier": 0.75,
+          "accuracy": 0.9282296650717703
+        },
+        {
+          "multiplier": 1.0,
+          "accuracy": 0.9252392344497608
+        },
+        {
+          "multiplier": 1.25,
+          "accuracy": 0.916267942583732
+        },
+        {
+          "multiplier": 1.5,
+          "accuracy": 0.9043062200956937
+        },
+        {
+          "multiplier": 2.0,
+          "accuracy": 0.8534688995215312
+        }
+      ]
+    }
+  },
+  "headers": {
+    "n": 1672,
+    "image_size": 224
+  }
+}

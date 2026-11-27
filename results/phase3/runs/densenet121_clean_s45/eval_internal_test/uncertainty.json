@@ -1,0 +1,66 @@
+{
+  "kind": "phase3_uncertainty",
+  "run": "densenet121_clean_s45",
+  "n": 1672,
+  "passes": 10,
+  "protocol": "model.eval() with only Dropout layers in train mode (Phase 2 / D5 fix)",
+  "accuracy": 0.9395933014354066,
+  "accuracy_deterministic": 0.9395933014354066,
+  "nll": 0.23363056778907776,
+  "brier": 0.10096579790115356,
+  "ece_15": 0.054931360800443065,
+  "mce_15": 0.23335102375815897,
+  "mean_confidence": 0.895950436592102,
+  "mean_predictive_entropy": 0.3950636386871338,
+  "mean_mutual_information": 0.0063795289024710655,
+  "mean_aleatoric_variance": 0.0017115268856287003,
+  "selective_accuracy": {
+    "1.0": 0.9395933014354066,
+    "0.9": 0.9700996677740864,
+    "0.8": 0.9805680119581465,
+    "0.7": 0.9888888888888889,
+    "0.5": 0.992822966507177
+  },
+  "error_detection_auroc": 0.8137781951333263,
+  "per_class": {
+    "Glioma": {
+      "support": 543,
+      "mean_entropy": 0.3503711223602295,
+      "mean_confidence": 0.9144514203071594,
+      "accuracy": 0.9484346224677717
+    },
+    "Meningioma": {
+      "support": 393,
+      "mean_entropy": 0.4231630265712738,
+      "mean_confidence": 0.8900477290153503,
+      "accuracy": 0.9236641221374046
+    },
+    "Pituitary": {
+      "support": 386,
+      "mean_entropy": 0.39395901560783386,
+      "mean_confidence": 0.8908888101577759,
+      "accuracy": 0.9533678756476683
+    },
+    "No Tumor": {
+      "support": 350,
+      "mean_entropy": 0.43406736850738525,
+      "mean_confidence": 0.8794578313827515,
+      "accuracy": 0.9285714285714286
+    }
+  },
+  "provenance": {
+    "evaluated_at": "2026-11-27T08:45:03+00:00",
+    "run_name": "densenet121_clean_s45",
+    "run_git": {
+      "commit": "0d3de40",
+      "dirty": true
+    },
+    "seed": 45,
+    "checkpoint": "results\\phase3\\runs\\densenet121_clean_s45\\best.pt",
+    "checkpoint_sha256": "72cb08eeec937ff5a88cfb7ddc2d9eb4971ad39a224f152c9318f6e72c0f024b",
+    "run_config_sha256": "f7a13dcecfd3b4d660e1291688682cfe42f78c46d2acdeb20105504638f3243e",
+    "test_manifest": "results\\phase3\\split_manifest_clean.json",
+    "test_manifest_sha256": "205c8e6f851070e56be42caad05c1613371a69c3f6b19f19e802ff643e939af6",
+    "script": "scripts/phase3_uncertainty.py"
+  }
+}

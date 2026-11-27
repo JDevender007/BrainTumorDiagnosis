@@ -1,0 +1,44 @@
+{
+  "started_at": "2026-11-26T15:32:46+00:00",
+  "max_workers": 3,
+  "n_total": 6,
+  "skipped": [
+    "3_seg_eval (already complete, valid artifact)"
+  ],
+  "queued": [],
+  "running": [
+    "6_robustness"
+  ],
+  "done": [
+    {
+      "name": "4_attention_alignment",
+      "returncode": 0,
+      "seconds": 94.0,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\par_4_attention_alignment.log"
+    },
+    {
+      "name": "2_calibration",
+      "returncode": 1,
+      "seconds": 425.7,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\par_2_calibration.log"
+    },
+    {
+      "name": "1_uncertainty",
+      "returncode": 1,
+      "seconds": 1151.3,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\par_1_uncertainty.log"
+    },
+    {
+      "name": "5_efficiency",
+      "returncode": 0,
+      "seconds": 1538.3,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\par_5_efficiency.log"
+    },
+    {
+      "name": "7_external_brisc_protocol",
+      "returncode": 0,
+      "seconds": 1076.2,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\par_7_external_brisc_protocol.log"
+    }
+  ]
+}

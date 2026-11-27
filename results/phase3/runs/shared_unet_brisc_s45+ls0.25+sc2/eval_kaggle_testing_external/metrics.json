@@ -1,0 +1,84 @@
+{
+  "n": 1311,
+  "accuracy": 0.9435545385202135,
+  "macro_f1": 0.9460981594963648,
+  "weighted_f1": 0.943841256723449,
+  "per_class": {
+    "Glioma": {
+      "precision": 0.9798657718120806,
+      "recall": 0.9733333333333334,
+      "f1": 0.9765886287625418,
+      "support": 300
+    },
+    "Meningioma": {
+      "precision": 0.8356545961002786,
+      "recall": 0.9803921568627451,
+      "f1": 0.9022556390977443,
+      "support": 306
+    },
+    "Pituitary": {
+      "precision": 0.9770491803278688,
+      "recall": 0.9933333333333333,
+      "f1": 0.9851239669421488,
+      "support": 300
+    },
+    "No Tumor": {
+      "precision": 0.994269340974212,
+      "recall": 0.8567901234567902,
+      "f1": 0.9204244031830239,
+      "support": 405
+    }
+  },
+  "confusion_matrix": [
+    [
+      292,
+      8,
+      0,
+      0
+    ],
+    [
+      3,
+      300,
+      1,
+      2
+    ],
+    [
+      0,
+      2,
+      298,
+      0
+    ],
+    [
+      3,
+      49,
+      6,
+      347
+    ]
+  ],
+  "confusion_matrix_order": [
+    "Glioma",
+    "Meningioma",
+    "Pituitary",
+    "No Tumor"
+  ],
+  "checkpoint_best_epoch": 5,
+  "checkpoint_val_f1": 0.9859604570894613,
+  "provenance": {
+    "evaluated_at": "2026-11-26T16:08:44+00:00",
+    "run_name": "shared_unet_brisc_s45+ls0.25+sc2",
+    "run_git": {
+      "commit": "df56277",
+      "dirty": true
+    },
+    "seed": 45,
+    "checkpoint": "results\\phase3\\runs\\shared_unet_brisc_s45+ls0.25+sc2\\best.pt",
+    "checkpoint_sha256": "8fcce66a9cd51a42a8bda4a2c7ea230cc00c07e8e09a89fb2655f29ace3e9273",
+    "run_config_sha256": "fda587a97b51e9a6d438d7de6d9547e97d4b7cf1483c5ad3223927f4d2a1c1ee",
+    "evaluator": "scripts/phase3_evaluate.py",
+    "dataset": "kaggle_testing",
+    "split": "external",
+    "manifest": null,
+    "manifest_sha256": null,
+    "dedup_applied": false
+  }
+}

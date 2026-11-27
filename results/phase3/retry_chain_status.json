@@ -1,0 +1,48 @@
+{
+  "started": "2026-11-27T11:18:39+00:00",
+  "results": [
+    {
+      "name": "retry_1_uncertainty",
+      "returncode": 0,
+      "seconds": 2161.6,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_retry_1_uncertainty.log"
+    },
+    {
+      "name": "retry_2_calibration",
+      "returncode": 0,
+      "seconds": 299.3,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_retry_2_calibration.log"
+    },
+    {
+      "name": "retry_6_robustness",
+      "returncode": 0,
+      "seconds": 3362.5,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_retry_6_robustness.log"
+    },
+    {
+      "name": "restore_external_brisc",
+      "returncode": 0,
+      "seconds": 2.2,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_restore_external_brisc.log"
+    },
+    {
+      "name": "restore_external_tamnet",
+      "returncode": 0,
+      "seconds": 1.0,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_restore_external_tamnet.log"
+    },
+    {
+      "name": "phase4_figures",
+      "returncode": 0,
+      "seconds": 11.4,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_phase4_figures.log"
+    },
+    {
+      "name": "phase4_tables",
+      "returncode": 0,
+      "seconds": 0.6,
+      "log": "D:\\BrainTumorDiagnosis\\results\\phase3\\logs\\retry_phase4_tables.log"
+    }
+  ],
+  "wall_min": 97.31
+}

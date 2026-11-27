@@ -139,7 +139,14 @@ def enable_dropout_only(model: torch.nn.Module) -> None:
             module.train()
 
 
-def load_test_tensor(device: torch.device) -> tuple[torch.Tensor, np.ndarray]:
+def load_test_tensor(device: torch.device | None = None) -> tuple[torch.Tensor, np.ndarray]:
+    """TEST tensors pinned in host memory.
+
+    ``device`` is accepted for API compatibility but the tensor is deliberately
+    kept on the CPU: on a 4 GiB card a 1 GiB test tensor plus batch activations
+    spills into shared memory and collapses throughput by ~18x.  ``mc_predict``
+    moves one batch at a time instead.
+    """
     manifest = json.loads(DEFAULT_SPLIT.read_text(encoding="utf-8"))
     entries = [e for e in manifest["entries"] if e["split"] == "test"]
 
@@ -162,27 +169,32 @@ def load_test_tensor(device: torch.device) -> tuple[torch.Tensor, np.ndarray]:
         item = ds[i]
         xs.append(item[0])
         ys.append(int(item[1]))
-    return torch.stack(xs).to(device), np.asarray(ys, dtype=np.int64)
+    return torch.stack(xs), np.asarray(ys, dtype=np.int64)
 
 
 @torch.no_grad()
-def mc_predict(model, x: torch.Tensor, passes: int, batch: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Return (mean_probs (N,C), per-pass probs (T,N,C), deterministic probs (N,C))."""
+def mc_predict(model, x: torch.Tensor, passes: int, batch: int, device=None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return (mean_probs (N,C), per-pass probs (T,N,C), deterministic probs (N,C)).
+
+    ``x`` stays on the CPU: a 1 GiB test-set tensor plus batch activations
+    oversubscribes a 4 GiB card into WDDM shared memory, which is ~18x slower.
+    Batches are moved to ``device`` one at a time instead.
+    """
+    device = device or next(model.parameters()).device
+
+    def _run():
+        chunks = []
+        for i in range(0, len(x), batch):
+            out = model(x[i:i + batch].to(device))
+            p = out["probabilities"] if isinstance(out, dict) else torch.softmax(out, 1)
+            chunks.append(p.float().cpu())
+        return torch.cat(chunks).numpy()
+
     model.eval()
-    logits = []
-    for i in range(0, len(x), batch):
-        out = model(x[i:i + batch])
-        logits.append((out["probabilities"] if isinstance(out, dict) else torch.softmax(out, 1)).float())
-    det = torch.cat(logits).cpu().numpy()
+    det = _run()
 
     enable_dropout_only(model)
-    runs = []
-    for _ in range(passes):
-        logits = []
-        for i in range(0, len(x), batch):
-            out = model(x[i:i + batch])
-            logits.append((out["probabilities"] if isinstance(out, dict) else torch.softmax(out, 1)).float())
-        runs.append(torch.cat(logits).cpu().numpy())
+    runs = [_run() for _ in range(passes)]
     model.eval()
     stacked = np.stack(runs, axis=0)          # (T, N, C)
     return stacked.mean(axis=0), stacked, det
@@ -194,7 +206,7 @@ def evaluate_run(run_dir: Path, args, x: torch.Tensor, y: np.ndarray) -> dict:
     model = build_model(run_config)
     ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
     model.load_state_dict(ckpt["model_state_dict"])
-    model = model.to(x.device).eval()
+    model = model.to(torch.device("cuda" if torch.cuda.is_available() else "cpu")).eval()
 
     mean_p, stacked, det = mc_predict(model, x, args.passes, args.batch_size)
 
@@ -352,7 +364,8 @@ def main() -> int:
     print(f"device={device} | preloading TEST images ...", flush=True)
     t0 = time.time()
     x, y = load_test_tensor(device)
-    print(f"  {tuple(x.shape)} on {device} ({time.time() - t0:.0f}s)", flush=True)
+    print(f"  {tuple(x.shape)} host-resident, streamed per batch to {device} "
+          f"({time.time() - t0:.0f}s)", flush=True)
 
     payloads: list[dict] = []
     failed = []
