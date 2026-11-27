@@ -226,10 +226,26 @@ activity, ETA).
       analysis" promised but qualitative-only; [33]/[3] never cited in body.
 
 ## FILLs (ask user if not answerable from repo)
-- [ ] Internal dataset: BraTS 2024 task(s), modalities, HOW the 4 class labels were derived.
-- [ ] Kaggle dataset exact name/link (local copy: `data/external/kaggle_brain_tumor/`,
+- [x] Internal dataset: BraTS 2024 task(s), modalities, HOW the 4 class labels were derived.
+      → **RESOLVED (partial)** from `results/fill_evidence.json`: 11,148 images / 10,223 unique
+      basenames, 43.7 % basename-match the canonical Kaggle zip, mixed filename families, 0 real
+      label conflicts, **not** BraTS (no pituitary / no-tumour class there). Label **origin**
+      remains `[CITATION NEEDED]` — no script, manifest, README or citation in the repo.
+- [x] Kaggle dataset exact name/link (local copy: `data/external/kaggle_brain_tumor/`,
       Testing = 1,311 = 300/306/405/300 ✓, Training has no pituitary folder).
-- [ ] Classifier training data source: BraTS-only, or also BRISC/Kaggle train splits?
+      → **RESOLVED (partial)**: `brain-tumor-mri-dataset.zip` = 7,023 entries = Training 5,712 +
+      Testing 1,311, i.e. the canonical Kaggle "Brain Tumor MRI Dataset". Local `Training/` is an
+      **incomplete** extraction (3,881, no pituitary). Owner slug/URL stays `[VERIFY]`.
+- [x] Classifier training data source: BraTS-only, or also BRISC/Kaggle train splits?
       (Local `data/raw/classification/` Train 9,291 / Test 1,857, 4 classes — provenance?)
-- [ ] 3D→2D conversion: modality/channels, slice rule, patient-level split yes/no.
-- [ ] Paper file path = `TAMNet_Paper.docx` (root) — confirm this is the single source.
+      → **RESOLVED (partial)**: neither BraTS nor BRISC (0 basename overlap with BRISC); it is a
+      4-class 2-D JPEG/PNG pool substantially re-using the Kaggle release. Label origin
+      `[CITATION NEEDED]`.
+- [x] 3D→2D conversion: modality/channels, slice rule, patient-level split yes/no.
+      → **RESOLVED**: there is **no** 3-D→2-D conversion in the classification path. BraTS is
+      segmentation-only (1,000 NIfTI, 200 seg targets, patient-level 70/15/15 manifest seed 42).
+      WT/TC/ET Dice belong to the standalone 3-D U-Net (D3).
+- [x] Paper file path = `TAMNet_Paper.docx` (root) — confirm this is the single source.
+      → **CONFIRMED**: `D:\BrainTumorDiagnosis\TAMNet_Paper.docx` (230 paragraphs, 8 tables).
+      The legacy generator `paper/generate_paper.py` still points at `D:\Projects\...` and is not
+      the source of truth; Phase 5 writes the docx from `results/` via `paper/rewrite_paper.py`.

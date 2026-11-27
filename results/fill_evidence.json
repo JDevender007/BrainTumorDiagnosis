@@ -1,0 +1,3669 @@
+{
+  "kind": "phase5_fill_evidence",
+  "created_at": "2026-11-27T11:58:00+00:00",
+  "purpose": "Evidence for the three FILL questions that block Phase 5 wording. Only literal filesystem facts; unknowns stay unknown.",
+  "FILL_1_internal_provenance": {
+    "internal": {
+      "counts": {
+        "Train/glioma": 3018,
+        "Train/meningioma": 2183,
+        "Train/no tumor": 1945,
+        "Train/pituitary": 2145,
+        "Test/glioma": 603,
+        "Test/meningioma": 436,
+        "Test/no tumor": 389,
+        "Test/pituitary": 429
+      },
+      "total_images": 11148,
+      "unique_basenames": 10223,
+      "filename_families": {
+        "kaggle_Tr_prefix": 3624,
+        "inst_code_X_###_XX_": 3439,
+        "plain_numeric": 1713,
+        "other": 1013,
+        "kaggle_Te_prefix": 839,
+        "gg_paren": 363,
+        "image_paren": 123,
+        "N_no": 34
+      },
+      "filename_family_examples": {
+        "inst_code_X_###_XX_": [
+          "Train/glioma/G_675_BR_.jpg",
+          "Train/glioma/G_704_BR_.jpg",
+          "Train/glioma/G_704_DA_.jpg",
+          "Train/glioma/G_704_HF_.jpg",
+          "Train/glioma/G_704_RO_.jpg"
+        ],
+        "other": [
+          "Train/glioma/G_705.jpg",
+          "Train/glioma/G_706.jpg",
+          "Train/glioma/G_707.jpg",
+          "Train/glioma/G_708.jpg",
+          "Train/glioma/G_709.jpg"
+        ],
+        "kaggle_Te_prefix": [
+          "Train/glioma/Te-gl_0057.jpg",
+          "Train/glioma/Te-gl_0058.jpg",
+          "Train/glioma/Te-gl_0059.jpg",
+          "Train/glioma/Te-gl_0060.jpg",
+          "Train/glioma/Te-gl_0061.jpg"
+        ],
+        "kaggle_Tr_prefix": [
+          "Train/glioma/Tr-gl_0028.jpg",
+          "Train/glioma/Tr-gl_0029.jpg",
+          "Train/glioma/Tr-gl_0030.jpg",
+          "Train/glioma/Tr-gl_0031.jpg",
+          "Train/glioma/Tr-gl_0032.jpg"
+        ],
+        "gg_paren": [
+          "Train/glioma/gg (325).jpg",
+          "Train/glioma/gg (326).jpg",
+          "Train/glioma/gg (327).jpg",
+          "Train/glioma/gg (328).jpg",
+          "Train/glioma/gg (329).jpg"
+        ],
+        "image_paren": [
+          "Train/glioma/image(1).jpg",
+          "Train/glioma/image(10).jpg",
+          "Train/glioma/image(11).jpg",
+          "Train/glioma/image(12).jpg",
+          "Train/glioma/image(13).jpg"
+        ],
+        "plain_numeric": [
+          "Train/meningioma/1299.jpg",
+          "Train/meningioma/1301.jpg",
+          "Train/meningioma/1302.jpg",
+          "Train/meningioma/1303.jpg",
+          "Train/meningioma/1304.jpg"
+        ],
+        "N_no": [
+          "Train/no tumor/1 no.jpeg",
+          "Train/no tumor/10 no.jpg",
+          "Train/no tumor/11 no.jpg",
+          "Train/no tumor/12 no.jpg",
+          "Train/no tumor/13 no.jpg"
+        ]
+      },
+      "note": "A basename appearing in several class folders would be a labelling conflict; duplicates_within_split are reported separately below.",
+      "basename_in_multiple_classes": {
+        "image(12).jpg": [
+          "Train/glioma",
+          "Train/no tumor"
+        ],
+        "image(13).jpg": [
+          "Train/glioma",
+          "Train/no tumor"
+        ],
+        "image(14).jpg": [
+          "Train/glioma",
+          "Train/no tumor"
+        ],
+        "image(15).jpg": [
+          "Train/glioma",
+          "Train/no tumor"
+        ],
+        "image(16).jpg": [
+          "Train/glioma",
+          "Train/no tumor"
+        ],
+        "image(30).jpg": [
+          "Train/glioma",
+          "Test/pituitary"
+        ],
+        "1299.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1301.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1302.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1303.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1304.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1305.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1306.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1307.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1308.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1309.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1310.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1311.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1312.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1313.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1314.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1315.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1316.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1317.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1318.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1319.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1320.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1321.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1322.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1323.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1324.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1325.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1326.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1327.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1328.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1329.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1330.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1331.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1332.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1333.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1334.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1335.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1336.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1337.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1338.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1339.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1340.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1341.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1342.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1343.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1344.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1345.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1346.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1347.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1348.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1349.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1350.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1351.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1352.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1353.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1354.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1355.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1356.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1357.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1358.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1359.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1360.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1361.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1362.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1363.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1364.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1365.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1366.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1367.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1368.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1369.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1370.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1371.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1372.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1373.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1374.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1375.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1376.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1377.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1378.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1379.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1380.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1381.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1382.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1383.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1384.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1385.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1386.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1387.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1388.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1389.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1390.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1391.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1392.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1393.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1394.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1395.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1396.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1397.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1398.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1399.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1400.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1401.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1402.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1403.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1404.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1405.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1406.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1407.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1408.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1409.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1410.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1411.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1412.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1413.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1414.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1415.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1416.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1417.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1418.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1419.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1420.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1421.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1422.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1423.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1424.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1425.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1426.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1427.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1428.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1429.jpg": [
+          "Train/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1430.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1431.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1432.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1433.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1434.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1435.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1436.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1437.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1438.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1439.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1440.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1441.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1442.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1443.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1444.jpg": [
+          "Train/meningioma",
+          "Test/pituitary"
+        ],
+        "1445.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1446.jpg": [
+          "Train/meningioma",
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1587.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1588.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1589.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1590.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1591.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1592.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1593.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1594.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1595.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1596.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1597.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1598.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1599.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1600.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1601.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1602.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1603.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1604.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1605.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1606.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1607.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1608.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1609.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1610.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1611.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1612.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1613.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1614.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1615.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1616.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1617.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1618.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1642.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1643.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1644.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1645.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1646.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1647.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1648.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1649.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1650.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1651.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1652.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1653.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1654.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1655.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1656.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1657.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1658.jpg": [
+          "Train/no tumor",
+          "Test/pituitary"
+        ],
+        "1178.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1179.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1180.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1181.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1182.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1183.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1184.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1185.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1186.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1187.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1188.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1189.jpg": [
+          "Train/pituitary",
+          "Test/glioma"
+        ],
+        "1191.jpg": [
+          "Train/pituitary",
+          "Test/glioma"
+        ],
+        "1192.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1193.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1194.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1195.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1196.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1198.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1199.jpg": [
+          "Train/pituitary",
+          "Test/glioma"
+        ],
+        "1200.jpg": [
+          "Train/pituitary",
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1107.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1108.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1109.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1111.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1112.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1113.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1114.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1115.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1116.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1117.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1118.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1119.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1120.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1121.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1122.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1123.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1124.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1128.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1130.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1131.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1132.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1134.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1135.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1136.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1137.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1139.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1140.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1141.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1142.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1143.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1145.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1146.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1151.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1152.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1153.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1154.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1155.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1156.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1157.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1159.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1160.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1161.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1162.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1163.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1164.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1165.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1166.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1167.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1168.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1169.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1170.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1173.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1175.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1176.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1177.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1202.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1203.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1205.jpg": [
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1206.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1207.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1208.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1209.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1210.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1211.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1212.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1213.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1214.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1215.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1216.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1217.jpg": [
+          "Test/glioma",
+          "Test/no tumor"
+        ],
+        "1218.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1219.jpg": [
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1220.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1221.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1222.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1223.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1225.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1226.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1229.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1232.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1233.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1235.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1236.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1238.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1239.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1241.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1242.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1243.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1244.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1245.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1246.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1249.jpg": [
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1250.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1251.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1252.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1253.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1255.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1257.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1258.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1260.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1261.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1262.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1263.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1265.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1266.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1267.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1268.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1269.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1270.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1273.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1274.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1275.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1276.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1280.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1282.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1283.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1285.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1287.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1289.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1291.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1292.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1293.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1294.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1296.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1297.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1300.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1447.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1448.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1449.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1450.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1451.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1452.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1454.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1455.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1457.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1459.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1461.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1462.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1463.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1465.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1466.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1467.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1468.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1469.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1471.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1472.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1474.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1475.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1476.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1477.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1478.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1479.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1480.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1481.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1482.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1483.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1484.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1485.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1487.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1488.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1492.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1493.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1494.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1495.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1497.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1498.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1499.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1500.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1501.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1502.jpg": [
+          "Test/glioma",
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1523.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1524.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1525.jpg": [
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1526.jpg": [
+          "Test/glioma",
+          "Test/pituitary"
+        ],
+        "1527.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1528.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1529.jpg": [
+          "Test/glioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1264.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1298.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1453.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1456.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1458.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1496.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1503.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1504.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1505.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1507.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1508.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1509.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1510.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1512.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1513.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1514.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1515.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1516.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1517.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1518.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1519.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1520.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1530.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1531.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1532.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1534.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1535.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1536.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1537.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1538.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1539.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1540.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1541.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1542.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1543.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1544.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1545.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1546.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1547.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1548.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1549.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1551.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1552.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1553.jpg": [
+          "Test/meningioma",
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1554.jpg": [
+          "Test/meningioma",
+          "Test/pituitary"
+        ],
+        "1204.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1224.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1227.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1228.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1230.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1234.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1237.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1254.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1272.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1277.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1278.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1284.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1286.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1486.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1506.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1511.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1521.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1522.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1533.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1550.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1555.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1556.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1557.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1558.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1560.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1561.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1562.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1563.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1564.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1566.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1567.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1568.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1569.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1572.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1573.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1575.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1577.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1578.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1579.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1581.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1582.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1583.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1584.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1585.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ],
+        "1586.jpg": [
+          "Test/no tumor",
+          "Test/pituitary"
+        ]
+      }
+    },
+    "vs_kaggle_zip": {
+      "n_internal_unique": 10223,
+      "n_other_unique": 7023,
+      "n_basename_overlap": 4463,
+      "frac_of_internal": 0.4366,
+      "sample": [
+        "Te-gl_0057.jpg",
+        "Te-gl_0058.jpg",
+        "Te-gl_0059.jpg",
+        "Te-gl_0060.jpg",
+        "Te-gl_0061.jpg",
+        "Te-gl_0062.jpg",
+        "Te-gl_0063.jpg",
+        "Te-gl_0064.jpg",
+        "Te-gl_0065.jpg",
+        "Te-gl_0066.jpg"
+      ]
+    },
+    "vs_kaggle_extracted": {
+      "n_internal_unique": 10223,
+      "n_other_unique": 5192,
+      "n_basename_overlap": 3503,
+      "frac_of_internal": 0.3427,
+      "sample": [
+        "Te-gl_0057.jpg",
+        "Te-gl_0058.jpg",
+        "Te-gl_0059.jpg",
+        "Te-gl_0060.jpg",
+        "Te-gl_0061.jpg",
+        "Te-gl_0062.jpg",
+        "Te-gl_0063.jpg",
+        "Te-gl_0064.jpg",
+        "Te-gl_0065.jpg",
+        "Te-gl_0066.jpg"
+      ]
+    },
+    "vs_brisc": {
+      "n_internal_unique": 10223,
+      "n_other_unique": 10798,
+      "n_basename_overlap": 0,
+      "frac_of_internal": 0.0,
+      "sample": []
+    },
+    "brats_has_pituitary_or_notumor_label": false,
+    "verdict": {
+      "established": [
+        "The internal set is 11148 2-D JPEG/PNG images in 4 class folders (Train + Test); no patient/subject identifiers exist in any filename.",
+        "4463 of 10223 unique internal basenames (43.7%) are also present in the local Kaggle zip, so the internal pool is substantially a re-use of that Kaggle release.",
+        "The remainder uses a distinct naming family {'kaggle_Tr_prefix': 3624, 'inst_code_X_###_XX_': 3439, 'plain_numeric': 1713, 'other': 1013, 'kaggle_Te_prefix': 839, 'gg_paren': 363, 'image_paren': 123, 'N_no': 34}, which is not BraTS (BraTS has no pituitary or no-tumour class)."
+      ],
+      "not_established": [
+        "Who produced the 4-class labels and from which primary source the non-Kaggle portion was collated - no download script, README, manifest or citation for this folder exists anywhere in the repository."
+      ],
+      "paper_wording": "state the class counts and the image-level split; mark the label origin [CITATION NEEDED]; do not claim BraTS provenance."
+    }
+  },
+  "FILL_2_kaggle_identity": {
+    "zip": {
+      "present": true,
+      "path": "D:\\BrainTumorDiagnosis\\data\\external\\kaggle_brain_tumor\\brain-tumor-mri-dataset.zip",
+      "archive_name": "brain-tumor-mri-dataset.zip",
+      "entries": 7023,
+      "per_directory": {
+        "Testing/glioma": 300,
+        "Testing/meningioma": 306,
+        "Testing/notumor": 405,
+        "Testing/pituitary": 300,
+        "Training/glioma": 1321,
+        "Training/meningioma": 1339,
+        "Training/notumor": 1595,
+        "Training/pituitary": 1457
+      },
+      "top_level_dirs": [
+        "Testing",
+        "Training"
+      ],
+      "sample_names": [
+        "Te-glTr_0000.jpg",
+        "Te-glTr_0001.jpg",
+        "Te-glTr_0002.jpg",
+        "Te-glTr_0003.jpg",
+        "Te-glTr_0004.jpg"
+      ]
+    },
+    "extracted_dirs": {
+      "Training": {
+        "glioma": 1321,
+        "meningioma": 1339,
+        "notumor": 1221
+      },
+      "Testing": {
+        "glioma": 300,
+        "meningioma": 306,
+        "notumor": 405,
+        "pituitary": 300
+      }
+    },
+    "canonical_brain_tumor_mri_dataset": {
+      "expected_entries": 7023,
+      "expected_split": {
+        "Training": 5712,
+        "Testing": 1311
+      },
+      "matches_local_zip": true
+    },
+    "verdict": {
+      "established": [
+        "The archive on disk is literally named 'brain-tumor-mri-dataset.zip' and holds 7023 entries with top-level dirs ['Testing', 'Training'] and per-directory counts {'Testing/glioma': 300, 'Testing/meningioma': 306, 'Testing/notumor': 405, 'Testing/pituitary': 300, 'Training/glioma': 1321, 'Training/meningioma': 1339, 'Training/notumor': 1595, 'Training/pituitary': 1457}.",
+        "Those counts equal the canonical Kaggle 'Brain Tumor MRI Dataset' release (Training 5712 + Testing 1311 = 7023).",
+        "The *extracted* folders used by the pipeline are an incomplete extraction of that zip: {'Training': {'glioma': 1321, 'meningioma': 1339, 'notumor': 1221}, 'Testing': {'glioma': 300, 'meningioma': 306, 'notumor': 405, 'pituitary': 300}}."
+      ],
+      "not_established": [
+        "The Kaggle owner slug / URL is not written in the repo; only the archive file name is. Treat the exact link as [VERIFY] until confirmed against the Kaggle page."
+      ],
+      "paper_wording": "cite the dataset by its archive name and canonical size; [VERIFY] the author/URL before camera-ready."
+    }
+  },
+  "FILL_3_brats_role": {
+    "brats": {
+      "present": true,
+      "n_nifti": 1000,
+      "n_case_like_dirs": 200,
+      "n_seg_files": 200,
+      "modality_tokens_seen": {
+        "t1c": 200,
+        "t1": 400,
+        "t1n": 200,
+        "t2f": 200,
+        "t2": 400,
+        "t2w": 200
+      },
+      "manifest": {
+        "schema_version": 1,
+        "dataset": "BraTS2024",
+        "split_level": "patient",
+        "root_dir": "data\\raw\\BraTS2024",
+        "seed": 42,
+        "ratios": {
+          "train": 0.7,
+          "validation": 0.15,
+          "test": 0.15
+        },
+        "created_at": "2026-08-16T07:34:46.533094+00:00",
+        "statistics": {
+          "total_cases": 200,
+          "total_patients": 39,
+          "cases_per_split": {
+            "train": 129,
+            "validation": 26,
+            "test": 45
+          },
+          "patients_per_split": {
+            "train": 27,
+            "validation": 5,
+            "test": 7
+          }
+        },
+        "splits": {
+          "train": [
+            {
+              "case_id": "BraTS-GLI-02206-101",
+              "patient_id": "BraTS-GLI-02206",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02206-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02206-102",
+              "patient_id": "BraTS-GLI-02206",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02206-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02206-103",
+              "patient_id": "BraTS-GLI-02206",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02206-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02206-104",
+              "patient_id": "BraTS-GLI-02206",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02206-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02514-101",
+              "patient_id": "BraTS-GLI-02514",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02514-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02514-102",
+              "patient_id": "BraTS-GLI-02514",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02514-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02514-103",
+              "patient_id": "BraTS-GLI-02514",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02514-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02514-104",
+              "patient_id": "BraTS-GLI-02514",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02514-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02514-105",
+              "patient_id": "BraTS-GLI-02514",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02514-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02072-101",
+              "patient_id": "BraTS-GLI-02072",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02072-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02072-102",
+              "patient_id": "BraTS-GLI-02072",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02072-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02072-103",
+              "patient_id": "BraTS-GLI-02072",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02072-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02072-104",
+              "patient_id": "BraTS-GLI-02072",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02072-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02072-105",
+              "patient_id": "BraTS-GLI-02072",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02072-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-100",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-101",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-102",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-103",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-104",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-105",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02129-106",
+              "patient_id": "BraTS-GLI-02129",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02129-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-100",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-101",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-102",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-103",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-104",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-105",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-106",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02111-107",
+              "patient_id": "BraTS-GLI-02111",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02111-107"
+            },
+            {
+              "case_id": "BraTS-GLI-02524-101",
+              "patient_id": "BraTS-GLI-02524",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02524-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02524-102",
+              "patient_id": "BraTS-GLI-02524",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02524-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02524-103",
+              "patient_id": "BraTS-GLI-02524",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02524-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02524-104",
+              "patient_id": "BraTS-GLI-02524",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02524-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02524-105",
+              "patient_id": "BraTS-GLI-02524",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02524-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02242-101",
+              "patient_id": "BraTS-GLI-02242",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02242-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02242-102",
+              "patient_id": "BraTS-GLI-02242",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02242-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02242-103",
+              "patient_id": "BraTS-GLI-02242",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02242-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02242-104",
+              "patient_id": "BraTS-GLI-02242",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02242-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02245-101",
+              "patient_id": "BraTS-GLI-02245",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02245-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02245-102",
+              "patient_id": "BraTS-GLI-02245",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02245-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02245-103",
+              "patient_id": "BraTS-GLI-02245",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02245-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02245-104",
+              "patient_id": "BraTS-GLI-02245",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02245-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02247-101",
+              "patient_id": "BraTS-GLI-02247",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02247-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02247-102",
+              "patient_id": "BraTS-GLI-02247",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02247-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02247-103",
+              "patient_id": "BraTS-GLI-02247",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02247-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02247-104",
+              "patient_id": "BraTS-GLI-02247",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02247-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02205-101",
+              "patient_id": "BraTS-GLI-02205",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02205-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02205-102",
+              "patient_id": "BraTS-GLI-02205",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02205-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02205-103",
+              "patient_id": "BraTS-GLI-02205",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02205-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02205-104",
+              "patient_id": "BraTS-GLI-02205",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02205-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02205-105",
+              "patient_id": "BraTS-GLI-02205",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02205-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02217-101",
+              "patient_id": "BraTS-GLI-02217",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02217-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02217-102",
+              "patient_id": "BraTS-GLI-02217",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02217-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02217-103",
+              "patient_id": "BraTS-GLI-02217",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02217-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02217-104",
+              "patient_id": "BraTS-GLI-02217",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02217-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02204-101",
+              "patient_id": "BraTS-GLI-02204",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02204-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02204-102",
+              "patient_id": "BraTS-GLI-02204",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02204-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02204-103",
+              "patient_id": "BraTS-GLI-02204",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02204-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02204-104",
+              "patient_id": "BraTS-GLI-02204",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02204-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02132-101",
+              "patient_id": "BraTS-GLI-02132",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02132-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02132-102",
+              "patient_id": "BraTS-GLI-02132",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02132-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02132-103",
+              "patient_id": "BraTS-GLI-02132",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02132-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02132-104",
+              "patient_id": "BraTS-GLI-02132",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02132-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-100",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-101",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-102",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-103",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-104",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-105",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02082-106",
+              "patient_id": "BraTS-GLI-02082",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02082-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-100",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-101",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-102",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-103",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-104",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-105",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-106",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02105-107",
+              "patient_id": "BraTS-GLI-02105",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02105-107"
+            },
+            {
+              "case_id": "BraTS-GLI-02520-101",
+              "patient_id": "BraTS-GLI-02520",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02520-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02520-102",
+              "patient_id": "BraTS-GLI-02520",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02520-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02520-103",
+              "patient_id": "BraTS-GLI-02520",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02520-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02520-104",
+              "patient_id": "BraTS-GLI-02520",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02520-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02209-101",
+              "patient_id": "BraTS-GLI-02209",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02209-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02209-102",
+              "patient_id": "BraTS-GLI-02209",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02209-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02209-103",
+              "patient_id": "BraTS-GLI-02209",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02209-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02209-104",
+              "patient_id": "BraTS-GLI-02209",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02209-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02244-101",
+              "patient_id": "BraTS-GLI-02244",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02244-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02244-102",
+              "patient_id": "BraTS-GLI-02244",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02244-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02244-103",
+              "patient_id": "BraTS-GLI-02244",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02244-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02244-104",
+              "patient_id": "BraTS-GLI-02244",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02244-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02199-101",
+              "patient_id": "BraTS-GLI-02199",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02199-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02199-102",
+              "patient_id": "BraTS-GLI-02199",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02199-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02199-103",
+              "patient_id": "BraTS-GLI-02199",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02199-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02199-104",
+              "patient_id": "BraTS-GLI-02199",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02199-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02216-101",
+              "patient_id": "BraTS-GLI-02216",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02216-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02216-102",
+              "patient_id": "BraTS-GLI-02216",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02216-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02216-103",
+              "patient_id": "BraTS-GLI-02216",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02216-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02216-104",
+              "patient_id": "BraTS-GLI-02216",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02216-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02608-101",
+              "patient_id": "BraTS-GLI-02608",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02608-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02608-102",
+              "patient_id": "BraTS-GLI-02608",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02608-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02608-103",
+              "patient_id": "BraTS-GLI-02608",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02608-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02608-104",
+              "patient_id": "BraTS-GLI-02608",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02608-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02608-105",
+              "patient_id": "BraTS-GLI-02608",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02608-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02218-101",
+              "patient_id": "BraTS-GLI-02218",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02218-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02218-102",
+              "patient_id": "BraTS-GLI-02218",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02218-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02218-103",
+              "patient_id": "BraTS-GLI-02218",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02218-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02218-104",
+              "patient_id": "BraTS-GLI-02218",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02218-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02198-101",
+              "patient_id": "BraTS-GLI-02198",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02198-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02198-102",
+              "patient_id": "BraTS-GLI-02198",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02198-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02198-103",
+              "patient_id": "BraTS-GLI-02198",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02198-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02198-104",
+              "patient_id": "BraTS-GLI-02198",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02198-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02193-101",
+              "patient_id": "BraTS-GLI-02193",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02193-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02193-102",
+              "patient_id": "BraTS-GLI-02193",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02193-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02193-103",
+              "patient_id": "BraTS-GLI-02193",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02193-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02193-104",
+              "patient_id": "BraTS-GLI-02193",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02193-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02193-105",
+              "patient_id": "BraTS-GLI-02193",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02193-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02632-101",
+              "patient_id": "BraTS-GLI-02632",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02632-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02632-102",
+              "patient_id": "BraTS-GLI-02632",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02632-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02632-103",
+              "patient_id": "BraTS-GLI-02632",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02632-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02632-104",
+              "patient_id": "BraTS-GLI-02632",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02632-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02248-101",
+              "patient_id": "BraTS-GLI-02248",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02248-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02248-102",
+              "patient_id": "BraTS-GLI-02248",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02248-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02248-103",
+              "patient_id": "BraTS-GLI-02248",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02248-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02248-104",
+              "patient_id": "BraTS-GLI-02248",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02248-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02066-101",
+              "patient_id": "BraTS-GLI-02066",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02066-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02066-102",
+              "patient_id": "BraTS-GLI-02066",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02066-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02066-103",
+              "patient_id": "BraTS-GLI-02066",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02066-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02066-104",
+              "patient_id": "BraTS-GLI-02066",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02066-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02066-105",
+              "patient_id": "BraTS-GLI-02066",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02066-105"
+            }
+          ],
+          "validation": [
+            {
+              "case_id": "BraTS-GLI-02062-100",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02062-101",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02062-102",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02062-103",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02062-104",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02062-105",
+              "patient_id": "BraTS-GLI-02062",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02062-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02609-101",
+              "patient_id": "BraTS-GLI-02609",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02609-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02609-102",
+              "patient_id": "BraTS-GLI-02609",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02609-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02609-103",
+              "patient_id": "BraTS-GLI-02609",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02609-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02609-104",
+              "patient_id": "BraTS-GLI-02609",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02609-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02143-101",
+              "patient_id": "BraTS-GLI-02143",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02143-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02143-102",
+              "patient_id": "BraTS-GLI-02143",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02143-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02143-103",
+              "patient_id": "BraTS-GLI-02143",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02143-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02143-104",
+              "patient_id": "BraTS-GLI-02143",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02143-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-100",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-101",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-102",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-103",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-104",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-105",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02196-106",
+              "patient_id": "BraTS-GLI-02196",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02196-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02085-101",
+              "patient_id": "BraTS-GLI-02085",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02085-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02085-102",
+              "patient_id": "BraTS-GLI-02085",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02085-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02085-103",
+              "patient_id": "BraTS-GLI-02085",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02085-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02085-104",
+              "patient_id": "BraTS-GLI-02085",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02085-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02085-105",
+              "patient_id": "BraTS-GLI-02085",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02085-105"
+            }
+          ],
+          "test": [
+            {
+              "case_id": "BraTS-GLI-02092-101",
+              "patient_id": "BraTS-GLI-02092",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02092-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02092-102",
+              "patient_id": "BraTS-GLI-02092",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02092-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02092-103",
+              "patient_id": "BraTS-GLI-02092",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02092-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02092-104",
+              "patient_id": "BraTS-GLI-02092",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02092-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02092-105",
+              "patient_id": "BraTS-GLI-02092",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02092-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-100",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-101",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-102",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-103",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-104",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-105",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02103-106",
+              "patient_id": "BraTS-GLI-02103",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02103-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02152-101",
+              "patient_id": "BraTS-GLI-02152",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02152-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02152-102",
+              "patient_id": "BraTS-GLI-02152",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02152-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02152-103",
+              "patient_id": "BraTS-GLI-02152",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02152-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02152-104",
+              "patient_id": "BraTS-GLI-02152",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02152-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02164-101",
+              "patient_id": "BraTS-GLI-02164",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02164-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02164-102",
+              "patient_id": "BraTS-GLI-02164",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02164-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02164-103",
+              "patient_id": "BraTS-GLI-02164",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02164-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02164-104",
+              "patient_id": "BraTS-GLI-02164",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02164-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-100",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-101",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-102",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-103",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-104",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-105",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-106",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02194-107",
+              "patient_id": "BraTS-GLI-02194",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02194-107"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-100",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-101",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-102",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-103",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-104",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-105",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02063-106",
+              "patient_id": "BraTS-GLI-02063",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02063-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-100",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-100"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-101",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-101"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-102",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-102"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-103",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-103"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-104",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-104"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-105",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-105"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-106",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-106"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-107",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-107"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-108",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-108"
+            },
+            {
+              "case_id": "BraTS-GLI-02093-109",
+              "patient_id": "BraTS-GLI-02093",
+              "case_dir": "data\\raw\\BraTS2024\\BraTS-GLI-02093-109"
+            }
+          ]
+        }
+      },
+      "class_labels_in_filenames": [],
+      "has_pituitary_label": false
+    },
+    "classification_data_is_2d_jpeg": true,
+    "verdict": {
+      "established": [
+        "Classification is trained and evaluated only on 2-D JPEG/PNG slices (data/raw/classification); BraTS contributes no classification images.",
+        "The local BraTS copy holds 1000 NIfTI volumes and 200 segmentation targets; it is the segmentation-only source.",
+        "BraTS 2024 carries no pituitary and no healthy/no-tumour label, so it cannot supply the 4-class labels used by the classifier.",
+        "No 3-D->2-D slice conversion exists in the classification path; the 4-class task was never run on converted BraTS volumes."
+      ],
+      "not_established": [
+        "Which BraTS 2024 task/subset the segmentation checkpoint was trained on, and the exact slice-selection rule, are only recorded as [VERIFY] in results/dataset_table.csv."
+      ],
+      "paper_wording": "BraTS = segmentation evaluation only; WT/TC/ET Dice belong to the standalone 3-D U-Net (D3), not to TAMNet's classification path."
+    }
+  }
+}

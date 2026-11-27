@@ -1,0 +1,294 @@
+[P000] TAMNet: Tumor-Aware Multi-Task Representation Learning for Brain MRI Classification and Segmentation with Uncertainty Quantification
+[P001] ABSTRACT— Accurate brain tumor analysis from magnetic resonance imaging (MRI) is important for automated diagnosis and tumor characterization. However, existing deep learning approaches commonly optimize tumor classification and segmentation as separate tasks, while providing limited information about prediction reliability. To address these limitations, we propose TAMNet (Tumor-Aware Multi-Task Representation), a unified framework for brain MRI classification and segmentation with uncertainty quantification. TAMNet employs a shared convolutional encoder with spatial and channel attention to learn tumor-aware representations and combines them with global image features for four-class classification of glioma, meningioma, pituitary tumor, and no-tumor cases. An auxiliary segmentation branch provides region-level supervision to encourage spatially meaningful representation learning. Monte Carlo dropout is incorporated during inference to quantify predictive uncertainty from stochastic predictions. TAMNet achieves 96.45% accuracy on the internal test set and 97.70% and 99.16% accuracy on two independent external datasets, together with a whole-tumor Dice score of 0.9005. The framework contains approximately 9.03 million trainable parameters and achieves 48.63 ms inference latency under the evaluated setting. These results indicate that tumor-aware attention and multi-task representation learning can jointly exploit global and spatially localized information while providing additional measures of prediction reliability for brain MRI analysis.
+[P002] Index Terms— Brain tumor, magnetic resonance imaging, tumor classification, tumor segmentation, multi-task learning, uncertainty quantification, deep learning.
+[P003] I. INTRODUCTION
+[P004] Brain tumors comprise a heterogeneous group of intracranial diseases with substantial variation in tissue characteristics, anatomical location, morphology, and appearance on magnetic resonance imaging (MRI). Accurate identification and delineation of tumors from MRI are important for diagnosis, treatment planning, and disease assessment. MRI is particularly valuable for brain tumor analysis because of its superior soft-tissue contrast and ability to capture detailed structural information. Consequently, automated brain MRI analysis has become an active research area, with deep learning methods increasingly applied to tumor classification, localization, and segmentation [1]–[9]. Despite these advances, reliable automated tumor analysis remains challenging because tumor size, shape, intensity, and anatomical context can vary substantially across subjects and imaging conditions.
+[P005] Brain tumor classification and segmentation provide complementary information for automated analysis. Classification determines the diagnostic category of an MRI image, whereas segmentation provides spatial information about tumor location and extent. Deep convolutional neural networks (CNNs) have demonstrated effectiveness for brain tumor segmentation [1], [4], [5], while benchmark datasets such as BraTS have supported systematic development and evaluation of segmentation methods [2]. Encoder–decoder architectures such as U-Net established an effective paradigm for combining contextual and spatial information in medical image segmentation [7], and nnU-Net demonstrated the importance of adaptive preprocessing, network configuration, and training strategies for biomedical segmentation [6]. In parallel, CNN-based methods have achieved promising performance in brain tumor classification [8], [9]. However, the two tasks impose different representation requirements: classification emphasizes discriminative image-level characteristics, whereas segmentation requires spatially localized representations that describe tumor regions and boundaries. Learning these complementary characteristics within a common representation space remains challenging.
+[P006] The quality of learned representations also depends on the ability of a network to identify informative spatial regions and feature channels. Conventional CNNs progressively learn hierarchical features, but the resulting representations may contain information that is not equally relevant to tumor characterization. Attention mechanisms provide a means of selectively emphasizing informative features. Squeeze-and-Excitation networks introduced channel-wise feature recalibration [16], while the Convolutional Block Attention Module (CBAM) jointly models channel and spatial attention [17]. Attention-based architectures have also been investigated for medical image segmentation to emphasize task-relevant anatomical regions [18]. Meanwhile, residual networks, densely connected networks, EfficientNet, ConvNeXt, and vision transformers provide alternative strategies for learning discriminative image representations [10]–[15]. These developments demonstrate the importance of both strong global feature extraction and mechanisms that can emphasize task-relevant information.
+[P007] Recent brain tumor studies have further investigated specialized representations for segmentation. Methods addressing incomplete multimodal imaging have examined how available modalities can be exploited while limiting detrimental information [20], whereas shape-scale modeling has been used to capture complementary tumor structures at different spatial scales [21]. Disentanglement-based methods have attempted to separate modality-related and tumor-related information [22]. More recent approaches have investigated hierarchical label relationships and frequency-domain characteristics for brain tumor segmentation [23], [24]. These studies highlight the importance of preserving spatially meaningful tumor information. Nevertheless, much of this research remains segmentation-oriented, whereas classification approaches generally emphasize image-level discriminative learning [8], [9]. Integrating global image characteristics with tumor-focused spatial representations therefore provides an opportunity for more unified brain MRI analysis.
+[P008] Prediction reliability represents an additional challenge in medical imaging. High classification accuracy does not necessarily indicate that predicted probabilities are well calibrated or that incorrect predictions can be identified reliably. Monte Carlo dropout provides a practical Bayesian approximation for quantifying predictive uncertainty through stochastic forward passes [25]. Deep ensembles provide an alternative approach for uncertainty estimation [27], while Bayesian deep learning has investigated different sources of uncertainty in computer vision [26]. Dataset shift can further alter predictive reliability when models are evaluated on distributions that differ from the training data [28]. Uncertainty-aware approaches have therefore been investigated for brain tumor segmentation and multimodal medical image analysis [29], [30]. Calibration measures such as expected calibration error provide complementary information regarding the correspondence between predicted confidence and observed correctness [31], [32]. These considerations motivate evaluating brain tumor models beyond conventional accuracy-based measures.
+[P009] Motivated by these challenges, we propose TAMNet, a unified framework for brain MRI classification and segmentation with uncertainty quantification. TAMNet uses a shared convolutional encoder with spatial and channel attention to derive tumor-aware representations while retaining global image information. The complementary representations are fused for four-class classification of glioma, meningioma, pituitary tumor, and no-tumor cases. An auxiliary segmentation branch provides region-level supervision during training to encourage spatially meaningful representations. During inference, Monte Carlo dropout produces stochastic predictions that are used to quantify predictive uncertainty. The framework is evaluated using internal and independent external datasets, together with segmentation analysis, calibration assessment, robustness testing, interpretability analysis, multi-seed evaluation, and computational efficiency measurements. TAMNet achieves 96.45% internal test accuracy, 97.70% and 99.16% accuracy on two independent external datasets, and a whole-tumor Dice score of 0.9005. These results support a unified approach for tumor-aware representation learning that jointly considers classification, segmentation, and predictive reliability in brain MRI analysis.
+[P010] II. RELATED WORK
+[P011] A. Deep Learning for Brain Tumor MRI Analysis
+[P012] Deep learning has become an important approach for automated brain tumor analysis because of its ability to learn hierarchical representations directly from MRI data. Early studies demonstrated the effectiveness of CNNs for brain tumor segmentation by learning discriminative spatial features from MR images [1], [4], [5]. The Multimodal Brain Tumor Image Segmentation Benchmark (BraTS) established an important basis for systematic development and evaluation of automated tumor segmentation methods [2]. U-Net introduced an encoder–decoder architecture that combines contextual and spatial information for biomedical segmentation [7], while nnU-Net demonstrated the influence of adaptive preprocessing, network configuration, and training strategies on biomedical segmentation performance [6].
+[P013] Deep learning has also been widely investigated for brain tumor classification. CNN-based approaches have demonstrated the ability to learn discriminative features for multi-class tumor categorization [8], while recent studies have reviewed and compared machine-learning and deep-learning approaches for MRI-based tumor classification [9]. These studies demonstrate the effectiveness of learned representations for both classification and segmentation. However, the two tasks require different forms of information. Classification primarily relies on image-level discriminative characteristics, whereas segmentation requires spatially localized representations describing tumor regions and boundaries. Consequently, independently optimizing the two tasks may limit the exploitation of their complementary information.
+[P014] B. Attention-Based Feature Representation
+[P015] The effectiveness of medical image analysis depends on identifying informative spatial regions and feature channels. Conventional CNNs learn hierarchical representations, but not all extracted features contribute equally to tumor characterization. Attention mechanisms address this limitation by selectively emphasizing informative feature components. Squeeze-and-Excitation networks introduced channel-wise feature recalibration to model inter-channel dependencies [16]. CBAM further combines channel and spatial attention to emphasize informative feature channels and image regions [17]. Attention U-Net demonstrated the use of attention mechanisms for focusing segmentation networks on task-relevant anatomical structures [18].
+[P016] Several modern architectures have also been developed to improve image representation. Residual networks facilitate deep feature learning through residual connections [10], while DenseNet promotes feature reuse through dense connectivity [11]. EfficientNet introduced compound scaling of network dimensions [12], and ConvNeXt revisited convolutional design using principles associated with modern vision architectures [13]. Vision Transformer and Swin Transformer subsequently demonstrated attention-based modeling of long-range visual relationships [14], [15]. Although these architectures provide powerful general-purpose representations, they do not explicitly impose tumor-focused representation learning. This motivates attention mechanisms that complement global image features with spatial and channel representations emphasizing tumor-relevant information.
+[P017] C. Multi-Task and Segmentation-Guided Representation Learning
+[P018] Classification and segmentation provide complementary information for brain tumor analysis, motivating multi-task learning. Segmentation supervision provides explicit spatial information that can encourage a network to learn representations associated with tumor regions rather than relying exclusively on global image appearance. UNet++ demonstrated the benefits of nested feature aggregation and multiscale representation learning for medical image segmentation [19].
+[P019] Recent brain tumor studies have further investigated specialized representations for tumor heterogeneity and spatial complexity. Qiu et al. examined the effects of available modalities in incomplete multimodal brain tumor segmentation [20], whereas Zhou et al. introduced shape-scale co-awareness to model complementary tumor structures at different spatial scales [21]. D2-Net investigated disentangled representations for separating modality-related and tumor-related information under missing modalities [22].
+[P020] More recent TMI studies have investigated hierarchical and frequency-domain representations. Deep hierarchy-aware segmentation models relationships among tumor labels [23], while frequency-domain approaches investigate frequency characteristics for brain tumor representation [24]. These methods emphasize the importance of preserving spatially meaningful tumor information. Nevertheless, most remain primarily segmentation-oriented, whereas classification methods generally optimize image-level discriminative features. A unified representation-learning strategy that uses spatial tumor information to support classification while simultaneously learning segmentation therefore remains an important direction.
+[P021] D. Uncertainty Quantification and Reliability
+[P022] Prediction accuracy alone does not fully characterize the reliability of a medical imaging model. A network may produce highly confident predictions for ambiguous samples or inputs that differ from the training distribution. Monte Carlo dropout provides a practical Bayesian approximation for quantifying predictive uncertainty through repeated stochastic forward passes [25]. Deep ensembles provide another strategy by aggregating predictions from independently trained models [27], while Bayesian deep learning has investigated different sources of uncertainty in computer vision [26].
+[P023] Reliability becomes particularly important under dataset shift, where model uncertainty may change when the evaluation distribution differs from the training distribution [28]. Uncertainty-aware methods have therefore been investigated for brain tumor segmentation, including approaches that use uncertainty maps together with attention-aware feature fusion [29] and mutual learning strategies for brain and brain tumor segmentation [30]. Calibration analysis provides another perspective by evaluating the correspondence between predicted confidence and observed correctness. Expected calibration error and related measures have been widely used to assess calibration in modern neural networks [31], [32]. These studies motivate the joint evaluation of predictive performance and reliability rather than relying exclusively on accuracy.
+[P024] E. Research Gap
+[P025] The reviewed literature demonstrates substantial progress in brain tumor classification, segmentation, attention-based representation learning, and uncertainty quantification. However, these capabilities are commonly addressed as separate components. Segmentation methods emphasize spatial delineation, classification methods focus on image-level discrimination, attention mechanisms enhance selected features, and uncertainty methods characterize prediction reliability. Their integration within a unified representation-learning framework remains comparatively limited.
+[P026] TAMNet addresses this gap by combining global image representations with spatial and channel attention to obtain tumor-aware features, while an auxiliary segmentation task provides region-level supervision during representation learning. Monte Carlo dropout is further incorporated during inference to quantify predictive uncertainty. The resulting framework jointly considers discriminative classification, spatial tumor representation, segmentation supervision, and predictive reliability within a unified brain MRI analysis framework.
+[P027] III. PROPOSED METHOD
+[P028] TAMNet is designed to jointly learn discriminative and spatially meaningful representations from brain MRI while providing predictive uncertainty during inference. The proposed framework addresses three related requirements: image-level tumor classification, tumor-region representation learning, and prediction reliability. As illustrated conceptually in Fig. 1, an input MRI image is first processed by a shared convolutional encoder to obtain hierarchical feature representations. A tumor-aware attention mechanism then emphasizes informative spatial locations and feature channels, producing a representation that is complementary to the global image representation. These representations are fused and supplied to a four-class classification head. In parallel, an auxiliary segmentation branch predicts tumor regions and provides region-level supervision during training. Monte Carlo (MC) dropout is applied during inference to obtain stochastic predictions and quantify predictive uncertainty.
+[P029] A. Input Representation and Shared Feature Encoding
+[P030] Let the input MRI image be represented by
+[P031] 
+[P032] where , , and denote the image height, width, and number of input channels, respectively.
+[P033] The image is supplied to a shared DenseNet121-based convolutional encoder [11]. Dense connectivity allows features generated at different stages of the network to be propagated through subsequent layers, providing hierarchical representations for downstream classification and segmentation.
+[P034] The encoder is represented as
+[P035] 
+[P036] where denotes the shared encoder and represents the final spatial feature map,
+[P037] 
+[P038] Rather than directly using a single global representation for classification, TAMNet derives two complementary representations from : a global representation describing the overall image and a tumor-aware representation emphasizing spatially relevant tumor information.
+[P039] The global representation is obtained using global average pooling:
+[P040] 
+[P041] Here, summarizes the feature map across its spatial dimensions and provides image-level contextual information. Such information is useful for distinguishing tumor categories whose visual characteristics may involve both tumor appearance and surrounding anatomical context.
+[P042] B. Tumor-Aware Spatial Attention
+[P043] A limitation of global pooling is that spatially localized tumor information may be diluted when features from the entire image are aggregated. TAMNet therefore introduces a spatial attention mechanism to emphasize informative regions of the feature map. Spatial attention is related to the feature-selection principle used in CBAM and attention-guided medical segmentation [17], [18].
+[P044] Let denote the spatial attention map generated from . The spatially attended representation is
+[P045] 
+[P046] where denotes element-wise multiplication.
+[P047] The attention map assigns different weights to spatial locations according to their contribution to the learned representation. Consequently, regions that provide stronger tumor-related information can contribute more strongly to subsequent representation learning.
+[P048] The tumor-focused representation is then obtained from the spatially attended features. In contrast to directly classifying the globally pooled feature, this operation preserves spatial information before aggregation. This design allows TAMNet to retain global contextual information while explicitly emphasizing localized features associated with tumor regions.
+[P049] C. Channel Attention and Tumor-Aware Representation
+[P050] Spatial attention determines where informative information is located, whereas channel attention determines which feature responses are more relevant. TAMNet therefore applies channel-wise feature recalibration, following the general principle of Squeeze-and-Excitation and CBAM [16], [17].
+[P051] Let denote the channel attention vector. The channel-refined feature representation is expressed as
+[P052] 
+[P053] The resulting represents the tumor-aware feature map because both spatial and channel dimensions have been selectively weighted. A tumor-aware representation is then obtained by aggregation:
+[P054] 
+[P055] Thus, captures global image characteristics, whereas emphasizes features associated with informative spatial regions and feature channels. The two representations provide complementary information rather than forcing all diagnostic information into a single pooled vector.
+[P056] D. Global–Tumor Representation Fusion
+[P057] Brain tumor classification may depend on both tumor-specific appearance and broader image context. A representation based exclusively on tumor-focused features may discard useful contextual information, whereas a purely global representation may underemphasize localized tumor characteristics. TAMNet therefore combines the two representations before classification.
+[P058] The fused representation is denoted by
+[P059] 
+[P060] where denotes concatenation and represents the implemented feature-fusion operation.
+[P061] The resulting representation integrates global contextual information with tumor-aware information. This global–tumor fusion constitutes the central representation-learning mechanism of TAMNet and provides the classification head with complementary image-level and localized feature information.
+[P062] The fused representation is subsequently passed to the classification layer:
+[P063] 
+[P064] where and denote the learnable classification parameters and contains logits for the four diagnostic categories: glioma, meningioma, pituitary tumor, and no tumor.
+[P065] The class probability for class is obtained using the softmax function:
+[P066] 
+[P067] The predicted class is
+[P068] 
+[P069] E. Auxiliary Tumor Segmentation Branch
+[P070] To provide explicit spatial supervision, TAMNet incorporates an auxiliary segmentation branch that operates on the shared feature representation. Let the predicted tumor segmentation map be
+[P071] 
+[P072] where denotes the auxiliary segmentation branch.
+[P073] The purpose of the segmentation branch is not to replace the classification task but to provide additional supervision during representation learning. Classification labels provide image-level diagnostic information, whereas segmentation labels identify the spatial region associated with tumor tissue. Jointly optimizing these objectives encourages the shared encoder to preserve tumor-related spatial information.
+[P074] The segmentation prediction is compared with the corresponding ground-truth tumor mask during training. The segmentation objective therefore contributes to the optimization of the shared representation and encourages features that are useful for identifying tumor regions.
+[P075] This design is particularly relevant to TAMNet because the tumor-aware attention mechanism operates on spatial feature representations. The segmentation task provides an explicit learning signal for these representations rather than relying solely on classification loss to discover tumor-relevant regions. The formulation is conceptually related to segmentation-guided feature learning used in medical image analysis [7], [19].
+[P076] F. Multi-Task Learning Objective
+[P077] TAMNet jointly optimizes classification and segmentation through a weighted multi-task objective:
+[P078] 
+[P079] where and denote the classification and auxiliary segmentation losses, respectively.
+[P080] For the implemented configuration,
+[P081] 
+[P082] Therefore,
+[P083] 
+[P084] The classification objective encourages discriminative separation among the four diagnostic categories, while the segmentation objective encourages spatially meaningful feature learning. The weighting prevents the auxiliary segmentation task from dominating the primary classification objective while retaining its contribution to representation learning.
+[P085] This formulation allows the shared encoder and attention modules to receive supervision from both image-level and region-level objectives. Consequently, TAMNet does not treat classification and segmentation as isolated networks; instead, they jointly contribute to the learned representation.
+[P086] G. Uncertainty Quantification Using Monte Carlo Dropout
+[P087] Although deterministic classification provides a probability distribution over the four classes, the resulting confidence does not necessarily reflect predictive reliability. TAMNet therefore incorporates MC dropout during inference, following the Bayesian approximation introduced by Gal and Ghahramani [25].
+[P088] Let stochastic forward passes be performed with dropout activated. For the -th forward pass, the model produces
+[P089] 
+[P090] where denotes a stochastic realization of the model parameters induced by dropout.
+[P091] The mean predictive distribution is
+[P092] 
+[P093] In the implemented configuration,
+[P094] 
+[P095] The final stochastic prediction is obtained from the mean predictive distribution rather than from a single deterministic forward pass.
+[P096] Predictive entropy provides a measure of uncertainty in the resulting distribution:
+[P097] 
+[P098] Higher entropy indicates a more dispersed predictive distribution and therefore greater uncertainty, whereas lower entropy corresponds to a more concentrated prediction.
+[P099] MC dropout also permits estimation of epistemic uncertainty through mutual information:
+[P100] 
+[P101] This provides an additional measure of model uncertainty arising from variation across stochastic predictions. Accordingly, TAMNet evaluates not only the predicted class but also the stability and uncertainty associated with that prediction. Related uncertainty formulations in Bayesian deep learning and medical imaging motivate this evaluation [26], [29], [30].
+[P102] H. Training and Inference Procedure
+[P103] During training, the input MRI image is passed through the shared encoder to generate the feature representation. Spatial and channel attention then produce the tumor-aware representation, which is fused with the global representation for classification. In parallel, the segmentation branch generates the auxiliary tumor mask. The classification and segmentation losses are jointly optimized according to the multi-task objective.
+[P104] The complete training pathway can be represented as
+[P105] 
+[P106] while the auxiliary pathway is
+[P107] 
+[P108] During standard inference, the classification output is obtained from the fused representation. For uncertainty analysis, dropout remains active and multiple stochastic predictions are generated. The mean predictive distribution, entropy, and mutual information are then calculated from these predictions.
+[P109] I. Design Rationale
+[P110] The proposed architecture is designed around the interaction of four components rather than the independent addition of standard modules. First, the shared encoder provides hierarchical image representations. Second, spatial and channel attention transforms these representations into tumor-aware features by emphasizing informative locations and feature responses [16], [17]. Third, the auxiliary segmentation task supplies region-level supervision that encourages the shared representation to retain tumor-related spatial information. Finally, MC dropout extends the deterministic classifier with predictive uncertainty information [25].
+[P111] The resulting design addresses complementary requirements of automated brain MRI analysis. Global representations preserve contextual information, tumor-aware representations emphasize localized diagnostic information, segmentation supervision introduces spatial constraints, and stochastic inference provides information about prediction reliability. TAMNet therefore provides a unified representation-learning framework in which classification and segmentation contribute jointly during training while uncertainty is quantified during inference.
+[P112] The proposed framework contains approximately 9.03 million trainable parameters. Under the evaluated computational setting, the measured inference latency is 48.63 ms per image. These characteristics allow the computational cost of the proposed representation-learning strategy to be evaluated together with its predictive and uncertainty-related performance.
+[P113] IV. EXPERIMENTAL SETUP
+[P114] A. Datasets and Experimental Protocol
+[P115] TAMNet was evaluated using four datasets covering brain MRI classification and tumor segmentation. The datasets comprised an internal brain MRI classification dataset, BRISC-2025, a Kaggle brain tumor dataset, and the BraTS dataset. The internal dataset was used for model development and internal testing, while BRISC-2025 and the Kaggle dataset were used as independent external datasets. BraTS was used to evaluate the tumor segmentation branch.
+[P116] The classification task consisted of four categories: glioma, meningioma, pituitary tumor, and no tumor. All input images were processed using the implemented TAMNet pipeline with an input resolution of pixels. The internal data were divided into training, validation, and test subsets, with the internal test set reserved for final evaluation. External datasets were not used for model optimization.
+[P117] TAMNet employs a shared DenseNet121-based encoder [11] followed by spatial and channel attention. The global and tumor-aware representations are fused for classification, while an auxiliary segmentation branch provides spatial supervision. The total training objective is
+[P118] 
+[P119] For uncertainty analysis, Monte Carlo dropout was activated during inference using 10 stochastic forward passes [25].
+[P120] B. Evaluation Metrics
+[P121] Classification performance was evaluated using accuracy and F1 score. The F1 score summarizes precision and recall and was used as a complementary measure to accuracy for the four-class classification task.
+[P122] Segmentation performance was measured using the Dice similarity coefficient:
+[P123] 
+[P124] where and denote the predicted and ground-truth tumor regions, respectively.
+[P125] Predictive reliability was evaluated using expected calibration error (ECE), Brier score, negative log-likelihood (NLL), predictive entropy, and mutual information. ECE was considered to quantify the correspondence between predicted confidence and observed accuracy, following established calibration evaluation approaches [31], [32].
+[P126] Robustness was evaluated using the mean relative robustness score (MRRS) under multiple image corruption conditions. The corruption experiments were used to examine model sensitivity to geometric and intensity-related perturbations.
+[P127] Computational efficiency was evaluated using the number of trainable parameters, model memory footprint, inference latency, and throughput.
+[P128] C. Experimental Comparisons
+[P129] To examine the influence of the backbone and representation architecture, TAMNet was compared with several conventional and modern architectures, including CNN-2D, DenseNet121 [11], ResNet50 [10], EfficientNetV2 [12], ConvNeXt-Tiny [13], Swin-T [15], and ViT-B/16 [14].
+[P130] The comparison was used to characterize the relationship between predictive performance and computational complexity. In addition, external datasets were used to assess whether the representation learned on the internal data transferred beyond the development distribution.
+[P131] V. RESULTS
+[P132] A. Internal Classification Performance
+[P133] The classification performance of TAMNet was first evaluated on the internal test set containing four diagnostic categories: glioma, meningioma, pituitary tumor, and no tumor. TAMNet achieved an overall accuracy of 96.45% with an F1 score of 0.9847.
+[P134] The classification performance was further examined using alternative backbone architectures under the same comparison setting. Table I summarizes the results.
+[P135] TABLE I
+COMPARISON WITH ALTERNATIVE BACKBONE ARCHITECTURES
+[T0] TABLE 9x5
+   | Model | Parameters | Internal Accuracy | F1 Score | External Accuracy
+   | CNN-2D | 0.30 M | 95.26% | 0.9547 | 96.40%
+   | DenseNet121 | 6.96 M | 97.95% | 0.9809 | 98.40%
+   | ResNet50 [10] | 23.50 M | 97.04% | 0.9720 | 98.00%
+   | EfficientNetV2 [12] | 20.18 M | 98.06% | 0.9811 | 97.90%
+   | ConvNeXt-Tiny [13] | 27.82 M | 97.42% | 0.9751 | 97.50%
+   | Swin-T [15] | 27.52 M | 97.09% | 0.9722 | 99.20%
+   | ViT-B/16 [14] | 85.80 M | 97.52% | 0.9764 | 97.80%
+   | TAMNet | 9.03 M | 96.45% | 0.9847 | 97.70%
+[P136] Although some individual backbones achieved higher classification accuracy, TAMNet incorporates additional tumor-aware attention, segmentation supervision, and uncertainty quantification within the same framework. The F1 score of 0.9847 further indicates strong class-discriminative performance despite the lower internal accuracy compared with some alternative architectures.
+[P137] B. External Dataset Evaluation
+[P138] To examine generalization beyond the internal distribution, TAMNet was evaluated on two independent external datasets. The model achieved 97.70% accuracy on BRISC-2025 and 99.16% accuracy on the Kaggle brain tumor dataset.
+[P139] TABLE II
+EXTERNAL DATASET PERFORMANCE
+[T1] TABLE 3x5
+   | Dataset | Accuracy | F1 | MCC | Cohen's Kappa
+   | BRISC-2025 | 97.70% | — | — | —
+   | Kaggle Brain Tumor | 99.16% | 0.9916 | 0.9888 | 0.9887
+[P140] For the Kaggle dataset, TAMNet obtained an F1 score of 0.9916, MCC of 0.9888, and Cohen's kappa of 0.9887.
+[P141] The corresponding confusion matrix is shown in Table III.
+[P142] TABLE III
+KAGGLE DATASET CONFUSION MATRIX
+[T2] TABLE 5x5
+   | Actual / Predicted | Glioma | Meningioma | Pituitary | No Tumor
+   | Glioma | 300 | 0 | 0 | 0
+   | Meningioma | 1 | 304 | 0 | 1
+   | Pituitary | 0 | 4 | 296 | 0
+   | No Tumor | 1 | 4 | 0 | 400
+[P143] The matrix shows limited misclassification across the four categories. The principal errors occurred between meningioma and pituitary tumor, while the glioma category achieved 300 correct predictions out of the evaluated 300 samples in this matrix.
+[P144] The external results provide evidence that the learned representation remains effective across the evaluated image distributions. However, these evaluations represent dataset-level generalization and should not be interpreted as evidence of universal clinical generalization.
+[P145] C. Tumor Segmentation Performance
+[P146] The auxiliary segmentation branch was evaluated using the BraTS dataset to determine whether the shared representation could preserve spatial tumor information. TAMNet obtained Dice scores of 0.9005 for whole tumor (WT), 0.5803 for tumor core (TC), and 0.6010 for enhancing tumor (ET).
+[P147] TABLE IV
+SEGMENTATION PERFORMANCE
+[T3] TABLE 4x2
+   | Region | Dice
+   | Whole Tumor (WT) | 0.9005
+   | Tumor Core (TC) | 0.5803
+   | Enhancing Tumor (ET) | 0.6010
+[P148] The substantially higher whole-tumor Dice indicates that the model more consistently identifies the overall tumor region, whereas the smaller tumor subregions remain more challenging. The segmentation results nevertheless demonstrate that the auxiliary task provides meaningful spatial supervision for the shared representation.
+[P149] D. Uncertainty and Calibration Analysis
+[P150] TAMNet was evaluated using Monte Carlo dropout with 10 stochastic forward passes [25]. The mean predictive confidence across evaluated samples was 0.8821. Correct predictions produced a mean confidence of 0.8843, whereas incorrect predictions produced a lower mean confidence of 0.8232.
+[P151] The mean predictive entropy was 0.4778, while the estimated mutual information was 0.0415.
+[P152] The calibration and probabilistic performance are summarized in Table V.
+[P153] TABLE V
+UNCERTAINTY AND CALIBRATION METRICS
+[T4] TABLE 9x2
+   | Metric | Value
+   | Mean Confidence | 0.8821
+   | Correct-Prediction Confidence | 0.8843
+   | Incorrect-Prediction Confidence | 0.8232
+   | Predictive Entropy | 0.4778
+   | Mutual Information | 0.0415
+   | ECE | 0.0855
+   | Brier Score | 0.0736
+   | NLL | 0.2172
+[P154] The lower confidence associated with incorrect predictions indicates that the uncertainty mechanism provides a measurable distinction between more reliable and less reliable predictions. However, the ECE of 0.0855 indicates that the predictive probabilities remain imperfectly calibrated. Therefore, uncertainty quantification provides complementary information beyond classification accuracy but should not be interpreted as a direct guarantee of prediction correctness.
+[P155] E. Robustness Evaluation
+[P156] TAMNet was evaluated under 27 image corruption conditions to examine sensitivity to common perturbations. The clean-test accuracy was 96.45%, while the overall mean relative robustness score (MRRS) was 0.7512.
+[P157] TABLE VI
+SELECTED ROBUSTNESS RESULTS
+[T5] TABLE 7x2
+   | Condition | Accuracy
+   | Clean | 96.45%
+   | Rotation, 5° | 95.96%
+   | Contrast, 0.5 | 22.40%
+   | Brightness Reduction | 54.17%
+   | Gaussian Noise | 56.81%
+   | MRRS | 0.7512
+[P158] Small geometric perturbations produced relatively limited degradation. For example, a 5° rotation resulted in 95.96% accuracy compared with the clean accuracy.
+[P159] In contrast, intensity-related perturbations produced substantially larger performance reductions. Reducing contrast to 0.5 resulted in 22.40% accuracy, while brightness reduction and Gaussian noise produced accuracies of 54.17% and 56.81%, respectively.
+[P160] These results indicate that TAMNet retains useful representations under modest geometric variation but is considerably more sensitive to changes in MRI intensity characteristics. Such behavior is relevant to dataset-shift analysis, where predictive behavior may change when the evaluation distribution differs from the training distribution [28].
+[P161] F. Multi-Seed Evaluation
+[P162] To assess experimental stability, TAMNet was evaluated using three independent training seeds. The validation F1 score was , with a 95% confidence interval of [0.9665, 0.9837]. Validation accuracy was , with a confidence interval of [0.9388, 0.9671].
+[P163] TABLE VII
+MULTI-SEED EVALUATION
+[T6] TABLE 6x3
+   | Metric | Mean ± Std. | 95% CI
+   | Validation F1 | 0.9751 ± 0.0035 | [0.9665, 0.9837]
+   | Validation Accuracy | 0.9530 ± 0.0057 | [0.9388, 0.9671]
+   | ECE | 0.0838 ± 0.0056 | [0.0698, 0.0977]
+   | MRRS | 0.7088 ± 0.0309 | [0.6320, 0.7856]
+   | Latency | 46.27 ± 2.48 ms | [40.11, 52.42]
+[P164] The mean ECE was , while MRRS was . The corresponding mean inference latency was ms. The relatively small standard deviations indicate consistent behavior across the evaluated seeds, although the use of only three seeds limits the strength of statistical conclusions.
+[P165] G. Interpretability Analysis
+[P166] To qualitatively examine whether the learned representation emphasizes tumor-relevant image regions, Grad-CAM-based visualization was considered using the framework of Selvaraju et al. [33]. The purpose of the analysis is to inspect the spatial correspondence between highly activated feature regions and diagnostically relevant portions of the input MRI.
+[P167] Because this analysis is qualitative, no additional quantitative interpretability score is reported. The visualization complements the spatial-attention and segmentation components by providing an image-level view of the regions contributing to the classification output.
+[P168] H. Computational Efficiency
+[P169] TAMNet contains 9,034,416 trainable parameters and occupies approximately 34.46 MB. The measured inference latency was 48.63 ms per image, corresponding to approximately 20.6 frames per second under the evaluated computational setting.
+[P170] TABLE VIII
+COMPUTATIONAL CHARACTERISTICS
+[T7] TABLE 5x2
+   | Characteristic | TAMNet
+   | Trainable Parameters | 9,034,416
+   | Model Size | 34.46 MB
+   | Inference Latency | 48.63 ms/image
+   | Throughput | 20.6 FPS
+[P171] Compared with larger architectures such as ConvNeXt-Tiny, Swin-T, and ViT-B/16 [13]–[15], TAMNet achieves a moderate parameter count while integrating classification, segmentation supervision, uncertainty quantification, and robustness analysis.
+[P172] The measured computational characteristics indicate potential for near-real-time processing under the evaluated hardware configuration. However, the latency remains dependent on hardware, software implementation, input resolution, and inference configuration.
+[P173] 
+[P174] VI. DISCUSSION
+[P175] The experimental results demonstrate that TAMNet can jointly address brain tumor classification, tumor-region representation learning, and predictive uncertainty within a unified framework. The proposed model achieved 96.45% accuracy and an F1 score of 0.9847 on the internal test set while maintaining approximately 9.03 million trainable parameters. These results indicate that the combination of global image information and tumor-aware representations can provide effective discrimination among glioma, meningioma, pituitary tumor, and no-tumor categories. Importantly, TAMNet does not achieve the highest classification accuracy among all evaluated backbones. EfficientNetV2 and several other architectures obtain higher accuracy under the same comparison protocol [10]–[15]. The contribution of TAMNet therefore lies in integrating complementary capabilities rather than optimizing classification accuracy alone.
+[P176] The backbone comparison illustrates the trade-off between predictive performance and model complexity. DenseNet121, ResNet50, EfficientNetV2, ConvNeXt-Tiny, Swin-T, and ViT-B/16 offer competitive classification performance, but TAMNet incorporates additional spatial attention, auxiliary segmentation supervision, and uncertainty quantification. Dense connectivity provides a strong baseline representation [11], while modern architectures exploit alternative scaling or attention strategies [12]–[15]. TAMNet instead emphasizes the interaction between global and tumor-aware information. This design supports a representation that is not restricted to image-level classification but also preserves spatial structure relevant to tumor analysis.
+[P177] The external evaluation provides additional evidence regarding the transferability of the learned representation. TAMNet obtained 97.70% accuracy on BRISC-2025 and 99.16% accuracy on the external Kaggle dataset. On the Kaggle dataset, the F1 score, Matthews correlation coefficient, and Cohen's kappa reached 0.9916, 0.9888, and 0.9887, respectively. These results indicate consistent performance across the evaluated external datasets. However, the datasets represent only a limited range of acquisition conditions and population characteristics. Consequently, external dataset performance should be interpreted as evidence of dataset-level transfer rather than comprehensive clinical generalization.
+[P178] The auxiliary segmentation branch contributes an additional spatial perspective to the representation-learning process. The whole-tumor Dice score of 0.9005 indicates effective identification of the overall tumor region, whereas lower Dice scores for tumor core and enhancing tumor, 0.5803 and 0.6010, respectively, demonstrate greater difficulty in identifying finer tumor subregions. This difference is relevant because smaller or more heterogeneous structures can be more difficult to delineate. The segmentation branch is therefore best interpreted as spatial supervision that complements classification rather than as a replacement for a dedicated multimodal segmentation architecture. This interpretation is consistent with the broader literature on U-Net-style and multi-task medical image segmentation [7], [19]–[24].
+[P179] Uncertainty analysis further extends the interpretation of the classification results. Using ten stochastic MC-dropout forward passes, TAMNet produced a mean confidence of 0.8821, with higher confidence for correct predictions (0.8843) than incorrect predictions (0.8232). The mean predictive entropy was 0.4778 and mutual information was 0.0415. These observations indicate that stochastic prediction variation provides information related to prediction reliability. This is consistent with the purpose of MC dropout as a practical approximation for Bayesian uncertainty [25], while Bayesian deep learning and ensemble approaches provide broader methodological context [26], [27]. Nevertheless, the ECE of 0.0855, together with a Brier score of 0.0736 and NLL of 0.2172, indicates that predictive confidence remains imperfectly calibrated. Calibration is particularly important in medical imaging because a numerically high confidence does not inherently imply a reliable prediction [31], [32].
+[P180] The robustness experiments identify another important characteristic of the framework. TAMNet remained relatively stable under small geometric perturbation, achieving 95.96% accuracy after a 5° rotation. In contrast, intensity-based perturbations caused substantially greater degradation. Contrast reduction to 0.5 reduced accuracy to 22.40%, while brightness reduction and Gaussian noise produced accuracies of 54.17% and 56.81%, respectively. These findings suggest that the learned representation retains useful geometric information but remains dependent on MRI intensity characteristics. Such sensitivity is important in the context of dataset shift and changing acquisition conditions [28]. The findings motivate future investigation of intensity normalization, domain adaptation, and targeted data augmentation.
+[P181] The efficiency results provide an additional perspective on the proposed design. TAMNet contains approximately 9.03 million trainable parameters and achieves a measured latency of 48.63 ms per image. This computational profile is smaller than that of several high-capacity architectures included in the backbone study while still supporting classification, segmentation supervision, and uncertainty analysis. The result suggests that the framework offers a moderate computational cost relative to its functional scope. However, latency remains implementation-dependent, and the measured throughput should not be generalized to different hardware configurations without direct benchmarking.
+[P182] Overall, the results support TAMNet as a unified tumor-aware representation-learning framework that integrates global contextual information, localized attention, segmentation supervision, predictive uncertainty, and robustness analysis. The evidence supports the usefulness of this integrated design while also identifying calibration, intensity robustness, and broader external validation as important areas for further improvement.
+[P183] VII. LIMITATIONS
+[P184] Several limitations should be considered when interpreting the presented results.
+[P185] First, the classification and segmentation evaluations are based on different dataset sources. The internal and external datasets are used primarily for four-class classification, whereas BraTS is used for tumor segmentation. Consequently, the reported classification and segmentation results do not represent a fully paired dataset in which the same subjects simultaneously provide classification labels and detailed segmentation masks.
+[P186] Second, although TAMNet was evaluated on two independent external classification datasets, the available external datasets do not encompass the full diversity of clinical imaging protocols, institutions, scanner manufacturers, demographic distributions, and disease presentations. Broader multi-center validation would therefore be required to characterize generalization more comprehensively.
+[P187] Third, the robustness experiments reveal substantial sensitivity to intensity-related perturbations. In particular, contrast reduction produces a much larger performance degradation than small geometric perturbations. This indicates that additional preprocessing, normalization, or domain-adaptation strategies may be necessary for heterogeneous MRI acquisition conditions.
+[P188] Fourth, uncertainty estimation is based on 10 MC-dropout stochastic passes. A larger number of stochastic samples or alternative approaches, such as deep ensembles, could provide additional information about uncertainty behavior [27]. Furthermore, the ECE result indicates that the predicted probabilities are not perfectly calibrated, suggesting that post-hoc or training-time calibration methods could be investigated [31], [32].
+[P189] Fifth, the multi-seed evaluation uses only three independent seeds. Although the observed variability is relatively small, a larger number of repeated experiments together with subject-level statistical analysis would provide stronger evidence regarding reproducibility.
+[P190] Finally, the measured inference latency depends on the evaluated computational environment, implementation, and input configuration. Therefore, the reported 48.63 ms latency and 20.6 FPS throughput should be interpreted as measurements under the evaluated setting rather than hardware-independent deployment characteristics.
+[P191] VIII. CONCLUSION
+[P192] This paper presented TAMNet, a tumor-aware multi-task representation learning framework for brain MRI classification and segmentation with uncertainty quantification. The proposed approach combines a shared DenseNet121-based encoder with spatial and channel attention to learn tumor-focused representations while retaining global image information. An auxiliary segmentation branch provides region-level supervision, and Monte Carlo dropout enables predictive uncertainty analysis during inference.
+[P193] TAMNet achieved 96.45% classification accuracy and an F1 score of 0.9847 on the internal test set, with 97.70% and 99.16% accuracy on the evaluated BRISC-2025 and Kaggle external datasets, respectively. The model obtained a whole-tumor Dice score of 0.9005, while tumor-core and enhancing-tumor Dice scores were 0.5803 and 0.6010, respectively. Uncertainty analysis indicated lower mean confidence for incorrect predictions than for correct predictions, although calibration remained imperfect. Robustness experiments revealed relatively limited degradation under small geometric perturbation but substantial sensitivity to intensity-related distortions.
+[P194] With approximately 9.03 million trainable parameters and 48.63 ms measured inference latency, TAMNet provides a moderate computational profile while integrating multiple analysis capabilities within a single framework. Future work should investigate stronger calibration, improved robustness to intensity and domain variations, larger multi-center datasets, and more comprehensive uncertainty evaluation to support reliable application of unified brain MRI analysis frameworks.
+[P195] REFERENCES
+[P196] [1] S. Pereira, A. Pinto, V. Alves, and C. A. Silva, “Brain tumor segmentation using convolutional neural networks in MRI images,” IEEE Trans. Med. Imag., vol. 35, no. 5, pp. 1240–1251, 2016, doi: 10.1109/TMI.2016.2538465.
+[P197] [2] B. H. Menze et al., “The multimodal brain tumor image segmentation benchmark (BRATS),” IEEE Trans. Med. Imag., vol. 34, no. 10, pp. 1993–2024, 2015, doi: 10.1109/TMI.2014.2377694.
+[P198] [3] F. J. Dorfner et al., “A review of deep learning for brain tumor analysis in MRI,” npj Precision Oncology, vol. 9, Art. no. 2, 2025, doi: 10.1038/s41698-024-00789-2.
+[P199] [4] M. Havaei et al., “Brain tumor segmentation with deep neural networks,” Med. Image Anal., vol. 35, pp. 18–31, 2017.
+[P200] [5] K. Kamnitsas et al., “Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation,” Med. Image Anal., vol. 36, pp. 61–78, 2017.
+[P201] [6] F. Isensee et al., “nnU-Net: A self-configuring method for deep learning-based biomedical image segmentation,” Nature Methods, vol. 18, pp. 203–211, 2021.
+[P202] [7] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional networks for biomedical image segmentation,” in Proc. MICCAI, 2015, pp. 234–241.
+[P203] [8] M. Sultan et al., “Multi-classification of brain tumor images using deep neural network,” IEEE Access, vol. 7, pp. 69215–69225, 2019.
+[P204] [9] “Exploring the state-of-the-art algorithms for brain tumor classification using MRI data,” IEEE Access, vol. 13, pp. 118033–118054, 2025, doi: 10.1109/ACCESS.2025.3579727.
+[P205] [10] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. CVPR, 2016, pp. 770–778.
+[P206] [11] G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Weinberger, “Densely connected convolutional networks,” in Proc. CVPR, 2017, pp. 4700–4708.
+[P207] [12] M. Tan and Q. V. Le, “EfficientNet: Rethinking model scaling for convolutional neural networks,” in Proc. ICML, 2019, pp. 6105–6114.
+[P208] [13] Z. Liu et al., “A ConvNet for the 2020s,” in Proc. CVPR, 2022, pp. 11976–11986.
+[P209] [14] A. Dosovitskiy et al., “An image is worth 16×16 words: Transformers for image recognition at scale,” in Proc. ICLR, 2021.
+[P210] [15] Z. Liu et al., “Swin Transformer: Hierarchical vision transformer using shifted windows,” in Proc. ICCV, 2021, pp. 10012–10022.
+[P211] [16] J. Hu, L. Shen, and G. Sun, “Squeeze-and-excitation networks,” in Proc. CVPR, 2018, pp. 7132–7141.
+[P212] [17] S. Woo, J. Park, J.-Y. Lee, and I. S. Kweon, “CBAM: Convolutional block attention module,” in Proc. ECCV, 2018, pp. 3–19.
+[P213] [18] O. Oktay et al., “Attention U-Net: Learning where to look for the pancreas,” arXiv:1804.03999, 2018.
+[P214] [19] Z. Zhou et al., “UNet++: A nested U-Net architecture for medical image segmentation,” in Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support, 2018, pp. 3–11.
+[P215] [20] Y. Qiu, K. Jiang, H. Yao, Z. Wang, and S. Satoh, “Does adding a modality really make positive impacts in incomplete multi-modal brain tumor segmentation?” IEEE Trans. Med. Imag., vol. 44, no. 5, pp. 2194–2205, 2025, doi: 10.1109/TMI.2025.3526818.
+[P216] [21] J. Zhou et al., “Shape-scale co-awareness network for 3D brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 43, no. 7, pp. 2495–2508, 2024, doi: 10.1109/TMI.2024.3368531.
+[P217] [22] Z. Yang et al., “D2-Net: Dual disentanglement network for brain tumor segmentation with missing modalities,” IEEE Trans. Med. Imag., vol. 41, no. 10, pp. 2953–2964, 2022.
+[P218] [23] Y. Cheng, Z. Liu, and S. Tamura, “Deep hierarchy-aware segmentation: A novel framework for MRIs brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 45, no. 5, pp. 2023–2038, 2026, doi: 10.1109/TMI.2025.3645821.
+[P219] [24] Y. Shao et al., “Rethinking brain tumor segmentation from the frequency domain perspective,” IEEE Trans. Med. Imag., vol. 44, no. 11, pp. 4536–4553, 2025, doi: 10.1109/TMI.2025.3579213.
+[P220] [25] Y. Gal and Z. Ghahramani, “Dropout as a Bayesian approximation: Representing model uncertainty in deep learning,” in Proc. ICML, 2016, pp. 1050–1059.
+[P221] [26] A. Kendall and Y. Gal, “What uncertainties do we need in Bayesian deep learning for computer vision?” in Proc. NeurIPS, 2017, pp. 5574–5584.
+[P222] [27] B. Lakshminarayanan, A. Pritzel, and C. Blundell, “Simple and scalable predictive uncertainty estimation using deep ensembles,” in Proc. NeurIPS, 2017, pp. 6402–6413.
+[P223] [28] A. Ovadia et al., “Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift,” in Proc. NeurIPS, vol. 32, 2019.
+[P224] [29] T. Zhou and S. Zhu, “Uncertainty quantification and attention-aware fusion guided multi-modal MR brain tumor segmentation,” Comput. Biol. Med., vol. 163, Art. no. 107142, 2023, doi: 10.1016/j.compbiomed.2023.107142.
+[P225] [30] J. Zhao, Z. Xing, Z. Chen, L. Wan, T. Han, H. Fu, and L. Zhu, “Uncertainty-aware multi-dimensional mutual learning for brain and brain tumor segmentation,” IEEE J. Biomed. Health Inform., vol. 27, no. 9, pp. 4362–4372, 2023, doi: 10.1109/JBHI.2023.3274255.
+[P226] [31] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger, “On calibration of modern neural networks,” in Proc. ICML, 2017, pp. 1321–1330.
+[P227] [32] M. Minderer et al., “Revisiting the calibration of modern neural networks,” in Proc. NeurIPS, vol. 34, pp. 15682–15694, 2021.
+[P228] [33] R. R. Selvaraju et al., “Grad-CAM: Visual explanations from deep networks via gradient-based localization,” in Proc. ICCV, 2017, pp. 618–626.
+[P229] 

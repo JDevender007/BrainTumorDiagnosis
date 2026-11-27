@@ -218,12 +218,87 @@ So the internal set is not that release either. Exact dataset URLs are still req
 
 ## 8. Open items blocking the rewrite
 
-| # | Item | Blocks |
-|---|---|---|
-| 1 | Internal dataset provenance and label origin | Methods section wording |
-| 2 | Exact Kaggle dataset name/link used for `outputs/kaggle_evaluation` | External validation wording |
-| 3 | BraTS role (classification training vs segmentation only) and 3D→2D conversion | Methods + Table 3 caption |
-| 4 | Kaggle dataset availability for a clean-protocol re-run | Whether 99.16 % can stay |
-| 5 | Whether the 5 corruption/robustness numbers are to be re-run on the clean split | Table 5 |
+| # | Item | Blocks | Status |
+|---|---|---|---|
+| 1 | Internal dataset provenance and label origin | Methods section wording | **PARTIALLY ANSWERED** — see §9 |
+| 2 | Exact Kaggle dataset name/link used for `outputs/kaggle_evaluation` | External validation wording | **PARTIALLY ANSWERED** — see §9 |
+| 3 | BraTS role (classification training vs segmentation only) and 3D→2D conversion | Methods + Table 3 caption | **ANSWERED** — see §9 |
+| 4 | Kaggle dataset availability for a clean-protocol re-run | Whether 99.16 % can stay | **ANSWERED** — the zip is on disk, 7023 entries, and the de-duplicated re-run is done (`external_eval_summary.json`) |
+| 5 | Whether the 5 corruption/robustness numbers are to be re-run on the clean split | Table 5 | **ANSWERED** — re-run on the clean split, 27 corruptions, `results/phase3/robustness.json` |
 
-Until 1–3 are answered, those sections carry `TODO-RERUN` / `[VERIFY]` markers rather than prose.
+Items 1–2 are answered as far as the repository can prove them; the remaining unknowns stay
+marked `[VERIFY]` / `[CITATION NEEDED]` in the paper rather than being filled with a guess.
+Evidence: `results/fill_evidence.json`, produced by `scripts/phase5_fill_evidence.py`.
+
+---
+
+## 9. FILL resolutions (filesystem evidence, 2026-11-27)
+
+### FILL #1 — internal dataset provenance / label origin
+
+Established:
+
+- `data/raw/classification` holds **11,148** 2-D JPEG/PNG images (Train 9,291 / Test 1,857) in
+  four class folders, **10,223 unique basenames**. Counts: Train 3018 / 2183 / 2145 / 1945,
+  Test 603 / 436 / 429 / 389 (glioma / meningioma / pituitary / no-tumor).
+- **4,463 of 10,223 (43.7 %) basenames are also in the canonical Kaggle zip**, so the internal
+  pool is substantially a re-use of that release.
+- The remainder comes from at least three other naming families — `X_###_XX_.jpg` (3,439,
+  institution-coded), plain numeric (1,713), `gg (N)` (363), `image(N)` (123), `N no` (34).
+- 490 basenames occur in more than one class folder, but **0 are byte-identical** — they are
+  benign filename collisions, **not** label conflicts.
+- No patient/subject identifier exists in any filename, so the split cannot be made
+  patient-level from this folder. BraTS provenance is excluded: BraTS has no pituitary and no
+  no-tumour class.
+
+Not established (stays `[CITATION NEEDED]`):
+
+- Who produced the four-class labels, and from which primary source the non-Kaggle portion was
+  collated. No download script, manifest, README or citation for this folder exists anywhere in
+  the repository.
+
+**Paper wording:** state the class counts and the image-level split; mark the label origin
+`[CITATION NEEDED]`; do not claim BraTS provenance.
+
+### FILL #2 — exact Kaggle dataset name/link
+
+Established:
+
+- The archive on disk is literally `data/external/kaggle_brain_tumor/brain-tumor-mri-dataset.zip`
+  with **7,023 entries**: Testing `glioma 300 / meningioma 306 / notumor 405 / pituitary 300` =
+  **1,311**, Training `1321 / 1339 / 1595 / 1457` = **5,712**.
+- Those counts equal the canonical Kaggle **"Brain Tumor MRI Dataset"** release
+  (5,712 + 1,311 = 7,023), consistent with the `Te-*` / `Tr-*` filenames.
+- The *extracted* folders the pipeline reads are an **incomplete** extraction: `Training/` has
+  only glioma 1321 / meningioma 1339 / notumor 1221 and **no pituitary folder** (3,881 of 5,712);
+  `Testing/` matches the zip exactly (1,311).
+
+Not established (stays `[VERIFY]`):
+
+- The Kaggle owner slug / URL is not written anywhere in the repo — only the archive file name
+  is. Confirm against the Kaggle page before camera-ready.
+
+**Paper wording:** cite the dataset by its archive name and canonical size; `[VERIFY]` the
+author/URL before camera-ready.
+
+### FILL #3 — BraTS role and 3-D → 2-D conversion
+
+Established:
+
+- Classification is trained and evaluated **only** on 2-D JPEG/PNG slices
+  (`data/raw/classification`); BraTS contributes **no** classification images.
+- The local BraTS copy holds **1,000 NIfTI volumes** (t1c 200 / t1n 200 / t2f 200 / t2w 200) and
+  **200 segmentation targets**, 200 case dirs, 39 patients; `split_manifest.json` is
+  `split_level=patient`, seed 42, ratios 0.7/0.15/0.15 — the only patient-level split in the repo.
+- BraTS 2024 carries **no pituitary and no healthy/no-tumour label**, so it cannot supply the
+  four-class labels used by the classifier.
+- **No 3-D → 2-D slice conversion exists anywhere in the classification path**; the four-class
+  task was never run on converted BraTS volumes.
+
+Not established (stays `[VERIFY]`):
+
+- Which BraTS 2024 task/subset the segmentation checkpoint was trained on, and the exact
+  slice-selection rule.
+
+**Paper wording:** BraTS = segmentation evaluation only; WT/TC/ET Dice belong to the standalone
+3-D U-Net (D3), not to TAMNet's classification path.
