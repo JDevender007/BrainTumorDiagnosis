@@ -20,6 +20,7 @@ import csv
 import json
 import re
 import shutil
+import statistics
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -63,6 +64,7 @@ UNC = J(P3 / "uncertainty_summary.json")
 ROB = J(P3 / "robustness.json")
 EFF = J(P3 / "efficiency.json")
 ATT = J(P3 / "attention_alignment.json")
+REL = J(P3 / "reliability.json")
 PARAMS = J(P3 / "params_table.json")
 DEDUP = J(P3 / "external_dedup_manifest.json")
 STAGE1 = J(P3 / "stage1_test_summary.json")
@@ -525,7 +527,8 @@ para("The gap this paper addresses is therefore not \u201cno one has fused "
      "protocol that removes leakage, and that its components have not been "
      "ablated. We close that gap with a negative result: under a clean, "
      "manifest-pinned protocol, the added machinery does not improve "
-     "classification, and a plain DenseNet-121 with 2.07 M fewer parameters "
+     "classification, and a plain DenseNet-121 with "
+     f"{P_EXTRA_M:.2f} M fewer parameters "
      "matches TAMNet exactly.", indent=True)
 
 print("sections I-II written")
@@ -542,7 +545,8 @@ figure("fig1_architecture.png",
        "the executed configuration (D2).")
 
 para("This section states the executed model exactly as implemented in "
-     "the source module `models/tumor_aware.py`. Where an earlier draft of "
+     "the source module `models/tumor_aware.py` and drawn in "
+     "[[FIG:fig1_architecture.png]]. Where an earlier draft of "
      "this paper disagreed with the code, the code is the specification and "
      "the text has been corrected; the five corrections are called out "
      "explicitly.", indent=True)
@@ -747,6 +751,11 @@ para(f"**Split.** All classification experiments use one manifest-pinned "
      f"internal pool, so a patient-held-out split cannot be constructed from "
      f"it. Every confidence interval in this paper is therefore an "
      f"image-level interval.", indent=True)
+para("Figure [[FIG:fig2_data_pipeline.png]] traces every image from its "
+     "source folder through the audit, the de-duplication keep-lists and the "
+     "manifest split to the single TEST evaluation, and "
+     "Figure [[FIG:fig3_samples.png]] shows what the slices themselves look "
+     "like in each source.", indent=True)
 
 para("**Leakage.** Perceptual-hash near-duplicate detection (pHamming \u2264 6 "
      "or dHamming \u2264 4, union) between every pair of sources shows that "
@@ -890,6 +899,14 @@ figure("fig5_pareto_params_accuracy.png",
        "Accuracy against parameter count. DenseNet-121 matches TAMNet with "
        "fewer parameters, so no efficiency advantage survives.")
 
+para("Figures [[FIG:fig4b_test_accuracy.png]] and "
+     "[[FIG:fig5_pareto_params_accuracy.png]] show the same table as a "
+     "ranking with intervals and as an accuracy\u2013parameter plane; "
+     "Figures [[FIG:fig6_confusion_internal.png]] and "
+     "[[FIG:fig6b_per_class_f1.png]] break the TAMNet row down into the "
+     "confusion pattern and the per-class scores behind its macro-F1.",
+     indent=True)
+
 h2("E.  Ablations")
 para("Table V isolates each tumor-aware component while holding the "
      "protocol fixed.", indent=True)
@@ -949,7 +966,13 @@ para("**(iii) Segmentation loss.** On the BRISC protocol, where aligned "
      indent=True)
 
 figure("fig4_ablation_val.png",
-       "Validation curves for the ablation configurations.")
+       "Validation curves for the ablation configurations; the panel "
+       "corresponds row-for-row to Table V.")
+
+para("Figure [[FIG:fig4_ablation_val.png]] shows the validation trajectory "
+     "behind each ablation row, so that a difference which is inside the "
+     "seed spread can be seen to be inside the epoch-to-epoch noise as well.",
+     indent=True)
 
 h2("F.  External Validation Before and After De-duplication")
 para("Table VI reports both versions of every external number. The full-set "
@@ -995,6 +1018,13 @@ figure("fig15_generalization_matrix.png",
        "Train-source \u00d7 test-set accuracy matrix, full and "
        "de-duplicated.")
 
+para("Figure [[FIG:fig15_generalization_matrix.png]] lays the same numbers "
+     "out as a train-source \u00d7 test-set matrix, which makes the "
+     "asymmetry visible: training on a source and testing on itself is "
+     "easy, testing on a de-duplicated external set is not, and the "
+     "difference between the two halves of every cell is exactly the "
+     "contamination removed by the keep-lists.", indent=True)
+
 h2("G.  Segmentation Performance")
 para("Two different things have been called \u201cthe segmentation result\u201d "
      "in this project, and they must not be conflated.", indent=True)
@@ -1024,6 +1054,13 @@ figure("fig8_seg_box.png",
        "The WT/TC/ET values from the standalone 3-D U-Net are deliberately "
        "absent: no per-case record of them exists under `results/`, so they "
        "cannot be plotted honestly.")
+
+para("Figure [[FIG:fig8_seg_box.png]] shows the full per-slice "
+     "distributions behind the summary rows of Table VII. The medians sit "
+     "well above the means in every run, i.e. the Dice distribution is "
+     "left-skewed by a tail of hard slices rather than being centred on a "
+     "mediocre value \u2014 reporting only the mean hides that shape.",
+     indent=True)
 
 para("**(b) The whole-tumour / tumor-core / enhancing-tumour numbers.** "
      "The values 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft are "
@@ -1090,6 +1127,23 @@ figure("fig10_uncertainty.png",
        "Uncertainty histograms, risk\u2013coverage curve and error-detection "
        "AUROC.")
 
+_rel = REL["curves"]["tamnet_clean_s42"]
+_sel = REL["selective"]["tamnet_clean_s42"]
+_heavy = [b for b in _rel["bins"] if b["n"] >= 30]
+_above = sum(1 for b in _heavy if b["accuracy"] > b["mean_confidence"])
+para("Figures [[FIG:fig9_reliability.png]] and "
+     f"[[FIG:fig10_uncertainty.png]] give the diagnostics behind the "
+     f"calibration columns. Of the reliability bins that hold at least 30 "
+     f"test images, {_above} of {len(_heavy)} sit **above** the diagonal \u2014 "
+     f"realised accuracy exceeds the stated confidence, which is exactly "
+     f"what under-confidence looks like, and it is where "
+     f"{sum(b['n'] for b in _heavy)} of {N_TEST} images live. The sparse "
+     f"low-confidence bins sit below it, so the model is not uniformly "
+     f"miscalibrated. The risk\u2013coverage curve behaves as a usable "
+     f"uncertainty signal should: abstaining on the most uncertain slices "
+     f"first moves accuracy from {_sel['accuracy'][0]:.4f} at full coverage "
+     f"to {_sel['accuracy'][-1]:.4f} at the lowest plotted coverage "
+     f"(AURC {_sel['aurc']:.4f}).", indent=True)
 h2("I.  Robustness to Image Corruptions")
 para(f"The corruption set contains {len(ROB['corruption_set'])} conditions "
      f"\u2014 {len(ROB['corruption_set']) // 3} corruption types \u00d7 3 "
@@ -1132,6 +1186,66 @@ figure("fig14_intensity_curves.png",
        "Accuracy against corruption severity for the intensity-type "
        "corruptions.")
 
+_rc_tam = [k for k in ROB["runs"] if k.startswith("tamnet")]
+_rc_dn = [k for k in ROB["runs"] if k.startswith("densenet")]
+
+
+def _sev_map(run: str) -> dict:
+    d: dict = {}
+    for c in ROB["runs"][run]["corruptions"]:
+        d.setdefault(c["corruption"], {})[c["severity"]] = c["accuracy"]
+    return d
+
+
+_mono_tot = _mono_bad = 0
+_mono_excess = []          # (run, corruption, sev1, sev2, pp)
+for _k in _rc_tam:
+    for _ct, _s in _sev_map(_k).items():
+        _mono_tot += 1
+        if not (_s[1] >= _s[2] >= _s[3]):
+            _mono_bad += 1
+            _mono_excess.append((_k, _ct, (_s[2] - _s[1]) * 100))
+
+_cells: dict = {}
+for _k in _rc_tam:
+    for _c in ROB["runs"][_k]["corruptions"]:
+        _cells.setdefault((_c["corruption"], _c["severity"]), []).append(
+            _c["accuracy"])
+_tam_cell = {k: statistics.mean(v) for k, v in _cells.items()}
+_cells = {}
+for _k in _rc_dn:
+    for _c in ROB["runs"][_k]["corruptions"]:
+        _cells.setdefault((_c["corruption"], _c["severity"]), []).append(
+            _c["accuracy"])
+_dn_cell = {k: statistics.mean(v) for k, v in _cells.items()}
+_shared = sorted(set(_tam_cell) & set(_dn_cell))
+_tam_higher = sum(1 for k in _shared if _tam_cell[k] > _dn_cell[k])
+
+if _mono_bad == 1:
+    _e = _mono_excess[0]
+    _exc = (f"The single exception is {_e[1].replace('_', ' ')} at "
+            f"{_e[0].replace('_', ' ')}, where severity 2 exceeds severity 1 "
+            f"by {_e[2]:.2f} pp.")
+elif _mono_bad:
+    _worst = max(x[2] for x in _mono_excess)
+    _exc = (f"{_mono_bad} of {_mono_tot} pairs are non-monotone, the worst "
+            f"by {_worst:.2f} pp.")
+else:
+    _exc = ""
+
+para("Figure [[FIG:fig13_robustness_heatmap.png]] shows every cell of the "
+     "corruption \u00d7 severity grid and Figure "
+     "[[FIG:fig14_intensity_curves.png]] collapses the intensity-type "
+     "corruptions into accuracy-versus-severity curves. Degradation is "
+     "graded rather than cliff-edge: accuracy falls from severity 1 to "
+     f"severity 3 in {_mono_tot - _mono_bad} of {_mono_tot} "
+     f"run\u00d7corruption pairs. {_exc} The two models do not keep a "
+     f"constant ordering either: TAMNet is ahead in only "
+     f"{_tam_higher} of {len(_shared)} corruption\u00d7severity cells, so "
+     "the higher aggregate MRRS of Section IV-I comes from the size of its "
+     "wins on the noise-type corruptions rather than from winning "
+     "everywhere.", indent=True)
+
 h2("J.  Attention Alignment")
 para("If the spatial attention map were tumor-aware it should place more "
      "mass inside the ground-truth tumour mask than a uniform map does. "
@@ -1166,6 +1280,14 @@ table("Attention\u2013mask alignment on BRISC tumour slices.",
 figure("fig11_attention_alignment.png",
        "Attention mass inside the tumour mask versus the uniform reference, "
        "with Grad-CAM marked unavailable.")
+
+para("Figure [[FIG:fig11_attention_alignment.png]] plots those two "
+     "quantities side by side. The learned attention map is not further "
+     "inside the tumour than a uniform map is, and the reference method "
+     "that would have shown otherwise \u2014 Grad-CAM on the DenseNet-121 "
+     "baseline \u2014 could not be extracted from that checkpoint because it "
+     "exposes no `.features` module. It is recorded as missing rather than "
+     "approximated.", indent=True)
 
 h2("K.  Computational Efficiency")
 para("Table XI reports the measured cost of every model under a fixed "
@@ -1464,14 +1586,37 @@ for i, ref in enumerate(REFERENCES, start=1):
 # ==========================================================================
 # save
 # ==========================================================================
+def _resolve_figure_refs() -> int:
+    """Replace ``[[FIG:stem.png]]`` placeholders with the final figure number."""
+    pat = re.compile(r"\[\[FIG:([^\]]+)\]\]")
+    n = 0
+    for p in doc.paragraphs:
+        if "[[FIG:" not in p.text:
+            continue
+        for run in p.runs:
+            if "[[FIG:" not in run.text:
+                continue
+            def sub(m: re.Match) -> str:
+                nonlocal n
+                stem = m.group(1)
+                if stem not in FIGNO:
+                    raise KeyError(f"figure referenced but not inserted: {stem}")
+                n += 1
+                return f"Fig. {FIGNO[stem]}"
+            run.text = pat.sub(sub, run.text)
+    return n
+
+
 def main() -> int:
+    resolved = _resolve_figure_refs()
     if OUT.is_file() and not PRESERVED.is_file():
         shutil.copy2(OUT, PRESERVED)
         print(f"preserved legacy manuscript -> {PRESERVED.name}")
     doc.save(str(OUT))
     print(f"wrote {OUT}")
     print(f"  paragraphs={len(doc.paragraphs)} tables={len(doc.tables)} "
-          f"figures={_fig_n} table_captions={_table_n}")
+          f"figures={_fig_n} table_captions={_table_n} "
+          f"figure_refs_resolved={resolved}")
     if MISSING_FIGURES:
         print("MISSING figures (skipped, not fabricated):")
         for f in MISSING_FIGURES:

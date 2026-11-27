@@ -201,6 +201,7 @@ def fig4_ablation(runs: list[dict], manifest: dict) -> None:
     fig.tight_layout()
     p = OUT / "fig4_ablation_val.png"
     fig.savefig(p, dpi=200)
+    fig.savefig(OUT / "fig4_ablation_val.pdf", bbox_inches="tight")
     plt.close(fig)
     print(f"fig4: wrote {p} ({len(rows)} configs, {len(excluded)} excluded)")
     manifest["fig4_ablation_val.png"] = {
@@ -257,6 +258,7 @@ def fig6_confusion(runs: list[dict], manifest: dict) -> None:
     fig.tight_layout()
     p = OUT / "fig6_confusion_internal.png"
     fig.savefig(p, dpi=200)
+    fig.savefig(OUT / "fig6_confusion_internal.pdf", bbox_inches="tight")
     plt.close(fig)
     print(f"fig6: wrote {p} ({n} runs)")
     manifest["fig6_confusion_internal.png"] = {
@@ -307,6 +309,7 @@ def fig6b_per_class(runs: list[dict], manifest: dict) -> None:
     fig.tight_layout()
     p = OUT / "fig6b_per_class_f1.png"
     fig.savefig(p, dpi=200)
+    fig.savefig(OUT / "fig6b_per_class_f1.pdf", bbox_inches="tight")
     plt.close(fig)
     print(f"fig6b: wrote {p}")
     manifest["fig6b_per_class_f1.png"] = {
@@ -784,7 +787,9 @@ def main() -> int:
     print(f"collect: {len(runs)} completed runs, "
           f"{sum(1 for r in runs if r['test'])} with TEST eval")
 
-    manifest: dict = {
+    mp = OUT / "figures_manifest.json"
+    manifest: dict = read_json(mp) or {}
+    manifest.update({
         "kind": "phase4_figures",
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "n_runs": len(runs),
@@ -793,8 +798,8 @@ def main() -> int:
             str(r["test_source"]): sha256_short(r["test_source"])
             for r in runs if r["test_source"]
         },
-        "figures": {},
-    }
+        "figures": manifest.get("figures") or {},
+    })
 
     names = args.only or list(FIGURES)
     for name in names:

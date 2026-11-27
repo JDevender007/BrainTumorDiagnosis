@@ -1,6 +1,6 @@
 {
   "kind": "phase4_figures",
-  "created_at": "2026-11-27T11:18:31+00:00",
+  "created_at": "2026-11-27T18:02:47+00:00",
   "n_runs": 41,
   "n_runs_with_test_eval": 41,
   "input_files_sha256_16": {
@@ -3492,5 +3492,5 @@
       ]
     }
   },
-  "static_generated_at": "2026-11-27T17:44:59+00:00"
+  "static_generated_at": "2026-11-27T18:25:26+00:00"
 }

@@ -1,0 +1,12 @@
+{
+  "kind": "phase6_paper_numbers",
+  "docx": "D:\\BrainTumorDiagnosis\\TAMNet_Paper.docx",
+  "artifact_values": 194916,
+  "rendered_forms": 1174251,
+  "numeric_tokens": 885,
+  "traced": 885,
+  "untraced": {},
+  "paragraphs": 195,
+  "tables": 468,
+  "references_excluded": true
+}

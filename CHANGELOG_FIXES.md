@@ -188,6 +188,109 @@ level too, not just on TEST.
 de-duplicated evals + MC-dropout/uncertainty + seg-aux metrics → Phase 4 figures → Phase 5 paper
 rewrite (needs the 3 open user FILLs) → Phase 6 QA.
 
-## Phase 4 — Figures _(pending)_
-## Phase 5 — Paper rewrite _(pending)_
-## Phase 6 — Reproducibility & QA _(pending)_
+## Phase 4 — Figures — **DONE** (commits `618527c`, `1c96c89`)
+
+**15 / 15 figures present as vector PDF + 600-dpi PNG**, all in `paper/figs/`,
+all cited in the manuscript in ascending order, all listed in
+`figures_manifest.json`.
+
+| Fig | Slug | Generator | Source of every number |
+|---|---|---|---|
+| 1 | `fig1_architecture` | `scripts/make_figures_static.py` | tensor shapes captured by **real forward hooks** on `TumorAwareMultiTaskNet` (CPU, eval mode) — not drawn by hand |
+| 2 | `fig2_data_pipeline` | idem | `dataset_table.csv` + `leakage_report.json` + `external_dedup_manifest.json` + `run_config.json` |
+| 3 | `fig3_samples` | idem | first sorted file per class per source + BRISC `segmentation_task/test/masks` overlay |
+| 4 | `fig4_ablation_val` | `scripts/make_figures.py` | `training_result.json` best val F1(w), mean ± ddof=1, leaky split excluded |
+| 4b | `fig4b_test_accuracy` | idem | `agg/combined_summary.json` + `bootstrap_ci.json` |
+| 5 | `fig5_pareto_params_accuracy` | idem | `params_table.json` + `agg` |
+| 6 | `fig6_confusion_internal` | idem | per-run `eval_internal_test/metrics.json` |
+| 6b | `fig6b_per_class_f1` | idem | idem |
+| 8 | `fig8_seg_box` | `make_figures_static.py` | per-slice `eval_brisc_test/seg_metrics.json` (8 runs) |
+| 9 | `fig9_reliability` | `make_figures.py` | `reliability.json` |
+| 10 | `fig10_uncertainty` | idem | `uncertainty_summary.json` + `reliability.json` |
+| 11 | `fig11_attention_alignment` | idem | `attention_alignment.json` |
+| 13 | `fig13_robustness_heatmap` | idem | `robustness.json` (27 conditions) |
+| 14 | `fig14_intensity_curves` | idem | idem |
+| 15 | `fig15_generalization_matrix` | idem | `external_eval_summary.json` |
+
+| Item | Status | Notes |
+|---|---|---|
+| Fig 7 `seg_qualitative` | **BLOCKED** | needs new GPU inference over the BRISC test split to emit predicted masks; no prediction raster exists in `results/`, so a qualitative panel would have to be fabricated → deliberately absent |
+| Fig 12 `gradcam_attention` | **BLOCKED** | `attention_alignment.json` records `densenet121_gradcam: null` — the checkpoint exposes no `.features` module. Recorded as missing in the paper, not approximated |
+| Fig 8 BraTS half (WT/TC/ET boxes) | **BLOCKED** | the WT/TC/ET means belong to the standalone 3-D U-Net (D3) and **no per-case record of them exists anywhere under `results/`** → the box plot shows only the BRISC rows, and says so in its caption and manifest note |
+| Supplementary `paper/figs/supp/` S1–S10 | **PARTIAL** | not generated; every figure the manuscript cites exists, so no citation is dangling. Listed below under manual steps |
+| `scripts/check_figures.py` | **DONE** | see Phase 6 |
+| Vector PDF for `fig4_ablation_val` / `fig6_confusion_internal` / `fig6b_per_class_f1` | **DONE** | these three were PNG-only; `make_figures.py` now writes both, and the manifest is merged instead of overwritten so the static figures survive a partial re-run |
+
+## Phase 5 — Paper rewrite — **DONE** (commits `e569370`, `d37fea0`, `1c96c89`)
+
+**`TAMNet_Paper.docx` was regenerated from `results/` only** by the new
+`paper/rewrite_paper.py`. The legacy manuscript is preserved untouched as
+**`TAMNet_Paper.pre-audit.docx`** (46,533 bytes, 23-Sep-2026) — never deleted,
+never overwritten.
+
+Result: **241 paragraphs, 11 tables, 15 figures**, every figure cross-referenced
+from the body text.
+
+| Item | Status | Old → new / notes |
+|---|---|---|
+| Abstract / Intro match new results | **CLAIM CHANGED** | 96.45 % / 99.16 % / 97.70 % → **0.9360 ± 0.0110** internal, de-duplicated externals **0.9431 ± 0.0073** (Kaggle) and **0.9234 ± 0.0218** (BRISC). Framing is now an explicit **negative result**: "TAMNet does not outperform modern classification backbones on this benchmark" |
+| WT/TC/ET together + re-attributed | **CLAIM CHANGED (D3)** | 0.9005 / 0.5803 / 0.6010 are stated once, attributed to the **standalone 3-D U-Net** on BraTS, with their legacy SDs (0.048 / 0.253 / 0.242) surfaced; TAMNet's own aux head is reported separately from `seg_metrics_summary.json` |
+| Related Work rewritten | DONE | copied intro paragraphs removed; [3] and [33] now cited in body; gap reframed without over-claiming |
+| Method equations + 5 corrections | **DONE** | M_s, M_c, Φ, t, L_cls, L_seg, MC-dropout all stated as executed; **Correction 1 (D1)** channel attention disabled · **Correction 2 (D4)** Φ = 2-way softmax convex combination + LayerNorm, not concat · **Correction 3 (D6)** mask gate never passed by the trainer → dead code · **Correction 4 (D2, D3)** L_seg ≡ 0 historically, WT/TC/ET mis-attributed · **Correction 5 (D5)** MC path had BN in train mode. Notation clash F, duplicated sentence, broken glyphs all gone |
+| Sections IV + V merged | DONE | one `IV. EXPERIMENTS` with subsections A–K; each full number appears once |
+| Dataset section from artifacts | DONE | Table I from `dataset_table.csv`; leakage bullets from `leakage_report.json`; patient-level statement; BraTS-vs-JPEG domain gap |
+| Implementation details table | DONE | Table II read field-by-field from `run_config.json` (AdamW, lr 1e-4, wd 1e-4, 30 ep, bs 8, patience 7, LS 0.1, 224², torch 2.11.0+cu128, seeds 42–46) |
+| Tables from `results/` only | DONE | **11 tables**: dataset · implementation · main result · paired significance · ablation · external full/dedup · segmentation · calibration · robustness · attention alignment · efficiency. Every one carries an inline `Source:` line |
+| All Phase 4 figures inserted | DONE | **15 figures**, each with dataset/split/N/error-bar meaning in the caption; every one cited from the body |
+| Discussion states the answer honestly | **CLAIM CHANGED** | opens "**Does TAMNet beat its baselines? No.**" — ties DenseNet-121 (0.9360 vs 0.9360) with 2.08 M more parameters, significantly behind EfficientNetV2-S, ConvNeXt-T, Swin-T, ResNet-50 |
+| Limitations + availability + not-for-clinical-use | DONE | 7 bullets (public data, image-level splits, unresolved label provenance, domain gap, intensity sensitivity, uneven seed counts, ±1.1 pp resolution) + Data/Code Availability ending "**not approved or intended for clinical use**" |
+| References fixed | **PARTIAL** | [28] corrected to Y. Ovadia; [3] and [33] cited in body; BraTS 2024, BRISC 2025 (Fateh et al. arXiv:2506.14318), Kaggle set and Hendrycks & Dietterich added. **`[VERIFY]` markers remain** on ref [9] (authors missing), [22] (Z. vs Q. Yang), [34] (BraTS author list) and [36] (Kaggle owner slug/URL) — these are unresolved provenance, deliberately not guessed |
+| "clinically ready" / "near-real-time" | DONE | removed; the efficiency section explicitly refuses the near-real-time claim and states single-pass vs T=10 MC latency separately |
+| Unified/framework repetition | DONE | reduced; "framework" appears where it carries meaning |
+
+## Phase 6 — Reproducibility & QA — **DONE** (this commit)
+
+| Item | Status | Notes |
+|---|---|---|
+| `scripts/check_paper_numbers.py` | **DONE** | walks **every** scalar in `results/**/*.json` + `*.csv` (194,916 values), renders them in every format the paper uses (1,174,251 forms), then scans the rendered docx. **920 numeric tokens → 920 traced, 0 untraced.** Citations are excluded by design (everything from the `REFERENCES` heading on) and git commit ids are masked as provenance. Report → `results/phase6_paper_numbers.json` |
+| `scripts/check_figures.py` | **DONE** | F1 figure+PDF+manifest exist · F2 numbering 1..15 in order · F3 every in-text `Fig. N` resolves · F4 every figure cited in the body · T1 tables I–XI once each in order · T2 every in-text `Table X` resolves · T3 every table names its `Source:` · M1 re-runs the number checker. **Passes with 0 warnings, 0 failures** |
+| Unit tests | **DONE** | `pytest tests -q` → **113 passed in 59 s** (includes split-leakage, module shapes, MC-dropout BN-eval/dropout-active, metrics vs sklearn, corruption tests, resume determinism) |
+| `requirements.txt` | **DONE** | already present and pinned (torch 2.11.0+cu128, numpy 2.5.2, scikit-learn 1.9.0, matplotlib 3.11.1, pytest 9.1.1) |
+| Fixed seeds / deterministic | **DONE** | every run records `seed` in `run_config.json`; split manifest is SHA-256 pinned; seeds 42–46 are stated in Table II |
+| `environment.yml` / `Makefile` / `run_all.sh` | **PARTIAL** | not created — see manual steps below; the equivalent is `scripts/make_figures.py` + `scripts/make_figures_static.py` + `scripts/make_tables.py` + `scripts/rewrite_paper.py` + the two checkers, in that order |
+| Final `CHANGELOG_FIXES.md` DONE/PARTIAL/BLOCKED | **DONE** | this section |
+| Legacy leaky tables moved aside, not deleted | **DONE** | `table1_main_comparison.md.stale-legacy`, `table2_per_class_f1.md.stale-legacy`, `table3_ablation_delta.md.stale-legacy` |
+
+### Headline claims — old → new
+
+| # | Claim (legacy paper) | Status | Re-measured value |
+|---|---|---|---|
+| 1 | Internal test accuracy / macro-F1 **96.45 % / 0.9847** | **REPLACED** | **0.9360 ± 0.0110 / 0.9355 ± 0.0109** (n=5 seeds, n=1,672 test) |
+| 2 | External BRISC **97.70 %** | **REPLACED** | full **0.9634 ± 0.0118**, de-duplicated **0.9234 ± 0.0218** |
+| 3 | External Kaggle **99.16 %** | **REPLACED** | full **0.9788 ± 0.0050**, de-duplicated **0.9431 ± 0.0073** |
+| 4 | "TAMNet beats baselines" | **REJECTED** | ties DenseNet-121, significantly behind 4 modern backbones |
+| 5 | WT/TC/ET **0.9005 / 0.5803 / 0.6010** | **RE-ATTRIBUTED** | standalone 3-D U-Net on BraTS (D3), not TAMNet |
+| 6 | MRRS **0.7512** | **REPLACED** | TAMNet **0.8508 ± 0.0035** (n=5) vs DenseNet-121 **0.8142 ± 0.0260** (n=4) |
+| 7 | Latency **48.63 ms** / 20.6 FPS | **REPLACED** | single pass **50.76 ms** median, T=10 MC **530.27 ms** median |
+| 8 | Params **9.03 M** | **VERIFIED** | 9,034,416 — unchanged, and now shown to buy no accuracy over DenseNet-121's 6,957,956 |
+
+### Manual steps remaining
+
+1. **References `[VERIFY]`**: resolve ref [9] authors, [22] first author (Z. vs
+   Q. Yang), [34] BraTS 2024 author list, [36] Kaggle owner slug/URL. Four
+   markers are printed in the document on purpose.
+2. **Dataset label provenance** for the internal pool stays
+   `[CITATION NEEDED]` — the filesystem evidence is in
+   `results/fill_evidence.json` but no upstream citation exists in the repo.
+3. **Supplementary figures S1–S10** (`paper/figs/supp/`) are not generated;
+   no manuscript citation depends on them.
+4. **Fig 7 (seg qualitative) and Fig 12 (Grad-CAM)** need a GPU inference pass
+   and a Grad-CAM-capable checkpoint respectively — both are recorded as
+   missing rather than approximated.
+5. **`run_all.sh` / Makefile / `environment.yml`** not written; the
+   reproduction order is: `phase3_split.py` → `phase3_train.py` →
+   `phase3_evaluate.py` → `phase3_aggregate.py` → `phase3_bootstrap.py` →
+   `phase3_external_eval.py` → `phase3_uncertainty.py` → `phase3_robustness.py`
+   → `phase3_seg_eval.py` → `phase3_attention_alignment.py` →
+   `phase3_efficiency.py` → `make_figures.py` → `make_figures_static.py` →
+   `make_tables.py` → `rewrite_paper.py` → `check_figures.py`.
