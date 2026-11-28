@@ -261,6 +261,7 @@ from the body text.
 | Fixed seeds / deterministic | **DONE** | every run records `seed` in `run_config.json`; split manifest is SHA-256 pinned; seeds 42–46 are stated in Table II |
 | `environment.yml` / `run_all.sh` / `run_all.ps1` / `Makefile` | **DONE** | four entry points written: `run_all.sh` (POSIX), `run_all.ps1` (native on this machine), `Makefile` (`make all`, `make check`; no `make` binary installed here), `environment.yml` (python=3.13 + `-r requirements.txt`). Stages: `split train evaluate aggregate bootstrap external uncertainty robustness seg brats3d attention efficiency qual figures tables paper check` — every stage is skip-if-done, so re-running never re-trains and never touches TEST twice |
 | Final `CHANGELOG_FIXES.md` DONE/PARTIAL/BLOCKED | **DONE** | this section |
+| `results/dataset_table.csv` row repair | **DONE** | two rows had an unquoted comma inside `role`, which shifted every later column (the paper's Table I showed `mask_available` = " not TAMNet"). `scripts/phase5_record_fills.py` now re-joins the split field on read → 7 rows, 0 malformed |
 | Legacy leaky tables moved aside, not deleted | **DONE** | `table1_main_comparison.md.stale-legacy`, `table2_per_class_f1.md.stale-legacy`, `table3_ablation_delta.md.stale-legacy` |
 
 ### Headline claims — old → new
@@ -278,12 +279,24 @@ from the body text.
 
 ### Manual steps remaining
 
-1. **References `[VERIFY]`**: resolve ref [9] authors, [22] first author (Z. vs
-   Q. Yang), [34] BraTS 2024 author list, [36] Kaggle owner slug/URL. Four
-   markers are printed in the document on purpose.
+1. ~~**References `[VERIFY]`**~~ — **DONE**: resolved against Crossref /
+   arXiv / the Kaggle dataset page.
+   [9] J. J. Anish and D. Ajitha, *IEEE Access* 13:118033–118054, 2025,
+   doi:10.1109/ACCESS.2025.3579727 ·
+   [22] **Q.** Yang et al. (not Z.), *IEEE TMI* 41(10):2953–2964, 2022,
+   doi:10.1109/TMI.2022.3175478 ·
+   [34] M. C. de Verdier et al., “The 2024 BraTS Challenge: Glioma
+   Segmentation on Post-treatment MRI,” arXiv:2405.18368 — matches the
+   `{NETC, SNFH, ET, RC}` label schema the repo's segmentation code
+   documents; the exact 200-case local release id still is not recorded
+   and is stated as such in the entry ·
+   [36] `https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset`.
+   Also corrected [21] first author **J. → L. Zhou** (Crossref).
+   References now number 1–37 with no gaps and no `[VERIFY]` left.
 2. **Dataset label provenance** for the internal pool stays
    `[CITATION NEEDED]` — the filesystem evidence is in
-   `results/fill_evidence.json` but no upstream citation exists in the repo.
+   `results/fill_evidence.json` but no upstream citation exists in the repo
+   and none can be invented.
 3. ~~**Supplementary figures S1–S10**~~ — **DONE**: `scripts/make_supplementary.py`
    renders all 10 panels (S3/S6/S7 need per-sample data, which
    `scripts/phase4_save_predictions.py` saves in one pass with an accuracy

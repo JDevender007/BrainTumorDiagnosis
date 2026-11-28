@@ -729,8 +729,11 @@ table("Datasets, locations, sizes and roles. Class columns are "
       "glioma/meningioma/pituitary/no-tumor.",
       ["Source (split)", "Path", "Images", "G/M/P/N", "Role"],
       _ds_rows,
-      note="Source: `results/dataset_table.csv`. Rows carrying [VERIFY] or "
-           "[CITATION NEEDED] are unresolved provenance, not estimates.")
+      note="Source: `results/dataset_table.csv`. The only provenance marker "
+           "left in a rendered cell is [CITATION NEEDED] (the label origin "
+           "of the internal pool). The Kaggle slug/URL, the BraTS challenge "
+           "citation and the BRISC publisher manifest were verified during "
+           "the audit; nothing in this table is estimated.")
 
 figure("fig2_data_pipeline.png",
        "Data flow and the leakage audit. Counts are read from "
@@ -1586,7 +1589,7 @@ REFERENCES = [
     "M. Sultan et al., \u201cMulti-classification of brain tumor images using "
     "deep neural network,\u201d IEEE Access, vol. 7, pp. 69215\u201369225, "
     "2019.",
-    "[9] [VERIFY \u2014 authors missing in the source list] \u201cExploring the "
+    "J. J. Anish and D. Ajitha, \u201cExploring the "
     "state-of-the-art algorithms for brain tumor classification using MRI "
     "data,\u201d IEEE Access, vol. 13, pp. 118033\u2013118054, 2025, "
     "doi: 10.1109/ACCESS.2025.3579727.",
@@ -1617,13 +1620,12 @@ REFERENCES = [
     "modality really make positive impacts in incomplete multi-modal brain "
     "tumor segmentation?\u201d IEEE Trans. Med. Imag., vol. 44, no. 5, "
     "pp. 2194\u20132205, 2025, doi: 10.1109/TMI.2025.",
-    "J. Zhou et al., \u201cShape-scale co-awareness network for 3D brain "
-    "tumor segmentation,\u201d IEEE Trans. Med._imag., vol. 43, no. 7, "
+    "L. Zhou et al., \u201cShape-scale co-awareness network for 3D brain "
+    "tumor segmentation,\u201d IEEE Trans. Med. Imag., vol. 43, no. 7, "
     "pp. 2495\u20132508, 2024, doi: 10.1109/TMI.2024.3368531.",
-    "[22] [VERIFY \u2014 first author initial disputed: Z. vs Q. Yang] "
-    "Yang et al., \u201cD2-Net: Dual disentanglement network for brain tumor "
+    "Q. Yang et al., \u201cD2-Net: Dual disentanglement network for brain tumor "
     "segmentation with missing modalities,\u201d IEEE Trans. Med. Imag., "
-    "vol. 41, no. 10, pp. 2953\u20132964, 2022.",
+    "vol. 41, no. 10, pp. 2953\u20132964, 2022, doi: 10.1109/TMI.2022.3175478.",
     "Y. Cheng, Z. Liu, and S. Tamura, \u201cDeep hierarchy-aware segmentation: "
     "A novel framework for MRIs brain tumor segmentation,\u201d IEEE Trans. "
     "Med. Imag., vol. 45, no. 5, pp. 2023\u20132038, 2026, "
@@ -1658,14 +1660,18 @@ REFERENCES = [
     "R. R. Selvaraju et al., \u201cGrad-CAM: Visual explanations from deep "
     "networks via gradient-based localization,\u201d in Proc. ICCV, 2017, "
     "pp. 618\u2013626.",
-    "[34] [VERIFY] \u201cThe Brain Tumor Segmentation (BraTS) Challenge 2024,\u201d "
-    "2024. [dataset/benchmark citation added in this revision; exact author "
-    "list and identifier to be confirmed]",
+    "M. C. de Verdier et al., \u201cThe 2024 Brain Tumor Segmentation "
+    "(BraTS) Challenge: Glioma segmentation on post-treatment MRI,\u201d "
+    "arXiv:2405.18368, 2024. [the local copy is a 200-case subset with the "
+    "post-treatment label schema {NETC, SNFH, ET, RC}; its exact release "
+    "identifier is not recorded in the repository]",
     "A. Fateh et al., \u201cBRISC 2025: A brain tumor image segmentation, "
     "classification and tumor boundary segmentation dataset,\u201d "
     "arXiv:2506.14318, 2025.",
-    "[36] [VERIFY \u2014 owner slug and URL] M. Nickparvar, \u201cBrain Tumor "
-    "MRI Dataset,\u201d Kaggle, 7,023 images (Training 5,712 / Testing 1,311).",
+    "M. Nickparvar, \u201cBrain Tumor "
+    "MRI Dataset,\u201d Kaggle, "
+    "https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset, "
+    "7,023 images (Training 5,712 / Testing 1,311).",
     "T. Hendrycks and T. G. Dietterich, \u201cBenchmarking neural network "
     "robustness to common corruptions and perturbations,\u201d in Proc. "
     "ICLR, 2019, arXiv:1903.12261.",

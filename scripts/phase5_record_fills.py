@@ -27,14 +27,16 @@ FILL2_SOURCE = (
     "(7023 entries = Training 5712 + Testing 1311)"
 )
 FILL2_CITATION = (
-    "Kaggle 'Brain Tumor MRI Dataset' (Te-*/Tr-* naming, 4 classes, 7023 images) "
-    "[VERIFY owner slug + URL against the Kaggle page before camera-ready]"
+    "Kaggle 'Brain Tumor MRI Dataset', M. Nickparvar - "
+    "https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset "
+    "(Te-*/Tr-* naming, 4 classes, 7023 images); owner slug + URL verified "
+    "against the live dataset page 2026-11-28"
 )
 FILL2_TEST_NOTES = (
     "CONTAMINATED: overlaps internal train (results/leakage_report.json). "
     "FILL#2 RESOLVED (partial): zip per-directory counts are Testing 300/306/405/300 = 1311 "
     "and Training 1321/1339/1595/1457 = 5712, i.e. exactly the canonical 7023-image release. "
-    "Local *extracted* Testing/ folder matches the zip (1311); the URL itself is [VERIFY]. "
+    "Local *extracted* Testing/ folder matches the zip (1311); URL verified 2026-11-28. "
     "See results/fill_evidence.json"
 )
 FILL2_TRAIN_NOTES = (
@@ -55,15 +57,36 @@ FILL3_NOTES = (
     "and NO no-tumour label, so it cannot supply the 4-class labels; no 3D->2D conversion exists "
     "anywhere in the classification path. Paper WT/TC/ET 0.9005/0.5803/0.6010 belong to the "
     "standalone 3-D U-Net at checkpoints/segmentation/unet3d (finding D3), not to TAMNet's aux "
-    "branch. Exact BraTS task/subset + slice rule remain [VERIFY]. "
+    "branch. Exact local release id + slice rule remain [VERIFY]. "
     "See results/fill_evidence.json"
+)
+FILL3_CITATION = (
+    "de Verdier et al., 'The 2024 Brain Tumor Segmentation (BraTS) Challenge: Glioma "
+    "Segmentation on Post-treatment MRI,' arXiv:2405.18368, 2024 - the {NETC, SNFH, ET, RC} "
+    "schema in datasets/segmentation.py is that challenge's label set; the exact local release "
+    "identifier is not recorded in the repo"
 )
 
 
 def main() -> int:
     with CSV.open(newline="", encoding="utf-8") as fh:
-        rows = list(csv.DictReader(fh))
-    fieldnames = list(rows[0].keys())
+        raw = list(csv.reader(fh))
+    header, body = raw[0], raw[1:]
+    role_idx = header.index("role")
+
+    # One legacy row was written with an unquoted comma inside `role`
+    # ("... (headline, clean protocol)"), which shifted every later column.
+    # Re-join it on read so the row round-trips cleanly.
+    rows, repaired = [], 0
+    for r in body:
+        if len(r) > len(header):
+            # an unquoted comma inside `role` shifted the later columns
+            r = r[:role_idx] + [f"{r[role_idx]},{r[role_idx + 1]}"] + r[role_idx + 2:]
+            repaired += 1
+        if len(r) > len(header):
+            print(f"WARNING: row with {len(r)} fields vs {len(header)} header "
+                  f"fields ({r[0]}/{r[1]}) - extra fields dropped")
+        rows.append(dict(zip(header, r)))
 
     touched = []
     for r in rows:
@@ -88,17 +111,23 @@ def main() -> int:
             r["notes"] = FILL2_TRAIN_NOTES
             touched.append("kaggle/training source+citation+notes")
         elif key == ("BraTS2024", r["split"]) and r["dataset"] == "BraTS2024":
+            # this row lost the tail of `role` to a bare comma in an earlier
+            # run of this script; put the fields back where they belong
+            r["role"] = ("BraTS 3-D segmentation only; WT/TC/ET Dice belong "
+                         "to the standalone 3-D U-Net, not TAMNet")
+            r["mask_available"] = "yes (seg/)"
             r["source"] = FILL3_SOURCE
+            r["citation"] = FILL3_CITATION
             r["notes"] = FILL3_NOTES
-            touched.append("BraTS source+notes")
+            touched.append("BraTS role+mask+source+citation+notes")
 
     tmp = CSV.with_suffix(".csv.tmp")
     with tmp.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=fieldnames)
+        w = csv.DictWriter(fh, fieldnames=header)
         w.writeheader()
         w.writerows(rows)
     tmp.replace(CSV)
-    print(f"updated {CSV}")
+    print(f"updated {CSV} ({repaired} row(s) re-quoted)")
     for t in touched:
         print("  -", t)
     return 0

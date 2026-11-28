@@ -193,7 +193,9 @@ item-by-item status. **247 paragraphs · 12 tables · 16 figures.**
 - [x] Discussion answers "does TAMNet beat baselines?" honestly (**No**).
 - [x] Limitations + Data/Code Availability + "not for clinical use".
 - [x] References: [28] → Y. Ovadia, dataset/benchmark citations added;
-      **`[VERIFY]` remains on [9], [22], [34], [36]** (unresolved provenance).
+      **`[VERIFY]` markers removed on [9], [22], [34], [36]** — authors and
+      identifiers resolved against Crossref/arXiv/Kaggle (see
+      `CHANGELOG_FIXES.md` § Phase 5, references note).
 - [x] "clinically ready" / "near-real-time" removed; repetition reduced.
 
 ## Phase 6 — Reproducibility & QA — **DONE** (this commit)
@@ -275,7 +277,8 @@ All nine are resolved in the rewritten manuscript — each row says *how*.
       Testing = 1,311 = 300/306/405/300 ✓, Training has no pituitary folder).
       → **RESOLVED (partial)**: `brain-tumor-mri-dataset.zip` = 7,023 entries = Training 5,712 +
       Testing 1,311, i.e. the canonical Kaggle "Brain Tumor MRI Dataset". Local `Training/` is an
-      **incomplete** extraction (3,881, no pituitary). Owner slug/URL stays `[VERIFY]`.
+      **incomplete** extraction (3,881, no pituitary). Owner slug/URL
+      **RESOLVED**: https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset.
 - [x] Classifier training data source: BraTS-only, or also BRISC/Kaggle train splits?
       (Local `data/raw/classification/` Train 9,291 / Test 1,857, 4 classes — provenance?)
       → **RESOLVED (partial)**: neither BraTS nor BRISC (0 basename overlap with BRISC); it is a

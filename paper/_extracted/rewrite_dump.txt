@@ -80,12 +80,12 @@
 [T0] TABLE 8x5
    | Source (split) | Path | Images | G/M/P/N | Role
    | internal_classification (train) | data/raw/classification/Train | 9291 | 3018/2183/2145/1945 | classifier training split (manifest-pinned clean protocol)
-   | internal_classification (test) | data/raw/classification/Test | 1857 | 603/436/429/389 | internal TEST set (headline
+   | internal_classification (test) | data/raw/classification/Test | 1857 | 603/436/429/389 | internal TEST set (headline, clean protocol)
    | kaggle_brain_tumor (testing) | data/external/kaggle_brain_tumor/Testing | 1311 | 300/306/300/405 | external test (full set; pre-audit claim withdrawn)
    | kaggle_brain_tumor (training) | data/external/kaggle_brain_tumor/Training | 3881 | 1321/1339/0/1221 | not used by paper runs
    | BRISC2025 (train) | data/external/brisc2025/brisc2025/classification_task/train | 5000 | 1147/1329/1457/1067 | external train (Phase 3 cross-dataset matrix)
    | BRISC2025 (test) | data/external/brisc2025/brisc2025/classification_task/test | 1000 | 254/306/300/140 | external test (full set; pre-audit claim withdrawn)
-   | BraTS2024 (patient-level 70/15/15 (manifest seed 42)) | data/raw/BraTS2024 | 200 | 0/0/0/0 | BraTS 3-D segmentation only; WT/TC/ET Dice belong to the standalone 3-D U-Net
+   | BraTS2024 (patient-level 70/15/15 (manifest seed 42)) | data/raw/BraTS2024 | 200 | 0/0/0/0 | BraTS 3-D segmentation only; WT/TC/ET Dice belong to the standalone 3-D U-Net, not TAMNet
 [P079] Source: results/dataset_table.csv. Rows carrying [VERIFY] or [CITATION NEEDED] are unresolved provenance, not estimates.
 [P080] 
 [P081] Fig. 2. Data flow and the leakage audit. Counts are read from `dataset_table.csv`, `leakage_report.json`, `external_dedup_manifest.json` and the run configuration; nothing in this diagram is typed by hand. (source: paper/figs/fig2_data_pipeline.png).
@@ -326,7 +326,7 @@
 [P215] [6] F. Isensee et al., “nnU-Net: A self-configuring method for deep learning-based biomedical image segmentation,” Nature Methods, vol. 18, pp. 203–211, 2021.
 [P216] [7] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional networks for biomedical image segmentation,” in Proc. MICCAI, 2015, pp. 234–241.
 [P217] [8] M. Sultan et al., “Multi-classification of brain tumor images using deep neural network,” IEEE Access, vol. 7, pp. 69215–69225, 2019.
-[P218] [9] [VERIFY — authors missing in the source list] “Exploring the state-of-the-art algorithms for brain tumor classification using MRI data,” IEEE Access, vol. 13, pp. 118033–118054, 2025, doi: 10.1109/ACCESS.2025.3579727.
+[P218] [9] J. J. Anish and D. Ajitha, “Exploring the state-of-the-art algorithms for brain tumor classification using MRI data,” IEEE Access, vol. 13, pp. 118033–118054, 2025, doi: 10.1109/ACCESS.2025.3579727.
 [P219] [10] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. CVPR, 2016, pp. 770–778.
 [P220] [11] G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Weinberger, “Densely connected convolutional networks,” in Proc. CVPR, 2017, pp. 4700–4708.
 [P221] [12] M. Tan and Q. V. Le, “EfficientNet: Rethinking model scaling for convolutional neural networks,” in Proc. ICML, 2019, pp. 6105–6114.
@@ -338,8 +338,8 @@
 [P227] [18] O. Oktay et al., “Attention U-Net: Learning where to look for the pancreas,” arXiv:1804.03999, 2018.
 [P228] [19] Z. Zhou et al., “UNet++: A nested U-Net architecture for medical image segmentation,” in Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support, 2018, pp. 3–11.
 [P229] [20] Y. Qiu, K. Jiang, H. Yao, Z. Wang, and S. Satoh, “Does adding a modality really make positive impacts in incomplete multi-modal brain tumor segmentation?” IEEE Trans. Med. Imag., vol. 44, no. 5, pp. 2194–2205, 2025, doi: 10.1109/TMI.2025.
-[P230] [21] J. Zhou et al., “Shape-scale co-awareness network for 3D brain tumor segmentation,” IEEE Trans. Med._imag., vol. 43, no. 7, pp. 2495–2508, 2024, doi: 10.1109/TMI.2024.3368531.
-[P231] [22] [VERIFY — first author initial disputed: Z. vs Q. Yang] Yang et al., “D2-Net: Dual disentanglement network for brain tumor segmentation with missing modalities,” IEEE Trans. Med. Imag., vol. 41, no. 10, pp. 2953–2964, 2022.
+[P230] [21] L. Zhou et al., “Shape-scale co-awareness network for 3D brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 43, no. 7, pp. 2495–2508, 2024, doi: 10.1109/TMI.2024.3368531.
+[P231] [22] Q. Yang et al., “D2-Net: Dual disentanglement network for brain tumor segmentation with missing modalities,” IEEE Trans. Med. Imag., vol. 41, no. 10, pp. 2953–2964, 2022, doi: 10.1109/TMI.2022.3175478.
 [P232] [23] Y. Cheng, Z. Liu, and S. Tamura, “Deep hierarchy-aware segmentation: A novel framework for MRIs brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 45, no. 5, pp. 2023–2038, 2026, doi: 10.1109/TMI.2025.3645821.
 [P233] [24] Y. Shao et al., “Rethinking brain tumor segmentation from the frequency domain perspective,” IEEE Trans. Med. Imag., vol. 44, no. 11, pp. 4536–4553, 2025, doi: 10.1109/TMI.2025.3579213.
 [P234] [25] Y. Gal and Z. Ghahramani, “Dropout as a Bayesian approximation: Representing model uncertainty in deep learning,” in Proc. ICML, 2016, pp. 1050–1059.
@@ -351,7 +351,7 @@
 [P240] [31] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger, “On calibration of modern neural networks,” in Proc. ICML, 2017, pp. 1321–1330.
 [P241] [32] M. Minderer et al., “Revisiting the calibration of modern neural networks,” in Proc. NeurIPS, vol. 34, pp. 15682–15694, 2021.
 [P242] [33] R. R. Selvaraju et al., “Grad-CAM: Visual explanations from deep networks via gradient-based localization,” in Proc. ICCV, 2017, pp. 618–626.
-[P243] [34] [VERIFY] “The Brain Tumor Segmentation (BraTS) Challenge 2024,” 2024. [dataset/benchmark citation added in this revision; exact author list and identifier to be confirmed]
+[P243] [34] M. C. de Verdier et al., “The 2024 Brain Tumor Segmentation (BraTS) Challenge: Glioma segmentation on post-treatment MRI,” arXiv:2405.18368, 2024. [the local copy is a 200-case subset with the post-treatment label schema {NETC, SNFH, ET, RC}; its exact release identifier is not recorded in the repository]
 [P244] [35] A. Fateh et al., “BRISC 2025: A brain tumor image segmentation, classification and tumor boundary segmentation dataset,” arXiv:2506.14318, 2025.
-[P245] [36] [VERIFY — owner slug and URL] M. Nickparvar, “Brain Tumor MRI Dataset,” Kaggle, 7,023 images (Training 5,712 / Testing 1,311).
+[P245] [36] M. Nickparvar, “Brain Tumor MRI Dataset,” Kaggle, https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset, 7,023 images (Training 5,712 / Testing 1,311).
 [P246] [37] T. Hendrycks and T. G. Dietterich, “Benchmarking neural network robustness to common corruptions and perturbations,” in Proc. ICLR, 2019, arXiv:1903.12261.
