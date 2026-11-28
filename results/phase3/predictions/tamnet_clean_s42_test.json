@@ -1,0 +1,19 @@
+{
+  "kind": "phase4_saved_predictions",
+  "created_at": "2026-11-28T04:59:29+00:00",
+  "run": "tamnet_clean_s42",
+  "split": "test",
+  "n": 1672,
+  "accuracy": 0.9270334928229665,
+  "accuracy_matches_eval": true,
+  "n_classes": 4,
+  "features_dim": 1024,
+  "checkpoint": "results\\phase3\\runs\\tamnet_clean_s42\\best.pt",
+  "checkpoint_sha256": "5166153f7d5b4e33327ea6d5fc93e70c96d80cb1a68a377529309576dd9de392",
+  "split_manifest": "results\\phase3\\split_manifest_clean.json",
+  "split_manifest_sha256": "205c8e6f851070e56be42caad05c1613371a69c3f6b19f19e802ff643e939af6",
+  "transform": "build_classification_transform((224, 224))",
+  "device": "cuda",
+  "git_commit": "5a408ad328ab91f5f05c3f1582a2ae1186a1c892",
+  "npz": "results\\phase3\\predictions\\tamnet_clean_s42_test.npz"
+}

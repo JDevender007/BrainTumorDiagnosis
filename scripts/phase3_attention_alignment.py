@@ -49,6 +49,7 @@ from datasets.classification import (  # noqa: E402
 from datasets.normalization import build_classification_transform  # noqa: E402
 from scripts.phase3_evaluate import build_model, sha256_file  # noqa: E402
 from scripts.phase3_train import load_brisc_split  # noqa: E402
+from evaluation.explainability import _patch_densenet_forward  # noqa: E402
 
 RUNS = ROOT / "results" / "phase3" / "runs"
 OUT = ROOT / "results" / "phase3" / "attention_alignment.json"
@@ -244,11 +245,19 @@ def main() -> int:
         net = build_model(cfg)
         net.load_state_dict(torch.load(d / "best.pt", map_location="cpu", weights_only=False)["model_state_dict"])
         net = net.to(device).eval()
-        inner = net.model if hasattr(net, "model") else net
+        # build_model returns DictWrapper(backbone=...) for every torchvision
+        # baseline; the DenseNet itself — and its .features — live one level
+        # down, which is why this probe used to record "no .features module".
+        inner = (net.backbone if hasattr(net, "backbone")
+                 else net.model if hasattr(net, "model") else net)
         target = getattr(inner, "features", None)
         if target is None:
             missing.append(f"{BASELINE_RUN} (no .features module for Grad-CAM)")
         else:
+            # DenseNet's final F.relu(..., inplace=True) sits on the hooked
+            # output and the backward hook rejects the view; the shared patch
+            # makes that ReLU non-inplace with identical numerics.
+            inner = _patch_densenet_forward(inner)
             cam_gen = GradCAM(inner, target)
             t0 = time.time()
             try:

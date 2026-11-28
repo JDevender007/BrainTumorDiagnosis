@@ -1,0 +1,74 @@
+{
+  "kind": "phase4_seg_qualitative",
+  "created_at": "2026-11-28T04:43:47+00:00",
+  "device": "cuda",
+  "source": "best.pt forward pass, return_seg=True, argmax over seg_logits (same transform pipeline as phase3_seg_eval)",
+  "slices": [
+    {
+      "run": "tamnet_brisc_s42+sc2",
+      "role": "best",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00702_pi_ax_t1.jpg",
+      "dice_recorded": 0.9459041731066461,
+      "gt_pixels": 323,
+      "pred_pixels": 323,
+      "seed": 42,
+      "model": "tamnet",
+      "seg_weight": 0.5
+    },
+    {
+      "run": "tamnet_brisc_s42+sc2",
+      "role": "median",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00435_me_co_t1.jpg",
+      "dice_recorded": 0.7933884297520661,
+      "gt_pixels": 392,
+      "pred_pixels": 576,
+      "seed": 42,
+      "model": "tamnet",
+      "seg_weight": 0.5
+    },
+    {
+      "run": "tamnet_brisc_s42+sc2",
+      "role": "worst",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00001_gl_ax_t1.jpg",
+      "dice_recorded": 0.0,
+      "gt_pixels": 222,
+      "pred_pixels": 1761,
+      "seed": 42,
+      "model": "tamnet",
+      "seg_weight": 0.5
+    },
+    {
+      "run": "shared_unet_brisc_s43+ls0.25+sc2",
+      "role": "best",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00287_me_ax_t1.jpg",
+      "dice_recorded": 0.9868971285196543,
+      "gt_pixels": 5385,
+      "pred_pixels": 5376,
+      "seed": 43,
+      "model": "shared_unet",
+      "seg_weight": 0.25
+    },
+    {
+      "run": "shared_unet_brisc_s43+ls0.25+sc2",
+      "role": "median",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00909_pi_co_t1.jpg",
+      "dice_recorded": 0.9110764430577223,
+      "gt_pixels": 292,
+      "pred_pixels": 349,
+      "seed": 43,
+      "model": "shared_unet",
+      "seg_weight": 0.25
+    },
+    {
+      "run": "shared_unet_brisc_s43+ls0.25+sc2",
+      "role": "worst",
+      "path": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00001_gl_ax_t1.jpg",
+      "dice_recorded": 0.0,
+      "gt_pixels": 222,
+      "pred_pixels": 1530,
+      "seed": 43,
+      "model": "shared_unet",
+      "seg_weight": 0.25
+    }
+  ]
+}

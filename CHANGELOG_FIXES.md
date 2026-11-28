@@ -190,9 +190,10 @@ rewrite (needs the 3 open user FILLs) → Phase 6 QA.
 
 ## Phase 4 — Figures — **DONE** (commits `618527c`, `1c96c89`)
 
-**15 / 15 figures present as vector PDF + 600-dpi PNG**, all in `paper/figs/`,
+**16 / 16 figures present as vector PDF + 600-dpi PNG**, all in `paper/figs/`,
 all cited in the manuscript in ascending order, all listed in
-`figures_manifest.json`.
+`figures_manifest.json` (plus 10 supplementary panels under
+`paper/figs/supp/`).
 
 | Fig | Slug | Generator | Source of every number |
 |---|---|---|---|
@@ -204,7 +205,8 @@ all cited in the manuscript in ascending order, all listed in
 | 5 | `fig5_pareto_params_accuracy` | idem | `params_table.json` + `agg` |
 | 6 | `fig6_confusion_internal` | idem | per-run `eval_internal_test/metrics.json` |
 | 6b | `fig6b_per_class_f1` | idem | idem |
-| 8 | `fig8_seg_box` | `make_figures_static.py` | per-slice `eval_brisc_test/seg_metrics.json` (8 runs) |
+| 7 | `fig7_seg_qualitative` | `scripts/phase4_seg_qualitative.py` | argmax/median/argmin of the per-slice Dice already in `seg_metrics.json`; masks re-predicted from `best.pt` (sha256 in the manifest) |
+| 8 | `fig8_seg_box` | `make_figures_static.py` | panel (a) per-slice `eval_brisc_test/seg_metrics.json` (8 runs); panel (b) `results/brats_unet3d_wt_tc_et.json` (45 BraTS cases) |
 | 9 | `fig9_reliability` | `make_figures.py` | `reliability.json` |
 | 10 | `fig10_uncertainty` | idem | `uncertainty_summary.json` + `reliability.json` |
 | 11 | `fig11_attention_alignment` | idem | `attention_alignment.json` |
@@ -214,10 +216,10 @@ all cited in the manuscript in ascending order, all listed in
 
 | Item | Status | Notes |
 |---|---|---|
-| Fig 7 `seg_qualitative` | **BLOCKED** | needs new GPU inference over the BRISC test split to emit predicted masks; no prediction raster exists in `results/`, so a qualitative panel would have to be fabricated → deliberately absent |
-| Fig 12 `gradcam_attention` | **BLOCKED** | `attention_alignment.json` records `densenet121_gradcam: null` — the checkpoint exposes no `.features` module. Recorded as missing in the paper, not approximated |
-| Fig 8 BraTS half (WT/TC/ET boxes) | **BLOCKED** | the WT/TC/ET means belong to the standalone 3-D U-Net (D3) and **no per-case record of them exists anywhere under `results/`** → the box plot shows only the BRISC rows, and says so in its caption and manifest note |
-| Supplementary `paper/figs/supp/` S1–S10 | **PARTIAL** | not generated; every figure the manuscript cites exists, so no citation is dangling. Listed below under manual steps |
+| Fig 7 `seg_qualitative` | **DONE** | `scripts/phase4_seg_qualitative.py` re-runs one forward pass per shown slice from each run's `best.pt` and draws the argmax / median-nearest / argmin slice by the Dice *already recorded* in `seg_metrics.json` — nothing picked by eye. Record: `results/phase4_seg_qualitative.json` |
+| Fig 12 Grad-CAM | **DONE** | `phase3_attention_alignment.py` probed `net.model` instead of `net.backbone`, so the `DictWrapper` masked DenseNet's `.features`; also needed the shared non-inplace ReLU patch. Re-run: **DenseNet-121 Grad-CAM mass-in-mask 0.0765 (4.01× lift)** vs TAMNet attention 0.0103 (0.54×), paired Δ −0.0662 [−0.0706, −0.0616], significant, n=860. `missing: []` |
+| Fig 8 BraTS half (WT/TC/ET boxes) | **DONE** | the per-case record did exist — at `outputs/metrics/segmentation_evaluation_test.json` (45 cases), just never ingested. `scripts/phase5_ingest_unet3d.py` validates the split is patient-level, reproduces every stored aggregate from the per-case values, and writes `results/brats_unet3d_wt_tc_et.json` with sha256 of report/manifest/commit. Eval re-run on 2026-11-28 reproduces 0.9005 / 0.5803 / 0.6010 exactly |
+| Supplementary `paper/figs/supp/` S1–S10 | **DONE** | `scripts/make_supplementary.py` → 7 panels from existing artifacts; S3/S6/S7 needed per-sample data, so `scripts/phase4_save_predictions.py` does one pass over the test split (asserting the accuracy equals the published TEST number) and those 3 render too. **10 / 10 panels**, 3 missing is now 0 |
 | `scripts/check_figures.py` | **DONE** | see Phase 6 |
 | Vector PDF for `fig4_ablation_val` / `fig6_confusion_internal` / `fig6b_per_class_f1` | **DONE** | these three were PNG-only; `make_figures.py` now writes both, and the manifest is merged instead of overwritten so the static figures survive a partial re-run |
 
@@ -253,11 +255,11 @@ from the body text.
 | Item | Status | Notes |
 |---|---|---|
 | `scripts/check_paper_numbers.py` | **DONE** | walks **every** scalar in `results/**/*.json` + `*.csv` (194,916 values), renders them in every format the paper uses (1,174,251 forms), then scans the rendered docx. **920 numeric tokens → 920 traced, 0 untraced.** Citations are excluded by design (everything from the `REFERENCES` heading on) and git commit ids are masked as provenance. Report → `results/phase6_paper_numbers.json` |
-| `scripts/check_figures.py` | **DONE** | F1 figure+PDF+manifest exist · F2 numbering 1..15 in order · F3 every in-text `Fig. N` resolves · F4 every figure cited in the body · T1 tables I–XI once each in order · T2 every in-text `Table X` resolves · T3 every table names its `Source:` · M1 re-runs the number checker. **Passes with 0 warnings, 0 failures** |
+| `scripts/check_figures.py` | **DONE** | F1 figure+PDF+manifest exist · F2 numbering 1..16 in order · F3 every in-text `Fig. N` resolves · F4 every figure cited in the body · T1 tables I–XII once each in order · T2 every in-text `Table X` resolves · T3 every table names its `Source:` · M1 re-runs the number checker. **Passes with 0 warnings, 0 failures** |
 | Unit tests | **DONE** | `pytest tests -q` → **113 passed in 59 s** (includes split-leakage, module shapes, MC-dropout BN-eval/dropout-active, metrics vs sklearn, corruption tests, resume determinism) |
 | `requirements.txt` | **DONE** | already present and pinned (torch 2.11.0+cu128, numpy 2.5.2, scikit-learn 1.9.0, matplotlib 3.11.1, pytest 9.1.1) |
 | Fixed seeds / deterministic | **DONE** | every run records `seed` in `run_config.json`; split manifest is SHA-256 pinned; seeds 42–46 are stated in Table II |
-| `environment.yml` / `Makefile` / `run_all.sh` | **PARTIAL** | not created — see manual steps below; the equivalent is `scripts/make_figures.py` + `scripts/make_figures_static.py` + `scripts/make_tables.py` + `scripts/rewrite_paper.py` + the two checkers, in that order |
+| `environment.yml` / `run_all.sh` / `run_all.ps1` / `Makefile` | **DONE** | four entry points written: `run_all.sh` (POSIX), `run_all.ps1` (native on this machine), `Makefile` (`make all`, `make check`; no `make` binary installed here), `environment.yml` (python=3.13 + `-r requirements.txt`). Stages: `split train evaluate aggregate bootstrap external uncertainty robustness seg brats3d attention efficiency qual figures tables paper check` — every stage is skip-if-done, so re-running never re-trains and never touches TEST twice |
 | Final `CHANGELOG_FIXES.md` DONE/PARTIAL/BLOCKED | **DONE** | this section |
 | Legacy leaky tables moved aside, not deleted | **DONE** | `table1_main_comparison.md.stale-legacy`, `table2_per_class_f1.md.stale-legacy`, `table3_ablation_delta.md.stale-legacy` |
 
@@ -282,15 +284,15 @@ from the body text.
 2. **Dataset label provenance** for the internal pool stays
    `[CITATION NEEDED]` — the filesystem evidence is in
    `results/fill_evidence.json` but no upstream citation exists in the repo.
-3. **Supplementary figures S1–S10** (`paper/figs/supp/`) are not generated;
-   no manuscript citation depends on them.
-4. **Fig 7 (seg qualitative) and Fig 12 (Grad-CAM)** need a GPU inference pass
-   and a Grad-CAM-capable checkpoint respectively — both are recorded as
-   missing rather than approximated.
-5. **`run_all.sh` / Makefile / `environment.yml`** not written; the
-   reproduction order is: `phase3_split.py` → `phase3_train.py` →
-   `phase3_evaluate.py` → `phase3_aggregate.py` → `phase3_bootstrap.py` →
-   `phase3_external_eval.py` → `phase3_uncertainty.py` → `phase3_robustness.py`
-   → `phase3_seg_eval.py` → `phase3_attention_alignment.py` →
-   `phase3_efficiency.py` → `make_figures.py` → `make_figures_static.py` →
-   `make_tables.py` → `rewrite_paper.py` → `check_figures.py`.
+3. ~~**Supplementary figures S1–S10**~~ — **DONE**: `scripts/make_supplementary.py`
+   renders all 10 panels (S3/S6/S7 need per-sample data, which
+   `scripts/phase4_save_predictions.py` saves in one pass with an accuracy
+   assertion against the published TEST number).
+4. ~~**Fig 7 and Fig 12 (Grad-CAM)**~~ — **DONE**: `scripts/phase4_seg_qualitative.py`
+   (rule-based argmax/median/argmin selection, masks re-predicted from
+   `best.pt`) and the fixed `phase3_attention_alignment.py`
+   (unwrap `DictWrapper.backbone` + non-inplace ReLU patch).
+5. ~~**`run_all.sh` / `Makefile` / `environment.yml`**~~ — **DONE**: see the
+   reproduction entry points above; `run_all.ps1 -Stages check` runs the QA
+   gate, `run_all.ps1` with no arguments runs the whole pipeline in the
+   documented order.

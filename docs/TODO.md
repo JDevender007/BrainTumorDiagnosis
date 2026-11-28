@@ -112,10 +112,14 @@ activity, ETA).
       formally; list all 27 corruptions (type × severity); retrain with intensity
       augmentation + per-image normalization; before/after; MRRS mean±std across seeds
       (resolve headline 0.7512 best-seed vs 0.7088±0.0309 3-seed).
-- [ ] H. Interpretability: Grad-CAM [33] + attention-map extraction; attention–mask
-      overlap (mass inside tumor mask, pointing game) on BRISC vs random and vs
-      DenseNet121 Grad-CAM; add optional attention-supervision loss if not aligned;
-      report with/without. (Paper §V-G currently promises qualitative-only.)
+- [x] H. Interpretability — **measurement DONE**: mass-in-mask, lift and
+      pointing-game on 860 BRISC tumour slices vs uniform **and** vs
+      DenseNet-121 Grad-CAM (`results/phase3/attention_alignment.json`,
+      `missing: []`). Result is negative: TAMNet attention 0.0103 (0.54×) vs
+      Grad-CAM 0.0765 (4.01×), paired Δ −0.0662 [−0.0706, −0.0616],
+      significant. The *optional attention-supervision loss* (with/without
+      comparison) was **not** run — a new training experiment outside the
+      audit — and the paper no longer promises it (findings D1/D6).
 - [ ] I. Efficiency: fixed protocol (20 warmup, 200 timed, batch 1, cuda synchronize),
       hardware named; single pass AND full 10-pass MC latency for TAMNet and every
       baseline; params and MiB. Resolve whether **48.63 ms** includes 10 MC passes;
@@ -138,16 +142,20 @@ Item-by-item status and source of every number: `CHANGELOG_FIXES.md` § Phase 4.
       per-slice Dice, 8 runs) · Fig 9 `reliability` · Fig 10 `uncertainty` ·
       Fig 11 `attention_alignment` · Fig 13 `robustness_heatmap` ·
       Fig 14 `intensity_curves` · Fig 15 `generalization_matrix`.
-- [ ] **BLOCKED** Fig 7 `seg_qualitative` — needs a GPU inference pass over the
-      BRISC test split; no prediction raster exists in `results/` → deliberately
-      absent rather than fabricated.
-- [ ] **BLOCKED** Grad-CAM panel — `attention_alignment.json` records
-      `densenet121_gradcam: null` (checkpoint exposes no `.features`); recorded
-      as missing in the paper.
-- [ ] **BLOCKED** Fig 8 WT/TC/ET half — no per-case record of those numbers
-      exists under `results/` (they belong to the standalone 3-D U-Net, D3).
-- [ ] **PARTIAL** Supplementary `paper/figs/supp/` S1–S10 — not generated; no
-      manuscript citation depends on them.
+- [x] **DONE** Fig 7 `seg_qualitative` — `scripts/phase4_seg_qualitative.py`
+      picks argmax / median-nearest / argmin by the Dice *already recorded* in
+      `seg_metrics.json` and re-predicts from each run's `best.pt`; record at
+      `results/phase4_seg_qualitative.json`.
+- [x] **DONE** Grad-CAM panel — `phase3_attention_alignment.py` now unwraps
+      `DictWrapper.backbone` and applies the non-inplace ReLU patch;
+      `attention_alignment.json` `missing: []`, DenseNet-121 Grad-CAM lift
+      4.01× against TAMNet attention 0.54× (paired Δ −0.0662, significant).
+- [x] **DONE** Fig 8 WT/TC/ET half — per-case record found at
+      `outputs/metrics/segmentation_evaluation_test.json` and ingested by
+      `scripts/phase5_ingest_unet3d.py` → `results/brats_unet3d_wt_tc_et.json`.
+- [x] **DONE** Supplementary `paper/figs/supp/` — **10 / 10 panels** via
+      `scripts/make_supplementary.py` (+ `scripts/phase4_save_predictions.py`
+      for S3/S6/S7); manifest records 0 missing.
 - [x] `scripts/check_figures.py` — see Phase 6.
 
 ## Phase 5 — Paper rewrite — **DONE** (commits `e569370`, `d37fea0`, `1c96c89`)
@@ -155,10 +163,10 @@ Item-by-item status and source of every number: `CHANGELOG_FIXES.md` § Phase 4.
 Regenerated `TAMNet_Paper.docx` with the new `paper/rewrite_paper.py`
 (results only, no typed numbers). Legacy preserved as
 `TAMNet_Paper.pre-audit.docx`. See `CHANGELOG_FIXES.md` § Phase 5 for the
-item-by-item status. **241 paragraphs · 11 tables · 15 figures.**
+item-by-item status. **247 paragraphs · 12 tables · 16 figures.**
 
 - [x] Abstract/Intro match new results; WT/TC/ET together; limitations stated;
-      interpretability promise removed (Grad-CAM recorded as missing).
+      Grad-CAM now **measured** (not missing) and reported as a negative result.
 - [x] Related Work rewritten; [3] and [33] cited in body; gap without over-claim.
 - [x] Method: equations for M_s, M_c, fusion, L_cls, L_seg, MC-dropout;
       notation clash and broken glyphs gone; **five corrections** D1–D6 called out.
@@ -166,8 +174,8 @@ item-by-item status. **241 paragraphs · 11 tables · 15 figures.**
 - [x] Dataset section from `dataset_table.csv` + leakage + patient-level +
       domain gap.
 - [x] Implementation details table read from `run_config.json`.
-- [x] 11 tables generated from `results/` only, each with an inline `Source:`.
-- [x] All 15 Phase 4 figures inserted, captions carry dataset/split/N/error-bar.
+- [x] 12 tables generated from `results/` only, each with an inline `Source:`.
+- [x] All 16 Phase 4 figures inserted, captions carry dataset/split/N/error-bar.
 - [x] Discussion answers "does TAMNet beat baselines?" honestly (**No**).
 - [x] Limitations + Data/Code Availability + "not for clinical use".
 - [x] References: [28] → Y. Ovadia, dataset/benchmark citations added;
@@ -178,8 +186,8 @@ item-by-item status. **241 paragraphs · 11 tables · 15 figures.**
 
 - [x] `requirements.txt` pinned (torch 2.11.0+cu128, numpy 2.5.2, sklearn 1.9.0).
       Seeds 42–46 recorded per run; split SHA-256 pinned.
-      **`environment.yml` / `Makefile` / `run_all.sh` — PARTIAL** (not written;
-      reproduction order listed in `CHANGELOG_FIXES.md` § Phase 6).
+      **`environment.yml` / `Makefile` / `run_all.sh` / `run_all.ps1` — DONE**
+      (stage list in `CHANGELOG_FIXES.md` § Phase 6).
 - [x] Unit tests: `pytest tests -q` → **113 passed** (split leakage, module
       shapes, MC-dropout BN-eval / dropout-active, metrics vs sklearn,
       corruption tests, resume determinism).

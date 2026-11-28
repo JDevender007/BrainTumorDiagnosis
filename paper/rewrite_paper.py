@@ -60,6 +60,7 @@ AGG = J(P3 / "agg" / "combined_summary.json")
 BOOT = J(P3 / "bootstrap_ci.json")
 EXT = J(P3 / "external_eval_summary.json")
 SEG = J(P3 / "seg_metrics_summary.json")
+WTE = J(RESULTS / "brats_unet3d_wt_tc_et.json")   # standalone 3-D U-Net (D3)
 UNC = J(P3 / "uncertainty_summary.json")
 ROB = J(P3 / "robustness.json")
 EFF = J(P3 / "efficiency.json")
@@ -339,6 +340,8 @@ ROB_D = ROB["groups"]["densenet121_clean"]
 FUSION_W = ATT["fusion_weights"]
 ATT_T = ATT["tamnet_attention"]
 ATT_U = ATT["uniform"]
+ATT_G = ATT.get("densenet121_gradcam")      # None until Grad-CAM succeeds
+ATT_P = ATT.get("paired_tamnet_minus_gradcam") or {}
 
 EC = LEAK["verdicts"]["kaggle_testing_independence"]
 SCHEME_C = SPLIT_AUDIT["headline_finding"]
@@ -751,10 +754,10 @@ para(f"**Split.** All classification experiments use one manifest-pinned "
      f"internal pool, so a patient-held-out split cannot be constructed from "
      f"it. Every confidence interval in this paper is therefore an "
      f"image-level interval.", indent=True)
-para("Figure [[FIG:fig2_data_pipeline.png]] traces every image from its "
+para("[[FIG:fig2_data_pipeline.png]] traces every image from its "
      "source folder through the audit, the de-duplication keep-lists and the "
      "manifest split to the single TEST evaluation, and "
-     "Figure [[FIG:fig3_samples.png]] shows what the slices themselves look "
+     "[[FIG:fig3_samples.png]] shows what the slices themselves look "
      "like in each source.", indent=True)
 
 para("**Leakage.** Perceptual-hash near-duplicate detection (pHamming \u2264 6 "
@@ -899,10 +902,10 @@ figure("fig5_pareto_params_accuracy.png",
        "Accuracy against parameter count. DenseNet-121 matches TAMNet with "
        "fewer parameters, so no efficiency advantage survives.")
 
-para("Figures [[FIG:fig4b_test_accuracy.png]] and "
+para("[[FIG:fig4b_test_accuracy.png]] and "
      "[[FIG:fig5_pareto_params_accuracy.png]] show the same table as a "
      "ranking with intervals and as an accuracy\u2013parameter plane; "
-     "Figures [[FIG:fig6_confusion_internal.png]] and "
+     "[[FIG:fig6_confusion_internal.png]] and "
      "[[FIG:fig6b_per_class_f1.png]] break the TAMNet row down into the "
      "confusion pattern and the per-class scores behind its macro-F1.",
      indent=True)
@@ -969,7 +972,7 @@ figure("fig4_ablation_val.png",
        "Validation curves for the ablation configurations; the panel "
        "corresponds row-for-row to Table V.")
 
-para("Figure [[FIG:fig4_ablation_val.png]] shows the validation trajectory "
+para("[[FIG:fig4_ablation_val.png]] shows the validation trajectory "
      "behind each ablation row, so that a difference which is inside the "
      "seed spread can be seen to be inside the epoch-to-epoch noise as well.",
      indent=True)
@@ -1018,7 +1021,7 @@ figure("fig15_generalization_matrix.png",
        "Train-source \u00d7 test-set accuracy matrix, full and "
        "de-duplicated.")
 
-para("Figure [[FIG:fig15_generalization_matrix.png]] lays the same numbers "
+para("[[FIG:fig15_generalization_matrix.png]] lays the same numbers "
      "out as a train-source \u00d7 test-set matrix, which makes the "
      "asymmetry visible: training on a source and testing on itself is "
      "easy, testing on a de-duplicated external set is not, and the "
@@ -1049,36 +1052,93 @@ table("Binary tumour Dice of the auxiliary segmentation head on the BRISC "
       note="Source: `results/phase3/seg_metrics_summary.json`. Single-seed "
            "rows have no standard deviation. These are not WT/TC/ET numbers.")
 
-figure("fig8_seg_box.png",
-       "Per-slice Dice distributions for every BRISC segmentation evaluation. "
-       "The WT/TC/ET values from the standalone 3-D U-Net are deliberately "
-       "absent: no per-case record of them exists under `results/`, so they "
-       "cannot be plotted honestly.")
+figure("fig7_seg_qualitative.png",
+       "Qualitative segmentation on the BRISC 2025 test split. Rows are "
+       "the argmax, median-nearest and argmin slice by the Dice already "
+       "recorded in `seg_metrics.json`, for the best-ranked TAMNet run and "
+       "the best-ranked shared-U-Net run; columns are the input slice, the "
+       "ground truth, the predicted mask and the overlay (red = ground "
+       "truth, cyan = prediction). Nothing here was chosen by eye, and the "
+       "shown predictions were re-computed from each run's `best.pt` "
+       "through the evaluation transform.")
 
-para("Figure [[FIG:fig8_seg_box.png]] shows the full per-slice "
-     "distributions behind the summary rows of Table VII. The medians sit "
+para("[[FIG:fig7_seg_qualitative.png]] shows what the Table VII "
+     "means look like on individual slices. The worst row is where the "
+     "binary head fails: an empty or near-empty prediction on a slice whose "
+     "mask is large, which is exactly the tail that pulls the mean below "
+     "the median in [[FIG:fig8_seg_box.png]] panel (a).",
+     indent=True)
+
+figure("fig8_seg_box.png",
+       "Panel (a): per-slice Dice distributions for every BRISC "
+       "segmentation evaluation of the auxiliary head. Panel (b): per-case "
+       "WT / TC / ET Dice of the standalone 3-D U-Net on the BraTS test "
+       "split, read from `results/brats_unet3d_wt_tc_et.json` \u2014 the "
+       "model that actually produced the 0.9005 / 0.5803 / 0.6010 quoted in "
+       "the earlier draft, not TAMNet.")
+
+para("[[FIG:fig8_seg_box.png]] shows the full per-slice "
+     "distributions behind the summary rows of Table VII (panel a). The "
+     "medians sit "
      "well above the means in every run, i.e. the Dice distribution is "
      "left-skewed by a tail of hard slices rather than being centred on a "
      "mediocre value \u2014 reporting only the mean hides that shape.",
      indent=True)
 
-para("**(b) The whole-tumour / tumor-core / enhancing-tumour numbers.** "
+_wte: dict[str, dict] = {}
+for _r in ("WT", "TC", "ET"):
+    _v = [c[_r] for c in WTE["per_case"] if isinstance(c.get(_r), (int, float))]
+    if not _v:
+        continue
+    _wte[_r] = {
+        "n": len(_v),
+        "mean": statistics.fmean(_v),
+        "sd": statistics.stdev(_v) if len(_v) > 1 else None,
+        "median": statistics.median(_v),
+        "min": min(_v), "max": max(_v),
+        "sd_legacy_ddof0": WTE["aggregate"][_r]["std_ddof0"],
+    }
+
+para("**(b) The whole-tumour / tumour-core / enhancing-tumour numbers.** "
      "The values 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft are "
      "**verified but mis-attributed**: they are produced by a standalone "
      "3-D U-Net trained on BraTS volumes "
-     "(`checkpoints/segmentation/unet3d`, 45 cases), not by TAMNet's "
+     "(`checkpoints/segmentation/unet3d`, 45 patient-held-out test cases), "
+     "not by TAMNet's "
      "auxiliary head, and in the historical runs that head received no "
-     "gradient at all (L_seg \u2261 0). BraTS contributes no classification "
+     "gradient at all (L_seg \u2261 0). Table VIII gives the re-measured "
+     "per-case distribution, and panel (b) of "
+     "[[FIG:fig8_seg_box.png]] plots it. BraTS contributes no classification "
      "images to this paper: it carries no pituitary and no no-tumour label, "
      "so it cannot supply the four-class task, and no 3-D-to-2-D conversion "
-     "exists anywhere in the classification path. The reported standard "
+     "exists anywhere in the classification path. The standard "
      "deviations for those legacy figures are 0.048 (WT), 0.253 (TC) and "
      "0.242 (ET) \u2014 the means hide very large case-to-case variance, and "
-     "the earlier draft quoted the means alone. We keep the figures only as "
-     "a characterisation of that separate 3-D system.", indent=True)
+     "the earlier draft quoted the means alone: WT spans "
+     f"{_wte['WT']['min']:.4f}\u2013{_wte['WT']['max']:.4f} while ET spans "
+     f"{_wte['ET']['min']:.4f}\u2013{_wte['ET']['max']:.4f}. We keep the "
+     "figures only as a characterisation of that separate 3-D system.",
+     indent=True)
+
+table("Per-case WT / TC / ET Dice of the standalone 3-D U-Net on the "
+      "patient-held-out BraTS test split (45 cases).",
+      ["Region", "Cases", "Mean", "Sample SD", "Legacy SD (ddof=0)",
+       "Median", "Min", "Max"],
+      [[r, str(_wte[r]["n"]), f"{_wte[r]['mean']:.4f}",
+        f"{_wte[r]['sd']:.4f}", f"{_wte[r]['sd_legacy_ddof0']:.4f}",
+        f"{_wte[r]['median']:.4f}", f"{_wte[r]['min']:.4f}",
+        f"{_wte[r]['max']:.4f}"]
+       for r in ("WT", "TC", "ET") if r in _wte],
+      note="Source: `results/brats_unet3d_wt_tc_et.json` (ingested from "
+           "`outputs/metrics/segmentation_evaluation_test.json`; SHA-256 of "
+           "both files and of the checkpoint recorded in the artifact, and "
+           "the per-case values reproduce the stored aggregate). The means "
+           "are the legacy 0.9005 / 0.5803 / 0.6010. These numbers belong to "
+           "a standalone 3-D U-Net, not to TAMNet (finding D3), and are not "
+           "comparable with Table VII's 2-D binary Dice.")
 
 h2("H.  Uncertainty and Calibration")
-para("Table VIII reports calibration for the configurations that have a "
+para("Table IX reports calibration for the configurations that have a "
      "full multi-seed MC-dropout evaluation, using the corrected protocol "
      "of Section III-H.", indent=True)
 
@@ -1131,7 +1191,7 @@ _rel = REL["curves"]["tamnet_clean_s42"]
 _sel = REL["selective"]["tamnet_clean_s42"]
 _heavy = [b for b in _rel["bins"] if b["n"] >= 30]
 _above = sum(1 for b in _heavy if b["accuracy"] > b["mean_confidence"])
-para("Figures [[FIG:fig9_reliability.png]] and "
+para("[[FIG:fig9_reliability.png]] and "
      f"[[FIG:fig10_uncertainty.png]] give the diagnostics behind the "
      f"calibration columns. Of the reliability bins that hold at least 30 "
      f"test images, {_above} of {len(_heavy)} sit **above** the diagonal \u2014 "
@@ -1233,8 +1293,8 @@ elif _mono_bad:
 else:
     _exc = ""
 
-para("Figure [[FIG:fig13_robustness_heatmap.png]] shows every cell of the "
-     "corruption \u00d7 severity grid and Figure "
+para("[[FIG:fig13_robustness_heatmap.png]] shows every cell of the "
+     "corruption \u00d7 severity grid and "
      "[[FIG:fig14_intensity_curves.png]] collapses the intensity-type "
      "corruptions into accuracy-versus-severity curves. Degradation is "
      "graded rather than cliff-edge: accuracy falls from severity 1 to "
@@ -1249,7 +1309,7 @@ para("Figure [[FIG:fig13_robustness_heatmap.png]] shows every cell of the "
 h2("J.  Attention Alignment")
 para("If the spatial attention map were tumor-aware it should place more "
      "mass inside the ground-truth tumour mask than a uniform map does. "
-     "Table X shows that it does not: on "
+     "Table XI shows that it does not: on "
      f"{ATT_T['n']} BRISC tumour slices the attention mass inside the mask "
      f"is {ATT_T['mass_in_mask_mean']:.4f} against a uniform baseline of "
      f"{ATT_U['mass_in_mask_mean']:.4f}, a lift of "
@@ -1259,38 +1319,77 @@ para("If the spatial attention map were tumor-aware it should place more "
      f"Section III-E, the tumor-aware pathway is measurably close to "
      f"inert.", indent=True)
 
+_att_rows = [
+    ["TAMNet spatial attention", str(ATT_T["n"]),
+     f"{ATT_T['mass_in_mask_mean']:.4f}",
+     f"{ATT_U['mass_in_mask_mean']:.4f}",
+     f"{ATT_T['lift_over_mask_fraction']:.2f}\u00d7",
+     f"{ATT_T['pointing_hit_rate']:.3f}"]]
+if ATT_G is not None:
+    _att_rows.append(
+        ["DenseNet-121 Grad-CAM [33]", str(ATT_G["n"]),
+         f"{ATT_G['mass_in_mask_mean']:.4f}",
+         f"{ATT_U['mass_in_mask_mean']:.4f}",
+         f"{ATT_G['lift_over_mask_fraction']:.2f}\u00d7",
+         f"{ATT_G['pointing_hit_rate']:.3f}"])
+_att_rows.append(
+    ["Uniform (reference)", str(ATT_U["n"]),
+     f"{ATT_U['mass_in_mask_mean']:.4f}",
+     f"{ATT_U['mask_fraction_mean']:.4f}", "1.00\u00d7",
+     f"{ATT_U['pointing_hit_rate']:.3f}"])
+
 table("Attention\u2013mask alignment on BRISC tumour slices.",
       ["Map", "Slices", "Mass in mask", "Uniform baseline", "Lift",
        "Pointing hit"],
-      [["TAMNet spatial attention", str(ATT_T["n"]),
-        f"{ATT_T['mass_in_mask_mean']:.4f}",
-        f"{ATT_U['mass_in_mask_mean']:.4f}",
-        f"{ATT_T['lift_over_mask_fraction']:.2f}\u00d7",
-        f"{ATT_T['pointing_hit_rate']:.3f}"],
-       ["Uniform (reference)", str(ATT_U["n"]),
-        f"{ATT_U['mass_in_mask_mean']:.4f}",
-        f"{ATT_U['mask_fraction_mean']:.4f}", "1.00\u00d7",
-        f"{ATT_U['pointing_hit_rate']:.3f}"]],
+      _att_rows,
       note="Source: `results/phase3/attention_alignment.json`. Definitions: "
            "mass-in-mask = fraction of map mass inside the mask; lift = "
-           "mass-in-mask divided by mask area. Grad-CAM on the DenseNet-121 "
-           "baseline could not be extracted (no `.features` module) and is "
-           "recorded as missing rather than approximated.")
+           "mass-in-mask divided by mask area. "
+           + ("Grad-CAM is computed on the DenseNet-121 baseline's final "
+              "convolutional feature map over the same "
+              f"{ATT_G['n']} slices; the paired difference is "
+              f"{ATT_P['delta_mass_mean']:+.4f} "
+              f"[{ATT_P['ci95_low']:+.4f}, {ATT_P['ci95_high']:+.4f}], "
+              "significant." if ATT_G is not None
+              else "Grad-CAM could not be extracted and is recorded as "
+                   "missing rather than approximated."))
 
 figure("fig11_attention_alignment.png",
-       "Attention mass inside the tumour mask versus the uniform reference, "
-       "with Grad-CAM marked unavailable.")
+       "Mass of each saliency map inside the ground-truth tumour mask, "
+       "against the uniform reference (dashed), over "
+       f"{ATT_T['n']} BRISC tumour slices.")
 
-para("Figure [[FIG:fig11_attention_alignment.png]] plots those two "
-     "quantities side by side. The learned attention map is not further "
-     "inside the tumour than a uniform map is, and the reference method "
-     "that would have shown otherwise \u2014 Grad-CAM on the DenseNet-121 "
-     "baseline \u2014 could not be extracted from that checkpoint because it "
-     "exposes no `.features` module. It is recorded as missing rather than "
-     "approximated.", indent=True)
+if ATT_G is not None:
+    para(f"[[FIG:fig11_attention_alignment.png]] plots the three "
+         f"maps side by side. The learned attention map puts "
+         f"{ATT_T['mass_in_mask_mean']:.4f} of its mass inside the tumour "
+         f"mask \u2014 *less* than a uniform map's "
+         f"{ATT_U['mass_in_mask_mean']:.4f} \u2014 while Grad-CAM on the "
+         f" DenseNet-121 baseline puts {ATT_G['mass_in_mask_mean']:.4f} "
+         f"there, a {ATT_G['lift_over_mask_fraction']:.2f}\u00d7 lift over "
+         f"mask area. The paired difference is "
+         f"{ATT_P['delta_mass_mean']:+.4f} with a 95 % interval of "
+         f"[{ATT_P['ci95_low']:+.4f}, {ATT_P['ci95_high']:+.4f}] over "
+         f"{ATT_P['n']} slices, so this is not noise: the tumour-aware "
+         "attention module attends *less* tumour-awarely than a "
+         "gradient-based explanation of a plain backbone. The pointing-game "
+         f"hit rate tells the same story "
+         f"({ATT_T['pointing_hit_rate']:.3f} against "
+         f"{ATT_G['pointing_hit_rate']:.3f}). Grad-CAM is computed on the "
+         "DenseNet-121 checkpoint only \u2014 no Grad-CAM of TAMNet's own "
+         "encoder is reported, because the attention map above *is* TAMNet's "
+         "saliency signal and it is the quantity under test.",
+         indent=True)
+else:
+    para("[[FIG:fig11_attention_alignment.png]] plots those two "
+         "quantities side by side. The learned attention map is not further "
+         "inside the tumour than a uniform map is, and the reference method "
+         "that would have shown otherwise \u2014 Grad-CAM on the DenseNet-121 "
+         "baseline \u2014 could not be extracted from that checkpoint. It is "
+         "recorded as missing rather than approximated.", indent=True)
 
 h2("K.  Computational Efficiency")
-para("Table XI reports the measured cost of every model under a fixed "
+para("Table XII reports the measured cost of every model under a fixed "
      "protocol: batch 1, 20 warm-up iterations, 200 timed iterations, CUDA "
      "synchronised around each iteration.", indent=True)
 

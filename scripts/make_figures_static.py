@@ -44,6 +44,7 @@ if str(ROOT) not in sys.path:
 
 OUT = ROOT / "paper" / "figs"
 RUNS = ROOT / "results" / "phase3" / "runs"
+RESULTS = ROOT / "results"
 
 CLASS_ORDER = ["Glioma", "Meningioma", "Pituitary", "No Tumor"]
 
@@ -419,12 +420,31 @@ def fig3_samples(manifest: dict) -> None:
 
 
 # ----------------------------------------------------------- fig 8 seg boxes
-def fig8_seg_box(manifest: dict) -> None:
-    """Per-slice Dice distributions for every BRISC segmentation evaluation.
+def _fig8_bras_wt_tc_et() -> list[dict] | None:
+    """Per-case WT/TC/ET from the standalone 3-D U-Net (finding D3)."""
+    rec = read_json(RESULTS / "brats_unet3d_wt_tc_et.json")
+    if not rec:
+        return None
+    out = []
+    for region in ("WT", "TC", "ET"):
+        vals = [c[region] for c in rec["per_case"]
+                if isinstance(c.get(region), (int, float))]
+        if not vals:
+            return None
+        out.append({"label": f"{region} (n={len(vals)})", "dice": vals,
+                    "mean": float(np.mean(vals))})
+    return out or None
 
-    Only the BRISC auxiliary-head rows are plotted: the WT/TC/ET values quoted
-    in the legacy manuscript belong to a standalone 3-D U-Net and no per-case
-    record of them exists in results/, so they are deliberately absent here.
+
+def fig8_seg_box(manifest: dict) -> None:
+    """Two-panel Dice distributions: BRISC auxiliary head vs the 3-D U-Net.
+
+    Left: per-slice Dice of every BRISC segmentation evaluation (TAMNet
+    auxiliary head and the shared-U-Net baseline, one box per run).
+    Right: per-case WT/TC/ET Dice of the *standalone* 3-D U-Net on the
+    BraTS patient-held-out test split, read from
+    ``results/brats_unet3d_wt_tc_et.json`` — the record behind the legacy
+    manuscript's 0.9005 / 0.5803 / 0.6010, now attributed to D3's model.
     """
     rows = []
     for d in sorted(RUNS.iterdir()):
@@ -452,12 +472,20 @@ def fig8_seg_box(manifest: dict) -> None:
                      "mean": float(np.mean(vals)),
                      "seed": cfg.get("seed")})
 
-    if not rows:
+    order = sorted(rows, key=lambda r: r["mean"])
+    brasc = _fig8_bras_wt_tc_et()
+
+    if not order and not brasc:
         print("MISSING: no eval_brisc_test/seg_metrics.json found")
         return
 
-    order = sorted(rows, key=lambda r: r["mean"])
-    fig, ax = plt.subplots(figsize=(6.6, 4.3))
+    n_pan = 2 if brasc else 1
+    fig, axes = plt.subplots(1, n_pan, figsize=(10.4, 4.3),
+                             gridspec_kw={"width_ratios":
+                                          [len(order) + 1.6, 3.2]} if brasc
+                             else None)
+    ax = axes[0] if brasc else axes
+
     data = [r["dice"] for r in order]
     labels = [f"{r['label']} (seed {r['seed']}, n={r['n']})" for r in order]
     bp = ax.boxplot(data, orientation="horizontal", widths=0.62,
@@ -477,17 +505,51 @@ def fig8_seg_box(manifest: dict) -> None:
                 fontsize=6.9, ha="center", va="bottom", color="#222")
     ax.set_xlabel("per-slice Dice on tumour slices "
                   "(BRISC 2025 official test split)", fontsize=8.4)
+    ax.set_title("(a) TAMNet auxiliary head — 2-D slices", fontsize=8.8)
     ax.grid(axis="x", alpha=0.25, lw=0.6)
     ax.set_axisbelow(True)
+
+    if brasc:
+        ax2 = axes[1]
+        bp2 = ax2.boxplot([r["dice"] for r in brasc],
+                          orientation="horizontal", widths=0.55,
+                          patch_artist=True,
+                          medianprops={"color": "#111", "lw": 1.3},
+                          flierprops={"markersize": 2.6, "alpha": 0.5},
+                          whiskerprops={"lw": 0.9}, capprops={"lw": 0.9})
+        for patch in bp2["boxes"]:
+            patch.set_facecolor(COLOR["unet"])
+            patch.set_alpha(0.72)
+            patch.set_edgecolor("#333")
+        ax2.set_yticklabels([r["label"] for r in brasc], fontsize=8.0)
+        for i, r in enumerate(brasc, start=1):
+            ax2.text(r["mean"], i + 0.22, f"mean {r['mean']:.4f}",
+                     fontsize=7.0, ha="center", va="bottom", color="#222")
+        ax2.set_xlabel("per-case Dice (3-D volume)", fontsize=8.4)
+        ax2.set_title("(b) standalone 3-D U-Net — BraTS test (D3)",
+                      fontsize=8.8)
+        ax2.grid(axis="x", alpha=0.25, lw=0.6)
+        ax2.set_axisbelow(True)
+
     fig.tight_layout()
     paths = savefig_both(fig, "fig8_seg_box")
     plt.close(fig)
-    print(f"fig8: wrote {paths[0]}  ({len(rows)} runs)")
+    n_br = len(brasc) if brasc else 0
+    print(f"fig8: wrote {paths[0]}  ({len(rows)} BRISC runs, {n_br} WT/TC/ET)")
     manifest["fig8_seg_box"] = {
-        "runs": [{"label": r["label"], "run": r["run"], "n": r["n"],
-                  "mean": r["mean"], "seed": r["seed"]} for r in order],
-        "excluded": "WT/TC/ET from the standalone 3-D U-Net (D3): no per-case "
-                    "record exists under results/, so they are not plotted",
+        "panel_a": [{"label": r["label"], "run": r["run"], "n": r["n"],
+                     "mean": r["mean"], "seed": r["seed"]} for r in order],
+        "panel_b": None if not brasc else {
+            "source": "results/brats_unet3d_wt_tc_et.json",
+            "model": "standalone 3-D U-Net (finding D3), patient-held-out "
+                     "BraTS test split",
+            "regions": [{"label": r["label"], "mean": r["mean"]}
+                        for r in brasc],
+        },
+        "note": "panel (b) numbers are NOT TAMNet's auxiliary head: they are "
+                "the WT/TC/ET Dice the legacy manuscript attributed to TAMNet "
+                "(0.9005/0.5803/0.6010), re-measured from the 3-D U-Net "
+                "checkpoint with per-case provenance",
     }
 
 

@@ -1,6 +1,6 @@
 {
   "kind": "phase4_figures",
-  "created_at": "2026-11-27T18:02:47+00:00",
+  "created_at": "2026-11-28T04:49:28+00:00",
   "n_runs": 41,
   "n_runs_with_test_eval": 41,
   "input_files_sha256_16": {
@@ -456,12 +456,21 @@
       "summaries": {
         "tamnet_attention": {
           "n": 860,
-          "mass_in_mask_mean": 0.010293705831357984,
-          "mass_in_mask_std": 0.014030265806546751,
-          "mass_in_mask_median": 0.005936024710536003,
+          "mass_in_mask_mean": 0.010293700432445147,
+          "mass_in_mask_std": 0.014030266988496456,
+          "mass_in_mask_median": 0.005936024943366647,
           "pointing_hit_rate": 0.0,
           "mask_fraction_mean": 0.019058981760700103,
-          "lift_over_mask_fraction": 0.5400973651480037
+          "lift_over_mask_fraction": 0.5400970818740646
+        },
+        "densenet121_gradcam": {
+          "n": 860,
+          "mass_in_mask_mean": 0.07646655858288584,
+          "mass_in_mask_std": 0.07623684141698005,
+          "mass_in_mask_median": 0.04843844287097454,
+          "pointing_hit_rate": 0.09534883720930233,
+          "mask_fraction_mean": 0.019058981760700103,
+          "lift_over_mask_fraction": 4.012100937131962
         },
         "uniform": {
           "n": 860,
@@ -473,12 +482,18 @@
           "lift_over_mask_fraction": 1.0000000003444718
         }
       },
-      "paired_tamnet_minus_gradcam": null,
+      "paired_tamnet_minus_gradcam": {
+        "n": 860,
+        "delta_mass_mean": -0.06617285815044069,
+        "ci95_low": -0.07057155965203407,
+        "ci95_high": -0.06155209101045266,
+        "significant": true
+      },
       "fusion_weights": {
         "n": 860,
-        "alpha_global_mean": 0.9707183436598888,
-        "alpha_tumor_mean": 0.029281656364108996,
-        "alpha_tumor_std": 0.04678354201620702,
+        "alpha_global_mean": 0.970718267352082,
+        "alpha_tumor_mean": 0.029281733545587427,
+        "alpha_tumor_std": 0.04678363117369819,
         "note": "2-way softmax over (global, tumour) features; see models/tumor_aware.py AttentionFusion"
       }
     },
@@ -3400,7 +3415,7 @@
       "note": "first sorted file per class/directory; BRISC mask overlay from segmentation_task/test/masks"
     },
     "fig8_seg_box": {
-      "runs": [
+      "panel_a": [
         {
           "label": "TAMNet \u03bb_seg=0.1",
           "run": "tamnet_brisc_s42+ls0.1+sc2",
@@ -3458,7 +3473,25 @@
           "seed": 43
         }
       ],
-      "excluded": "WT/TC/ET from the standalone 3-D U-Net (D3): no per-case record exists under results/, so they are not plotted"
+      "panel_b": {
+        "source": "results/brats_unet3d_wt_tc_et.json",
+        "model": "standalone 3-D U-Net (finding D3), patient-held-out BraTS test split",
+        "regions": [
+          {
+            "label": "WT (n=45)",
+            "mean": 0.9005117522345649
+          },
+          {
+            "label": "TC (n=45)",
+            "mean": 0.5802639113171114
+          },
+          {
+            "label": "ET (n=45)",
+            "mean": 0.6009605632366091
+          }
+        ]
+      },
+      "note": "panel (b) numbers are NOT TAMNet's auxiliary head: they are the WT/TC/ET Dice the legacy manuscript attributed to TAMNet (0.9005/0.5803/0.6010), re-measured from the 3-D U-Net checkpoint with per-case provenance"
     },
     "fig2_data_pipeline": {
       "internal_train": 9291,
@@ -3490,7 +3523,86 @@
         "results/phase3/external_dedup_manifest.json",
         "results/phase3/runs/tamnet_clean_s42/run_config.json"
       ]
+    },
+    "fig7_seg_qualitative.png": {
+      "runs": [
+        "shared_unet_brisc_s43+ls0.25+sc2",
+        "tamnet_brisc_s42+sc2"
+      ],
+      "selection": "argmax / median-nearest / argmin of per-slice Dice among non-empty-GT slices; runs chosen by group mean",
+      "checkpoints": {
+        "tamnet_brisc_s42+sc2": "db84b8838f26ad0bbfa11048f137d723523ace756b19851fff0a1a091c67a72a",
+        "shared_unet_brisc_s43+ls0.25+sc2": "38b96b24b4463fd1fe8f84cafb4fccf664397ec9edc405366145bab737914c1a"
+      },
+      "slices": [
+        {
+          "run": "tamnet_brisc_s42+sc2",
+          "role": "best",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00702_pi_ax_t1.jpg",
+          "dice_recorded": 0.9459041731066461,
+          "gt_pixels": 323,
+          "pred_pixels": 323,
+          "seed": 42,
+          "model": "tamnet",
+          "seg_weight": 0.5
+        },
+        {
+          "run": "tamnet_brisc_s42+sc2",
+          "role": "median",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00435_me_co_t1.jpg",
+          "dice_recorded": 0.7933884297520661,
+          "gt_pixels": 392,
+          "pred_pixels": 576,
+          "seed": 42,
+          "model": "tamnet",
+          "seg_weight": 0.5
+        },
+        {
+          "run": "tamnet_brisc_s42+sc2",
+          "role": "worst",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00001_gl_ax_t1.jpg",
+          "dice_recorded": 0.0,
+          "gt_pixels": 222,
+          "pred_pixels": 1761,
+          "seed": 42,
+          "model": "tamnet",
+          "seg_weight": 0.5
+        },
+        {
+          "run": "shared_unet_brisc_s43+ls0.25+sc2",
+          "role": "best",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/meningioma/brisc2025_test_00287_me_ax_t1.jpg",
+          "dice_recorded": 0.9868971285196543,
+          "gt_pixels": 5385,
+          "pred_pixels": 5376,
+          "seed": 43,
+          "model": "shared_unet",
+          "seg_weight": 0.25
+        },
+        {
+          "run": "shared_unet_brisc_s43+ls0.25+sc2",
+          "role": "median",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/pituitary/brisc2025_test_00909_pi_co_t1.jpg",
+          "dice_recorded": 0.9110764430577223,
+          "gt_pixels": 292,
+          "pred_pixels": 349,
+          "seed": 43,
+          "model": "shared_unet",
+          "seg_weight": 0.25
+        },
+        {
+          "run": "shared_unet_brisc_s43+ls0.25+sc2",
+          "role": "worst",
+          "path": "data/external/brisc2025/brisc2025/classification_task/test/glioma/brisc2025_test_00001_gl_ax_t1.jpg",
+          "dice_recorded": 0.0,
+          "gt_pixels": 222,
+          "pred_pixels": 1530,
+          "seed": 43,
+          "model": "shared_unet",
+          "seg_weight": 0.25
+        }
+      ]
     }
   },
-  "static_generated_at": "2026-11-27T18:25:26+00:00"
+  "static_generated_at": "2026-11-28T04:49:32+00:00"
 }

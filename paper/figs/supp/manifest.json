@@ -1,0 +1,49 @@
+{
+  "kind": "phase4_supplementary",
+  "created_at": "2026-11-28T05:00:08+00:00",
+  "directory": "paper/figs/supp",
+  "written": {
+    "S1_training_curves": [
+      "S1_training_curves.png",
+      "S1_training_curves.pdf"
+    ],
+    "S2_leakage_audit": [
+      "S2_leakage_audit.png",
+      "S2_leakage_audit.pdf"
+    ],
+    "S3_per_class_roc_pr": [
+      "S3_per_class_roc_pr.png",
+      "S3_per_class_roc_pr.pdf"
+    ],
+    "S4_per_class_prf": [
+      "S4_per_class_prf.png",
+      "S4_per_class_prf.pdf"
+    ],
+    "S5_calibration_mc": [
+      "S5_calibration_mc.png",
+      "S5_calibration_mc.pdf"
+    ],
+    "S6_tsne_fused_embedding": [
+      "S6_tsne_fused_embedding.png",
+      "S6_tsne_fused_embedding.pdf"
+    ],
+    "S7_failure_gallery": [
+      "S7_failure_gallery.png",
+      "S7_failure_gallery.pdf"
+    ],
+    "S8_class_counts": [
+      "S8_class_counts.png",
+      "S8_class_counts.pdf"
+    ],
+    "S9_seed_dots": [
+      "S9_seed_dots.png",
+      "S9_seed_dots.pdf"
+    ],
+    "S10_latency_summary": [
+      "S10_latency_summary.png",
+      "S10_latency_summary.pdf"
+    ]
+  },
+  "missing": {},
+  "note": "Supplementary panels are supporting material; no citation in TAMNet_Paper.docx depends on them. MISSING entries are recorded rather than approximated."
+}

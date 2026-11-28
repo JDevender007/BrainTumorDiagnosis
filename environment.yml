@@ -1,0 +1,17 @@
+# Conda environment for the TAMNet audit reproduction.
+# The audit itself was run on CPython 3.13.14 with the wheels pinned in
+# requirements.txt; this file pins the same set for a fresh machine.
+#
+#   conda env create -f environment.yml
+#   conda activate tamnet-audit
+#
+# torch/torchaudio/torchvision use the cu128 build index (RTX 3050, CUDA 12.8);
+# CPU-only machines can drop the +cu128 suffix and the pytorch channel.
+name: tamnet-audit
+channels:
+  - defaults
+dependencies:
+  - python=3.13
+  - pip
+  - pip:
+      - -r requirements.txt

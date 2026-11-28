@@ -92,7 +92,7 @@
 [P082] 
 [P083] Fig. 3. First sorted slice per class from each source, with the BRISC ground-truth mask overlaid in the last column. Selection is mechanical, not cherry-picked. (source: paper/figs/fig3_samples.png).
 [P084] Split. All classification experiments use one manifest-pinned split of the internal pool: 7804 training, 1672 validation and 1672 test images, with per-class test counts of 543 glioma, 393 meningioma, 386 pituitary and 350 no-tumor. The manifest is results/phase3/split_manifest_clean.json (SHA-256 recorded in every run_config.json), and it is the only split used for the headline numbers. The split is image-level, not patient-level: no patient identifier exists in any filename of the internal pool, so a patient-held-out split cannot be constructed from it. Every confidence interval in this paper is therefore an image-level interval.
-[P085] Figure Fig. 2 traces every image from its source folder through the audit, the de-duplication keep-lists and the manifest split to the single TEST evaluation, and Figure Fig. 3 shows what the slices themselves look like in each source.
+[P085] Fig. 2 traces every image from its source folder through the audit, the de-duplication keep-lists and the manifest split to the single TEST evaluation, and Fig. 3 shows what the slices themselves look like in each source.
 [P086] Leakage. Perceptual-hash near-duplicate detection (pHamming ≤ 6 or dHamming ≤ 4, union) between every pair of sources shows that the historical evaluation was not independent:
 [P087] •  Internal train vs internal test. 6,311 near-duplicate pairs. The historical split reproduces this directly: the leaky control reaches 0.9815 against 0.9360 ± 0.0110 on the clean split — a 4.55 pp inflation from leakage alone.
 [P088] •  Kaggle testing vs internal train. 1242 of 1311 images (94.7 %) also occur in training, of which 960 are byte-identical. Kaggle testing is not an independent external set.
@@ -159,7 +159,7 @@
 [P112] Fig. 6. Per-class F1 for the TAMNet headline run; meningioma is the weakest class. (source: paper/figs/fig6b_per_class_f1.png).
 [P113] 
 [P114] Fig. 7. Accuracy against parameter count. DenseNet-121 matches TAMNet with fewer parameters, so no efficiency advantage survives. (source: paper/figs/fig5_pareto_params_accuracy.png).
-[P115] Figures Fig. 4 and Fig. 7 show the same table as a ranking with intervals and as an accuracy–parameter plane; Figures Fig. 5 and Fig. 6 break the TAMNet row down into the confusion pattern and the per-class scores behind its macro-F1.
+[P115] Fig. 4 and Fig. 7 show the same table as a ranking with intervals and as an accuracy–parameter plane; Fig. 5 and Fig. 6 break the TAMNet row down into the confusion pattern and the per-class scores behind its macro-F1.
 [P116] E.  Ablations
 [P117] Table V isolates each tumor-aware component while holding the protocol fixed.
 [P118] TABLE V
@@ -183,7 +183,7 @@
 [P123] (iii) Segmentation loss. On the BRISC protocol, where aligned masks exist, adding the auxiliary loss never helps: λ_seg = 0 gives 0.9043 and λ_seg = 1 gives 0.8780, with the intermediate values no better. Since these are single-seed runs they are point estimates, but the direction is consistent — segmentation supervision does not improve classification. This is the central design assumption of the model, and it is not supported.
 [P124] 
 [P125] Fig. 8. Validation curves for the ablation configurations; the panel corresponds row-for-row to Table V. (source: paper/figs/fig4_ablation_val.png).
-[P126] Figure Fig. 8 shows the validation trajectory behind each ablation row, so that a difference which is inside the seed spread can be seen to be inside the epoch-to-epoch noise as well.
+[P126] Fig. 8 shows the validation trajectory behind each ablation row, so that a difference which is inside the seed spread can be seen to be inside the epoch-to-epoch noise as well.
 [P127] F.  External Validation Before and After De-duplication
 [P128] Table VI reports both versions of every external number. The full-set row reproduces the contamination described in Section IV-A; the de-duplicated row is the only value that may be called external generalisation.
 [P129] TABLE VI
@@ -198,7 +198,7 @@
 [P132] De-duplication costs 3.57 pp on Kaggle and 4.00 pp on BRISC — the difference between in-distribution and genuine generalisation. Even the full-set re-run (0.9788 ± 0.0050 on Kaggle) falls short of the 99.16 % quoted in the earlier draft, which came from a different checkpoint under the historical protocol. We therefore withdraw both original external claims.
 [P133] 
 [P134] Fig. 9. Train-source × test-set accuracy matrix, full and de-duplicated. (source: paper/figs/fig15_generalization_matrix.png).
-[P135] Figure Fig. 9 lays the same numbers out as a train-source × test-set matrix, which makes the asymmetry visible: training on a source and testing on itself is easy, testing on a de-duplicated external set is not, and the difference between the two halves of every cell is exactly the contamination removed by the keep-lists.
+[P135] Fig. 9 lays the same numbers out as a train-source × test-set matrix, which makes the asymmetry visible: training on a source and testing on itself is easy, testing on a de-duplicated external set is not, and the difference between the two halves of every cell is exactly the contamination removed by the keep-lists.
 [P136] G.  Segmentation Performance
 [P137] Two different things have been called “the segmentation result” in this project, and they must not be conflated.
 [P138] (a) The multi-task head of this model. TAMNet's auxiliary segmentation head is evaluated on the BRISC 2025 test split as binary tumour-versus-background Dice on 2-D 224×224 slices. Table VII gives what the architecture can defend.
@@ -213,14 +213,25 @@
    | shared_unet_brisc | 4 | 0.8034 ± 0.0357 | 0.7135 | 0.9942 | 0.559
 [P141] Source: results/phase3/seg_metrics_summary.json. Single-seed rows have no standard deviation. These are not WT/TC/ET numbers.
 [P142] 
-[P143] Fig. 10. Per-slice Dice distributions for every BRISC segmentation evaluation. The WT/TC/ET values from the standalone 3-D U-Net are deliberately absent: no per-case record of them exists under `results/`, so they cannot be plotted honestly. (source: paper/figs/fig8_seg_box.png).
-[P144] Figure Fig. 10 shows the full per-slice distributions behind the summary rows of Table VII. The medians sit well above the means in every run, i.e. the Dice distribution is left-skewed by a tail of hard slices rather than being centred on a mediocre value — reporting only the mean hides that shape.
-[P145] (b) The whole-tumour / tumor-core / enhancing-tumour numbers. The values 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft are verified but mis-attributed: they are produced by a standalone 3-D U-Net trained on BraTS volumes (checkpoints/segmentation/unet3d, 45 cases), not by TAMNet's auxiliary head, and in the historical runs that head received no gradient at all (L_seg ≡ 0). BraTS contributes no classification images to this paper: it carries no pituitary and no no-tumour label, so it cannot supply the four-class task, and no 3-D-to-2-D conversion exists anywhere in the classification path. The reported standard deviations for those legacy figures are 0.048 (WT), 0.253 (TC) and 0.242 (ET) — the means hide very large case-to-case variance, and the earlier draft quoted the means alone. We keep the figures only as a characterisation of that separate 3-D system.
-[P146] H.  Uncertainty and Calibration
-[P147] Table VIII reports calibration for the configurations that have a full multi-seed MC-dropout evaluation, using the corrected protocol of Section III-H.
-[P148] TABLE VIII
-[P149] Calibration and uncertainty on the clean test split (T = 10, BatchNorm frozen, 15 ECE bins).
-[T7] TABLE 10x8
+[P143] Fig. 10. Qualitative segmentation on the BRISC 2025 test split. Rows are the argmax, median-nearest and argmin slice by the Dice already recorded in `seg_metrics.json`, for the best-ranked TAMNet run and the best-ranked shared-U-Net run; columns are the input slice, the ground truth, the predicted mask and the overlay (red = ground truth, cyan = prediction). Nothing here was chosen by eye, and the shown predictions were re-computed from each run's `best.pt` through the evaluation transform. (source: paper/figs/fig7_seg_qualitative.png).
+[P144] Fig. 10 shows what the Table VII means look like on individual slices. The worst row is where the binary head fails: an empty or near-empty prediction on a slice whose mask is large, which is exactly the tail that pulls the mean below the median in Fig. 11 panel (a).
+[P145] 
+[P146] Fig. 11. Panel (a): per-slice Dice distributions for every BRISC segmentation evaluation of the auxiliary head. Panel (b): per-case WT / TC / ET Dice of the standalone 3-D U-Net on the BraTS test split, read from `results/brats_unet3d_wt_tc_et.json` — the model that actually produced the 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft, not TAMNet. (source: paper/figs/fig8_seg_box.png).
+[P147] Fig. 11 shows the full per-slice distributions behind the summary rows of Table VII (panel a). The medians sit well above the means in every run, i.e. the Dice distribution is left-skewed by a tail of hard slices rather than being centred on a mediocre value — reporting only the mean hides that shape.
+[P148] (b) The whole-tumour / tumour-core / enhancing-tumour numbers. The values 0.9005 / 0.5803 / 0.6010 quoted in the earlier draft are verified but mis-attributed: they are produced by a standalone 3-D U-Net trained on BraTS volumes (checkpoints/segmentation/unet3d, 45 patient-held-out test cases), not by TAMNet's auxiliary head, and in the historical runs that head received no gradient at all (L_seg ≡ 0). Table VIII gives the re-measured per-case distribution, and panel (b) of Fig. 11 plots it. BraTS contributes no classification images to this paper: it carries no pituitary and no no-tumour label, so it cannot supply the four-class task, and no 3-D-to-2-D conversion exists anywhere in the classification path. The standard deviations for those legacy figures are 0.048 (WT), 0.253 (TC) and 0.242 (ET) — the means hide very large case-to-case variance, and the earlier draft quoted the means alone: WT spans 0.7313–0.9632 while ET spans 0.0000–1.0000. We keep the figures only as a characterisation of that separate 3-D system.
+[P149] TABLE VIII
+[P150] Per-case WT / TC / ET Dice of the standalone 3-D U-Net on the patient-held-out BraTS test split (45 cases).
+[T7] TABLE 4x8
+   | Region | Cases | Mean | Sample SD | Legacy SD (ddof=0) | Median | Min | Max
+   | WT | 45 | 0.9005 | 0.0485 | 0.0480 | 0.9158 | 0.7313 | 0.9632
+   | TC | 45 | 0.5803 | 0.2555 | 0.2526 | 0.6155 | 0.0000 | 1.0000
+   | ET | 45 | 0.6010 | 0.2449 | 0.2422 | 0.6162 | 0.0000 | 1.0000
+[P151] Source: results/brats_unet3d_wt_tc_et.json (ingested from outputs/metrics/segmentation_evaluation_test.json; SHA-256 of both files and of the checkpoint recorded in the artifact, and the per-case values reproduce the stored aggregate). The means are the legacy 0.9005 / 0.5803 / 0.6010. These numbers belong to a standalone 3-D U-Net, not to TAMNet (finding D3), and are not comparable with Table VII's 2-D binary Dice.
+[P152] H.  Uncertainty and Calibration
+[P153] Table IX reports calibration for the configurations that have a full multi-seed MC-dropout evaluation, using the corrected protocol of Section III-H.
+[P154] TABLE IX
+[P155] Calibration and uncertainty on the clean test split (T = 10, BatchNorm frozen, 15 ECE bins).
+[T8] TABLE 10x8
    | Configuration | Seeds | Accuracy | ECE | NLL | Brier | MI | Error AUROC
    | TAMNet baseline (g+t fusion), clean protocol | 5 | 0.9359 ± 0.0110 | 0.0760 ± 0.0102 | 0.2804 ± 0.0212 | 0.1130 ± 0.0130 | 0.0494 ± 0.0117 | 0.7214 ± 0.0746
    | TAMNet + channel attention (MC) | 4 | 0.9412 ± 0.0047 | 0.0708 ± 0.0033 | 0.2676 ± 0.0196 | 0.1059 ± 0.0092 | 0.0428 ± 0.0023 | 0.7132 ± 0.0269
@@ -231,47 +242,48 @@
    | ResNet-50 baseline (single seed) | 1 | 0.9438 | 0.0466 | 0.2441 | 0.1000 | 0.0010 | 0.7201
    | ConvNeXt-Tiny baseline (single seed) | 1 | 0.9498 | 0.0410 | 0.2316 | 0.0903 | 0.0005 | 0.6686
    | ViT-B/16 baseline (single seed) | 1 | 0.9282 | 0.0343 | 0.2952 | 0.1257 | 0.0006 | 0.7025
-[P150] Source: results/phase3/uncertainty_summary.json. Error AUROC is how well mutual information separates misclassified from correctly classified slices (0.5 = no signal).
-[P151] TAMNet's ECE of 0.0760 against an accuracy of 0.9359 means the model is under-confident: mean confidence 0.8736 sits below realised accuracy. Mutual information carries real signal (error AUROC 0.721), so the uncertainty estimate is usable for ranking risk even though the absolute confidence is miscalibrated. DenseNet-121 is better calibrated (ECE 0.0545 at 0.9363 accuracy) on the same split, which is a further reason not to claim a calibration advantage.
-[P152] 
-[P153] Fig. 11. Reliability diagram on the clean test split; diagonal = perfect calibration. (source: paper/figs/fig9_reliability.png).
-[P154] 
-[P155] Fig. 12. Uncertainty histograms, risk–coverage curve and error-detection AUROC. (source: paper/figs/fig10_uncertainty.png).
-[P156] Figures Fig. 11 and Fig. 12 give the diagnostics behind the calibration columns. Of the reliability bins that hold at least 30 test images, 3 of 4 sit above the diagonal — realised accuracy exceeds the stated confidence, which is exactly what under-confidence looks like, and it is where 1590 of 1672 images live. The sparse low-confidence bins sit below it, so the model is not uniformly miscalibrated. The risk–coverage curve behaves as a usable uncertainty signal should: abstaining on the most uncertain slices first moves accuracy from 0.9282 at full coverage to 0.9760 at the lowest plotted coverage (AURC 0.9719).
-[P157] I.  Robustness to Image Corruptions
-[P158] The corruption set contains 27 conditions — 9 corruption types × 3 severities — applied in pixel space before normalisation, with the clean path verified bit-identical. MRRS is defined formally as
-[P159] MRRS  =  (1/K) Σ_{k=1..K}  acc(corruption_k) / acc(clean)
-[P160] averaged over the 27 conditions and then reported as a mean over seeds — never as the best seed. The types are brightness, contrast, defocus_blur, gaussian_noise, impulse_noise, jpeg_compression, motion_blur, pixelate, shot_noise, each at severities 1–3.
-[P161] TABLE IX
-[P162] Mean relative robustness score under the 27-condition corruption set.
-[T8] TABLE 3x5
+[P156] Source: results/phase3/uncertainty_summary.json. Error AUROC is how well mutual information separates misclassified from correctly classified slices (0.5 = no signal).
+[P157] TAMNet's ECE of 0.0760 against an accuracy of 0.9359 means the model is under-confident: mean confidence 0.8736 sits below realised accuracy. Mutual information carries real signal (error AUROC 0.721), so the uncertainty estimate is usable for ranking risk even though the absolute confidence is miscalibrated. DenseNet-121 is better calibrated (ECE 0.0545 at 0.9363 accuracy) on the same split, which is a further reason not to claim a calibration advantage.
+[P158] 
+[P159] Fig. 12. Reliability diagram on the clean test split; diagonal = perfect calibration. (source: paper/figs/fig9_reliability.png).
+[P160] 
+[P161] Fig. 13. Uncertainty histograms, risk–coverage curve and error-detection AUROC. (source: paper/figs/fig10_uncertainty.png).
+[P162] Fig. 12 and Fig. 13 give the diagnostics behind the calibration columns. Of the reliability bins that hold at least 30 test images, 3 of 4 sit above the diagonal — realised accuracy exceeds the stated confidence, which is exactly what under-confidence looks like, and it is where 1590 of 1672 images live. The sparse low-confidence bins sit below it, so the model is not uniformly miscalibrated. The risk–coverage curve behaves as a usable uncertainty signal should: abstaining on the most uncertain slices first moves accuracy from 0.9282 at full coverage to 0.9760 at the lowest plotted coverage (AURC 0.9719).
+[P163] I.  Robustness to Image Corruptions
+[P164] The corruption set contains 27 conditions — 9 corruption types × 3 severities — applied in pixel space before normalisation, with the clean path verified bit-identical. MRRS is defined formally as
+[P165] MRRS  =  (1/K) Σ_{k=1..K}  acc(corruption_k) / acc(clean)
+[P166] averaged over the 27 conditions and then reported as a mean over seeds — never as the best seed. The types are brightness, contrast, defocus_blur, gaussian_noise, impulse_noise, jpeg_compression, motion_blur, pixelate, shot_noise, each at severities 1–3.
+[P167] TABLE X
+[P168] Mean relative robustness score under the 27-condition corruption set.
+[T9] TABLE 3x5
    | Configuration | Seeds | Clean accuracy | MRRS (mean ± SD) | Best-seed MRRS
    | TAMNet | 5 | 0.9360 ± 0.0110 | 0.8508 ± 0.0035 | 0.8541
    | DenseNet-121 | 4 | 0.9360 ± 0.0125 | 0.8142 ± 0.0260 | 0.8452
-[P163] Source: results/phase3/robustness.json.
-[P164] TAMNet is the more corruption-robust of the two (0.8508 ± 0.0035 vs 0.8142 ± 0.0260), and the gap survives the seed spread. Note that the best-seed values (0.8541 and 0.8452) are shown only to document how large the seed effect is; neither is used as a headline. The earlier draft's MRRS of 0.7512 was a best-seed value from a different protocol and is superseded.
-[P165] 
-[P166] Fig. 13. Accuracy for each corruption × severity cell, normalised by clean accuracy. (source: paper/figs/fig13_robustness_heatmap.png).
-[P167] 
-[P168] Fig. 14. Accuracy against corruption severity for the intensity-type corruptions. (source: paper/figs/fig14_intensity_curves.png).
-[P169] Figure Fig. 13 shows every cell of the corruption × severity grid and Figure Fig. 14 collapses the intensity-type corruptions into accuracy-versus-severity curves. Degradation is graded rather than cliff-edge: accuracy falls from severity 1 to severity 3 in 44 of 45 run×corruption pairs. The single exception is motion blur at tamnet clean s42, where severity 2 exceeds severity 1 by 0.06 pp. The two models do not keep a constant ordering either: TAMNet is ahead in only 20 of 27 corruption×severity cells, so the higher aggregate MRRS of Section IV-I comes from the size of its wins on the noise-type corruptions rather than from winning everywhere.
-[P170] J.  Attention Alignment
-[P171] If the spatial attention map were tumor-aware it should place more mass inside the ground-truth tumour mask than a uniform map does. Table X shows that it does not: on 860 BRISC tumour slices the attention mass inside the mask is 0.0103 against a uniform baseline of 0.0191, a lift of 0.54×, and the pointing-game hit rate is 0.000. Combined with the fusion weight α_tumor = 0.0293 from Section III-E, the tumor-aware pathway is measurably close to inert.
-[P172] TABLE X
-[P173] Attention–mask alignment on BRISC tumour slices.
-[T9] TABLE 3x6
+[P169] Source: results/phase3/robustness.json.
+[P170] TAMNet is the more corruption-robust of the two (0.8508 ± 0.0035 vs 0.8142 ± 0.0260), and the gap survives the seed spread. Note that the best-seed values (0.8541 and 0.8452) are shown only to document how large the seed effect is; neither is used as a headline. The earlier draft's MRRS of 0.7512 was a best-seed value from a different protocol and is superseded.
+[P171] 
+[P172] Fig. 14. Accuracy for each corruption × severity cell, normalised by clean accuracy. (source: paper/figs/fig13_robustness_heatmap.png).
+[P173] 
+[P174] Fig. 15. Accuracy against corruption severity for the intensity-type corruptions. (source: paper/figs/fig14_intensity_curves.png).
+[P175] Fig. 14 shows every cell of the corruption × severity grid and Fig. 15 collapses the intensity-type corruptions into accuracy-versus-severity curves. Degradation is graded rather than cliff-edge: accuracy falls from severity 1 to severity 3 in 44 of 45 run×corruption pairs. The single exception is motion blur at tamnet clean s42, where severity 2 exceeds severity 1 by 0.06 pp. The two models do not keep a constant ordering either: TAMNet is ahead in only 20 of 27 corruption×severity cells, so the higher aggregate MRRS of Section IV-I comes from the size of its wins on the noise-type corruptions rather than from winning everywhere.
+[P176] J.  Attention Alignment
+[P177] If the spatial attention map were tumor-aware it should place more mass inside the ground-truth tumour mask than a uniform map does. Table XI shows that it does not: on 860 BRISC tumour slices the attention mass inside the mask is 0.0103 against a uniform baseline of 0.0191, a lift of 0.54×, and the pointing-game hit rate is 0.000. Combined with the fusion weight α_tumor = 0.0293 from Section III-E, the tumor-aware pathway is measurably close to inert.
+[P178] TABLE XI
+[P179] Attention–mask alignment on BRISC tumour slices.
+[T10] TABLE 4x6
    | Map | Slices | Mass in mask | Uniform baseline | Lift | Pointing hit
    | TAMNet spatial attention | 860 | 0.0103 | 0.0191 | 0.54× | 0.000
+   | DenseNet-121 Grad-CAM [33] | 860 | 0.0765 | 0.0191 | 4.01× | 0.095
    | Uniform (reference) | 860 | 0.0191 | 0.0191 | 1.00× | 0.000
-[P174] Source: results/phase3/attention_alignment.json. Definitions: mass-in-mask = fraction of map mass inside the mask; lift = mass-in-mask divided by mask area. Grad-CAM on the DenseNet-121 baseline could not be extracted (no .features module) and is recorded as missing rather than approximated.
-[P175] 
-[P176] Fig. 15. Attention mass inside the tumour mask versus the uniform reference, with Grad-CAM marked unavailable. (source: paper/figs/fig11_attention_alignment.png).
-[P177] Figure Fig. 15 plots those two quantities side by side. The learned attention map is not further inside the tumour than a uniform map is, and the reference method that would have shown otherwise — Grad-CAM on the DenseNet-121 baseline — could not be extracted from that checkpoint because it exposes no .features module. It is recorded as missing rather than approximated.
-[P178] K.  Computational Efficiency
-[P179] Table XI reports the measured cost of every model under a fixed protocol: batch 1, 20 warm-up iterations, 200 timed iterations, CUDA synchronised around each iteration.
-[P180] TABLE XI
-[P181] Measured computational characteristics (batch 1, 20 warm-up, 200 timed iterations).
-[T10] TABLE 12x6
+[P180] Source: results/phase3/attention_alignment.json. Definitions: mass-in-mask = fraction of map mass inside the mask; lift = mass-in-mask divided by mask area. Grad-CAM is computed on the DenseNet-121 baseline's final convolutional feature map over the same 860 slices; the paired difference is -0.0662 [-0.0706, -0.0616], significant.
+[P181] 
+[P182] Fig. 16. Mass of each saliency map inside the ground-truth tumour mask, against the uniform reference (dashed), over 860 BRISC tumour slices. (source: paper/figs/fig11_attention_alignment.png).
+[P183] Fig. 16 plots the three maps side by side. The learned attention map puts 0.0103 of its mass inside the tumour mask — less than a uniform map's 0.0191 — while Grad-CAM on the  DenseNet-121 baseline puts 0.0765 there, a 4.01× lift over mask area. The paired difference is -0.0662 with a 95 % interval of [-0.0706, -0.0616] over 860 slices, so this is not noise: the tumour-aware attention module attends less tumour-awarely than a gradient-based explanation of a plain backbone. The pointing-game hit rate tells the same story (0.000 against 0.095). Grad-CAM is computed on the DenseNet-121 checkpoint only — no Grad-CAM of TAMNet's own encoder is reported, because the attention map above is TAMNet's saliency signal and it is the quantity under test.
+[P184] K.  Computational Efficiency
+[P185] Table XII reports the measured cost of every model under a fixed protocol: batch 1, 20 warm-up iterations, 200 timed iterations, CUDA synchronised around each iteration.
+[P186] TABLE XII
+[P187] Measured computational characteristics (batch 1, 20 warm-up, 200 timed iterations).
+[T11] TABLE 12x6
    | Model | Parameters | Weights (MiB) | Single pass (ms) | MC 10 passes (ms) | FPS (single)
    | densenet121 | 6,957,956 | 26.54 | 65.66 | 636.72 | 15.2
    | resnet50 | 23,516,228 | 89.71 | 41.70 | 415.23 | 24.0
@@ -284,62 +296,62 @@
    | tamnet_tonly | 8,573,870 | 32.71 | 49.90 | 551.93 | 20.0
    | tamnet_concat | 8,840,110 | 33.72 | 56.20 | 533.67 | 17.8
    | tamnet_mc | 9,165,488 | 34.96 | 60.31 | 544.72 | 16.6
-[P182] Source: results/phase3/efficiency.json. Device: NVIDIA GeForce RTX 3050 Laptop GPU, PyTorch 2.11.0+cu128.
-[P183] TAMNet uses 9,034,416 parameters (9.03 M) against 6,957,956 for DenseNet-121 — 2.08 M more parameters for the same accuracy. A single forward pass takes 50.76 ms and the full T = 10-pass Monte Carlo estimate takes 530.27 ms, so any statement about throughput must say which of the two it means. We do not claim a near-real-time advantage.
-[P184] V.  DISCUSSION
-[P185] Does TAMNet beat its baselines? No. Under the clean protocol the model scores 0.9360 ± 0.0110 against 0.9360 ± 0.0125 for a plain DenseNet-121 trained identically — the same accuracy with 2.08 M more parameters — and it is significantly behind EfficientNetV2-S, ConvNeXt-Tiny, Swin-T and ResNet-50. The earlier draft already lost to DenseNet-121 (96.45 % against 97.95 %); the clean protocol turns that loss into a tie. The accuracy–parameter plane in Fig. 7 makes the practical consequence explicit: there is no efficiency argument to fall back on.
-[P186] What the ablations say. None of the three tumor-aware components earns its complexity on classification. The learned fusion collapses onto the global pathway (α_tumor = 0.0293); the spatial attention map places less mass inside the tumour mask than a uniform map would; and the auxiliary segmentation loss does not improve accuracy at any weight we tried. The one component with a visible positive effect is channel attention, which is disabled in the executed model — an honest reading is that the historical configuration was not the one the manuscript described.
-[P187] What survives. Three things do. First, the model is genuinely more robust to corruption than DenseNet-121 (MRRS 0.8508 ± 0.0035 vs 0.8142 ± 0.0260), which is a real if modest property. Second, its mutual information separates errors from correct predictions meaningfully (error AUROC around 0.72), so the uncertainty machinery is usable for ranking risk even though the confidence values themselves are under-confident. Third, the framework genuinely does all of this in one pass with a moderate parameter budget — but that is an engineering property, not a performance claim.
-[P188] Why the earlier numbers were so high. They were traceable, not invented — every one of them matched an artifact. They were simply measuring a different, leaky protocol. Re-introducing that split reproduces 0.9815 immediately, which is the clearest demonstration that the gap between the two protocols, not any change in the model, explains the entire difference. This is the methodological point of the paper: the same architecture, the same code and the same data produce a 4.5-point swing purely from how the split is drawn.
-[P189] VI.  LIMITATIONS
-[P190] •  Public data only. All experiments use publicly released 2-D MRI slices. There is no prospective, institutional or clinical validation of any kind.
-[P191] •  Image-level, not patient-level, splits. The internal pool carries no patient identifiers, so near-duplicate control is the only available defence against patient leakage; residual within-patient correlation cannot be ruled out and every interval in this paper is image-level.
-[P192] •  Unresolved label provenance. The origin of the four-class labels in the internal pool is not documented anywhere in the repository. Part of that pool shares filenames with a public Kaggle release; the remainder comes from at least three other naming families. The class counts are stated, the origin is marked [CITATION NEEDED].
-[P193] •  Domain gap. The segmentation evidence comes from a different modality stack (BraTS 3-D multimodal NIfTI) and a different 2-D source (BRISC), while classification uses single-channel JPEG slices. No experiment here establishes transfer between them.
-[P194] •  Intensity sensitivity. Corruption robustness is measured, but the model remains sensitive to intensity-type perturbations; the corruption suite does not cover motion, bias field or scanner domain shift.
-[P195] •  Uneven seed counts. The headline configurations carry four to five seeds, but ConvNeXt-Tiny, ResNet-50, ViT-B/16 and the λ_seg sweep have a single seed each; those rows are point estimates and are labelled as such throughout.
-[P196] •  Statistical resolution. Per-run bootstrap intervals are about ±1.1 pp, so this benchmark cannot resolve differences smaller than roughly one percentage point.
-[P197] VII.  CONCLUSION
-[P198] This paper presented TAMNet, a tumor-aware multi-task framework that couples a shared DenseNet-121 encoder with spatial attention, an auxiliary segmentation branch, a learned global–tumor fusion and Monte Carlo dropout, and then re-measured it under a leakage-audited protocol. The re-measurement is the contribution: 41 runs, 1672 held-out test images, mean-over-seeds headlines with sample standard deviations, paired bootstrap intervals on every comparison, and de-duplicated external evaluation.
-[P199] The answer to the research question is negative. TAMNet reaches 0.9360 ± 0.0110 accuracy and 0.9355 ± 0.0109 macro-F1, statistically indistinguishable from plain DenseNet-121 (0.9360 ± 0.0125) and significantly below four modern backbones. Removing near-duplicates from the public test sets costs 3.57 pp on Kaggle and 4.00 pp on BRISC. The auxiliary segmentation loss provides no classification gain, the attention map does not concentrate on tumour regions, and the fusion weights ignore the tumor-region feature. The whole-tumour Dice figures quoted previously belong to a separate 3-D U-Net and are re-attributed accordingly.
-[P200] What remains useful is a recipe that is cheap, moderately robust to corruption, and carries a usable error-ranking uncertainty signal — plus, we hope, a worked example of how quickly a positive result can disappear once the split is audited. Future work should obtain a genuinely patient-level dataset, make the segmentation branch receive gradient during classification training, and test whether explicit attention supervision can move the fusion weight off the global pathway.
-[P201] DATA AND CODE AVAILABILITY
-[P202] All experiments were run at repository commit 52777ce on NVIDIA GeForce RTX 3050 Laptop GPU with PyTorch 2.11.0+cu128. Every number in this manuscript is read from an artifact under results/ by paper/rewrite_paper.py; the mapping from table to source file is recorded in paper/tables/sources.json, and the FILL evidence for the dataset statements is in results/fill_evidence.json. Per-run predictions, checkpoints, split manifests (SHA-256 pinned) and de-duplication keep-lists are included so that all confidence intervals can be recomputed. The legacy manuscript is preserved as TAMNet_Paper.pre-audit.docx. This is a research prototype and is not approved or intended for clinical use.
-[P203] REFERENCES
-[P204] [1] S. Pereira, A. Pinto, V. Alves, and C. A. Silva, “Brain tumor segmentation using convolutional neural networks in MRI images,” IEEE Trans. Med. Imag., vol. 35, no. 5, pp. 1240–1251, 2016, doi: 10.1109/TMI.2016.2538465.
-[P205] [2] B. H. Menze et al., “The multimodal brain tumor image segmentation benchmark (BRATS),” IEEE Trans. Med. Imag., vol. 34, no. 10, pp. 1993–2024, 2015, doi: 10.1109/TMI.2014.2377694.
-[P206] [3] F. J. Dorfner et al., “A review of deep learning for brain tumor analysis in MRI,” npj Precision Oncology, vol. 9, Art. no. 2, 2025, doi: 10.1038/s41698-024-00789-2.
-[P207] [4] M. Havaei et al., “Brain tumor segmentation with deep neural networks,” Med. Image Anal., vol. 35, pp. 18–31, 2017.
-[P208] [5] K. Kamnitsas et al., “Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation,” Med. Image Anal., vol. 36, pp. 61–78, 2017.
-[P209] [6] F. Isensee et al., “nnU-Net: A self-configuring method for deep learning-based biomedical image segmentation,” Nature Methods, vol. 18, pp. 203–211, 2021.
-[P210] [7] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional networks for biomedical image segmentation,” in Proc. MICCAI, 2015, pp. 234–241.
-[P211] [8] M. Sultan et al., “Multi-classification of brain tumor images using deep neural network,” IEEE Access, vol. 7, pp. 69215–69225, 2019.
-[P212] [9] [VERIFY — authors missing in the source list] “Exploring the state-of-the-art algorithms for brain tumor classification using MRI data,” IEEE Access, vol. 13, pp. 118033–118054, 2025, doi: 10.1109/ACCESS.2025.3579727.
-[P213] [10] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. CVPR, 2016, pp. 770–778.
-[P214] [11] G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Weinberger, “Densely connected convolutional networks,” in Proc. CVPR, 2017, pp. 4700–4708.
-[P215] [12] M. Tan and Q. V. Le, “EfficientNet: Rethinking model scaling for convolutional neural networks,” in Proc. ICML, 2019, pp. 6105–6114.
-[P216] [13] Z. Liu et al., “A ConvNet for the 2020s,” in Proc. CVPR, 2022, pp. 11976–11986.
-[P217] [14] A. Dosovitskiy et al., “An image is worth 16×16 words: Transformers for image recognition at scale,” in Proc. ICLR, 2021.
-[P218] [15] Z. Liu et al., “Swin Transformer: Hierarchical vision transformer using shifted windows,” in Proc. ICCV, 2021, pp. 10012–10022.
-[P219] [16] J. Hu, L. Shen, and G. Sun, “Squeeze-and-excitation networks,” in Proc. CVPR, 2018, pp. 7132–7141.
-[P220] [17] S. Woo, J. Park, J.-Y. Lee, and I. S. Kweon, “CBAM: Convolutional block attention module,” in Proc. ECCV, 2018, pp. 3–19.
-[P221] [18] O. Oktay et al., “Attention U-Net: Learning where to look for the pancreas,” arXiv:1804.03999, 2018.
-[P222] [19] Z. Zhou et al., “UNet++: A nested U-Net architecture for medical image segmentation,” in Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support, 2018, pp. 3–11.
-[P223] [20] Y. Qiu, K. Jiang, H. Yao, Z. Wang, and S. Satoh, “Does adding a modality really make positive impacts in incomplete multi-modal brain tumor segmentation?” IEEE Trans. Med. Imag., vol. 44, no. 5, pp. 2194–2205, 2025, doi: 10.1109/TMI.2025.
-[P224] [21] J. Zhou et al., “Shape-scale co-awareness network for 3D brain tumor segmentation,” IEEE Trans. Med._imag., vol. 43, no. 7, pp. 2495–2508, 2024, doi: 10.1109/TMI.2024.3368531.
-[P225] [22] [VERIFY — first author initial disputed: Z. vs Q. Yang] Yang et al., “D2-Net: Dual disentanglement network for brain tumor segmentation with missing modalities,” IEEE Trans. Med. Imag., vol. 41, no. 10, pp. 2953–2964, 2022.
-[P226] [23] Y. Cheng, Z. Liu, and S. Tamura, “Deep hierarchy-aware segmentation: A novel framework for MRIs brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 45, no. 5, pp. 2023–2038, 2026, doi: 10.1109/TMI.2025.3645821.
-[P227] [24] Y. Shao et al., “Rethinking brain tumor segmentation from the frequency domain perspective,” IEEE Trans. Med. Imag., vol. 44, no. 11, pp. 4536–4553, 2025, doi: 10.1109/TMI.2025.3579213.
-[P228] [25] Y. Gal and Z. Ghahramani, “Dropout as a Bayesian approximation: Representing model uncertainty in deep learning,” in Proc. ICML, 2016, pp. 1050–1059.
-[P229] [26] A. Kendall and Y. Gal, “What uncertainties do we need in Bayesian deep learning for computer vision?” in Proc. NeurIPS, 2017, pp. 5574–5584.
-[P230] [27] B. Lakshminarayanan, A. Pritzel, and C. Blundell, “Simple and scalable predictive uncertainty estimation using deep ensembles,” in Proc. NeurIPS, 2017, pp. 6402–6413.
-[P231] [28] Y. Ovadia et al., “Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift,” in Proc. NeurIPS, vol. 32, 2019. [author first initial corrected: A. → Y.]
-[P232] [29] T. Zhou and S. Zhu, “Uncertainty quantification and attention-aware fusion guided multi-modal MR brain tumor segmentation,” Comput. Biol. Med., vol. 163, Art. no. 107142, 2023, doi: 10.1016/j.compbiomed.2023.107142.
-[P233] [30] J. Zhao, Z. Xing, Z. Chen, L. Wan, T. Han, H. Fu, and L. Zhu, “Uncertainty-aware multi-dimensional mutual learning for brain and brain tumor segmentation,” IEEE J. Biomed. Health Inform., vol. 27, no. 9, pp. 4362–4372, 2023, doi: 10.1109/JBHI.2023.3266775.
-[P234] [31] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger, “On calibration of modern neural networks,” in Proc. ICML, 2017, pp. 1321–1330.
-[P235] [32] M. Minderer et al., “Revisiting the calibration of modern neural networks,” in Proc. NeurIPS, vol. 34, pp. 15682–15694, 2021.
-[P236] [33] R. R. Selvaraju et al., “Grad-CAM: Visual explanations from deep networks via gradient-based localization,” in Proc. ICCV, 2017, pp. 618–626.
-[P237] [34] [VERIFY] “The Brain Tumor Segmentation (BraTS) Challenge 2024,” 2024. [dataset/benchmark citation added in this revision; exact author list and identifier to be confirmed]
-[P238] [35] A. Fateh et al., “BRISC 2025: A brain tumor image segmentation, classification and tumor boundary segmentation dataset,” arXiv:2506.14318, 2025.
-[P239] [36] [VERIFY — owner slug and URL] M. Nickparvar, “Brain Tumor MRI Dataset,” Kaggle, 7,023 images (Training 5,712 / Testing 1,311).
-[P240] [37] T. Hendrycks and T. G. Dietterich, “Benchmarking neural network robustness to common corruptions and perturbations,” in Proc. ICLR, 2019, arXiv:1903.12261.
+[P188] Source: results/phase3/efficiency.json. Device: NVIDIA GeForce RTX 3050 Laptop GPU, PyTorch 2.11.0+cu128.
+[P189] TAMNet uses 9,034,416 parameters (9.03 M) against 6,957,956 for DenseNet-121 — 2.08 M more parameters for the same accuracy. A single forward pass takes 50.76 ms and the full T = 10-pass Monte Carlo estimate takes 530.27 ms, so any statement about throughput must say which of the two it means. We do not claim a near-real-time advantage.
+[P190] V.  DISCUSSION
+[P191] Does TAMNet beat its baselines? No. Under the clean protocol the model scores 0.9360 ± 0.0110 against 0.9360 ± 0.0125 for a plain DenseNet-121 trained identically — the same accuracy with 2.08 M more parameters — and it is significantly behind EfficientNetV2-S, ConvNeXt-Tiny, Swin-T and ResNet-50. The earlier draft already lost to DenseNet-121 (96.45 % against 97.95 %); the clean protocol turns that loss into a tie. The accuracy–parameter plane in Fig. 7 makes the practical consequence explicit: there is no efficiency argument to fall back on.
+[P192] What the ablations say. None of the three tumor-aware components earns its complexity on classification. The learned fusion collapses onto the global pathway (α_tumor = 0.0293); the spatial attention map places less mass inside the tumour mask than a uniform map would; and the auxiliary segmentation loss does not improve accuracy at any weight we tried. The one component with a visible positive effect is channel attention, which is disabled in the executed model — an honest reading is that the historical configuration was not the one the manuscript described.
+[P193] What survives. Three things do. First, the model is genuinely more robust to corruption than DenseNet-121 (MRRS 0.8508 ± 0.0035 vs 0.8142 ± 0.0260), which is a real if modest property. Second, its mutual information separates errors from correct predictions meaningfully (error AUROC around 0.72), so the uncertainty machinery is usable for ranking risk even though the confidence values themselves are under-confident. Third, the framework genuinely does all of this in one pass with a moderate parameter budget — but that is an engineering property, not a performance claim.
+[P194] Why the earlier numbers were so high. They were traceable, not invented — every one of them matched an artifact. They were simply measuring a different, leaky protocol. Re-introducing that split reproduces 0.9815 immediately, which is the clearest demonstration that the gap between the two protocols, not any change in the model, explains the entire difference. This is the methodological point of the paper: the same architecture, the same code and the same data produce a 4.5-point swing purely from how the split is drawn.
+[P195] VI.  LIMITATIONS
+[P196] •  Public data only. All experiments use publicly released 2-D MRI slices. There is no prospective, institutional or clinical validation of any kind.
+[P197] •  Image-level, not patient-level, splits. The internal pool carries no patient identifiers, so near-duplicate control is the only available defence against patient leakage; residual within-patient correlation cannot be ruled out and every interval in this paper is image-level.
+[P198] •  Unresolved label provenance. The origin of the four-class labels in the internal pool is not documented anywhere in the repository. Part of that pool shares filenames with a public Kaggle release; the remainder comes from at least three other naming families. The class counts are stated, the origin is marked [CITATION NEEDED].
+[P199] •  Domain gap. The segmentation evidence comes from a different modality stack (BraTS 3-D multimodal NIfTI) and a different 2-D source (BRISC), while classification uses single-channel JPEG slices. No experiment here establishes transfer between them.
+[P200] •  Intensity sensitivity. Corruption robustness is measured, but the model remains sensitive to intensity-type perturbations; the corruption suite does not cover motion, bias field or scanner domain shift.
+[P201] •  Uneven seed counts. The headline configurations carry four to five seeds, but ConvNeXt-Tiny, ResNet-50, ViT-B/16 and the λ_seg sweep have a single seed each; those rows are point estimates and are labelled as such throughout.
+[P202] •  Statistical resolution. Per-run bootstrap intervals are about ±1.1 pp, so this benchmark cannot resolve differences smaller than roughly one percentage point.
+[P203] VII.  CONCLUSION
+[P204] This paper presented TAMNet, a tumor-aware multi-task framework that couples a shared DenseNet-121 encoder with spatial attention, an auxiliary segmentation branch, a learned global–tumor fusion and Monte Carlo dropout, and then re-measured it under a leakage-audited protocol. The re-measurement is the contribution: 41 runs, 1672 held-out test images, mean-over-seeds headlines with sample standard deviations, paired bootstrap intervals on every comparison, and de-duplicated external evaluation.
+[P205] The answer to the research question is negative. TAMNet reaches 0.9360 ± 0.0110 accuracy and 0.9355 ± 0.0109 macro-F1, statistically indistinguishable from plain DenseNet-121 (0.9360 ± 0.0125) and significantly below four modern backbones. Removing near-duplicates from the public test sets costs 3.57 pp on Kaggle and 4.00 pp on BRISC. The auxiliary segmentation loss provides no classification gain, the attention map does not concentrate on tumour regions, and the fusion weights ignore the tumor-region feature. The whole-tumour Dice figures quoted previously belong to a separate 3-D U-Net and are re-attributed accordingly.
+[P206] What remains useful is a recipe that is cheap, moderately robust to corruption, and carries a usable error-ranking uncertainty signal — plus, we hope, a worked example of how quickly a positive result can disappear once the split is audited. Future work should obtain a genuinely patient-level dataset, make the segmentation branch receive gradient during classification training, and test whether explicit attention supervision can move the fusion weight off the global pathway.
+[P207] DATA AND CODE AVAILABILITY
+[P208] All experiments were run at repository commit 52777ce on NVIDIA GeForce RTX 3050 Laptop GPU with PyTorch 2.11.0+cu128. Every number in this manuscript is read from an artifact under results/ by paper/rewrite_paper.py; the mapping from table to source file is recorded in paper/tables/sources.json, and the FILL evidence for the dataset statements is in results/fill_evidence.json. Per-run predictions, checkpoints, split manifests (SHA-256 pinned) and de-duplication keep-lists are included so that all confidence intervals can be recomputed. The legacy manuscript is preserved as TAMNet_Paper.pre-audit.docx. This is a research prototype and is not approved or intended for clinical use.
+[P209] REFERENCES
+[P210] [1] S. Pereira, A. Pinto, V. Alves, and C. A. Silva, “Brain tumor segmentation using convolutional neural networks in MRI images,” IEEE Trans. Med. Imag., vol. 35, no. 5, pp. 1240–1251, 2016, doi: 10.1109/TMI.2016.2538465.
+[P211] [2] B. H. Menze et al., “The multimodal brain tumor image segmentation benchmark (BRATS),” IEEE Trans. Med. Imag., vol. 34, no. 10, pp. 1993–2024, 2015, doi: 10.1109/TMI.2014.2377694.
+[P212] [3] F. J. Dorfner et al., “A review of deep learning for brain tumor analysis in MRI,” npj Precision Oncology, vol. 9, Art. no. 2, 2025, doi: 10.1038/s41698-024-00789-2.
+[P213] [4] M. Havaei et al., “Brain tumor segmentation with deep neural networks,” Med. Image Anal., vol. 35, pp. 18–31, 2017.
+[P214] [5] K. Kamnitsas et al., “Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation,” Med. Image Anal., vol. 36, pp. 61–78, 2017.
+[P215] [6] F. Isensee et al., “nnU-Net: A self-configuring method for deep learning-based biomedical image segmentation,” Nature Methods, vol. 18, pp. 203–211, 2021.
+[P216] [7] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional networks for biomedical image segmentation,” in Proc. MICCAI, 2015, pp. 234–241.
+[P217] [8] M. Sultan et al., “Multi-classification of brain tumor images using deep neural network,” IEEE Access, vol. 7, pp. 69215–69225, 2019.
+[P218] [9] [VERIFY — authors missing in the source list] “Exploring the state-of-the-art algorithms for brain tumor classification using MRI data,” IEEE Access, vol. 13, pp. 118033–118054, 2025, doi: 10.1109/ACCESS.2025.3579727.
+[P219] [10] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. CVPR, 2016, pp. 770–778.
+[P220] [11] G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Weinberger, “Densely connected convolutional networks,” in Proc. CVPR, 2017, pp. 4700–4708.
+[P221] [12] M. Tan and Q. V. Le, “EfficientNet: Rethinking model scaling for convolutional neural networks,” in Proc. ICML, 2019, pp. 6105–6114.
+[P222] [13] Z. Liu et al., “A ConvNet for the 2020s,” in Proc. CVPR, 2022, pp. 11976–11986.
+[P223] [14] A. Dosovitskiy et al., “An image is worth 16×16 words: Transformers for image recognition at scale,” in Proc. ICLR, 2021.
+[P224] [15] Z. Liu et al., “Swin Transformer: Hierarchical vision transformer using shifted windows,” in Proc. ICCV, 2021, pp. 10012–10022.
+[P225] [16] J. Hu, L. Shen, and G. Sun, “Squeeze-and-excitation networks,” in Proc. CVPR, 2018, pp. 7132–7141.
+[P226] [17] S. Woo, J. Park, J.-Y. Lee, and I. S. Kweon, “CBAM: Convolutional block attention module,” in Proc. ECCV, 2018, pp. 3–19.
+[P227] [18] O. Oktay et al., “Attention U-Net: Learning where to look for the pancreas,” arXiv:1804.03999, 2018.
+[P228] [19] Z. Zhou et al., “UNet++: A nested U-Net architecture for medical image segmentation,” in Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support, 2018, pp. 3–11.
+[P229] [20] Y. Qiu, K. Jiang, H. Yao, Z. Wang, and S. Satoh, “Does adding a modality really make positive impacts in incomplete multi-modal brain tumor segmentation?” IEEE Trans. Med. Imag., vol. 44, no. 5, pp. 2194–2205, 2025, doi: 10.1109/TMI.2025.
+[P230] [21] J. Zhou et al., “Shape-scale co-awareness network for 3D brain tumor segmentation,” IEEE Trans. Med._imag., vol. 43, no. 7, pp. 2495–2508, 2024, doi: 10.1109/TMI.2024.3368531.
+[P231] [22] [VERIFY — first author initial disputed: Z. vs Q. Yang] Yang et al., “D2-Net: Dual disentanglement network for brain tumor segmentation with missing modalities,” IEEE Trans. Med. Imag., vol. 41, no. 10, pp. 2953–2964, 2022.
+[P232] [23] Y. Cheng, Z. Liu, and S. Tamura, “Deep hierarchy-aware segmentation: A novel framework for MRIs brain tumor segmentation,” IEEE Trans. Med. Imag., vol. 45, no. 5, pp. 2023–2038, 2026, doi: 10.1109/TMI.2025.3645821.
+[P233] [24] Y. Shao et al., “Rethinking brain tumor segmentation from the frequency domain perspective,” IEEE Trans. Med. Imag., vol. 44, no. 11, pp. 4536–4553, 2025, doi: 10.1109/TMI.2025.3579213.
+[P234] [25] Y. Gal and Z. Ghahramani, “Dropout as a Bayesian approximation: Representing model uncertainty in deep learning,” in Proc. ICML, 2016, pp. 1050–1059.
+[P235] [26] A. Kendall and Y. Gal, “What uncertainties do we need in Bayesian deep learning for computer vision?” in Proc. NeurIPS, 2017, pp. 5574–5584.
+[P236] [27] B. Lakshminarayanan, A. Pritzel, and C. Blundell, “Simple and scalable predictive uncertainty estimation using deep ensembles,” in Proc. NeurIPS, 2017, pp. 6402–6413.
+[P237] [28] Y. Ovadia et al., “Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift,” in Proc. NeurIPS, vol. 32, 2019. [author first initial corrected: A. → Y.]
+[P238] [29] T. Zhou and S. Zhu, “Uncertainty quantification and attention-aware fusion guided multi-modal MR brain tumor segmentation,” Comput. Biol. Med., vol. 163, Art. no. 107142, 2023, doi: 10.1016/j.compbiomed.2023.107142.
+[P239] [30] J. Zhao, Z. Xing, Z. Chen, L. Wan, T. Han, H. Fu, and L. Zhu, “Uncertainty-aware multi-dimensional mutual learning for brain and brain tumor segmentation,” IEEE J. Biomed. Health Inform., vol. 27, no. 9, pp. 4362–4372, 2023, doi: 10.1109/JBHI.2023.3266775.
+[P240] [31] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger, “On calibration of modern neural networks,” in Proc. ICML, 2017, pp. 1321–1330.
+[P241] [32] M. Minderer et al., “Revisiting the calibration of modern neural networks,” in Proc. NeurIPS, vol. 34, pp. 15682–15694, 2021.
+[P242] [33] R. R. Selvaraju et al., “Grad-CAM: Visual explanations from deep networks via gradient-based localization,” in Proc. ICCV, 2017, pp. 618–626.
+[P243] [34] [VERIFY] “The Brain Tumor Segmentation (BraTS) Challenge 2024,” 2024. [dataset/benchmark citation added in this revision; exact author list and identifier to be confirmed]
+[P244] [35] A. Fateh et al., “BRISC 2025: A brain tumor image segmentation, classification and tumor boundary segmentation dataset,” arXiv:2506.14318, 2025.
+[P245] [36] [VERIFY — owner slug and URL] M. Nickparvar, “Brain Tumor MRI Dataset,” Kaggle, 7,023 images (Training 5,712 / Testing 1,311).
+[P246] [37] T. Hendrycks and T. G. Dietterich, “Benchmarking neural network robustness to common corruptions and perturbations,” in Proc. ICLR, 2019, arXiv:1903.12261.
