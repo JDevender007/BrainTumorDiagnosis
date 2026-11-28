@@ -175,6 +175,19 @@ def resolve_samples(args: argparse.Namespace) -> tuple[list[ClassificationSample
     return samples, prov
 
 
+def build_eval_transform(run_config: dict):
+    """Deterministic eval transform matching the run's training-time input mode.
+
+    ``run_config["preprocessing"]["normalize"]`` is ``"imagenet"`` for every
+    headline run; the item-G retrain stores ``"per_image"`` and must be
+    evaluated with the same per-image percentile z-score it was trained on.
+    """
+    pre = run_config.get("preprocessing") or {}
+    return build_classification_transform(
+        (224, 224), normalize=pre.get("normalize", "imagenet")
+    )
+
+
 def main() -> int:
     args = parse_args()
     run_dir = Path(args.run_dir)
@@ -203,7 +216,7 @@ def main() -> int:
 
     # ---- inference ------------------------------------------------------
     dataset = BrainTumorClassificationDataset(
-        samples, transform=build_classification_transform((224, 224))
+        samples, transform=build_eval_transform(run_config)
     )
     loader = make_dataloader(
         dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers

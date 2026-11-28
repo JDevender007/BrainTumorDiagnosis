@@ -13,6 +13,8 @@ from datasets.normalization import (
     DEFAULT_IMAGE_SIZE,
     IMAGENET_MEAN,
     IMAGENET_STD,
+    PerImageZScore,
+    build_classification_augment_transform,
     build_classification_transform,
     imagenet_normalize,
     percentile_zscore,
@@ -99,6 +101,60 @@ class TestPercentileZscore:
         out = percentile_zscore(np.arange(100, dtype=np.int16).reshape(10, 10))
         assert out.dtype == np.float32
         assert np.all(np.isfinite(out))
+
+
+class TestItemGRetrainTransforms:
+    """docs/TODO.md item G: per-image normalisation + intensity augmentation."""
+
+    def test_default_pipeline_is_unchanged(self) -> None:
+        """No argument may ever alter the canonical ImageNet pipeline."""
+        import torch
+
+        image = Image.new("RGB", (200, 160), color=(10, 200, 30))
+        canonical = build_classification_transform()
+        explicit = build_classification_transform(normalize="imagenet")
+        assert torch.equal(canonical(image), explicit(image))
+
+    def test_per_image_mode_zero_centres_each_channel(self) -> None:
+        import torch
+
+        rng = np.random.default_rng(7)
+        tensor = torch.from_numpy(
+            rng.random((3, 224, 224), dtype=np.float32)
+        )
+        out = PerImageZScore()(tensor)
+        assert tuple(out.shape) == (3, 224, 224)
+        assert torch.isfinite(out).all()
+        for ch in out:
+            assert abs(float(ch.mean())) < 1e-4
+            assert abs(float(ch.std()) - 1.0) < 0.05
+
+    def test_per_image_transform_differs_from_imagenet(self) -> None:
+        import torch
+
+        rng = np.random.default_rng(0)
+        image = Image.fromarray(
+            rng.integers(0, 256, (64, 80, 3), dtype=np.uint8), "RGB"
+        )
+        a = build_classification_transform(normalize="imagenet")(image)
+        b = build_classification_transform(normalize="per_image")(image)
+        assert not torch.allclose(a, b)
+
+    def test_unknown_normalisation_rejected(self) -> None:
+        with pytest.raises(ValueError, match="normalisation"):
+            build_classification_transform(normalize="magic")
+
+    def test_augment_pipeline_shape_and_determinism_when_seeded(self) -> None:
+        import torch
+
+        image = Image.new("RGB", (200, 160), color=(120, 120, 120))
+        tf = build_classification_augment_transform()
+        torch.manual_seed(123)
+        a = tf(image)
+        torch.manual_seed(123)
+        b = tf(image)
+        assert tuple(a.shape) == (3, 224, 224)
+        assert torch.equal(a, b)  # same seed -> same augmentation
 
 
 if __name__ == "__main__":

@@ -150,8 +150,25 @@ def apply_corruption(name: str, level: float, x: torch.Tensor, rng: np.random.Ge
     raise ValueError(f"unknown corruption {name}")
 
 
-def normalise(pixel: torch.Tensor) -> torch.Tensor:
-    return (pixel.clamp(0.0, 1.0) - IMAGENET_MEAN) / IMAGENET_STD
+def normalise(pixel: torch.Tensor, mode: str = "imagenet") -> torch.Tensor:
+    """Normalise corrupted pixels the same way the run's model was trained.
+
+    ``imagenet`` is the canonical bit-identical path.  ``per_image`` (item-G
+    retrain) clips to the 1-99 percentile and z-scores each image channel
+    independently — the same ``percentile_zscore`` used at training time, so
+    the corruption contract stays consistent for those runs.
+    """
+    pixel = pixel.clamp(0.0, 1.0)
+    if mode == "per_image":
+        from datasets.normalization import percentile_zscore
+
+        arr = pixel.numpy()
+        out = np.empty_like(arr, dtype=np.float32)
+        for i in range(arr.shape[0]):
+            for c in range(arr.shape[1]):
+                out[i, c] = percentile_zscore(arr[i, c])
+        return torch.from_numpy(out)
+    return (pixel - IMAGENET_MEAN) / IMAGENET_STD
 
 
 # --------------------------------------------------------------------------- #
@@ -205,10 +222,11 @@ def smoke_test(x: torch.Tensor) -> dict:
 # inference
 # --------------------------------------------------------------------------- #
 @torch.no_grad()
-def predict(model, pixel: torch.Tensor, device, batch: int = 32) -> np.ndarray:
+def predict(model, pixel: torch.Tensor, device, batch: int = 32,
+            mode: str = "imagenet") -> np.ndarray:
     preds = []
     for i in range(0, len(pixel), batch):
-        xb = normalise(pixel[i:i + batch]).to(device)
+        xb = normalise(pixel[i:i + batch], mode).to(device)
         out = model(xb)
         logits = out["logits"] if isinstance(out, dict) else out
         preds.append(logits.argmax(dim=1).cpu().numpy())
@@ -221,6 +239,18 @@ def main() -> int:
     ap.add_argument("--smoke", action="store_true", help="corruption contract test only")
     ap.add_argument("--batch-size", type=int, default=32)
     ap.add_argument("--intensity-runs", nargs="*", default=["tamnet_clean_s42", "densenet121_clean_s42"])
+    ap.add_argument(
+        "--out",
+        default=str(OUT),
+        help="output JSON (default: results/phase3/robustness.json). Use a new "
+        "path for a new model family so the published robustness.json is "
+        "never rewritten.",
+    )
+    ap.add_argument(
+        "--group-label",
+        default="tamnet_clean",
+        help="key under 'groups' for the runs passed via --runs",
+    )
     args = ap.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -243,20 +273,22 @@ def main() -> int:
             print(f"MISSING best.pt: {run_name}")
             continue
         cfg = json.loads((d / "run_config.json").read_text(encoding="utf-8"))
+        mode = (cfg.get("preprocessing") or {}).get("normalize", "imagenet")
         model = build_model(cfg)
         model.load_state_dict(torch.load(d / "best.pt", map_location="cpu", weights_only=False)["model_state_dict"])
         model = model.to(device).eval()
         t0 = time.time()
-        clean_acc = float((predict(model, x_clean, device, args.batch_size) == y).mean())
+        clean_acc = float((predict(model, x_clean, device, args.batch_size, mode) == y).mean())
         rows = []
         for name, sev, level in CORRUPTIONS:
             xc = apply_corruption(name, level, x_clean, rng)
-            acc = float((predict(model, xc, device, args.batch_size) == y).mean())
+            acc = float((predict(model, xc, device, args.batch_size, mode) == y).mean())
             rows.append({"corruption": name, "severity": sev, "level": level,
                          "accuracy": acc, "retention": acc / clean_acc if clean_acc else None})
         mrrs = float(np.mean([r["retention"] for r in rows]))
         per_run[run_name] = {
             "run": run_name,
+            "normalize_mode": mode,
             "clean_accuracy": clean_acc,
             "mrrs": mrrs,
             "n_corruptions": len(rows),
@@ -282,15 +314,16 @@ def main() -> int:
         if not (d / "best.pt").is_file():
             continue
         cfg = json.loads((d / "run_config.json").read_text(encoding="utf-8"))
+        mode = (cfg.get("preprocessing") or {}).get("normalize", "imagenet")
         model = build_model(cfg)
         model.load_state_dict(torch.load(d / "best.pt", map_location="cpu", weights_only=False)["model_state_dict"])
         model = model.to(device).eval()
         contrast, brightness = [], []
         for c in (0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0):
-            acc = float((predict(model, apply_corruption("contrast", c, x_clean, rng), device, args.batch_size) == y).mean())
+            acc = float((predict(model, apply_corruption("contrast", c, x_clean, rng), device, args.batch_size, mode) == y).mean())
             contrast.append({"multiplier": c, "accuracy": acc})
         for b in (0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0):
-            acc = float((predict(model, apply_corruption("brightness", b, x_clean, rng), device, args.batch_size) == y).mean())
+            acc = float((predict(model, apply_corruption("brightness", b, x_clean, rng), device, args.batch_size, mode) == y).mean())
             brightness.append({"multiplier": b, "accuracy": acc})
         intensity[run_name] = {"contrast": contrast, "brightness": brightness}
         print(f"  intensity curves: {run_name}", flush=True)
@@ -326,13 +359,15 @@ def main() -> int:
         "hardware": torch.cuda.get_device_name(0) if device.type == "cuda" else "cpu",
         "runs": per_run,
         "groups": {
-            "tamnet_clean": group("tamnet_clean_s"),
+            args.group_label: group("tamnet_clean_s"),
             "densenet121_clean": group("densenet121_clean_s"),
         },
         "intensity_curves": intensity,
         "headers": {"n": len(y), "image_size": 224},
     }
-    OUT.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
     print("=" * 96)
     print(" Phase 3G robustness — MRRS over 27 corruptions (mean over seeds)")
@@ -343,7 +378,7 @@ def main() -> int:
         sd = "" if g["mrrs_std_sample_ddof1"] is None else f" ± {g['mrrs_std_sample_ddof1']:.4f}"
         print(f" {slug:<22} n={g['n_seeds']}  MRRS {g['mrrs_mean']:.4f}{sd}  "
               f"(best seed {g['mrrs_best_seed']:.4f} - the paper reported this one)")
-    print(f" wrote {OUT.relative_to(ROOT)}")
+    print(f" wrote {out_path}")
     return 0
 
 

@@ -53,7 +53,10 @@ from datasets.classification import (  # noqa: E402
     split_classification_samples,
 )
 from datasets.dataloaders import make_dataloader  # noqa: E402
-from datasets.normalization import build_classification_transform  # noqa: E402
+from datasets.normalization import (  # noqa: E402
+    build_classification_augment_transform,
+    build_classification_transform,
+)
 from models.factory import create_backbone_classifier  # noqa: E402
 from models.shared_unet import SharedUNetMultiTask  # noqa: E402
 from training.multitask_trainer import (  # noqa: E402
@@ -142,6 +145,19 @@ def parse_args() -> argparse.Namespace:
         choices=("g+t", "t"),
         default="g+t",
         help="'g+t' = z=Phi(g,t) executed model; 't' = t-only ablation",
+    )
+    # docs/TODO.md Phase 3G retrain: intensity augmentation + per-image norm
+    p.add_argument(
+        "--intensity-aug",
+        action="store_true",
+        help="train-only intensity augmentation (ColorJitter brightness/contrast); "
+        "validation/test stay deterministic",
+    )
+    p.add_argument(
+        "--per-image-norm",
+        action="store_true",
+        help="replace ImageNet normalisation with per-image percentile(1-99) z-score "
+        "(MRI-native); evaluation reads the mode back from run_config.json",
     )
     return p.parse_args()
 
@@ -334,6 +350,13 @@ def main() -> int:
             suffix += f"+ls{args.seg_weight:g}"
         if args.seg_classes != 4:
             suffix += f"+sc{args.seg_classes}"
+        # item-G retrain: starts with 'tamnet_clean_s', so every headline
+        # selector must keep excluding '+'-suffixed ablation runs (they do:
+        # phase3_bootstrap / external_eval / make_figures / robustness groups).
+        if args.intensity_aug:
+            suffix += "+iaug"
+        if args.per_image_norm:
+            suffix += "+pnorm"
     run_name = f"{args.model}_{args.protocol}_s{args.seed}{suffix}"
     out_dir = Path(args.out) if args.out else RUNS_DIR / run_name
     # Auto-resume (Phase 3 shutdown safety): a previous attempt left a
@@ -360,9 +383,20 @@ def main() -> int:
         if not splits[key]:
             raise SystemExit(f"empty {key} split - check manifest/protocol")
 
-    transform = build_classification_transform((224, 224))
-    train_ds = BrainTumorClassificationDataset(splits["train"], transform=transform)
-    val_ds = BrainTumorClassificationDataset(splits["val"], transform=transform)
+    normalize_mode = "per_image" if args.per_image_norm else "imagenet"
+    if args.intensity_aug:
+        train_transform = build_classification_augment_transform(
+            (224, 224), normalize=normalize_mode
+        )
+    else:
+        train_transform = build_classification_transform(
+            (224, 224), normalize=normalize_mode
+        )
+    eval_transform = build_classification_transform(
+        (224, 224), normalize=normalize_mode
+    )
+    train_ds = BrainTumorClassificationDataset(splits["train"], transform=train_transform)
+    val_ds = BrainTumorClassificationDataset(splits["val"], transform=eval_transform)
     train_loader = make_dataloader(
         train_ds,
         batch_size=args.batch_size,
@@ -456,7 +490,19 @@ def main() -> int:
         "optimizer": "AdamW+CosineAnnealingLR",
         "selection_metric": "val_f1_weighted",
         "image_size": [224, 224],
-        "transform": "Resize->ToTensor->Normalize(ImageNet)",
+        "transform": (
+            "Resize->ToTensor"
+            + ("->RandomApply(ColorJitter(b=0.3,c=0.3),p=0.8)" if args.intensity_aug else "")
+            + (
+                "->PercentileZScore(1-99, per image)"
+                if args.per_image_norm
+                else "->Normalize(ImageNet)"
+            )
+        ),
+        "preprocessing": {
+            "normalize": normalize_mode,
+            "intensity_aug": args.intensity_aug,
+        },
         "num_workers": args.num_workers,
         "pretrained": not args.no_pretrained,
         "smoke": args.smoke,
