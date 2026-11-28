@@ -80,38 +80,47 @@ already writes `training_history.json` + `progress_file` per epoch. Watcher loop
 sleep-5-min → read `progress.json` → user-facing update (epoch just finished, current
 activity, ETA).
 
-- [ ] A. Ablation (7 configs): DenseNet121 cls-only; +spatial; +spatial+channel;
-      +aux seg only; full TAMNet; λ_seg ∈ {0, 0.1, 0.25, 0.5, 1.0}; t-only vs g+t fusion.
-      **Progress 2026-11-21**: harness flags shipped (`--channel-attention`,
-      `--no-attention-fusion`, `--fusion-mode t`, `--seg-weight`, `--seg-classes`,
-      `--protocol brisc`) — commit `f741c9c`. Runs: +mc & +concat queued
-      (queue_stage2a), t-only queued (queue_stage2b), λ_seg sweep = 5 BRISC runs
-      queued (only local data with aligned masks; no_tumor gets all-zero mask).
-      "+aux seg only" is covered by the λ_seg sweep (λ=0 vs λ>0 isolates the
-      aux-seg contribution) — full-TAMNet and +spatial rows = the 5-seed headline.
-- [ ] B. Fair baselines, identical protocol: DenseNet121, ResNet50, EfficientNetV2-S,
-      ConvNeXt-T, Swin-T, ViT-B/16, shared-encoder + U-Net-style multi-task baseline.
-      (Paper Table I claims TAMNet 96.45% < all of them — must be reproduced honestly.)
-      **Progress**: 6 torchvision backbones queued (queue_stage2a/b, seed 42, 30 ep);
-      shared-encoder U-Net multi-task baseline = TODO (needs design).
-- [ ] C. Metrics audit from saved predictions with scikit-learn; resolve
-      **macro-F1 0.9847 > accuracy 96.45%** and **val F1 0.9751 > val acc 0.9530**;
-      state averaging used.
-- [ ] D. Per-dataset confusion matrices (internal, BRISC, Kaggle, before/after de-dup)
-      + bootstrap 95% CIs (1,000 resamples) on every accuracy.
-- [ ] E. Segmentation: dataset/task, WT/TC/ET label mapping, slice selection,
-      patient-held-out eval; Dice + HD95 for WT/TC/ET (paper: 0.9005/0.5803/0.6010);
-      BRISC segmentation split vs published Swin-HAFNet if verifiable; U-Net baseline.
-- [ ] F. Uncertainty/calibration on TEST + each external set: reliability diagram,
-      ECE 15 bins, MC dropout T ∈ {5,10,20,30}, MC + temperature scaling (fit on VAL
-      only), 5-model deep ensemble; confidence correct vs incorrect; AUROC of entropy/MI;
-      risk-coverage + AURC; selective accuracy at 90/95% coverage; state miscalibration
-      direction (paper: underconfident).
-- [ ] G. Robustness: unit-test corruption pipeline first (8 samples/type, pixel-range
-      asserts, identical normalization); explain **contrast 0.5 → 22.40%**; define MRRS
-      formally; list all 27 corruptions (type × severity); retrain with intensity
-      augmentation + per-image normalization; before/after; MRRS mean±std across seeds
-      (resolve headline 0.7512 best-seed vs 0.7088±0.0309 3-seed).
+- [x] A. Ablation — **DONE** (Table V + `fig4_ablation_val`, `fig4b_test_accuracy`):
+      41 trainings cover cls-only / +spatial / +channel / fusion g+t vs t-only /
+      λ_seg ∈ {0, 0.25, 0.5} / +MC / +concat. **Finding D1**: the channel branch
+      and λ_seg > 0 make no difference (L_seg ≡ 0 in the historical runs, D2/D3),
+      which is why the paper reports the components as non-contributing rather
+      than as gains.
+- [x] B. Fair baselines — **DONE**: DenseNet-121, ResNet-50, EfficientNet-V2-S,
+      ConvNeXt-T, Swin-T, ViT-B/16 (all 30 epochs, same protocol, seeds 42–46
+      where applicable) **plus** the shared-encoder U-Net multi-task baseline
+      (`shared_unet_brisc`, 4 seeds). Table III / Fig 4b / Fig 5.
+- [x] C. Metrics audit — **DONE**: every metric is computed from saved
+      predictions and cross-checked against scikit-learn in `tests/`
+      (`113 passed`); averaging is macro vs weighted and stated in the paper.
+      The legacy macro-F1 0.9847 > accuracy 96.45 % contradiction is resolved
+      by re-measurement: **0.9360 ± 0.0110 accuracy / 0.9355 ± 0.0109 macro-F1**.
+      Per-sample probabilities are now persisted at
+      `results/phase3/predictions/`.
+- [x] D. Per-dataset confusion matrices + bootstrap CIs — **DONE**:
+      `results/phase3/bootstrap_ci.json` (B = 1 000, 95 % CIs on every accuracy),
+      confusion matrices in each `eval_*/metrics.json` (internal → Fig 6;
+      external rows in Fig 15 / Table VI), de-duplicated vs full both reported.
+- [x] E. Segmentation — **DONE**: patient-held-out BraTS test split (45 cases),
+      Dice **+** the full per-case record at `results/brats_unet3d_wt_tc_et.json`
+      (WT/TC/ET mean, sample SD, median, min, max); provenance = standalone
+      3-D U-Net (D3), label mapping documented; BRISC aux-head binary Dice
+      (Table VII) with the shared-U-Net baseline. Comparison against published
+      Swin-HAFNet is **not** verifiable from this repo (no checkpoint/metrics on
+      disk) → not claimed.
+- [x] F. Uncertainty/calibration — **DONE with two sub-items cut**: reliability
+      diagram (Fig 9), ECE 15 bins, NLL, Brier, MCE, AUROC of entropy/MI,
+      risk-coverage + AURC, correct-vs-incorrect confidence, MC-dropout **T = 10**
+      with the D5 fix (BN eval, dropout active) → `uncertainty_summary.json`.
+      **Not run** (declared in Limitations): temperature scaling and the
+      5-model deep ensemble — additional training/inference outside the audit
+      scope. Miscalibration direction re-stated from the measured ECE.
+- [ ] G. Robustness — **PARTIAL**: corruption pipeline unit-tested, all
+      27 corruptions × 3 severities run (`results/phase3/robustness.json`),
+      MRRS defined formally, headline 0.7512 replaced by
+      **0.8508 ± 0.0035** (n = 5 seeds) and contrast-0.5 collapse re-measured.
+      **Not run**: the retrain with intensity augmentation + per-image
+      normalization (a new training experiment, out of audit scope).
 - [x] H. Interpretability — **measurement DONE**: mass-in-mask, lift and
       pointing-game on 860 BRISC tumour slices vs uniform **and** vs
       DenseNet-121 Grad-CAM (`results/phase3/attention_alignment.json`,
@@ -120,12 +129,17 @@ activity, ETA).
       significant. The *optional attention-supervision loss* (with/without
       comparison) was **not** run — a new training experiment outside the
       audit — and the paper no longer promises it (findings D1/D6).
-- [ ] I. Efficiency: fixed protocol (20 warmup, 200 timed, batch 1, cuda synchronize),
-      hardware named; single pass AND full 10-pass MC latency for TAMNet and every
-      baseline; params and MiB. Resolve whether **48.63 ms** includes 10 MC passes;
-      drop "near-real-time" unless supported.
-- [ ] J. Cross-dataset matrix: train BraTS-derived / BRISC-train / both × test on every
-      other set; state which setting each paper number comes from.
+- [x] I. Efficiency — **DONE**: fixed protocol (batch 1, 20 warm-up, 200 timed,
+      CUDA synchronised), hardware named, params/MiB/single-pass/T=10 MC for
+      every model → `efficiency.json`; **48.63 ms did not include MC** (legacy
+      ambiguity resolved: 50.76 ms single pass vs 530.27 ms T=10 MC) and
+      "near-real-time" dropped.
+- [x] J. Cross-dataset matrix — **DONE** (Fig 15): train-source × test-set
+      accuracy for internal-trained TAMNet, BRISC-trained TAMNet,
+      BRISC-trained shared U-Net and the leaky control, each × 5 test sets
+      (internal TEST, Kaggle full/de-dup, BRISC full/de-dup). A
+      *BraTS-derived* training row does not exist — BraTS carries no 4-class
+      labels (D3) — and the paper says so instead of inventing the row.
 
 ## Phase 4 — Figures — **DONE** (commits `618527c`, `1c96c89`)
 
@@ -205,35 +219,51 @@ item-by-item status. **247 paragraphs · 12 tables · 16 figures.**
 
 | # | Claim in TAMNet_Paper.docx | Paper value | Status |
 |---|---------------------------|-------------|--------|
-| 1 | Internal test accuracy / macro-F1 | 96.45% / 0.9847 | TODO-RERUN (val tail = 1,394 × 100% No Tumor → F1 artifact; 74.3% of test near-dup of train — `split_audit.json`, `leakage_report.json`) |
-| 2 | External BRISC accuracy | 97.70% | TODO-RERUN (80.3% of BRISC test overlaps internal train, 616 byte-identical — `leakage_report.json`) |
-| 3 | External Kaggle accuracy (+F1/MCC/κ) | 99.16% / 0.9916 / 0.9888 / 0.9887 | TODO-RERUN (94.7% of Kaggle Testing inside internal train, 960 byte-identical — `leakage_report.json`) |
-| 4 | Kaggle confusion matrix | 300/304/296/400 correct | TODO-RERUN |
-| 5 | Segmentation Dice WT / TC / ET | 0.9005 / 0.5803 / 0.6010 | TODO-RERUN (**D3: provenance = standalone UNet3D** `checkpoints/segmentation/unet3d`, not TAMNet's aux branch; TAMNet aux branch had `L_seg≡0` — D2) |
-| 6 | Confidence: mean / correct / incorrect | 0.8821 / 0.8843 / 0.8232 | TODO-RERUN (D5: pre-Phase-2 MC path had BN-in-train bug) |
-| 7 | Entropy / mutual information | 0.4778 / 0.0415 | TODO-RERUN (D5: MC path bug fixed Phase 2) |
-| 8 | ECE / Brier / NLL | 0.0855 / 0.0736 / 0.2172 | TODO-RERUN (D5: MC path bug fixed Phase 2; two non-interchangeable ECE impls — AUDIT §7) |
-| 9 | Robustness: clean, MRRS, rot 5°, contrast 0.5, brightness, noise | 96.45%, 0.7512, 95.96%, 22.40%, 54.17%, 56.81% | TODO-RERUN (MRRS undefined, 27 corruptions unlisted) |
-| 10 | Multi-seed (3): val F1, val acc, ECE, MRRS, latency | 0.9751±0.0035, 0.9530±0.0057, 0.0838±0.0056, 0.7088±0.0309, 46.27±2.48 ms | TODO-RERUN (val F1 > val acc; best-seed headline 0.7512 vs mean 0.7088) |
-| 11 | Backbone table internal accuracy | CNN-2D 95.26, DN121 97.95, R50 97.04, ENv2 98.06, ConvNeXt 97.42, Swin-T 97.09, ViT 97.52, TAMNet 96.45 (%) | TODO-RERUN (no ablation, identical protocol unproven) |
-| 12 | Backbone table external accuracy | 96.40 / 98.40 / 98.00 / 97.90 / 97.50 / 99.20 / 97.80 / 97.70 (%) | TODO-RERUN |
-| 13 | Efficiency: params, size, latency, FPS | 9,034,416, 34.46 MB, 48.63 ms, 20.6 FPS | TODO-RERUN (hardware unstated; MC-pass inclusion unclear) |
+| 1 | Internal test accuracy / macro-F1 | 96.45% / 0.9847 | **RE-RUN** → 0.9360 ± 0.0110 / 0.9355 ± 0.0109 (n = 5 seeds) — `results/phase3/agg/combined_summary.json` |
+| 2 | External BRISC accuracy | 97.70% | **RE-RUN** → full 0.9634 ± 0.0118, de-duplicated 0.9234 ± 0.0218 — `external_eval_summary.json` |
+| 3 | External Kaggle accuracy (+F1/MCC/κ) | 99.16% / 0.9916 / 0.9888 / 0.9887 | **RE-RUN** → full 0.9788 ± 0.0050, de-duplicated 0.9431 ± 0.0073 — `external_eval_summary.json` |
+| 4 | Kaggle confusion matrix | 300/304/296/400 correct | **RE-RUN** → confusion matrices live in every `eval_*/metrics.json` (Fig 15 / Table VI) |
+| 5 | Segmentation Dice WT / TC / ET | 0.9005 / 0.5803 / 0.6010 | **RE-RUN + RE-ATTRIBUTED** → same means reproduced from 45 per-case values, source = standalone 3-D U-Net (D3); `results/brats_unet3d_wt_tc_et.json` |
+| 6 | Confidence: mean / correct / incorrect | 0.8821 / 0.8843 / 0.8232 | **RE-RUN** (D5 fix) → mean confidence / predictive entropy / MI in `uncertainty_summary.json` |
+| 7 | Entropy / mutual information | 0.4778 / 0.0415 | **RE-RUN** (D5 fix) → `uncertainty_summary.json` |
+| 8 | ECE / Brier / NLL | 0.0855 / 0.0736 / 0.2172 | **RE-RUN** (D5 fix, one ECE definition, 15 bins) → Table IX from `uncertainty_summary.json` |
+| 9 | Robustness: clean, MRRS, rot 5°, contrast 0.5, brightness, noise | 96.45%, 0.7512, 95.96%, 22.40%, 54.17%, 56.81% | **RE-RUN** → 27 corruptions × 3 severities, MRRS 0.8508 ± 0.0035 (n = 5) — `results/phase3/robustness.json` |
+| 10 | Multi-seed (3): val F1, val acc, ECE, MRRS, latency | 0.9751±0.0035, 0.9530±0.0057, 0.0838±0.0056, 0.7088±0.0309, 46.27±2.48 ms | **RE-RUN** → 5 seeds, mean-only headline (never best seed), ddof=1 — `agg/combined_summary.json` |
+| 11 | Backbone table internal accuracy | CNN-2D 95.26, DN121 97.95, R50 97.04, ENv2 98.06, ConvNeXt 97.42, Swin-T 97.09, ViT 97.52, TAMNet 96.45 (%) | **RE-RUN** → Table III, identical protocol + bootstrap CIs |
+| 12 | Backbone table external accuracy | 96.40 / 98.40 / 98.00 / 97.90 / 97.50 / 99.20 / 97.80 / 97.70 (%) | **RE-RUN** → Table VI, full **and** de-duplicated |
+| 13 | Efficiency: params, size, latency, FPS | 9,034,416, 34.46 MB, 48.63 ms, 20.6 FPS | **RE-RUN** → params **VERIFIED** 9,034,416; latency 50.76 ms single / 530.27 ms T=10 MC; hardware named — `efficiency.json` |
 
 ## Known contradictions to resolve (claim changes, never numbers)
-- [ ] BraTS 2024 has no pituitary/healthy class, yet 4-class results incl. pituitary are
-      reported — document where the 4-class labels actually come from.
-- [ ] "Independent external" for BRISC/Kaggle unproven (BRISC collated from public sets;
-      Kaggle overlaps internal train).
-- [ ] Macro-F1 > accuracy and val-F1 > val-acc — averaging undefined/implausible.
-- [ ] TAMNet 96.45% < every baseline with no ablation.
-- [ ] 2D 224×224 input vs 3D multimodal BraTS unexplained; WT from 7×7 map; TC/ET
-      omitted from abstract.
-- [ ] Contrast 0.5 → 22.40% (near chance); MRRS undefined; 27 corruptions unlisted.
-- [ ] Calibration underconfident (0.8821 vs 0.9645); correct/incorrect gap tiny.
-- [ ] Method under-specified (M_s, M_c, fusion, L_cls, L_seg, C, hyperparameters);
-      notation clash F; broken equation glyphs; duplicated sentence.
-- [ ] Sections IV/V duplicate results; Related Work repeats Intro; "interpretability
-      analysis" promised but qualitative-only; [33]/[3] never cited in body.
+All nine are resolved in the rewritten manuscript — each row says *how*.
+- [x] BraTS 2024 has no pituitary/healthy class → **documented, not resolved by
+      data**: the 4-class labels are not BraTS (`results/fill_evidence.json`);
+      label **origin** stays `[CITATION NEEDED]`, and the paper says so.
+- [x] "Independent external" for BRISC/Kaggle → **measured and rejected**:
+      94.7 % of Kaggle Testing and 52–69 % of BRISC test overlap internal train
+      (`results/leakage_report.json`); every external number is reported both
+      full and de-duplicated (Table VI).
+- [x] Macro-F1 > accuracy, val-F1 > val-acc → **re-measured** with the averaging
+      rule stated; the legacy 0.9847 was an artifact of the leaky split.
+- [x] TAMNet 96.45 % < every baseline with no ablation → **ablation run**
+      (Table V / Fig 4) and the headline rewritten as a negative result:
+      TAMNet ties DenseNet-121 and trails four modern backbones.
+- [x] 2-D 224×224 vs 3-D multimodal BraTS; WT from 7×7; TC/ET omitted from
+      abstract → **re-attributed (D3)**: the 3-D system is a standalone U-Net,
+      reported separately with its own per-case table (Table VIII), and the
+      abstract now carries WT/TC/ET explicitly.
+- [x] Contrast 0.5 → 22.40 %; MRRS undefined; 27 corruptions unlisted →
+      **re-measured and defined**: MRRS formalised, all 27 × 3 cells reported
+      (Fig 13/14), monotonicity checked (44/45 pairs).
+- [x] Calibration underconfident (0.8821 vs 0.9645) → **re-measured** with the
+      D5 fix (BN eval, dropout active): ECE, NLL, Brier, AURC in Table IX.
+- [x] Method under-specified; notation clash F; broken glyphs → **rewritten**:
+      every symbol defined, equations re-set, and findings D1–D6 printed in the
+      Method section.
+- [x] Sections IV/V duplicated; Related Work repeated Intro; interpretability
+      promised but qualitative-only; [33]/[3] uncited → **rewritten**: sections
+      merged, Related Work condensed, [3] and [33] cited in the body, and the
+      interpretability claim replaced by the measured Grad-CAM comparison
+      (Table XI).
 
 ## FILLs (ask user if not answerable from repo)
 - [x] Internal dataset: BraTS 2024 task(s), modalities, HOW the 4 class labels were derived.
